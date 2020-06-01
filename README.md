@@ -5,7 +5,8 @@
 
 
 
-#### Tecnologias (iniciais)
+### Tecnologias (iniciais)
+
 
 |      Front-End      |       Back-End      |
 |-------------------- |---------------------|
@@ -14,7 +15,8 @@
 
 
  
-#### Equipe (SQUAD 1)
+### Equipe (SQUAD 1)
+
 
 - [Matheus Santos (UX)](https://www.linkedin.com/in/matheus-santos-7347421a1/)
 - [Caio Enrique (DEV)](https://github.com/100f)
