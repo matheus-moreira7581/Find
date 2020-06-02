@@ -9,8 +9,6 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
     height: '100%',
     width: '100%',
-    borderWidth: 2,
-    borderColor: '#FF0000',
   },
   welcomeContainer: {
     marginTop: Constants.statusBarHeight + 40,
@@ -25,12 +23,27 @@ export default StyleSheet.create({
   },
   typeContainer: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
+    paddingHorizontal: 23,
   },
   typeText: {
     paddingHorizontal: 15,
     fontFamily: fonts.montserratSemiBold,
     fontSize: 15,
     color: colors.primary,
+  },
+  listContainer: {
+    paddingHorizontal: 23,
+  },
+  listTitle: {
+    color: colors.secondary,
+    fontFamily: fonts.montserratBold,
+    fontSize: 19,
+    marginBottom: 5,
+    marginTop: 23,
+  },
+  listItem: {
+    height: 90,
+    marginHorizontal: 14,
+    justifyContent: 'center',
   }
 });
