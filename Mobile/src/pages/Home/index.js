@@ -60,12 +60,14 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}> 
-      <View style={styles.welcomeContainer}>
-        <Text style={styles.welcomeText}>Olá, Lucas. Oque você deseja?</Text>
-      </View>
-      <View style={styles.typeContainer}>
-        <Text style={styles.typeText}>Produto</Text>
-        <Text style={styles.typeText}>Service</Text>
+      <View style={styles.headerContainer}>
+        <View style={styles.welcomeContainer}>
+          <Text style={styles.welcomeText}>Olá, Lucas. Oque você deseja?</Text>
+        </View>
+        <View style={styles.typeContainer}>
+          <Text style={styles.typeText}>Produto</Text>
+          <Text style={styles.typeText}>Serviço</Text>
+        </View>
       </View>
       <View style={styles.listContainer}>
         <SectionList 

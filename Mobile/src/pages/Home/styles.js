@@ -10,10 +10,14 @@ export default StyleSheet.create({
     height: '100%',
     width: '100%',
   },
+  headerContainer: {
+    backgroundColor: colors.grey,
+    paddingBottom: 10,
+    elevation: 4,
+  },
   welcomeContainer: {
     marginTop: Constants.statusBarHeight + 40,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingLeft: 23,
     marginBottom: 25,
   }, 
   welcomeText: {
@@ -23,16 +27,17 @@ export default StyleSheet.create({
   },
   typeContainer: {
     flexDirection: 'row',
-    paddingHorizontal: 23,
+    paddingLeft: 23,
   },
   typeText: {
-    paddingHorizontal: 15,
+    paddingRight: 20,
     fontFamily: fonts.montserratSemiBold,
     fontSize: 15,
     color: colors.primary,
   },
   listContainer: {
-    paddingHorizontal: 23,
+    paddingLeft: 23,
+    backgroundColor: colors.grey,
   },
   listTitle: {
     color: colors.secondary,
@@ -43,7 +48,7 @@ export default StyleSheet.create({
   },
   listItem: {
     height: 90,
-    marginHorizontal: 14,
+    marginRight: 14,
     justifyContent: 'center',
   }
 });
