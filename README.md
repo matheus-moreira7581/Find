@@ -8,9 +8,9 @@
 
 ## Links úteis
 
-* Como chegamos nessa solução? [Clique aqui](https://docs.google.com/document/d/1Vsk6FfSIcFM8ikHsm82gj1hrL63U6hUuCF7S36d11aU/edit)
+* Como chegamos nessa solução: [Clique aqui](https://docs.google.com/document/d/1Vsk6FfSIcFM8ikHsm82gj1hrL63U6hUuCF7S36d11aU/edit)
 
-* Acesse o nosso protótipo [Clique aqui](https://xd.adobe.com/view/d607447c-2ac7-416d-7b2f-59eef7e60025-a036/)
+* Acesse o nosso protótipo: [Clique aqui](https://xd.adobe.com/view/d607447c-2ac7-416d-7b2f-59eef7e60025-a036/)
 
 ----
 
