@@ -20,6 +20,24 @@ const Routes = () => {
               <MaterialIcons name="home" color={color} size={size}/>
             ),
           }} />
+        <Tab.Screen 
+          name="Orders" 
+          component={Home} 
+          options={{
+            tabBarLabel: "Pedidos",
+            tabBarIcon: ({color, size}) => (
+              <MaterialIcons name="view-list" color={color} size={size}/>
+            ),
+          }} />
+        <Tab.Screen 
+          name="Profile" 
+          component={Home} 
+          options={{
+            tabBarLabel: "Perfil",
+            tabBarIcon: ({color, size}) => (
+              <MaterialIcons name="person" color={color} size={size}/>
+            ),
+          }} />
       </Tab.Navigator>
     </NavigationContainer>
   );
