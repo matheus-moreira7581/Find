@@ -4,6 +4,7 @@ import { AppLoading } from 'expo';
 import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold, 
         Montserrat_700Bold} from '@expo-google-fonts/montserrat';
 import Home from './src/pages/Home';
+import Routes from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts ({
@@ -16,7 +17,8 @@ export default function App() {
   }
   else {
     return (
-      <Home />
+      <Routes />
+      // <Home />
     )
   }
 }
