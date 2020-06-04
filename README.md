@@ -10,7 +10,7 @@
 |      Front-End      |       Back-End      |
 |-------------------- |---------------------|
 | React Native (Expo) |  Node.js (Express)  |         
-|                     |     PostgreSQL      |
+|                     |        SQLite       |
 
 
  
