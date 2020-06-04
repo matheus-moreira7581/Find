@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, SectionList, SafeAreaView, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import ProductCard from '../../components/ProductCard';
 import HomeList from '../../components/HomeList';
@@ -7,6 +7,8 @@ import HomeList from '../../components/HomeList';
 // import { Container } from './styles';
 
 const Home = () => {
+
+  const [showProduct, setShowProduct] = useState(true);
   // This data array is temporary only for test
   const productDATA = [
     {
@@ -58,7 +60,7 @@ const Home = () => {
       ]]
     },
   ]
-
+  // This data array is temporary only for test
   const serviceData = [
     {
       title: 'Moda e Beleza',
@@ -92,6 +94,15 @@ const Home = () => {
     },
   ]
 
+  let showList = <HomeList DATA={productDATA}/>;
+  if(showProduct === false) showList = <HomeList DATA={serviceData}/>
+
+  const navigateList = (type) => {
+    if(type === 'service') setShowProduct(false);
+    else setShowProduct(true);
+  }
+
+
   return (
     <SafeAreaView style={styles.container}> 
       <View style={styles.headerContainer}>
@@ -99,12 +110,15 @@ const Home = () => {
           <Text style={styles.welcomeText}>Olá, Lucas. Oque você deseja?</Text>
         </View>
         <View style={styles.typeContainer}>
-          <Text style={styles.typeText}>Produto</Text>
-          <Text style={styles.typeText}>Serviço</Text>
+          <TouchableOpacity onPress={() => navigateList('product')}> 
+            <Text style={styles.typeText}>Produto</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigateList('service')}> 
+            <Text style={styles.typeText}>Serviço</Text>
+          </TouchableOpacity>
         </View>
       </View>
-      {/* <HomeList DATA={productDATA}/> */}
-      <HomeList DATA={serviceData}/>
+      {showList}
     </SafeAreaView>
   )
 }
