@@ -11,6 +11,7 @@ const ProductCard = (props) => {
     <View style={{...styles.container, ...props.style}}>
       <Image 
         source={props.Image}
+        resizeMode="stretch"
         style={styles.image}
       />
       <View style={styles.titleContainer}>

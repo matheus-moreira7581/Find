@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text, SectionList, SafeAreaView, FlatList } from 'react-native';
 import styles from './styles';
 import ProductCard from '../../components/ProductCard';
+import HomeList from '../../components/HomeList';
 
 // import { Container } from './styles';
 
 const Home = () => {
   // This data array is temporary only for test
-  const DATA = [
+  const productDATA = [
     {
       title: 'Alimentação',
       data: [[
@@ -58,6 +59,39 @@ const Home = () => {
     },
   ]
 
+  const serviceData = [
+    {
+      title: 'Moda e Beleza',
+      data: [[
+        {name: 'Moda',image: require('../../assets/images/roupas.png')},
+        {name: 'Salão de Beleza',image: require('../../assets/images/salaoDeBeleza.png')},
+        {name: 'Barbeiro',image: require('../../assets/images/barbeiro.png')},
+        {name: 'Estética',image: require('../../assets/images/estética.png')}
+      ]]
+    },
+    {
+      title: 'Saúde',
+      data: [[
+        {name: 'Odontologia',image: require('../../assets/images/odonto.png')},
+        {name: 'Psicologia',image: require('../../assets/images/psicologi.png')},
+      ]]
+    },
+    {
+      title: 'Design',
+      data: [[
+        {name: 'UX | UI Design',image: require('../../assets/images/UX-UI.png')},
+        {name: 'Psicologia',image: require('../../assets/images/designGrafico.png')},
+      ]]
+    },
+    {
+      title: 'Serviços Domésticos',
+      data: [[
+        {name: 'Babá',image: require('../../assets/images/baba.png')},
+        {name: 'Cozinheiro',image: require('../../assets/images/cozinheira.png')},
+      ]]
+    },
+  ]
+
   return (
     <SafeAreaView style={styles.container}> 
       <View style={styles.headerContainer}>
@@ -69,33 +103,8 @@ const Home = () => {
           <Text style={styles.typeText}>Serviço</Text>
         </View>
       </View>
-      <View style={styles.listContainer}>
-        <SectionList 
-          sections={DATA}
-          keyExtractor={(item, index) => item + index}
-          showsVerticalScrollIndicator={false}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text style={styles.listTitle}>{title}</Text>
-          )}
-          renderItem={({ item, index }) => 
-              <FlatList 
-                data={item}
-                keyExtractor={(item, index) => item + index}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => (
-                <View style={styles.listItem}>
-                  <ProductCard 
-                    Title={item.name} 
-                    Image={item.image}
-                  />
-                </View>
-                )
-              }
-              />
-          }
-        />
-      </View>
+      {/* <HomeList DATA={productDATA}/> */}
+      <HomeList DATA={serviceData}/>
     </SafeAreaView>
   )
 }

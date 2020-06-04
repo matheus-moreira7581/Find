@@ -6,7 +6,7 @@ import fonts from '../../assets/var/fonts';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.grey,
     height: '100%',
     width: '100%',
   },
@@ -35,20 +35,20 @@ export default StyleSheet.create({
     fontSize: 15,
     color: colors.primary,
   },
-  listContainer: {
-    paddingLeft: 23,
-    backgroundColor: colors.grey,
-  },
-  listTitle: {
-    color: colors.secondary,
-    fontFamily: fonts.montserratBold,
-    fontSize: 19,
-    marginBottom: 5,
-    marginTop: 23,
-  },
-  listItem: {
-    height: 90,
-    marginRight: 14,
-    justifyContent: 'center',
-  }
+  // listContainer: {
+  //   paddingLeft: 23,
+  //   backgroundColor: colors.grey,
+  // },
+  // listTitle: {
+  //   color: colors.secondary,
+  //   fontFamily: fonts.montserratBold,
+  //   fontSize: 19,
+  //   marginBottom: 5,
+  //   marginTop: 23,
+  // },
+  // listItem: {
+  //   height: 90,
+  //   marginRight: 14,
+  //   justifyContent: 'center',
+  // }
 });
