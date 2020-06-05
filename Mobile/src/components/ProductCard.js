@@ -15,7 +15,9 @@ const ProductCard = (props) => {
       </View>
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{props.Title}</Text>
-        <Text style={styles.description} numberOfLines={1}>{props.Description}</Text>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description} numberOfLines={3}>{props.Description}</Text>
+        </View>
         <Text style={styles.price}>R$ {props.Price}</Text>
       </View>
     </View>
@@ -49,11 +51,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colors.secondary,
   },
+  descriptionContainer: {
+    height: 45,
+  },
   description: {
     fontFamily: fonts.montserrat,
     fontSize: 10,
     color: colors.textGrey,
-    marginBottom: 30,
   }
 });
 
