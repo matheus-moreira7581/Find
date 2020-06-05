@@ -7,6 +7,46 @@ import ProductCard from '../../components/ProductCard';
 // import { Container } from './styles';
 
 const CompanyProducts = () => {
+  //This data is temporary, only for tests
+  const DATA = [
+    {
+      image: require('../../assets/images/CompanyProducts/calabresa.png'),
+      title: 'Calabresa c/ Queijo',
+      description: 'Molho, calabresa, mozzarella e azeitona.',
+      price: '44,00'
+    },
+    {
+      image: require('../../assets/images/CompanyProducts/3queijos.png'),
+      title: 'Três Queijos',
+      description: 'Molho, mozzarella, requeijão e parmesão ralado.',
+      price: '40,00'
+    },
+    {
+      image: require('../../assets/images/CompanyProducts/marguerita.png'),
+      title: 'Marguerita',
+      description: 'Molho, mozzarella, tomate e manjericão.',
+      price: '39,00'
+    },
+    {
+      image: require('../../assets/images/CompanyProducts/calabresa.png'),
+      title: 'Carne seca',
+      description: 'Molho, mozzarella e carne seca.',
+      price: '40,50'
+    },
+    {
+      image: require('../../assets/images/CompanyProducts/frangoCatupiry.png'),
+      title: 'Frango c/ Catupiry',
+      description: 'Molho, frango desfiado e catupiry.',
+      price: '38,00'
+    },
+    {
+      image: require('../../assets/images/CompanyProducts/portuguesa.png'),
+      title: 'Portuguesa',
+      description: 'Molho, mozzarella, tomate, milho, calabresa, cebola, ovo, palmito e azeitona.',
+      price: '40,00'
+    },
+  ]
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -34,10 +74,19 @@ const CompanyProducts = () => {
         </View>
       </View>
       <View style={styles.productsContainer}>
-        <ProductCard 
-          Title="Teste"
-          Description="Testando o card do produto"
-          Price="R$ 44,00"
+        <FlatList 
+          data={DATA}
+          keyExtractor={(item, index) => item + index}
+          renderItem={({ item }) => (
+            <View style={styles.cardContainer}>
+              <ProductCard 
+                Image={item.image}
+                Title={item.title}
+                Description={item.description}
+                Price={item.price}
+              />
+            </View>
+          )}
         />
       </View>
 

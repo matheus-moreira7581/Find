@@ -5,7 +5,6 @@ import fonts from '../../assets/var/fonts';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: colors.grey,
     height: '100%',
     width: '100%',
@@ -68,6 +67,15 @@ export default StyleSheet.create({
     fontFamily: fonts.montserratSemiBold,
     fontSize: 10,
     color: colors.secondary,
+  },
+  productsContainer: {
+    width: '100%',
+    height: 570,
+  },
+  cardContainer: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
   
 });
