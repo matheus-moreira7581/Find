@@ -26,7 +26,8 @@ const Routes = () => {
           options={{
             tabBarLabel: "Pedidos",
             tabBarIcon: ({color, size}) => (
-              <MaterialIcons name="view-list" color={color} size={size}/>
+              <MaterialIcons name="receipt" color={color} size={size}/>
+              
             ),
           }} />
         <Tab.Screen 

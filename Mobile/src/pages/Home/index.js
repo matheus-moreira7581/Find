@@ -14,49 +14,49 @@ const Home = () => {
     {
       title: 'Alimentação',
       data: [[
-        {name: 'Restaurante',image: require('../../assets/images/comida.png')},
-        {name: 'Pizzaria',image: require('../../assets/images/pizzaria.png')},
-        {name: 'Hamburguer',image: require('../../assets/images/hamburguer.png')},
-        {name: 'Padaria',image: require('../../assets/images/padaria.png')}
+        {name: 'Restaurante',image: require('../../assets/images/ProductCategory/comida.png')},
+        {name: 'Pizzaria',image: require('../../assets/images/ProductCategory/pizzaria.png')},
+        {name: 'Hamburguer',image: require('../../assets/images/ProductCategory/hamburguer.png')},
+        {name: 'Padaria',image: require('../../assets/images/ProductCategory/padaria.png')}
       ]]
     },
     {
       title: 'Derivados',
       data: 
       [[
-        {name: 'Mercados',image: require('../../assets/images/mercado.png')},
-        {name: 'Atacados',image: require('../../assets/images/atacado.png')},
+        {name: 'Mercados',image: require('../../assets/images/ProductCategory/mercado.png')},
+        {name: 'Atacados',image: require('../../assets/images/ProductCategory/atacado.png')},
       ]]
     },
     {
       title: 'Saúde',
       data: 
       [[
-        {name: 'Farmácia',image: require('../../assets/images/farmacia.png')},
-        {name: 'Suplementos',image: require('../../assets/images/suplementos.png')},
+        {name: 'Farmácia',image: require('../../assets/images/ProductCategory/farmacia.png')},
+        {name: 'Suplementos',image: require('../../assets/images/ProductCategory/suplementos.png')},
       ]]
     },
     {
       title: 'Beleza',
       data: 
       [[
-        {name: 'Estética',image: require('../../assets/images/estetica.png')}
+        {name: 'Estética',image: require('../../assets/images/ProductCategory/estetica.png')}
       ]]
     },
     {
       title: 'Educação',
       data: 
       [[
-        {name: 'Papelaria',image: require('../../assets/images/papelaria.png')}, 
-        {name: 'Livraria',image: require('../../assets/images/livros.png')}
+        {name: 'Papelaria',image: require('../../assets/images/ProductCategory/papelaria.png')}, 
+        {name: 'Livraria',image: require('../../assets/images/ProductCategory/livros.png')}
       ]]
     },
     {
       title: 'Construção',
       data: 
       [[
-        {name: 'Material',image: require('../../assets/images/material.png')}, 
-        {name: 'Ferramenta',image: require('../../assets/images/ferramenta.png')}
+        {name: 'Material',image: require('../../assets/images/ProductCategory/material.png')}, 
+        {name: 'Ferramenta',image: require('../../assets/images/ProductCategory/ferramenta.png')}
       ]]
     },
   ]
@@ -65,31 +65,31 @@ const Home = () => {
     {
       title: 'Moda e Beleza',
       data: [[
-        {name: 'Moda',image: require('../../assets/images/roupas.png')},
-        {name: 'Salão de Beleza',image: require('../../assets/images/salaoDeBeleza.png')},
-        {name: 'Barbeiro',image: require('../../assets/images/barbeiro.png')},
-        {name: 'Estética',image: require('../../assets/images/estética.png')}
+        {name: 'Moda',image: require('../../assets/images/ServicesCategory/roupas.png')},
+        {name: 'Salão de Beleza',image: require('../../assets/images/ServicesCategory/salaoDeBeleza.png')},
+        {name: 'Barbeiro',image: require('../../assets/images/ServicesCategory/barbeiro.png')},
+        {name: 'Estética',image: require('../../assets/images/ServicesCategory/estética.png')}
       ]]
     },
     {
       title: 'Saúde',
       data: [[
-        {name: 'Odontologia',image: require('../../assets/images/odonto.png')},
-        {name: 'Psicologia',image: require('../../assets/images/psicologi.png')},
+        {name: 'Odontologia',image: require('../../assets/images/ServicesCategory/odonto.png')},
+        {name: 'Psicologia',image: require('../../assets/images/ServicesCategory/psicologi.png')},
       ]]
     },
     {
       title: 'Design',
       data: [[
-        {name: 'UX | UI Design',image: require('../../assets/images/UX-UI.png')},
-        {name: 'Psicologia',image: require('../../assets/images/designGrafico.png')},
+        {name: 'UX | UI Design',image: require('../../assets/images/ServicesCategory/UX-UI.png')},
+        {name: 'Psicologia',image: require('../../assets/images/ServicesCategory/designGrafico.png')},
       ]]
     },
     {
       title: 'Serviços Domésticos',
       data: [[
-        {name: 'Babá',image: require('../../assets/images/baba.png')},
-        {name: 'Cozinheiro',image: require('../../assets/images/cozinheira.png')},
+        {name: 'Babá',image: require('../../assets/images/ServicesCategory/baba.png')},
+        {name: 'Cozinheiro',image: require('../../assets/images/ServicesCategory/cozinheira.png')},
       ]]
     },
   ]
