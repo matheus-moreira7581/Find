@@ -5,6 +5,7 @@ import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold,
         Montserrat_700Bold} from '@expo-google-fonts/montserrat';
 import Home from './src/pages/Home';
 import CompanyProducts from './src/pages/CompanyProducts';
+import Companies from './src/pages/Companies'
 import Routes from './src/routes';
 
 export default function App() {
@@ -19,7 +20,7 @@ export default function App() {
   else {
     return (
       // <Routes />
-      <CompanyProducts />
+      <Companies />
       // <Home />
     )
   }
