@@ -27,7 +27,7 @@
 
 **Database**
 
-  - [x] SQLite3;
+  - [x] PostgreSQL;
 
 
 
