@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, SectionList, FlatList, StyleSheet } from 'react-native';
-import ProductCard from './ProductCard';
+import CategoryCard from './CategoryCard';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
 
@@ -24,7 +24,7 @@ const HomeList = (props) => {
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
                 <View style={styles.listItem}>
-                  <ProductCard 
+                  <CategoryCard 
                     Title={item.name} 
                     Image={item.image}
                   />

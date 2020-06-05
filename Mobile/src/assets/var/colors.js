@@ -3,5 +3,6 @@ export default {
   secondary: '#242424',
   grey: '#F8F8F8',
   white: '#FFFFFF',
-  ratingYellow: '#F8CC1B'
+  statusGreen: '#17E73A',
+  ratingYellow: '#F8CC1B',
 }

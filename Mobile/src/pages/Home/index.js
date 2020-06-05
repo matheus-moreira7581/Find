@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import ProductCard from '../../components/ProductCard';
 import HomeList from '../../components/HomeList';
 
 // import { Container } from './styles';
