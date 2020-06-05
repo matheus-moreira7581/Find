@@ -11,8 +11,15 @@ export default StyleSheet.create({
     width: '100%',
   },
   headerContainer: {
+    marginTop: Constants.statusBarHeight,
+    width: '100%',
     backgroundColor: colors.grey,
     elevation: 4,
+    justifyContent: 'space-around'
   },
+  ImageContainer: {
+    borderWidth: 2,
+    borderColor: '#FF0000',
+  }
   
 });

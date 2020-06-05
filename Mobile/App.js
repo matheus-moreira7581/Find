@@ -18,8 +18,8 @@ export default function App() {
   }
   else {
     return (
-      <Routes />
-      // <CompanyProducts />
+      // <Routes />
+      <CompanyProducts />
       // <Home />
     )
   }
