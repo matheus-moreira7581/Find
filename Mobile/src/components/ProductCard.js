@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     width: 88,
     height: 88,
     borderRadius: 8,
-    backgroundColor: colors.grey,
+    backgroundColor: colors.background,
     marginRight: 7.5,
   },
   detailsContainer: {
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.montserratBold,
     fontSize: 15,
-    color: colors.secondary,
+    color: colors.cinzaEscuro,
   },
   descriptionContainer: {
     height: 45,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   description: {
     fontFamily: fonts.montserrat,
     fontSize: 10,
-    color: colors.textGrey,
+    color: colors.cinza,
   }
 });
 

@@ -41,10 +41,10 @@ const HomeList = (props) => {
 const styles = StyleSheet.create({
   listContainer: {
     paddingLeft: 23,
-    backgroundColor: colors.grey,
+    backgroundColor: colors.background,
   },
   listTitle: {
-    color: colors.secondary,
+    color: colors.cinzaEscuro,
     fontFamily: fonts.montserratBold,
     fontSize: 19,
     marginBottom: 5,

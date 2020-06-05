@@ -5,7 +5,7 @@ import fonts from '../../assets/var/fonts';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.grey,
+    backgroundColor: colors.background,
     height: '100%',
     width: '100%',
   },
@@ -13,7 +13,7 @@ export default StyleSheet.create({
     marginTop: Constants.statusBarHeight,
     width: '100%',
     height: 203,
-    backgroundColor: colors.grey,
+    backgroundColor: colors.background,
     elevation: 4,
   },
   imageContainer: {
@@ -42,7 +42,7 @@ export default StyleSheet.create({
   companyName: {
     fontFamily: fonts.montserratBold,
     fontSize: 15,
-    color: colors.secondary,
+    color: colors.cinzaEscuro,
   },
   rateContainer: {
     flexDirection: 'row',
@@ -52,21 +52,21 @@ export default StyleSheet.create({
   },
   rate: {
     paddingHorizontal: 4,
-    color: colors.ratingYellow,
+    color: colors.dourado,
     fontSize: 13,
   },
   companyStatus: {
     fontFamily: fonts.montserratSemiBold,
     fontSize: 10,
-    color: colors.secondary,
+    color: colors.cinzaEscuro,
     borderBottomWidth: 2,
-    borderBottomColor: colors.statusGreen,
+    borderBottomColor: colors.verde,
     marginBottom: 11,
   },
   companyAddress: {
     fontFamily: fonts.montserratSemiBold,
     fontSize: 10,
-    color: colors.secondary,
+    color: colors.cinzaEscuro,
   },
   productsContainer: {
     width: '100%',

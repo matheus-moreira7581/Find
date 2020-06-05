@@ -6,12 +6,12 @@ import fonts from '../../assets/var/fonts';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.grey,
+    backgroundColor: colors.background,
     height: '100%',
     width: '100%',
   },
   headerContainer: {
-    backgroundColor: colors.grey,
+    backgroundColor: colors.background,
     paddingBottom: 10,
     elevation: 4,
   },
@@ -21,7 +21,7 @@ export default StyleSheet.create({
     marginBottom: 25,
   }, 
   welcomeText: {
-    color: colors.secondary,
+    color: colors.cinzaEscuro,
     fontFamily: fonts.montserrat,
     fontSize: 20,
   },

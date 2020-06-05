@@ -1,9 +1,10 @@
 export default {
   primary: '#1763E7',
-  secondary: '#242424',
-  grey: '#F8F8F8',
-  textGrey: '#888888',
-  white: '#FFFFFF',
-  statusGreen: '#17E73A',
-  ratingYellow: '#F8CC1B',
+  cinzaEscuro: '#242424',
+  cinza: '#888888',
+  verde: '#17E73A',
+  dourado: '#F8CC1B',
+  branco: '#FFFFFF',
+  vermelho: '#F81B1B',
+  background: '#F8F8F8',
 }
