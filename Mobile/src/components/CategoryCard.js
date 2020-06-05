@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   container: {
     height: 77,
     width: 95,
-    backgroundColor: colors.white,
+    backgroundColor: colors.branco,
     borderRadius: 5,
     elevation: 3,
     shadowRadius: 3,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.montserratSemiBold,
     fontSize: 10,
-    color: colors.secondary
+    color: colors.cinzaEscuro
   },
 });
 
