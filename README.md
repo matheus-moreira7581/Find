@@ -10,7 +10,7 @@
 
 * Como chegamos nessa solução: [Clique aqui](https://docs.google.com/document/d/1Vsk6FfSIcFM8ikHsm82gj1hrL63U6hUuCF7S36d11aU/edit)
 
-* Acesse o nosso protótipo: [Clique aqui](https://xd.adobe.com/view/d607447c-2ac7-416d-7b2f-59eef7e60025-a036/)
+* Acesse o nosso protótipo: [Clique aqui](https://xd.adobe.com/view/cfdbd8be-8e2c-4701-616f-b80c71143f29-b9ea/screen/660c5085-8027-4058-9b4e-684366c4febf/Cliente-home-Produto-5)
 
 ----
 
