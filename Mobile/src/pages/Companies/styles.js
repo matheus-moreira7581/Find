@@ -5,7 +5,8 @@ import fonts from '../../assets/var/fonts';
 const styles = StyleSheet.create({
     screenContainer:{
         backgroundColor: colors.backgroundGrey,
-        marginBottom: 1
+        height: '100%',
+        width: '100%'
     },
     headerContainer:{
         flexDirection: 'row',
