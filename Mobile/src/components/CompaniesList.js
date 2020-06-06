@@ -13,9 +13,9 @@ const CompaniesList = (props) => {
         <FlatList
         data={props.Companies}
         keyExtractor={company => company.id}
-        renderItem={({company})=>{
-            <Text>Teste</Text>
-        }}
+        renderItem={({item})=>(
+            <Text>{item.name}</Text>
+        )}
         />
     );
 };

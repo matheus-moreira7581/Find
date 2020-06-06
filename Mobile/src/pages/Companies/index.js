@@ -14,7 +14,7 @@ let subCategory = 'Pizzaria';
 
 const companies = [
     {
-        id: 1,
+        id: "1",
         name: 'Tasty Pizza',
         address: 'R. José da Costa Monteiro, 625',
         minDistance: 0.94,
@@ -22,7 +22,7 @@ const companies = [
         img_url: require('../../assets/images/CompanyLogos/pizzaria_1.png')
     },
     {
-        id: 2,
+        id: "2",
         name: 'La Pizza',
         address: 'R. Luiz Machado de Assis, 441',
         minDistance: 1.64,
@@ -30,7 +30,7 @@ const companies = [
         img_url: require('../../assets/images/CompanyLogos/pizzaria_2.png')
     },
     {
-        id: 3,
+        id: "3",
         name: 'Pizzaria Donato',
         address: 'R. Olga de Almeida Machado, 441',
         minDistance: 1.72,
