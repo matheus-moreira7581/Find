@@ -2,23 +2,45 @@ import { StyleSheet } from 'react-native';
 import colors from '../../assets/var/colors';
 import fonts from '../../assets/var/fonts';
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
+    screenContainer:{
+        backgroundColor: colors.backgroundGrey,
+        marginBottom: 1
+    },
     headerContainer:{
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        backgroundColor: '#777'
+        alignItems: 'center',
+        marginTop: 61,
+        marginBottom: 18.5
     },
-    category:{
+    centeredContainer:{
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    categoryText:{
+        fontFamily: fonts.montserratSemiBold,
+        fontSize: 20,
+        color: colors.secondary,
+    },
+    subCategoryText:{
         fontFamily: fonts.montserratBold,
         fontSize: 20,
-        color: colors.secondary
-    },
-    backgroundContainer:{
-        backgroundColor: colors.backgroundGrey,
+        color: colors.secondary, 
     },
     subCategoryContainer:{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 23
+        marginHorizontal: 23,
+        marginBottom: 16
+    },
+    backIcon:{
+        marginLeft: 25
     }
 });
+
+export default styles;
