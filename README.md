@@ -26,7 +26,7 @@ login.
 
 ---
 
-# Dia 1:  BACK-END da aplicação (08/06/2020);
+## Dia 1: back-end da aplicação (08/06/2020);
 
 
 - [ ] Resetar o projeto, e fazer do zero as instalações;
