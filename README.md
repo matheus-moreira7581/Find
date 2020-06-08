@@ -42,13 +42,13 @@
 
 ---
 
-## Primeira Sprint
+# Primeira Sprint
 
 O foco na primeira sprint está em torno do primeiro contato do usuário com o aplicativo, principalmente pelo lado do cliente. Trabalhando no cadastramento e login.
 
-# Mobile
+## Mobile
 
-# Cliente
+## Cliente
 - Cadastro - Dados pessoais do cliente, como nome, email e endereço;
 - Login - Login através do email e senha;
 - Detalhes do produto - Onde o cliente escolhe a quantidade de produtos que ele deseja solicitar;
@@ -56,12 +56,12 @@ O foco na primeira sprint está em torno do primeiro contato do usuário com o a
 - Tipo de entrega - Delivery ou retirada no local;
 - Confirmação de compra - Feedback para o cliente, sobre o status do pedido.
 
-# Empresa
+## Empresa
 - Login - Login através do email e senha.
 
-# Back-end
+## Back-end
 
-# Cliente
+## Cliente
 - Regra de negócio - Controles; 
 - Create - Inserção de dados pessoais;
 - Read - Queries; 
