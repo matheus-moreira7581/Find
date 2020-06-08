@@ -1,5 +1,5 @@
 {
-  "name": "Find",
+  "name": "find",
   "version": "1.0.0",
   "description": "O foco na primeira sprint está em torno do primeiro contato do usuário com o\r aplicativo, principalmente pelo lado do cliente. Trabalhando no cadastramento e\r login.",
   "main": "index.js",
