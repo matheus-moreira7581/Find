@@ -1,21 +1,17 @@
-
+// Update with your config settings.
 
 module.exports = {
 
-  // conexao com o banco de dados
-
-  development : {
-    client: "pg",
+  development: {
+    client: 'pg',
     connection: {
-      database: "find_db",
-      user: "postgre",
-      password: "db123"
+      host: "localhost",
+      user: "postgres",
+      password: "db123",
+      database: "find_db"
+    },
+    migrations: {
+      directory: `${__dirname}/src/database/migrations`
     }
-  },
-  migrations: {
-    directory: `${__dirname}/src/database/migrations`
-  },
-  seeds:{
-    directory: `${__dirname}/src/database/seeds`
   }
 };
