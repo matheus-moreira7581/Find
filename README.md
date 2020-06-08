@@ -6,8 +6,8 @@ login.
 
 - Prazo: 
 
-    **Inicio:** Segunda-feira (08/06/2020); 
-    **Final:** Sexta-feira (12/06/2020);
+    - Inicio: Segunda-feira (08/06/2020); 
+    - Final: Sexta-feira (12/06/2020);
 
 ### Entrega
 
@@ -38,20 +38,5 @@ login.
 - [ ] Fazer relacionamentos;
 - [ ] Testar resultados.
 
----
-# Primeira Sprint
 
-O foco na primeira sprint está em torno do primeiro contato do usuário com o aplicativo, principalmente pelo lado do cliente. Trabalhando no cadastramento e login.
-
-
-## Back-end
-
-## Cliente
-- Regra de negócio - Controles; 
-- Create - Inserção de dados pessoais;
-- Read - Queries; 
-- Update - Atualizações dos dados;
-- Delete - Exclusão de dados.
-
- [Kanban Trello](https://trello.com/b/Y9fmF1ye/find) 
 
