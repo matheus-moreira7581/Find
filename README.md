@@ -51,10 +51,10 @@ O foco na primeira sprint está em torno do primeiro contato do usuário com o a
 ## Cliente
 - Cadastro - Dados pessoais do cliente, como nome, email e endereço;
 - Login - Login através do email e senha;
-- Detalhes do produto - Onde o cliente escolhe a quantidade de produtos que ele deseja solicitar;
-- Tipo de pagamento - Escolha entre cartão e dinheiro;
-- Tipo de entrega - Delivery ou retirada no local;
-- Confirmação de compra - Feedback para o cliente, sobre o status do pedido.
+- Detalhes do produto(estático) - Onde o cliente escolhe a quantidade de produtos que ele deseja solicitar;
+- Tipo de pagamento(estático) - Escolha entre cartão e dinheiro;
+- Tipo de entrega(estático) - Delivery ou retirada no local;
+- Confirmação de compra(estático) - Feedback para o cliente, sobre o status do pedido.
 
 ## Empresa
 - Login - Login através do email e senha.
