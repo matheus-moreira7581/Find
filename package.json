@@ -1,0 +1,28 @@
+{
+  "name": "Find",
+  "version": "1.0.0",
+  "description": "O foco na primeira sprint está em torno do primeiro contato do usuário com o\r aplicativo, principalmente pelo lado do cliente. Trabalhando no cadastramento e\r login.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matheus-moreira7581/Find.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matheus-moreira7581/Find/issues"
+  },
+  "homepage": "https://github.com/matheus-moreira7581/Find#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.21.1",
+    "pg": "^8.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

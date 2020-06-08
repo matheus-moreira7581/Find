@@ -1,1 +1,0 @@
-// This is a temporary file for define project structure
