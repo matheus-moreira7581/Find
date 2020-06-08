@@ -1,28 +1,41 @@
-# APP Find
+# 1° SPRINT
+
+O foco na primeira sprint está em torno do primeiro contato do usuário com o
+aplicativo, principalmente pelo lado do cliente. Trabalhando no cadastramento e
+login.
+
+- Prazo: 
+
+    **Inicio:** Segunda-feira (08/06/2020); 
+    **Final:** Sexta-feira (12/06/2020);
+
+### Entrega
+
+- Cliente:
+
+    - Regra de negócio - Controles;
+    - Create - Inserção de dados pessoais;
+    - Read - Queries;
+    - Update - Atualizações dos dados;
+    - Delete - Exclusão de dados.
 
 
-* O projeto consiste em um aplicativo que visa conectar empresas e clientes, durante o período de quarentena.
+#### Link util
 
-
-
-### Tecnologias (iniciais)
-
-|      Front-End      |       Back-End      |
-|-------------------- |---------------------|
-| React Native (Expo) |  Node.js (Express)  |         
-|                     |     PostgreSQL      |
-
-
- 
-### Equipe (SQUAD 1)
-
-- [Matheus Santos (UX)](https://www.linkedin.com/in/matheus-santos-7347421a1/)
-- [Caio Enrique (DEV)](https://github.com/100f)
-- [Matheus Moreira (DEV)](https://github.com/matheus-moreira7581)
-- [Rodrigo Souza (DEV)](https://github.com/rodrigoscruz)
-- [Samuel W Lorena (DEV)](https://github.com/SamukaWenceslau)
-
-
+- [Link do nosso Trello](https://trello.com/b/Y9fmF1ye/find)
 
 ---
-Projeto do Programa de Formação FCamara - Squad 1 - Aplicativo Find
+
+# Dia 1:  BACK-END da aplicação (08/06/2020);
+
+
+- [ ] Resetar o projeto, e fazer do zero as instalações;
+- [ ] Organizar o projeto;
+- [ ] Criar o banco de dados;
+- [ ] Criar a conexão;
+- [ ] Criar as tabelas;
+- [ ] Popular as tabelas;
+- [ ] Fazer relacionamentos;
+- [ ] Testar resultados.
+
+
