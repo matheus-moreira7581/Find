@@ -4,7 +4,10 @@
   "description": "O foco na primeira sprint está em torno do primeiro contato do usuário com o\r aplicativo, principalmente pelo lado do cliente. Trabalhando no cadastramento e\r login.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/server"
+    "dev": "nodemon src/server",
+    "migrations": "knex migrate:latest",
+    "seeds": "knex seed:run"
+
   },
   "repository": {
     "type": "git",
