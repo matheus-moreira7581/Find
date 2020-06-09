@@ -2,6 +2,20 @@ const knex = require('../database')
 
 module.exports = {
 
+    // Cadastrar um cliente
+
+     async create(request, response) {
+
+        const { name, email, cell, password } = request.body;
+
+        const client = { name, email, cell, password };
+
+        await knex('clients').insert(client);
+
+        return response.json(client);
+
+    },
+
     // Listar clientes
 
     async index(request, response) {
@@ -22,20 +36,8 @@ module.exports = {
 
         return response.json(client)
 
-    },
-
-    // Cadastrar um cliente
-    async create(request, response) {
-
-        const { name, email, cell, password } = request.body;
-
-        const client = { name, email, cell, password };
-
-        await knex('clients').insert(client);
-
-        return response.json(client);
-
     }
 
+    
     
 }
