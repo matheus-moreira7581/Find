@@ -41,11 +41,11 @@ login.
 
 ## Dia 2: back-end da aplicação (09/06/2020)
 
-- [ ] Cadastro do cliente;
-- [ ] Cadastro do endereço;
-- [ ] Listar todos os endereços de um cliente especifico;
-- [ ] Mostrar as informações de um cliente especifico;
-- [ ] Testar alguns resultados.
+- [x] Cadastro do cliente;
+- [x] Cadastro do endereço;
+- [x] Listar todos os endereços de um cliente especifico;
+- [x] Mostrar as informações de um cliente especifico;
+- [x] Testar alguns resultados.
 
 ---
 
