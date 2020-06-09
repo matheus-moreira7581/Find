@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
     screenContainer:{
         backgroundColor: colors.backgroundGrey,
         height: '100%',
-        width: '100%'
+        width: '100%',
+        paddingLeft: 30
     },
     headerContainer:{
         flexDirection: 'row',
