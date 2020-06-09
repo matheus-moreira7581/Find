@@ -8,6 +8,7 @@ import CompanyProducts from './src/pages/CompanyProducts';
 import Companies from './src/pages/Companies'
 import Routes from './src/routes';
 import DeliveryOptions from './src/pages/DeliveryOptions'
+import SuccessOrder from './src/pages/SuccessOrder';
 
 export default function App() {
   const [fontsLoaded] = useFonts ({
@@ -21,10 +22,11 @@ export default function App() {
   else {
     return (
       // <Routes />
-      //<CompanyProducts/>
-      //<Companies />
+      // <CompanyProducts/>
+      // <Companies />
       // <Home />
-      <DeliveryOptions/>
+      // <DeliveryOptions/>
+      <SuccessOrder />
     )
   }
 }
