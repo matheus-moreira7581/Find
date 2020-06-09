@@ -8,9 +8,8 @@ const routes = express.Router();
 
 
 routes.get('/clients', ClientsController.index)
+      .post('/clients', ClientsController.create)
 
       
-
- 
 
 module.exports = routes;
