@@ -25,8 +25,8 @@ export default function App() {
       // <CompanyProducts/>
       // <Companies />
       // <Home />
-      // <DeliveryOptions/>
-      <SuccessOrder />
+      <DeliveryOptions/>
+      //<SuccessOrder />
     )
   }
 }

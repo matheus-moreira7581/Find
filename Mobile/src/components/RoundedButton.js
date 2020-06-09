@@ -8,14 +8,14 @@ const RoundedButton = (props) => (
     <TouchableOpacity 
         onPress={props.onPress} 
         style={props.selected === true 
-            ? [styles.selected, {
+            ? {...props.style,...styles.selected, ...{
                 width: props.width,
                 height: props.height
-            }] 
-            : [styles.unselected, {
+            }} 
+            : {...props.style,...styles.unselected, ...{
                 width: props.width,
                 height: props.height
-            }]}
+            }}}
     >
         <Text style={props.selected === true 
             ? styles.selectedText 
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 55,
-        backgroundColor: '#FFF',
+        backgroundColor: colors.background,
         padding: 15,
         borderWidth: 2,
         borderColor: colors.primary,

@@ -6,5 +6,5 @@ export default {
   dourado: '#F8CC1B',
   branco: '#FFFFFF',
   vermelho: '#F81B1B',
-  background: '#F8F8F8',
+  background: '#F6F6F6',
 }
