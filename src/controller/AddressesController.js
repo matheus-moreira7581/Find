@@ -16,6 +16,19 @@ module.exports = {
 
         return response.json(address);
 
+    },
+
+    // Listar todos os endereços de um cliente especifico
+
+    async show(request, response) {
+
+        const { id } = request.params;
+
+        const clientAddresses = await knex('addresses')
+        .where('id_clients', id);
+
+        return response.json(clientAddresses);
+
     }
 
 
