@@ -29,14 +29,14 @@ login.
 ## Dia 1: back-end da aplicação (08/06/2020);
 
 
-- [ ] Resetar o projeto, e fazer do zero as instalações;
-- [ ] Organizar o projeto;
-- [ ] Criar o banco de dados;
-- [ ] Criar a conexão;
-- [ ] Criar as tabelas;
-- [ ] Popular as tabelas;
-- [ ] Fazer relacionamentos;
-- [ ] Testar resultados.
+- [x] Resetar o projeto, e fazer do zero as instalações;
+- [x] Organizar o projeto;
+- [x] Criar o banco de dados;
+- [x] Criar a conexão;
+- [x] Criar as tabelas;
+- [x] Popular as tabelas;
+- [x] Fazer relacionamentos;
+- [x] Testar alguns resultados.
 
 
 
