@@ -8,9 +8,11 @@ module.exports = {
 
         const clients = await knex('clients');
 
+
         return response.json(clients);
     }
 
-    //
+    
+
 
 }
