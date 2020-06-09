@@ -9,6 +9,7 @@ const routes = express.Router();
 
 routes.get('/clients', ClientsController.index)
       .post('/clients', ClientsController.create)
+      .get('/client/:id', ClientsController.show)
 
       
 

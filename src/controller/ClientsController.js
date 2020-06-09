@@ -11,6 +11,19 @@ module.exports = {
         return response.json(clients);
     },
 
+    // Mostra dados de um cliente especifico
+
+    async show(request, response) {
+
+        const { id } = request.params;
+        
+        const client = await knex('clients')
+        .where('id', id);
+
+        return response.json(client)
+
+    },
+
     // Cadastrar um cliente
     async create(request, response) {
 
