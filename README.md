@@ -26,7 +26,7 @@ login.
 
 ---
 
-## Dia 1: back-end da aplicação (08/06/2020);
+## Dia 1: back-end da aplicação (08/06/2020)
 
 
 - [x] Resetar o projeto, e fazer do zero as instalações;
@@ -37,6 +37,15 @@ login.
 - [x] Popular as tabelas;
 - [x] Fazer relacionamentos;
 - [x] Testar alguns resultados.
+
+
+## Dia 2: back-end da aplicação (09/06/2020)
+
+- [ ] Cadastro do cliente;
+- [ ] Cadastro do endereço;
+- [ ] Login do cliente;
+- [ ] Mostrar as informações de um cliente especifico;
+- [ ] Testar alguns resultados.
 
 
 
