@@ -43,7 +43,7 @@ login.
 
 - [ ] Cadastro do cliente;
 - [ ] Cadastro do endereço;
-- [ ] Login do cliente;
+- [ ] Listar todos os endereços de um cliente especifico;
 - [ ] Mostrar as informações de um cliente especifico;
 - [ ] Testar alguns resultados.
 
