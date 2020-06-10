@@ -8,11 +8,11 @@ module.exports = {
     async create(request, response, next) {
 
         try {
-            const { id } = request.params;
+            const { id_clients } = request.params;
     
             const { name, street, neighborhood, ad_number, additional, zip, city, state, landmark } = request.body;
     
-            const address = {name, street, neighborhood, ad_number, additional, zip, city, state, landmark, id_clients: id};
+            const address = {name, street, neighborhood, ad_number, additional, zip, city, state, landmark, id_clients};
     
             await knex('addresses').insert(address);
     
@@ -29,10 +29,10 @@ module.exports = {
     async show(request, response, next) {
 
         try {
-            const { id } = request.params;
+            const { id_clients } = request.params;
     
             const clientAddresses = await knex('addresses')
-            .where('id_clients', id);
+            .where({ id_clients });
     
             return response.json(clientAddresses);
             

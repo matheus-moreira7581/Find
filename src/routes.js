@@ -17,8 +17,8 @@ routes.post('/clients', ClientsController.create)
 
 //Endereço
 
-routes.post('/address/:id', AddressesController.create)
-      .get('/address/:id', AddressesController.show)
+routes.post('/address/:id_clients', AddressesController.create)
+      .get('/address/:id_clients', AddressesController.show)
       .get('/address', AddressesController.index)
       
       

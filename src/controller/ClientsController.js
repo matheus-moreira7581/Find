@@ -45,7 +45,7 @@ module.exports = {
             const { id } = request.params;
             
             const client = await knex('clients')
-            .where('id', id);
+            .where({ id });
     
             return response.json(client)
             
