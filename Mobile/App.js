@@ -10,6 +10,7 @@ import Routes from './src/routes';
 import DeliveryOptions from './src/pages/DeliveryOptions'
 import SuccessOrder from './src/pages/SuccessOrder';
 import Login from './src/pages/Login';
+import CustomerRegistration from './src/pages/CustomerRegistration';
 
 export default function App() {
   const [fontsLoaded] = useFonts ({
@@ -27,9 +28,10 @@ export default function App() {
       // <CompanyProducts/>
       // <Companies />
       // <Home />
-      <Login />
+      //<Login />
       // <DeliveryOptions/>
       //<SuccessOrder />
+      <CustomerRegistration/>
     )
   }
 }

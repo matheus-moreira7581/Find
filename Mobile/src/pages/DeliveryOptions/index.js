@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, SafeAreaView, Text } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 import RoundedButton from '../../components/RoundedButton';
@@ -11,7 +11,7 @@ const DeliveryOptions = () => {
     const [deliveryOption, setDeliveryOption] = useState(false);
 
     return ( 
-        <View style={styles.screenContainer}>
+        <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
                 <MaterialIcons name="arrow-back" size={20} color={colors.secondary} style={styles.backIcon}/>
                 <View style={styles.centeredContainer}>
@@ -51,7 +51,7 @@ const DeliveryOptions = () => {
                     style={styles.continueButton}
                 />
             </View>
-        </View>   
+        </SafeAreaView>   
     );
 };
 

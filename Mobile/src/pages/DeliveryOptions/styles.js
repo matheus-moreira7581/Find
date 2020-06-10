@@ -39,7 +39,7 @@ export default StyleSheet.create({
         height: '100%',
         backgroundColor: colors.background,
         paddingTop: '17.56%',
-        paddingBottom: '19.6%',
+        paddingBottom: 50,
     },
     questionContainer:{
         alignItems: 'center',
