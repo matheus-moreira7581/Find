@@ -44,9 +44,17 @@ module.exports = {
 
         const { id } = request.params;
 
-        
-    }
+        const trx = await knex.transaction();
 
-    
+        await trx('clients').where({ id }).del();
+
+        await trx('addresses').where('id_clients', id).del();
+
+        await trx.commit();
+
+        return response.json({msg: 'cliente deletado com sucesso!'});
+
+    }
+ 
     
 }
