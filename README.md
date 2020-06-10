@@ -50,7 +50,7 @@ login.
 ## Dia 3: back-end da aplicação (10/06/2020)
 
 - [ ] Atualizar dados de um cliente;
-- [ ] Deletar um cliente e seus endereços;
+- [x] Deletar um cliente e seus endereços;
 - [ ] Add um recurso para pegar erro;
 - [ ] Add comentários;
 - [ ] Testar alguns resultados.
