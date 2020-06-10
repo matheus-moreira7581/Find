@@ -1,5 +1,5 @@
 const knex = require('../database');
-const { index } = require('./ClientsController');
+
 
 module.exports = {
 

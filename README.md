@@ -51,8 +51,8 @@ login.
 
 - [ ] Atualizar dados de um cliente;
 - [x] Deletar um cliente e seus endereços;
-- [ ] Add um recurso para pegar erro;
-- [ ] Add comentários;
+- [x] Add um recurso para pegar erro;
+- [x] Add comentários;
 - [ ] Testar alguns resultados.
 
 ## Dia 4: back-end da aplicação (11/06/2020)
