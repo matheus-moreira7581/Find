@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     },
     input:{
         fontFamily: fonts.montserratRegular,
+        color: colors.cinza,
         borderRadius: 7,
         backgroundColor: colors.textInput,
         paddingLeft: 15,

@@ -11,6 +11,7 @@ import DeliveryOptions from './src/pages/DeliveryOptions'
 import SuccessOrder from './src/pages/SuccessOrder';
 import Login from './src/pages/Login';
 import CustomerRegistration from './src/pages/CustomerRegistration';
+import PaymentOptions from './src/pages/PaymentOptions';
 
 export default function App() {
   const [fontsLoaded] = useFonts ({
@@ -31,7 +32,8 @@ export default function App() {
       //<Login />
       // <DeliveryOptions/>
       //<SuccessOrder />
-      <CustomerRegistration/>
+      //<CustomerRegistration/>
+      <PaymentOptions />
     )
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, SafeAreaView, Text, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, SafeAreaView, Text, TextInput } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
