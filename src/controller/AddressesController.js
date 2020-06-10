@@ -1,4 +1,5 @@
-const knex = require('../database')
+const knex = require('../database');
+const { index } = require('./ClientsController');
 
 module.exports = {
 
@@ -28,6 +29,14 @@ module.exports = {
         .where('id_clients', id);
 
         return response.json(clientAddresses);
+
+    },
+
+    async index(request, response) {
+
+        const addresses = await knex('addresses');
+
+        return response.json(addresses);
 
     }
 

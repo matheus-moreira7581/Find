@@ -46,9 +46,10 @@ module.exports = {
 
         const trx = await knex.transaction();
 
-        await trx('clients').where({ id }).del();
-
         await trx('addresses').where('id_clients', id).del();
+        
+        await trx('clients').where('id', id).del();
+
 
         await trx.commit();
 
