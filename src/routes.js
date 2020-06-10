@@ -8,9 +8,10 @@ const routes = express.Router();
 
 //Cliente
 
-routes.get('/clients', ClientsController.index)
-      .post('/clients', ClientsController.create)
+routes.post('/clients', ClientsController.create)
+      .get('/clients', ClientsController.index)
       .get('/client/:id', ClientsController.show)
+      .put('/client/:id', ClientsController.update)
       .delete('/client/:id', ClientsController.delete) 
 
 

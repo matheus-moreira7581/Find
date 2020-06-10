@@ -1,6 +1,5 @@
 const knex = require('../database');
-const { update } = require('../database');
-const e = require('express');
+
 
 module.exports = {
 
@@ -38,7 +37,7 @@ module.exports = {
 
     },
 
-    // Mostra dados de um cliente especifico
+    // Mostrar dados de um cliente especifico
 
     async show(request, response, next) {
    
@@ -56,6 +55,27 @@ module.exports = {
 
     },
 
+    // Atualizar dados de um cliente
+
+    async update(request, response, next) { 
+
+        try {
+          
+            const { id } = request.params;
+
+            const { name, cell, img_url} = request.body;
+
+            await knex('clients').where({ id }).update({name, cell, img_url})
+
+            const newdata = await knex('clients').where({ id })
+
+            return response.json(newdata)
+
+        } catch (error) {
+            next(error)
+        }
+
+    },
 
     // Deletar um cliente e seus endereços;
 
