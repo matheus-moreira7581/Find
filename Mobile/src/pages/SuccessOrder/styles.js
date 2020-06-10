@@ -60,9 +60,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 113,
-    
   }
-
 });
 
 export default styles

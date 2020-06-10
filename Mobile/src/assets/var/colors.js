@@ -3,6 +3,7 @@ export default {
   cinzaEscuro: '#242424',
   cinza: '#888888',
   verde: '#17E73A',
+  textInput: '#EFEFEF',
   dourado: '#F8CC1B',
   branco: '#FFFFFF',
   vermelho: '#F81B1B',

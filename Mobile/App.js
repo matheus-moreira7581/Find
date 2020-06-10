@@ -2,16 +2,18 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { AppLoading } from 'expo';
 import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold, 
-        Montserrat_700Bold} from '@expo-google-fonts/montserrat';
+        Montserrat_700Bold, Montserrat_400Regular} from '@expo-google-fonts/montserrat';
 import Home from './src/pages/Home';
 import CompanyProducts from './src/pages/CompanyProducts';
 import Companies from './src/pages/Companies'
 import Routes from './src/routes';
 import DeliveryOptions from './src/pages/DeliveryOptions'
 import SuccessOrder from './src/pages/SuccessOrder';
+import Login from './src/pages/Login';
 
 export default function App() {
   const [fontsLoaded] = useFonts ({
+    Montserrat_400Regular,
     Montserrat_500Medium,
     Montserrat_600SemiBold,
     Montserrat_700Bold,
@@ -25,7 +27,8 @@ export default function App() {
       // <CompanyProducts/>
       // <Companies />
       // <Home />
-      <DeliveryOptions/>
+      <Login />
+      // <DeliveryOptions/>
       //<SuccessOrder />
     )
   }
