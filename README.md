@@ -47,6 +47,12 @@ login.
 - [x] Mostrar as informações de um cliente especifico;
 - [x] Testar alguns resultados.
 
+## Dia 3: back-end da aplicação (10/06/2020)
+
+## Dia 4: back-end da aplicação (11/06/2020)
+
+- [ ] Login usuário
+
 ---
 
 ## Guia para ativação do código
