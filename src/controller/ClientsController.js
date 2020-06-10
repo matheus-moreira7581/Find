@@ -36,6 +36,15 @@ module.exports = {
 
         return response.json(client)
 
+    },
+
+    // Deletar um cliente e seus endereços;
+
+    async delete(request, response) {
+
+        const { id } = request.params;
+
+        
     }
 
     
