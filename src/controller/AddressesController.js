@@ -32,6 +32,8 @@ module.exports = {
 
     },
 
+    // Listar todos os endereços
+
     async index(request, response) {
 
         const addresses = await knex('addresses');
