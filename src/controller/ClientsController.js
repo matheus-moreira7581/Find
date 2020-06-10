@@ -1,10 +1,12 @@
-const knex = require('../database')
+const knex = require('../database');
+const { update } = require('../database');
+const e = require('express');
 
 module.exports = {
 
     // Cadastrar um cliente
 
-     async create(request, response, next) {
+    async create(request, response, next) {
 
          try {
             const { name, email, cell, password } = request.body;
@@ -53,6 +55,7 @@ module.exports = {
         }
 
     },
+
 
     // Deletar um cliente e seus endereços;
 

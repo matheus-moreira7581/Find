@@ -49,11 +49,10 @@ login.
 
 ## Dia 3: back-end da aplicação (10/06/2020)
 
-- [ ] Atualizar dados de um cliente;
 - [x] Deletar um cliente e seus endereços;
 - [x] Add um recurso para pegar erro;
 - [x] Add comentários;
-- [ ] Testar alguns resultados.
+- [x] Testar alguns resultados.
 
 ## Dia 4: back-end da aplicação (11/06/2020)
 
