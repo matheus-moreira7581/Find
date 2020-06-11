@@ -1,4 +1,5 @@
 const knex = require('../database');
+const bcrypt = require('bcrypt')
 
 
 module.exports = {
@@ -8,9 +9,11 @@ module.exports = {
     async create(request, response, next) {
 
          try {
+            const hashedPassword = await bcrypt.hash(request.body.password, 10)
+
             const { name, email, cell, password } = request.body;
     
-            const client = { name, email, cell, password };
+            const client = { name, email, cell, password: hashedPassword };
     
             await knex('clients').insert(client);
     
@@ -21,6 +24,30 @@ module.exports = {
         }
 
     },
+
+
+    // Login Clientes
+
+    async login(request, response, next) {
+
+        try {
+            const clients = await knex('clients');
+
+            if(await bcrypt.compare(req.body.password, user.password)) {
+            res.send('Success')
+            }
+            else 
+            {
+                res.send('Not Allowed')
+            }
+            //return response.json(clients);
+            
+        } catch (error) {  
+            next(error)
+        }
+
+   },
+
 
     // Listar clientes
 

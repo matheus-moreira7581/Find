@@ -1,0 +1,24 @@
+GET http://localhost:3333/clients
+
+###
+
+POST http://localhost:3333/clients
+Content-Type: application/json
+
+{   
+"name": "Fulano", 
+"email":"fulano@ail.com", 
+"password":"789456", 
+"cell":"139876321", 
+"img_url":"my-photo"
+}
+
+###
+
+POST http://localhost:3333/client
+Content-Type: application/json
+
+{ 
+"name": "Fulano", 
+"password": "789456" 
+}
