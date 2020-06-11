@@ -1,12 +1,22 @@
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+
 import { StyleSheet, Text, View } from 'react-native';
 import { AppLoading } from 'expo';
-import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold, 
-        Montserrat_700Bold, Montserrat_400Regular} from '@expo-google-fonts/montserrat';
+import { 
+        useFonts, 
+        Montserrat_500Medium, Montserrat_600SemiBold, 
+        Montserrat_700Bold, 
+        Montserrat_400Regular
+} from '@expo-google-fonts/montserrat';
+
+import { AuthProvider } from './src/contexts/auth';
+
+import Routes from './src/routes';
+
 import Home from './src/pages/Home';
 import CompanyProducts from './src/pages/CompanyProducts';
 import Companies from './src/pages/Companies'
-import Routes from './src/routes';
 import DeliveryOptions from './src/pages/DeliveryOptions'
 import SuccessOrder from './src/pages/SuccessOrder';
 import Login from './src/pages/Login';
@@ -25,12 +35,18 @@ export default function App() {
   }
   else {
     return (
-      // <Routes />
+      /*
+      <NavigationContainer>
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+      </NavigationContainer>*/
+       
       // <CompanyProducts/>
       // <Companies />
       // <Home />
       //<Login />
-      // <DeliveryOptions/>
+       //<DeliveryOptions/>
       //<SuccessOrder />
       //<CustomerRegistration/>
       <PaymentOptions />
