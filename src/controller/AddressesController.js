@@ -24,7 +24,7 @@ module.exports = {
 
     },
 
-    // Listar todos os endereços de um cliente especifico
+    // Listar todos os endereços de um cliente especifico, se existirem 
 
     async show(request, response, next) {
 

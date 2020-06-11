@@ -11,10 +11,18 @@ module.exports = {
          try {
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
-            const { name, email, cell, password } = request.body;
+            const { name, email, cell } = request.body;
     
             const client = { name, email, cell, password: hashedPassword };
-    
+
+            const checkEmail = await knex('clients').where({ email });
+
+            if (checkEmail.length !== 0) {
+
+               return response.json({ msg: 'Já existe uma conta com esse email cadastrado' });
+
+            }
+
             await knex('clients').insert(client);
     
             return response.json(client);
