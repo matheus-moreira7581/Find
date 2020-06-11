@@ -115,7 +115,7 @@ module.exports = {
             const { id } = request.params;
     
             const trx = await knex.transaction();
-    
+
             await trx('addresses').where('id_clients', id).del();
     
             await trx('clients').where('id', id).del();

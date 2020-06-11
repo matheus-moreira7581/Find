@@ -33,6 +33,12 @@ module.exports = {
     
             const clientAddresses = await knex('addresses')
             .where({ id_clients });
+
+            if (clientAddresses.length == 0) { 
+
+                return response.json({msg: 'Você ainda não possui endereços cadastrados'});
+
+            }
     
             return response.json(clientAddresses);
             
