@@ -55,8 +55,10 @@ login.
 - [x] Testar alguns resultados.
 
 ## Dia 4: back-end da aplicação (11/06/2020)
-
-- [ ] Login usuário
+- [x] Validar cadastro do cliente;
+- [x] Listar endereços se eles existirem; 
+- [x] Criptografar senha;
+- [ ] Login usuário.
 
 ---
 
