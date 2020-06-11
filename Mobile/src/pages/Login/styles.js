@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colors.cinzaEscuro
   },
-  TextInput: {
+   TextInput: {
     marginTop: 4,
     backgroundColor: colors.textInput,
     height: 42,

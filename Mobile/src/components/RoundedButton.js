@@ -18,8 +18,8 @@ const RoundedButton = (props) => (
             }}}
     >
         <Text style={props.selected === true 
-            ? styles.selectedText 
-            : styles.unselectedText}
+            ? {...styles.selectedText, ...{fontSize: props.fontSize}}
+            : {...styles.unselectedText, ...{fontSize: props.fontSize}}}
         >
             {props.text}
         </Text>
