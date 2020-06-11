@@ -6,8 +6,8 @@ POST http://localhost:3333/clients
 Content-Type: application/json
 
 {   
-"name": "Fulano", 
-"email":"fulano@ail.com", 
+"name": "Beltrano", 
+"email":"beltrano@ail.com", 
 "password":"789456", 
 "cell":"139876321", 
 "img_url":"my-photo"
@@ -15,10 +15,10 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3333/client
+POST http://localhost:3333/clients/:id
 Content-Type: application/json
 
 { 
-"name": "Fulano", 
+"name": "Beltrano", 
 "password": "789456" 
 }
