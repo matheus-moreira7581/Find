@@ -48,12 +48,12 @@ const styles = StyleSheet.create({
     selectedText:{
         color: '#FFF',
         fontFamily: fonts.montserratBold,
-        fontSize: 16
+        fontSize: 15
     },
     unselectedText:{
         color: colors.primary,
         fontFamily: fonts.montserratBold,
-        fontSize: 16
+        fontSize: 15
     }
 
 });
