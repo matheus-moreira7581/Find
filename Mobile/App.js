@@ -46,10 +46,10 @@ export default function App() {
       // <CompanyProducts/>
       // <Companies />
       // <Home />
-      //<Login />
-       //<DeliveryOptions/>
-      //<SuccessOrder />
-      //<CustomerRegistration/>
+      // <Login />
+      //  <DeliveryOptions/>
+      // <SuccessOrder />
+      // <CustomerRegistration/>
       // <PaymentOptions />
       <ProductDetails />
     )
