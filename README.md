@@ -12,6 +12,10 @@ Find é um aplicativo onde o comerciante poderá anunciar sua empresa ou marca, 
 
 - Modelagem do banco de dados: [Clique aqui](https://whimsical.com/Em9E37vFo2G1r3vHxHXCCM)
 
+- Acompanhe nosso cronograma: [Veja nossa sprint](./Sprints)
+
+
+
 ## Tecnologias
 
 **Back-End**
