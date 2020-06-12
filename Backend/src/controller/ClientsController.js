@@ -39,24 +39,36 @@ module.exports = {
     async login(request, response, next) {
         try 
         {
-        const { name } = request.params;
+        const { email, password} = request.body;
             
         const client = await knex('clients')
-        .where({ name });
+        .where({ email });
 
-        if (client == null) {
+       
+       if (client.length == 0) {
+
           return response.status(400).send('Cannot find user')
-        }
 
-          if(await bcrypt.compare(request.body.password, clients.password)) {
+        } 
+        
+        if(await bcrypt.compare(password, client.password)) {
+
             response.send('Success')
-          } else {
+
+          } 
+          else {
+
             response.send('Not Allowed')
+
           } 
 
-        } catch  
+         
+
+        
+          
+        } catch (error) 
         {  
-            response.status(500).send("code not working")
+            next(error)
         }
 
    },

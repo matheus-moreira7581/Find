@@ -8,8 +8,8 @@ const routes = express.Router();
 
 //Cliente
 
-routes.post('/clients', ClientsController.create)
-      .post('/client/:name', ClientsController.login)
+routes.post('/client', ClientsController.create)
+      .post('/login', ClientsController.login)
       .get('/clients', ClientsController.index)
       .get('/client/:id', ClientsController.show)
       .put('/client/:id', ClientsController.update)
