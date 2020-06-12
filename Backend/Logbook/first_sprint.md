@@ -65,5 +65,5 @@ login.
 
 - [x] Finalizar etapas da sprint;
 - [x] Fazer o merge na master do back e do front;
-- [ ] Definir proxima sprint;
+- [x] Definir proxima sprint;
 - [x] Organizar repositório.
