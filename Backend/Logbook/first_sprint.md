@@ -28,7 +28,6 @@ login.
 
 ## Dia 1: back-end da aplicação (08/06/2020)
 
-
 - [x] Resetar o projeto, e fazer do zero as instalações;
 - [x] Organizar o projeto;
 - [x] Criar o banco de dados;
@@ -48,6 +47,7 @@ login.
 - [x] Testar alguns resultados.
 
 ## Dia 3: back-end da aplicação (10/06/2020)
+
 - [x] Atualizar dados de um cliente;
 - [x] Deletar um cliente e seus endereços;
 - [x] Add um recurso para pegar erro;
@@ -55,34 +55,9 @@ login.
 - [x] Testar alguns resultados.
 
 ## Dia 4: back-end da aplicação (11/06/2020)
+
 - [x] Validar cadastro do cliente;
 - [x] Listar endereços se eles existirem; 
 - [x] Criptografar senha;
 - [x] Login usuário.
-
----
-
-## Guia para ativação do código
-
-- Atualizar as informações de usuário e senha no arquivo "knexfile.js"
-
-- Instalar pacotes do node modules 
-```node
-npm i
-```
-
-- Inicializar o servidor
-```node
-npm run dev
-```
-
-- Criar tabelas
-```node
-npm run migrations
-```
-
-- Popular tabelas 
-```node
-npm run seeds
-```
 
