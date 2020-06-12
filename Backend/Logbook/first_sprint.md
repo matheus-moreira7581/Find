@@ -61,3 +61,9 @@ login.
 - [x] Criptografar senha;
 - [x] Login usuário.
 
+## Dia 5: back-end da aplicação (12/06/2020)
+
+- [x] Finalizar etapas da sprint;
+- [x] Fazer o merge na master do back e do front;
+- [ ] Definir proxima sprint;
+- [x] Organizar repositório.
