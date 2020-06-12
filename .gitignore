@@ -1,3 +1,4 @@
+node_modules/**/*
 Mobile/node_modules/**/*
 Mobile/.expo/*
 Backend/node_modules/**/*
