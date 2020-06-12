@@ -58,7 +58,7 @@ login.
 - [x] Validar cadastro do cliente;
 - [x] Listar endereços se eles existirem; 
 - [x] Criptografar senha;
-- [ ] Login usuário.
+- [x] Login usuário.
 
 ---
 
