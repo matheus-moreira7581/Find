@@ -51,7 +51,7 @@ module.exports = {
 
         } 
         
-        if(await bcrypt.compare(password, client.password)) {
+        if(await bcrypt.compare(password, client[0].password)) {
 
             response.send('Success')
 
@@ -61,11 +61,7 @@ module.exports = {
             response.send('Not Allowed')
 
           } 
-
-         
-
-        
-          
+  
         } catch (error) 
         {  
             next(error)
