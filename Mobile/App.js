@@ -23,6 +23,7 @@ import Login from './src/pages/Login';
 import CustomerRegistration from './src/pages/CustomerRegistration';
 import PaymentOptions from './src/pages/PaymentOptions';
 import ProductDetails from './src/pages/ProductDetails';
+import OpeningHours from './src/pages/OpeningHours';
 
 export default function App() {
   const [fontsLoaded] = useFonts ({
@@ -51,7 +52,8 @@ export default function App() {
       // <SuccessOrder />
       // <CustomerRegistration/>
       // <PaymentOptions />
-      <ProductDetails />
+      //<ProductDetails />
+      <OpeningHours/>
     )
   }
 }
