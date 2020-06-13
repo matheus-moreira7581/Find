@@ -9,17 +9,22 @@ import PaymentOptionsScreen from '../pages/PaymentOptions';
 import DeliveryOptionsScreen from '../pages/DeliveryOptions';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 
-const AppStack = createStackNavigator();
+const CustomerAppStack = createStackNavigator();
+const CompanyAppStack = createStackNavigator();
 
-const AppRoutes = () => (
-    <AppStack.Navigator headerMode="none">
-        <AppStack.Screen name="Home" component={HomeScreen}/>
-        <AppStack.Screen name="Companies" component={CompaniesScreen}/>
-        <AppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
-        <AppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
-        <AppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
-        <AppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
-    </AppStack.Navigator>
+export const CustomerAppRoutes = () => (
+    <CustomerAppStack.Navigator headerMode="none">
+        <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
+        <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
+        <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
+        <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
+        <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
+        <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
+    </CustomerAppStack.Navigator>
 );
 
-export default AppRoutes;
+export const CompanyAppRoutes = () => (
+    <CompanyAppStack.Navigator headerMode="none">
+        
+    </CompanyAppStack.Navigator>
+);
