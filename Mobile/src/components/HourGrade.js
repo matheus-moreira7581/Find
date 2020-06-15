@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, PixelRatio } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils/constants';
 
 import adjustFontSize from '../utils/adjustFontSize';
 

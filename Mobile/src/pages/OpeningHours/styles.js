@@ -7,7 +7,7 @@ import colors from '../../assets/var/colors';
 
 import adjustFontSize from '../../utils/adjustFontSize';
 
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../utils/constants';
 
 const styles = StyleSheet.create({
     screenContainer:{

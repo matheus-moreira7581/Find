@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet, PixelRatio } from 'react-native';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils/constants';
 
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';

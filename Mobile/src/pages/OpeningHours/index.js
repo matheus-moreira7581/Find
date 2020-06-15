@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, SafeAreaView, Text, TouchableOpacity, PixelRatio } from 'react-native'; 
+import { View, SafeAreaView, Text, TouchableOpacity } from 'react-native'; 
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../utils/constants';
 
 import adjustFontSize from '../../utils/adjustFontSize';
 
@@ -28,7 +28,7 @@ const OpeningHours = () => {
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
                 <TouchableOpacity style={styles.backButton} onPress={() => {}}>
-                    <MaterialIcons name="arrow-back" size={20/375 * SCREEN_WIDTH}/>
+                    <MaterialIcons name="arrow-back" size={20/375 * SCREEN_WIDTH} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
                     <Text style={styles.headerText}>Cadastre-se</Text>
