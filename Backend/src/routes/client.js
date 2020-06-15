@@ -1,8 +1,5 @@
 const express = require('express');
-
-const ClientsController = require('./controller/ClientsController');
-const AddressesController = require('./controller/AddressesController');
-
+const ClientsController = require('../controller/ClientsController');
 
 const routes = express.Router();
 
@@ -16,12 +13,5 @@ routes.post('/client', ClientsController.create)
       .delete('/client/:id', ClientsController.delete) 
 
 
-//Endereço
-
-routes.post('/address/:id_clients', AddressesController.create)
-      .get('/address/:id_clients', AddressesController.show)
-      .get('/address', AddressesController.index)
-      
-      
 
 module.exports = routes;
