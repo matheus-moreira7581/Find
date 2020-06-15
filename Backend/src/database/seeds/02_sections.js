@@ -4,12 +4,12 @@ exports.seed = function(knex) {
     .then(function() {
 
         return knex('sections').insert([
-            {title: "Alimentação"},
-            {title: "Derivados"},
-            {title: "Saúde"},
-            {title: "Moda e beleza"},
-            {title: "Educação"},
-            {title: "Construção"}
+            {name: "Alimentação"},
+            {name: "Derivados"},
+            {name: "Saúde"},
+            {name: "Moda e beleza"},
+            {name: "Educação"},
+            {name: "Construção"}
         ]);
 
     });
