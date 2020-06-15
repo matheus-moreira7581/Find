@@ -6,7 +6,11 @@ module.exports = {
 
     async index(request, response){
 
-        const category = await knex('categories').where('id_section', 1).select('title','img_url');
+        //const category = await knex('sections')
+        //.join('categories', 'sections.id', 'categories.id_section')
+        //.select('sections.name', 'categories.*')
+
+        const category = await knex('categories')
 
         return response.json(category);
 
