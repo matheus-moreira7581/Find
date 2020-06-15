@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, PixelRatio } from 'react-native';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT, actuatedNormalize } from '../constants';
 
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
@@ -38,8 +38,8 @@ const HourGrade = ({datasource, style}) => {
                             onPress={() => handleHourSelection(index)}
                         >
                             <Text style={selectedHours[index]
-                                ? styles.selectedButton 
-                                : styles.unselectedButton}
+                                ? styles.selectedButtonText 
+                                : styles.unselectedButtonText}
                             >
                                     {hour}
                             </Text>
@@ -66,14 +66,14 @@ const styles = StyleSheet.create({
         height: 40/812 * SCREEN_HEIGHT,
         marginLeft: 7.5/375 * SCREEN_WIDTH,
     },
-    selectedButton:{
+    selectedButtonText:{
         fontFamily: fonts.montserratBold,
         fontSize: 15 / PixelRatio.getFontScale(),
         color: colors.primary,
     },
-    unselectedButton:{
+    unselectedButtonText:{
         fontFamily: fonts.montserratBold,
-        fontSize: 15 / PixelRatio.getFontScale(),
+        fontSize: actuatedNormalize(15),
         color: colors.cinzaEscuro,
     }
 });

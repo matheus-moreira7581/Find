@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, SafeAreaView, Text, TouchableOpacity } from 'react-native'; 
+import { View, SafeAreaView, Text, TouchableOpacity, PixelRatio } from 'react-native'; 
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT, actuatedNormalize } from '../../constants';
 
 import RoundedButton from '../../components/RoundedButton';
 import HourGrade from '../../components/HourGrade';
@@ -48,9 +48,9 @@ const OpeningHours = () => {
                 <RoundedButton style={styles.doneButton} 
                     text="Concluir" 
                     selected={true} 
-                    width={328}
-                    height={50} 
-                    fontSize={16}
+                    width={328/375 * SCREEN_WIDTH}
+                    height={50/812 * SCREEN_HEIGHT} 
+                    fontSize={actuatedNormalize(16)}
                 />
                 
             </View>

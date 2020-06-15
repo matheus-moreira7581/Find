@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, PixelRatio } from 'react-native';
+
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../constants';
 
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
@@ -33,7 +35,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 55,
         backgroundColor: colors.primary,
-        padding: 15,
+        paddingHorizontal: 15/375 * SCREEN_WIDTH,
+        paddingVertical: 15/375 * SCREEN_HEIGHT,
         overflow: 'hidden',
     },
     unselected:{
@@ -42,7 +45,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 55,
         backgroundColor: colors.background,
-        padding: 15,
+        paddingHorizontal: 15/375 * SCREEN_WIDTH,
+        paddingVertical: 15/375 * SCREEN_HEIGHT,
         borderWidth: 2,
         borderColor: colors.primary,
         overflow: 'hidden',
@@ -50,13 +54,13 @@ const styles = StyleSheet.create({
     selectedText:{
         color: '#FFF',
         fontFamily: fonts.montserratBold,
-        fontSize: 16
+        fontSize: 16 / PixelRatio.getFontScale(),
 
     },
     unselectedText:{
         color: colors.primary,
         fontFamily: fonts.montserratBold,
-        fontSize: 16
+        fontSize: 16 / PixelRatio.getFontScale(),
     }
 
 });

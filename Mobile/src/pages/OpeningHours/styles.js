@@ -1,11 +1,11 @@
-import { StyleSheet, PixelRatio } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import  Constants  from 'expo-constants';
 
 import fonts from '../../assets/var/fonts';
 import colors from '../../assets/var/colors';
 
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
+import { SCREEN_HEIGHT, SCREEN_WIDTH, actuatedNormalize } from '../../constants';
 
 const styles = StyleSheet.create({
     screenContainer:{
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
     headerText:{
         fontFamily: fonts.montserratBold,
-        fontSize: 20 / PixelRatio.getFontScale(),
+        fontSize: actuatedNormalize(20),
         color: colors.cinzaEscuro,
         textAlign: 'center',
     },
@@ -49,12 +49,11 @@ const styles = StyleSheet.create({
     },
     textContainer:{
         justifyContent: 'center',
-        alignItems: 'stretch',
         marginBottom: 36/812 * SCREEN_HEIGHT,
     },
     text:{
         fontFamily: fonts.montserratBold,
-        fontSize: 20 / PixelRatio.getFontScale(),
+        fontSize: actuatedNormalize(20),
         color: colors.cinzaEscuro,
         textAlign: 'center',
     },
