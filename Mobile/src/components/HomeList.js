@@ -3,6 +3,7 @@ import { View, Text, SectionList, FlatList, StyleSheet } from 'react-native';
 import CategoryCard from './CategoryCard';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // import { Container } from './styles';
 
@@ -23,12 +24,16 @@ const HomeList = (props) => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={props.onPress}
+                >
                 <View style={styles.listItem}>
                   <CategoryCard 
                     Title={item.name} 
                     Image={item.image}
                   />
                 </View>
+                </TouchableOpacity>
                 )
               }
               />

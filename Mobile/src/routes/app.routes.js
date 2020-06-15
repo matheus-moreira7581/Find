@@ -17,7 +17,7 @@ const CompanyAppStack = createStackNavigator();
 const AppTab = createBottomTabNavigator();
 
 export const CustomerAppRoutes = () => (
-    <CustomerAppStack.Navigator headerMode="none">
+    <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
         <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
         <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
         <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
@@ -37,7 +37,7 @@ export const TabAppRoutes = () => (
     <AppTab.Navigator initialRouteName="Home" tabBarOptions={{showLabel: false}}>
         <AppTab.Screen 
             name="Home" 
-            component={HomeScreen}
+            component={CustomerAppRoutes}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="home" size={size} color={color} />

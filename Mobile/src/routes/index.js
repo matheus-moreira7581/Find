@@ -9,7 +9,8 @@ const Routes = () => {
     const { signedIn } = useAuth();
 
     return (
-        signedIn ? (<CustomerAppRoutes/>, <TabAppRoutes/> ) : <AuthRoutes/>)
+        signedIn ? <TabAppRoutes />  : <AuthRoutes/> 
+    )
 };
 
 export default Routes;

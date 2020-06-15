@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import HomeList from '../../components/HomeList';
+import { useNavigation } from '@react-navigation/native';
 
 
 // import { Container } from './styles';
 
 const Home = () => {
+  const navigation = useNavigation();
+
   const [showProduct, setShowProduct] = useState(true);
   // This data array is temporary only for test
   const productDATA = [
@@ -92,9 +95,12 @@ const Home = () => {
       ]]
     },
   ]
-  
 
-  let showList = <HomeList DATA={productDATA}/>;
+  const navigateToCompanies = () => {
+    navigation.navigate('Companies');
+  }
+
+  let showList = <HomeList DATA={productDATA} onPress={navigateToCompanies}/>;
   if(showProduct === false) showList = <HomeList DATA={serviceData}/>
 
   const navigateList = (type) => {
