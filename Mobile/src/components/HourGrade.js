@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, PixelRatio } from 'react-native';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT, actuatedNormalize } from '../constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../constants';
+
+import adjustFontSize from '../utils/adjustFontSize';
 
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
@@ -68,12 +70,12 @@ const styles = StyleSheet.create({
     },
     selectedButtonText:{
         fontFamily: fonts.montserratBold,
-        fontSize: 15 / PixelRatio.getFontScale(),
+        fontSize: adjustFontSize(15),
         color: colors.primary,
     },
     unselectedButtonText:{
         fontFamily: fonts.montserratBold,
-        fontSize: actuatedNormalize(15),
+        fontSize: adjustFontSize(15),
         color: colors.cinzaEscuro,
     }
 });

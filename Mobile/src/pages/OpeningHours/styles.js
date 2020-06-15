@@ -5,7 +5,9 @@ import  Constants  from 'expo-constants';
 import fonts from '../../assets/var/fonts';
 import colors from '../../assets/var/colors';
 
-import { SCREEN_HEIGHT, SCREEN_WIDTH, actuatedNormalize } from '../../constants';
+import adjustFontSize from '../../utils/adjustFontSize';
+
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
 
 const styles = StyleSheet.create({
     screenContainer:{
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
     },
     headerText:{
         fontFamily: fonts.montserratBold,
-        fontSize: actuatedNormalize(20),
+        fontSize: adjustFontSize(20),
         color: colors.cinzaEscuro,
         textAlign: 'center',
     },
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     },
     text:{
         fontFamily: fonts.montserratBold,
-        fontSize: actuatedNormalize(20),
+        fontSize: adjustFontSize(20),
         color: colors.cinzaEscuro,
         textAlign: 'center',
     },

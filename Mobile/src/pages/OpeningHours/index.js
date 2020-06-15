@@ -3,7 +3,9 @@ import { View, SafeAreaView, Text, TouchableOpacity, PixelRatio } from 'react-na
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT, actuatedNormalize } from '../../constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../constants';
+
+import adjustFontSize from '../../utils/adjustFontSize';
 
 import RoundedButton from '../../components/RoundedButton';
 import HourGrade from '../../components/HourGrade';
@@ -50,7 +52,7 @@ const OpeningHours = () => {
                     selected={true} 
                     width={328/375 * SCREEN_WIDTH}
                     height={50/812 * SCREEN_HEIGHT} 
-                    fontSize={actuatedNormalize(16)}
+                    fontSize={adjustFontSize(16)}
                 />
                 
             </View>
