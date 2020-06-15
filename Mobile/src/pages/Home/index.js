@@ -3,6 +3,7 @@ import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity } fro
 import styles from './styles';
 import HomeList from '../../components/HomeList';
 
+
 // import { Container } from './styles';
 
 const Home = () => {
@@ -91,6 +92,7 @@ const Home = () => {
       ]]
     },
   ]
+  
 
   let showList = <HomeList DATA={productDATA}/>;
   if(showProduct === false) showList = <HomeList DATA={serviceData}/>

@@ -1,6 +1,9 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { MaterialIcons } from '@expo/vector-icons';
 
 import HomeScreen from '../pages/Home';
 import CompaniesScreen from '../pages/Companies';
@@ -11,6 +14,7 @@ import SuccessOrderScreen from '../pages/SuccessOrder';
 
 const CustomerAppStack = createStackNavigator();
 const CompanyAppStack = createStackNavigator();
+const AppTab = createBottomTabNavigator();
 
 export const CustomerAppRoutes = () => (
     <CustomerAppStack.Navigator headerMode="none">
@@ -28,3 +32,44 @@ export const CompanyAppRoutes = () => (
 
     </CompanyAppStack.Navigator>
 );
+
+export const TabAppRoutes = () => (
+    <AppTab.Navigator initialRouteName="Home" tabBarOptions={{showLabel: false}}>
+        <AppTab.Screen 
+            name="Home" 
+            component={HomeScreen}
+            options={{
+                tabBarIcon: ({color, size}) => (
+                    <MaterialIcons name="home" size={size} color={color} />
+                ),
+            }}
+        />
+        <AppTab.Screen 
+            name="History" 
+            component={HomeScreen}
+            options={{
+                tabBarIcon: ({color, size}) => (
+                    <MaterialIcons name="receipt" size={size} color={color} />
+                ),
+            }}
+        />
+        <AppTab.Screen 
+            name="Chat" 
+            component={HomeScreen}
+            options={{
+                tabBarIcon: ({color, size}) => (
+                    <MaterialIcons name="speaker-notes" size={size} color={color} />
+                ),
+            }}
+        />
+        <AppTab.Screen 
+            name="Profile" 
+            component={HomeScreen}
+            options={{
+                tabBarIcon: ({color, size}) => (
+                    <MaterialIcons name="person" size={size} color={color} />
+                ),
+            }}
+        />
+    </AppTab.Navigator>
+)

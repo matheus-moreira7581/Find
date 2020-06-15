@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StyleSheet, View } from 'react-native';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils/constants';
 
 import colors from '../assets/var/colors';
 

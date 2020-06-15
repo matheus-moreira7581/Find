@@ -1,6 +1,6 @@
 import { PixelRatio } from 'react-native';
 
-import { SCREEN_WIDTH } from '../constants';
+import { SCREEN_WIDTH } from './constants';
 
 const scale = SCREEN_WIDTH / 360;
 
