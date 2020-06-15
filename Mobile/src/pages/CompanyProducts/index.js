@@ -3,10 +3,12 @@ import { View, Text, FlatList, Image } from 'react-native';
 import styles from '../CompanyProducts/styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import ProductCard from '../../components/ProductCard';
+import { useNavigation } from '@react-navigation/native';
 
 // import { Container } from './styles';
 
 const CompanyProducts = () => {
+  const navigation = useNavigation();
   //This data is temporary, only for tests
   const DATA = [
     {
@@ -47,6 +49,10 @@ const CompanyProducts = () => {
     },
   ]
 
+  const navigateToProductDetails = () => {
+    navigation.navigate('ProductDetails');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -84,6 +90,7 @@ const CompanyProducts = () => {
                 Title={item.title}
                 Description={item.description}
                 Price={item.price}
+                onPress={navigateToProductDetails}
               />
             </View>
           )}

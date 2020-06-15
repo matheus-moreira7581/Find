@@ -8,6 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import HomeScreen from '../pages/Home';
 import CompaniesScreen from '../pages/Companies';
 import CompanyProductsScreen from '../pages/CompanyProducts';
+import ProductDeatilsScreen from '../pages/ProductDetails';
 import PaymentOptionsScreen from '../pages/PaymentOptions';
 import DeliveryOptionsScreen from '../pages/DeliveryOptions';
 import SuccessOrderScreen from '../pages/SuccessOrder';
@@ -21,6 +22,7 @@ export const CustomerAppRoutes = () => (
         <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
         <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
         <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
+        <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
         <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
         <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
         <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>

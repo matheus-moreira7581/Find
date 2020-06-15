@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import fonts from '../assets/var/fonts';
 import colors from '../assets/var/colors';
@@ -16,29 +16,33 @@ const CompaniesList = (props) => {
         keyExtractor={item => String(item.id)}
         showsVerticalScrollIndicator={false}
         renderItem={({item})=> (
-            <View style={styles.companyContainer}>
-              <Image 
-                source={item.imgUrl}
-                resizeMode='stretch'
-                style={styles.companyLogo}
-              />
-              <View style={styles.companyInfoContainer}>
-                  <View style={styles.companyTitleContainer}>
-                    <Text style={styles.companyName}>{item.name}</Text>
-                    <MaterialIcons name="star" size={13} color={colors.dourado} style={styles.ratingIcon}/>
-                    <Text style={styles.ratingText}>{item.rating}</Text>
-                  </View>
-                  <View style={styles.companyAddressContainer}>
-                      <Text style={styles.addressText}>{item.address}</Text>
-                      <StatusCircle color={colors.cinzaEscuro} radius={2} style={styles.separatorCircle} />
-                      <Text style={styles.minDistanceText}>{item.minDistance}km</Text>
-                  </View>
-                  <View style={styles.companyStatusContainer}>
-                      <StatusCircle color={colors.vermelho} radius={2} />
-                      <Text style={styles.minDistanceText}>Fechado</Text>
-                  </View>
-              </View>
-            </View> 
+            <TouchableOpacity
+                onPress={props.onPress}
+            >
+                <View style={styles.companyContainer}>
+                <Image 
+                    source={item.imgUrl}
+                    resizeMode='stretch'
+                    style={styles.companyLogo}
+                />
+                <View style={styles.companyInfoContainer}>
+                    <View style={styles.companyTitleContainer}>
+                        <Text style={styles.companyName}>{item.name}</Text>
+                        <MaterialIcons name="star" size={13} color={colors.dourado} style={styles.ratingIcon}/>
+                        <Text style={styles.ratingText}>{item.rating}</Text>
+                    </View>
+                    <View style={styles.companyAddressContainer}>
+                        <Text style={styles.addressText}>{item.address}</Text>
+                        <StatusCircle color={colors.cinzaEscuro} radius={2} style={styles.separatorCircle} />
+                        <Text style={styles.minDistanceText}>{item.minDistance}km</Text>
+                    </View>
+                    <View style={styles.companyStatusContainer}>
+                        <StatusCircle color={colors.vermelho} radius={2} />
+                        <Text style={styles.minDistanceText}>Fechado</Text>
+                    </View>
+                </View>
+                </View> 
+            </TouchableOpacity>
         )}
         />
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
 
@@ -7,20 +7,24 @@ import fonts from '../assets/var/fonts';
 
 const ProductCard = (props) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image 
-          source={props.Image}
-        />
-      </View>
-      <View style={styles.detailsContainer}>
-        <Text style={styles.title}>{props.Title}</Text>
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.description} numberOfLines={3}>{props.Description}</Text>
+    <TouchableOpacity
+      onPress={props.onPress}
+    >
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image 
+            source={props.Image}
+          />
         </View>
-        <Text style={styles.price}>R$ {props.Price}</Text>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.title}>{props.Title}</Text>
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.description} numberOfLines={3}>{props.Description}</Text>
+          </View>
+          <Text style={styles.price}>R$ {props.Price}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

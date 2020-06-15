@@ -7,10 +7,12 @@ import styles from './styles';
 import colors from '../../assets/var/colors';
 
 import CompaniesList from '../../components/CompaniesList'
+import { useNavigation } from '@react-navigation/native';
 
 let category = 'Alimentação';
 let subCategory = 'Pizzaria';
 //temp names, to be retrieved via api later
+
 
 const companies = [
     {
@@ -79,7 +81,15 @@ const companies = [
     }
 ]
 
+
+
 const Companies = () => {
+    const navigation = useNavigation();
+    
+    const navigateToCompanyProducts = () => {
+        navigation.navigate('CompanyProducts');
+    }
+
     return (
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
@@ -92,7 +102,7 @@ const Companies = () => {
                 <Text style={styles.subCategoryText}>{subCategory}</Text>
                 <MaterialIcons name="filter-list" size={20} color={colors.secondary}/>
             </View>
-            <CompaniesList Companies={companies} />
+            <CompaniesList Companies={companies} onPress={navigateToCompanyProducts}/>
         </SafeAreaView>
     );
 }
