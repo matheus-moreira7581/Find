@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { StyleSheet, Text, View } from 'react-native';
@@ -26,6 +26,7 @@ import ProductDetails from './src/pages/ProductDetails';
 import OpeningHours from './src/pages/OpeningHours';
 
 export default function App() {
+
   const [fontsLoaded] = useFonts ({
     Montserrat_400Regular,
     Montserrat_500Medium,
@@ -37,12 +38,12 @@ export default function App() {
   }
   else {
     return (
-      /*
+      
       <NavigationContainer>
         <AuthProvider>
           <Routes />
         </AuthProvider>
-      </NavigationContainer>*/
+      </NavigationContainer>
        
       // <CompanyProducts/>
       // <Companies />
@@ -53,7 +54,9 @@ export default function App() {
       // <CustomerRegistration/>
       // <PaymentOptions />
       //<ProductDetails />
-      <OpeningHours/>
+      // <OpeningHours/>
+      // <ProductDetails />
+
     )
   }
 }

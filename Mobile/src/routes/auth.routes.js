@@ -14,7 +14,7 @@ import OpeningHoursScreen from '../pages/OpeningHours';
 const AuthStack = createStackNavigator();
 
 const AuthRoutes = () => (
-    <AuthStack.Navigator headerMode="none">
+    <AuthStack.Navigator headerMode="none" initialRouteName="Login">
         <AuthStack.Screen name="Login" component={LoginScreen}/>
         <AuthStack.Screen name="CustomerRegistration" component={CustomerRegistrationScreen}/>
         <AuthStack.Screen name="OpeningHours" component={OpeningHoursScreen}/>

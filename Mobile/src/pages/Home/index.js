@@ -6,7 +6,6 @@ import HomeList from '../../components/HomeList';
 // import { Container } from './styles';
 
 const Home = () => {
-
   const [showProduct, setShowProduct] = useState(true);
   // This data array is temporary only for test
   const productDATA = [

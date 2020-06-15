@@ -20,6 +20,8 @@ export const AuthProvider = ({children}) => {
         // Utilização da api pra login vem aqui
         //const { user } = retorno da api aqui (response)
         //setLoggedUser(user);
+        const user = {email: email, password: password}
+        setLoggedUser(user);
         await AsyncStorage.setItem('@Find:user', JSON.stringify(user));
     }
     const signOut = async () => {
