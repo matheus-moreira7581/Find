@@ -56,7 +56,7 @@ export default StyleSheet.create({
         marginVertical: adjustVerticalMeasure(19),
     },
     deliveryButton: {
-        marginBottom: 'auto',
+        marginBottom: adjustVerticalMeasure(120),
     }
 
 });
