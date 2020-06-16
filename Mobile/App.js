@@ -51,9 +51,9 @@ export default function App() {
       // <Companies />
       // <Home />
       //<Login />
-      //  <DeliveryOptions/>
+       <DeliveryOptions/>
       // <SuccessOrder />
-       <CustomerRegistration/>
+       //<CustomerRegistration/>
       //<PaymentOptions />
       //<ProductDetails />
        //<OpeningHours/>
