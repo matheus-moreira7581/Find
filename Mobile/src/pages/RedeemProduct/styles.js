@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import Constants from 'expo-constants';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../utils/constants';
+import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import colors from '../../assets/var/colors'; 
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     headerContainer:{
         flexDirection: 'row',
         alignItems: 'flex-end',
-        height: 98.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        height: adjustVerticalMeasure(98.5),
         backgroundColor: colors.background,
         borderBottomWidth: 1,
         borderBottomColor: colors.bordarCinza,
@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         right: 0,
-        bottom: 13.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        bottom: adjustVerticalMeasure(13.5),
         justifyContent: 'center',
         alignItems: 'center',
     },
     backButton:{
-        left: 24/375 * SCREEN_WIDTH,
-        bottom: 18.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        left: adjustHorizontalMeasure(24),
+        bottom: adjustVerticalMeasure(18.5),
     },
     headerText:{
         fontFamily: fonts.montserratBold,
@@ -43,21 +43,21 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingTop: 62.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
-        paddingBottom: 164/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        paddingTop: adjustVerticalMeasure(62.5),
+        paddingBottom: adjustVerticalMeasure(164),
         backgroundColor: colors.background,
     },
     inputContainer:{
         width: '100%',
-        paddingHorizontal: 23/375 * SCREEN_WIDTH,
-        marginBottom: 40/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        paddingHorizontal: adjustHorizontalMeasure(23),
+        marginBottom: adjustVerticalMeasure(40),
     },
     textInput:{
         backgroundColor: colors.textInput,
         fontFamily: fonts.montserratRegular,
         fontSize: adjustFontSize(13),
-        paddingLeft: 15/375 * SCREEN_WIDTH,
-        marginTop: 6/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        paddingLeft: adjustHorizontalMeasure(15),
+        marginTop: adjustVerticalMeasure(6),
         borderRadius: 7,
     },
     bodyText:{
@@ -66,32 +66,32 @@ const styles = StyleSheet.create({
         color: colors.cinzaEscuro,
     },
     requestContainer: {
-        width: 329/375 * SCREEN_WIDTH,
-        height: 80/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        width: adjustHorizontalMeasure(329),
+        height: adjustVerticalMeasure(80),
         flexDirection: 'row',
         alignItems: 'center',
         borderWidth: 1,
         borderColor: colors.bordarCinza,
         borderRadius: 7,
-        paddingLeft: 24.5/375 * SCREEN_WIDTH,
-        paddingVertical: 11.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        paddingLeft: adjustHorizontalMeasure(24.5),
+        paddingVertical: adjustVerticalMeasure(11.5),
         marginBottom: 'auto',
     },
     requestInfoContainer:{
-        marginLeft: 8/375 * SCREEN_WIDTH,
+        marginLeft: adjustHorizontalMeasure(8),
     },
     companyTitle:{
         fontFamily: fonts.montserratBold,
         fontSize: adjustFontSize(15),
         color: colors.cinzaEscuro,
-        top: 11/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
-        marginBottom: 10/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        top: adjustVerticalMeasure(11),
+        marginBottom: adjustVerticalMeasure(10),
     },
     meanTimeContainer:{
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 13/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
-        marginTop: 10/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        marginBottom: adjustVerticalMeasure(13),
+        marginTop: adjustVerticalMeasure(10),
     },
     meanTimeTitleContainer:{
         flexDirection: 'row',
@@ -104,14 +104,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     horizontalLink:{
-        width: 5/375 * SCREEN_WIDTH,
-        height: 1/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        width: adjustHorizontalMeasure(5),
+        height: adjustVerticalMeasure(1),
         backgroundColor: colors.primary,
-        marginRight: 2.5/375 * SCREEN_WIDTH,
+        marginRight: adjustHorizontalMeasure(2.5),
     },
     verticalLink:{
-        width: 1/375 * SCREEN_WIDTH,
-        height: 17.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        width: adjustHorizontalMeasure(1),
+        height: adjustVerticalMeasure(17.5),
         backgroundColor: colors.primary,
     },
     meanTimeTitle:{
@@ -125,8 +125,8 @@ const styles = StyleSheet.create({
         color: colors.cinza,
     },
     companyLogo:{
-        width: 56/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
-        height: 56/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        width: adjustVerticalMeasure(56),
+        height: adjustVerticalMeasure(56),
     },
 });
 

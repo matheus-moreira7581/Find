@@ -1,5 +1,5 @@
 import Constants from 'expo-constants';
-import { SCREEN_WIDTH, SCREEN_HEIHT } from './constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from './constants';
 
 export const adjustHorizontalMeasure = (value) => value/375 * SCREEN_WIDTH;
 
