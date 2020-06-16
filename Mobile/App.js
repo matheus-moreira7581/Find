@@ -50,9 +50,9 @@ export default function App() {
       // <CompanyProducts/>
       // <Companies />
       // <Home />
-      <Login />
+      // <Login />
       //  <DeliveryOptions/>
-      // <SuccessOrder />
+      <SuccessOrder />
       // <CustomerRegistration/>
       //<PaymentOptions />
       //<ProductDetails />
