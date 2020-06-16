@@ -113,7 +113,7 @@ const Home = () => {
     <SafeAreaView style={styles.container}> 
       <View style={styles.headerContainer}>
         <View style={styles.welcomeContainer}>
-          <Text style={styles.welcomeText}>Olá, Lucas. Oque você deseja?</Text>
+          <Text style={styles.welcomeText}>Olá, Lucas.</Text>
         </View>
         <View style={styles.typeContainer}>
           <TouchableOpacity onPress={() => navigateList('product')}> 

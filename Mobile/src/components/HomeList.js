@@ -4,6 +4,8 @@ import CategoryCard from './CategoryCard';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SCREEN_HEIGHT ,SCREEN_WIDTH } from '../utils/constants';
+import adjustFontSize from '../utils/adjustFontSize';
 
 // import { Container } from './styles';
 
@@ -45,19 +47,19 @@ const HomeList = (props) => {
 
 const styles = StyleSheet.create({
   listContainer: {
-    paddingLeft: 23,
+    marginLeft: 20 / 375 * SCREEN_WIDTH,
     backgroundColor: colors.background,
   },
   listTitle: {
     color: colors.cinzaEscuro,
     fontFamily: fonts.montserratBold,
-    fontSize: 19,
-    marginBottom: 5,
-    marginTop: 23,
+    fontSize: adjustFontSize(19),
+    marginBottom: 5 / 812 * SCREEN_HEIGHT,
+    marginTop: 23 / 812 * SCREEN_HEIGHT,
   },
   listItem: {
-    height: 90,
-    marginRight: 14,
+    height: 90 / 812 * SCREEN_HEIGHT,
+    marginRight: 14 / 375 * SCREEN_WIDTH,
     justifyContent: 'center',
   }
 });

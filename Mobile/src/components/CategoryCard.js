@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
+import adjustFontSize from '../utils/adjustFontSize';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../utils/constants';
 
 // import { Container } from './styles';
 
@@ -23,8 +25,8 @@ const CategoryCard = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 77,
-    width: 95,
+    height: 90 / 812 * SCREEN_HEIGHT,
+    width: 120 / 375 * SCREEN_WIDTH,
     backgroundColor: colors.branco,
     borderRadius: 5,
     elevation: 3,
@@ -32,16 +34,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.7,
   },
   image: {
-    height: 59,
-    width: 95,
+    height: 68 / 812 * SCREEN_HEIGHT,
+    width: 120 / 375 * SCREEN_WIDTH,
   },
   titleContainer: {
+    height: 22 / 812 * SCREEN_HEIGHT,
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
     fontFamily: fonts.montserratSemiBold,
-    fontSize: 10,
+    fontSize: adjustFontSize(12),
     color: colors.cinzaEscuro
   },
 });
