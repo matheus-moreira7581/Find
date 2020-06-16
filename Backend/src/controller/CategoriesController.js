@@ -3,14 +3,28 @@ const knex = require('../database');
 module.exports = {
 
     async index(request, response) {
+        
+        const category = await knex('categories').select('title', 'img_url','id_section');
+        const section = await knex('sections');
 
-        //const category = await knex('sections')
-        //.join('categories', 'sections.id', 'categories.id_section')
-        //.select('sections.name', 'categories.*')
+        let i = 1;
 
-        const category = await knex('categories');
+        const mixed = section.map(items => {
 
-        return response.json(category);
+            if(items.id == i) {
+                
+                i += 1;
+                return {
+                    "Section" : items.name,
+                    "Subcategory": category.filter(elements => elements.id_section == items.id)
+                }
+            
+            }
+
+        });
+
+       
+        return response.json(mixed);
 
     }
 
