@@ -1,10 +1,11 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet, PixelRatio } from 'react-native';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils/constants';
-
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
+
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils/constants';
+import adjustFontSize from '../utils/adjustFontSize';
 
 const RoundedButton = (props) => (
     <TouchableOpacity 
@@ -54,15 +55,13 @@ const styles = StyleSheet.create({
     selectedText:{
         color: '#FFF',
         fontFamily: fonts.montserratBold,
-        fontSize: 16 / PixelRatio.getFontScale(),
-
+        fontSize: adjustFontSize(16),
     },
     unselectedText:{
         color: colors.primary,
         fontFamily: fonts.montserratBold,
-        fontSize: 16 / PixelRatio.getFontScale(),
+        fontSize: adjustFontSize(16),
     }
-
 });
 
 export default RoundedButton;

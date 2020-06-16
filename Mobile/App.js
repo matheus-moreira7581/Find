@@ -39,11 +39,11 @@ export default function App() {
   else {
     return (
       
-      <NavigationContainer>
+      /*<NavigationContainer>
         <AuthProvider>
           <Routes />
         </AuthProvider>
-      </NavigationContainer>
+      </NavigationContainer>*/
        
       // <CompanyProducts/>
       // <Companies />
@@ -52,7 +52,7 @@ export default function App() {
       //  <DeliveryOptions/>
       // <SuccessOrder />
       // <CustomerRegistration/>
-      // <PaymentOptions />
+      <PaymentOptions />
       //<ProductDetails />
       // <OpeningHours/>
       // <ProductDetails />

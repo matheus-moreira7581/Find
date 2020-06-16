@@ -4,6 +4,8 @@ import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
 
+import adjustFontSize from '../utils/adjustFontSize';
+
 const SmallOptionButton = (props) => (
     <TouchableOpacity 
         onPress={props.onPress} 
@@ -48,12 +50,12 @@ const styles = StyleSheet.create({
     selectedText:{
         color: '#FFF',
         fontFamily: fonts.montserratBold,
-        fontSize: 15
+        fontSize: adjustFontSize(15),
     },
     unselectedText:{
         color: colors.primary,
         fontFamily: fonts.montserratBold,
-        fontSize: 15
+        fontSize: adjustFontSize(15),
     }
 
 });
