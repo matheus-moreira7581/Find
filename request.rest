@@ -1,4 +1,4 @@
-GET http://localhost:3333/clients
+GET http://localhost:3333/company
 
 ###
 
@@ -17,20 +17,12 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3333/login
+POST http://localhost:3333/company_login
 Content-Type: application/json
 
 {  
-"email": "siclano@mmail.com",    
-"password": "123456" 
+"email": "aço@mail.com",    
+"password": "987654" 
 }
 
 
-###
-
-DELETE http://localhost:3333/company/:id
-Content-Type: application/json
-
-{
-"id": "2"
-}

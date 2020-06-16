@@ -41,17 +41,17 @@ module.exports = {
         {
         const { email, password} = request.body;
             
-        const client = await knex('clients')
+        const company = await knex('company')
         .where({ email });
 
        
-       if (client.length == 0) {
+       if (company.length == 0) {
 
           return response.status(400).send('Cannot find user')
 
         } 
         
-        if(await bcrypt.compare(password, client[0].password)) {
+        if(await bcrypt.compare(password, company[0].password)) {
 
             response.send('Success')
 
