@@ -56,9 +56,9 @@ export default function App() {
       // <CustomerRegistration/>
       //<PaymentOptions />
       //<ProductDetails />
-      // <OpeningHours/>
+       <OpeningHours/>
       // <ProductDetails />
-       <RedeemProduct/>
+      // <RedeemProduct/>
     )
   }
 }
