@@ -1,0 +1,27 @@
+GET http://localhost:3333/clients
+
+###
+
+POST http://localhost:3333/company
+Content-Type: application/json
+
+{
+"name": "Ouro puro", 
+"email": "ouro@mail.com", 
+"password": "123456", 
+"cpf": "123456789", 
+"cell": "139876543", 
+"address": "av. são simão", 
+"img_url": "my-photo"
+}
+
+###
+
+POST http://localhost:3333/login
+Content-Type: application/json
+
+{  
+"email": "siclano@mmail.com",    
+"password": "123456" 
+}
+
