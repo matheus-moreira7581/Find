@@ -4,7 +4,8 @@ import { Text, TouchableOpacity, StyleSheet, PixelRatio } from 'react-native';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils/constants';
+import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustMeasures';
+
 import adjustFontSize from '../utils/adjustFontSize';
 
 const RoundedButton = (props) => (
@@ -12,12 +13,12 @@ const RoundedButton = (props) => (
         onPress={props.onPress} 
         style={props.selected === true 
             ? {...props.style,...styles.selected, ...{
-                width: props.width / 375 * SCREEN_WIDTH,
-                height: props.height / 812 * SCREEN_HEIGHT
+                width: adjustHorizontalMeasure(props.width),
+                height: adjustVerticalMeasure(props.height)
             }} 
             : {...props.style,...styles.unselected, ...{
-                width: props.width / 375 * SCREEN_WIDTH,
-                height: props.height / 812 * SCREEN_HEIGHT
+                width: adjustHorizontalMeasure(props.width),
+                height: adjustVerticalMeasure(props.height)
             }}}
     >
         <Text style={props.selected === true 
