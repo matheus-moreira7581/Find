@@ -12,12 +12,12 @@ const RoundedButton = (props) => (
         onPress={props.onPress} 
         style={props.selected === true 
             ? {...props.style,...styles.selected, ...{
-                width: props.width,
-                height: props.height
+                width: props.width / 375 * SCREEN_WIDTH,
+                height: props.height / 812 * SCREEN_HEIGHT
             }} 
             : {...props.style,...styles.unselected, ...{
-                width: props.width,
-                height: props.height
+                width: props.width / 375 * SCREEN_WIDTH,
+                height: props.height / 812 * SCREEN_HEIGHT
             }}}
     >
         <Text style={props.selected === true 

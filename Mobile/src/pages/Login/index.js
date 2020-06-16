@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, Image, Alert } from 'react-native';
+import { View, Text, TextInput, Image, Alert, CheckBox } from 'react-native';
 import styles from './styles';
 import RoundedButton from '../../components/RoundedButton';
 import { useAuth } from '../../contexts/auth';

@@ -40,17 +40,17 @@ export default function App() {
   }
   else {
     return (
-      
-      /*<NavigationContainer>
-        <AuthProvider>
-          <Routes />
-        </AuthProvider>
-      </NavigationContainer>*/
+
+      // <NavigationContainer>
+      //   <AuthProvider>
+      //     <Routes />
+      //   </AuthProvider>
+      // </NavigationContainer>
        
       // <CompanyProducts/>
       // <Companies />
       // <Home />
-      // <Login />
+      <Login />
       //  <DeliveryOptions/>
       // <SuccessOrder />
       // <CustomerRegistration/>
@@ -58,7 +58,7 @@ export default function App() {
       //<ProductDetails />
       // <OpeningHours/>
       // <ProductDetails />
-      <RedeemProduct/>
+      // <RedeemProduct/>
     )
   }
 }
