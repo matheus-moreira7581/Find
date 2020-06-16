@@ -3,7 +3,7 @@ import { View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../utils/constants';
+import { SCREEN_WIDTH } from '../../utils/constants';
 
 import adjustFontSize from '../../utils/adjustFontSize';
 
@@ -50,8 +50,8 @@ const OpeningHours = () => {
                 <RoundedButton style={styles.doneButton} 
                     text="Concluir" 
                     selected={true} 
-                    width={328/375 * SCREEN_WIDTH}
-                    height={50/812 * SCREEN_HEIGHT} 
+                    width={328}
+                    height={50} 
                     fontSize={adjustFontSize(16)}
                 />
                 

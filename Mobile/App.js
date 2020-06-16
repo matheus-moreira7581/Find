@@ -40,23 +40,23 @@ export default function App() {
   }
   else {
     return (
-
+      /*
       <NavigationContainer>
         <AuthProvider>
           <Routes />
         </AuthProvider>
-      </NavigationContainer>
+      </NavigationContainer>*/
        
       // <CompanyProducts/>
       // <Companies />
       // <Home />
-      // <Login />
+      //<Login />
       //  <DeliveryOptions/>
       // <SuccessOrder />
       // <CustomerRegistration/>
       //<PaymentOptions />
       //<ProductDetails />
-      // <OpeningHours/>
+       <OpeningHours/>
       // <ProductDetails />
       // <RedeemProduct/>
     )

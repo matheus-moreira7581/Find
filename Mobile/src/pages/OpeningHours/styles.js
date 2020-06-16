@@ -7,7 +7,7 @@ import colors from '../../assets/var/colors';
 
 import adjustFontSize from '../../utils/adjustFontSize';
 
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../utils/constants';
+import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adjustMeasures';
 
 const styles = StyleSheet.create({
     screenContainer:{
@@ -15,9 +15,8 @@ const styles = StyleSheet.create({
         top: Constants.statusBarHeight,
     },
     headerContainer:{
-        //backgroundColor: '#DE7777',
         justifyContent: 'flex-end',
-        height: 98.5/812 * SCREEN_HEIGHT,
+        height: adjustVerticalMeasure(98.5),
         borderBottomWidth: 1,
         borderBottomColor: '#E5E5E5',
     },
@@ -25,13 +24,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         right: 0,
-        bottom: 13.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        bottom: adjustVerticalMeasure(13.5),
         justifyContent: 'center',
         alignItems: 'center',
     },
     backButton:{
-        marginLeft: 24/375 * SCREEN_WIDTH,
-        marginBottom: 18.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight)
+        marginLeft: adjustHorizontalMeasure(24),
+        marginBottom: adjustVerticalMeasure(18.5),
     },
     headerText:{
         fontFamily: fonts.montserratBold,
@@ -41,17 +40,16 @@ const styles = StyleSheet.create({
     },
     bodyContainer:{
         flex: 1,
-       // backgroundColor: '#DE7',
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
     dots:{
-        marginTop: 45.5/812 * SCREEN_HEIGHT,
-        marginBottom: 29/812 * SCREEN_HEIGHT,
+        marginTop: adjustVerticalMeasure(45.5),
+        marginBottom: adjustVerticalMeasure(29),
     },
     textContainer:{
         justifyContent: 'center',
-        marginBottom: 36/812 * SCREEN_HEIGHT,
+        marginBottom: adjustVerticalMeasure(36),
     },
     text:{
         fontFamily: fonts.montserratBold,
@@ -60,7 +58,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     hourGrade: {
-        marginBottom: 60/812 * SCREEN_HEIGHT,
+        marginBottom: adjustVerticalMeasure(60),
     }
 
 });
