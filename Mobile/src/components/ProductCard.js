@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../utils/constants';
+import adjustFontSize from '../utils/adjustFontSize';
 
 // import { Container } from './styles';
 
@@ -14,6 +16,7 @@ const ProductCard = (props) => {
         <View style={styles.imageContainer}>
           <Image 
             source={props.Image}
+            style={styles.image}
           />
         </View>
         <View style={styles.detailsContainer}>
@@ -30,37 +33,43 @@ const ProductCard = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
-    width: '95%',
-    height: 104,
+    marginTop: 10 / 812 * SCREEN_HEIGHT,
+    width: 360 / 375 * SCREEN_WIDTH,
+    height: 104 / 812 * SCREEN_HEIGHT,
     flexDirection: 'row',
-    padding: 5,
+    // padding: 5,
+    paddingHorizontal: 5 / 375 * SCREEN_WIDTH,
+    paddingVertical: 5 / 812 * SCREEN_HEIGHT,
     borderWidth: 2,
     borderRadius: 8,
-    borderColor: '#E5E5E5',
+    borderColor: colors.bordarCinza,
   },
   imageContainer: {
-    width: 88,
-    height: 88,
+    width: 88 / 375 * SCREEN_WIDTH,
+    height: 88 / 812 * SCREEN_HEIGHT,
     borderRadius: 8,
     backgroundColor: colors.background,
-    marginRight: 7.5,
+    marginRight: 7 / 375 * SCREEN_WIDTH,
+  },
+  image: {
+    width: 88 / 375 * SCREEN_WIDTH,
+    height: 88 / 812 * SCREEN_HEIGHT,
   },
   detailsContainer: {
-    width: '75%',
+    width: 270 / 375 * SCREEN_WIDTH,
     height: '100%',
   },
   title: {
     fontFamily: fonts.montserratBold,
-    fontSize: 15,
+    fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
   },
   descriptionContainer: {
-    height: 45,
+    height: 43 / 812 * SCREEN_HEIGHT,
   },
   description: {
     fontFamily: fonts.montserrat,
-    fontSize: 10,
+    fontSize: adjustFontSize(10),
     color: colors.cinza,
   }
 });

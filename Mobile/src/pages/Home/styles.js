@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants'
 import colors from '../../assets/var/colors';
 import fonts from '../../assets/var/fonts';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../utils/constants';
+import adjustFontSize from '../../utils/adjustFontSize';
 
 export default StyleSheet.create({
   container: {
@@ -12,27 +14,27 @@ export default StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: colors.background,
-    paddingBottom: 10,
+    paddingBottom: 10 / 812 * SCREEN_HEIGHT,
     elevation: 4,
   },
   welcomeContainer: {
-    marginTop: Constants.statusBarHeight + 40,
-    paddingLeft: 23,
-    marginBottom: 25,
+    marginTop: 41 / 812 * SCREEN_HEIGHT,
+    marginLeft: 23 / 375 * SCREEN_WIDTH,
+    marginBottom: 25 / 812 * SCREEN_HEIGHT,
   }, 
   welcomeText: {
     color: colors.cinzaEscuro,
-    fontFamily: fonts.montserrat,
-    fontSize: 20,
+    fontFamily: fonts.montserratBold,
+    fontSize: adjustFontSize(20),
   },
   typeContainer: {
     flexDirection: 'row',
-    paddingLeft: 23,
+    marginLeft: 23 / 375 * SCREEN_WIDTH,
   },
   typeText: {
-    paddingRight: 20,
+    marginRight: 20 / 375 * SCREEN_WIDTH,
     fontFamily: fonts.montserratSemiBold,
-    fontSize: 15,
+    fontSize: adjustFontSize(15),
     color: colors.primary,
   },
   // listContainer: {
