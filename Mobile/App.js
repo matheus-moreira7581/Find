@@ -50,7 +50,7 @@ export default function App() {
       // <CompanyProducts/>
       // <Companies />
       // <Home />
-      <Login />
+      //<Login />
       //  <DeliveryOptions/>
       // <SuccessOrder />
       // <CustomerRegistration/>
@@ -58,7 +58,7 @@ export default function App() {
       //<ProductDetails />
       // <OpeningHours/>
       // <ProductDetails />
-      // <RedeemProduct/>
+       <RedeemProduct/>
     )
   }
 }
