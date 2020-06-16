@@ -9,11 +9,13 @@ module.exports = {
     async create(request, response, next) {
 
          try {
+            const { id_categories } = request.params;
+
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
             const { name, email, cpf, cell, address} = request.body;
     
-            const company = { name, email, cpf, cell, address, password: hashedPassword };
+            const company = { name, email, cpf, cell, address, password: hashedPassword, id_categories};
 
             const checkEmail = await knex('company').where({ email });
 

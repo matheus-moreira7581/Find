@@ -8,6 +8,7 @@ exports.up = knex => knex.schema.createTable('company', table => {
     table.integer('cell', 12).notNullable()
     table.string('address').notNullable()
     table.string('img_url').nullable()
+    table.integer('id_categorie').references('categories.id').notNullable().onDelete()
 
 })
 
