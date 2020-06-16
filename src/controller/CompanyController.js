@@ -75,9 +75,9 @@ module.exports = {
     async index(request, response, next) {
 
         try {
-            const clients = await knex('clients');
+            const company = await knex('company');
     
-            return response.json(clients);
+            return response.json(company);
             
         } catch (error) {  
             next(error)
@@ -92,10 +92,10 @@ module.exports = {
         try {
             const { id } = request.params;
             
-            const client = await knex('clients')
+            const company = await knex('company')
             .where({ id });
     
-            return response.json(client)
+            return response.json(company)
             
         } catch (error) {
             next(error)
@@ -111,11 +111,11 @@ module.exports = {
           
             const { id } = request.params;
 
-            const { name, cell, img_url} = request.body;
+            const { name, cell, address, img_url} = request.body;
 
-            await knex('clients').where({ id }).update({name, cell, img_url})
+            await knex('company').where({ id }).update({name, cell, address, img_url})
 
-            const newdata = await knex('clients').where({ id })
+            const newdata = await knex('company').where({ id })
 
             return response.json(newdata)
 
@@ -125,7 +125,7 @@ module.exports = {
 
     },
 
-    // Deletar um cliente e seus endereços;
+    // Deletar uma empresa;
 
     async delete(request, response, next) {
 
@@ -134,14 +134,11 @@ module.exports = {
     
             const trx = await knex.transaction();
 
-            await trx('addresses').where('id_clients', id).del();
-    
-            await trx('clients').where('id', id).del();
-    
+            await trx('company').where('id', id).del();
     
             await trx.commit();
     
-            return response.json({msg: 'cliente deletado com sucesso!'});
+            return response.json({msg: 'empresa deletado com sucesso!'});
             
         } catch (error) {
             next(error)
