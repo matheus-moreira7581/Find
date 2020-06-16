@@ -5,7 +5,8 @@ import Constants from 'expo-constants';
 import colors from '../../assets/var/colors';
 import fonts from '../../assets/var/fonts';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../utils/constants';
+import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adjustMeasures';
+
 import adjustFontSize from '../../utils/adjustFontSize';
 
 const styles = StyleSheet.create({
@@ -15,20 +16,20 @@ const styles = StyleSheet.create({
     },
     headerContainer:{
         backgroundColor: colors.background,
-        height: 98.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        height: adjustVerticalMeasure(98.5),
         justifyContent: 'flex-end',
         borderBottomWidth: 1,
         borderBottomColor: '#E5E5E5'
     },
     backButton: {
-        bottom: 18.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
-        left: 24/375 * SCREEN_WIDTH,
+        bottom: adjustVerticalMeasure(18.5),
+        left: adjustHorizontalMeasure(24),
     },
     centeredContainer:{
         position: 'absolute',
         left: 0,
         right: 0,
-        bottom: 13.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        bottom: adjustVerticalMeasure(13.5),
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -43,13 +44,13 @@ const styles = StyleSheet.create({
         backgroundColor: colors.background,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingHorizontal: 35/375 * SCREEN_WIDTH,
-        paddingTop: 50.5/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
-        paddingBottom: 140/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        paddingHorizontal: adjustHorizontalMeasure(35),
+        paddingTop: adjustVerticalMeasure(50.5),
+        paddingBottom: adjustVerticalMeasure(140),
     },
     questionContainer:{
         width: '100%',
-        marginBottom: 58/812 * (SCREEN_HEIGHT - Constants.statusBarHeight),
+        marginBottom: adjustVerticalMeasure(58),
     },
     optionButtonsContainer:{
         width: '100%',
