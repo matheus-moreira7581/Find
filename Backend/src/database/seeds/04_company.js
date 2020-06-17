@@ -5,9 +5,9 @@ exports.seed = function(knex) {
 
         return knex('company').insert([
             {name: 'Aço puro', email:"aço@mail.com", password:"987654", 
-            cpf: "12345678910", cell:"139876543", address:"av. são cristóvão", img_url:"my-photo"},
+            cpf: "1234567891", cell:"139876543", address:"av. são cristóvão", img_url:"my-photo", id_categories: 19},
             {name: 'Ouro puro', email:"ouro@mail.com", password:"123456", 
-            cpf: "12345678910", cell:"139876543", address:"av. são cristóvão", img_url:"my-photo"}
+            cpf: "1234567891", cell:"139876543", address:"av. são cristóvão", img_url:"my-photo", id_categories: 19}
         ]);
 
     });

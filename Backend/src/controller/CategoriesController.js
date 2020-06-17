@@ -1,4 +1,5 @@
 const knex = require('../database');
+const { show } = require('./CompanyController');
 
 module.exports = {
 
@@ -22,7 +23,6 @@ module.exports = {
     
             });
     
-    
             return response.json(mixed);
             
         } catch (error) {
@@ -32,6 +32,6 @@ module.exports = {
         }
        
 
-    }
+    },
 
 };
