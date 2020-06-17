@@ -49,7 +49,7 @@ export default function App() {
        
       // <CompanyProducts/>
       // <Companies />
-       <Home />
+      // <Home />
       //<Login />
        //<DeliveryOptions/>
       // <SuccessOrder />
@@ -59,7 +59,7 @@ export default function App() {
        //<OpeningHours/>
       // <ProductDetails />
       // <RedeemProduct/>
-      //<DeliveryAddress/>
+      <DeliveryAddress/>
     )
   }
 }
