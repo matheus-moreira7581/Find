@@ -36,7 +36,7 @@ module.exports = {
     },
 
 
-    // Login Clientes
+    // Login Empresa
 
     async login(request, response, next) {
         try 
@@ -71,23 +71,27 @@ module.exports = {
 
    },
 
-
-    // Listar clientes
+   
+    // Listar empresas filtrando pela categoria 
 
     async index(request, response, next) {
 
         try {
-            const company = await knex('company');
-    
-            return response.json(company);
-            
+           const { id_categories } = request.query;
+
+           const companies = await knex('company')
+           .where({ id_categories });
+
+           return response.json(companies);
+
         } catch (error) {  
             next(error)
         }
 
     },
 
-    // Mostrar dados de um cliente especifico
+
+    // Mostrar dados de uma empresa especifico
 
     async show(request, response, next) {
    
@@ -105,7 +109,8 @@ module.exports = {
 
     },
 
-    // Atualizar dados de um cliente
+
+    // Atualizar dados de uma empresa
 
     async update(request, response, next) { 
 
@@ -127,7 +132,8 @@ module.exports = {
 
     },
 
-    // Deletar uma empresa;
+
+    // Deletar uma empresa
 
     async delete(request, response, next) {
 
