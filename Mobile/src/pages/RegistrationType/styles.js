@@ -9,6 +9,9 @@ import colors from '../../assets/var/colors';
 import fonts from '../../assets/var/fonts'; 
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.branco,
+  },
   headerContainer:{
     backgroundColor: colors.branco,
     flexDirection: 'row',

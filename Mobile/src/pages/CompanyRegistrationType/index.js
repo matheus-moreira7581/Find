@@ -7,14 +7,20 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import colors from '../../assets/var/colors';
 import adjustFontSize from '../../utils/adjustFontSize';
+import { useNavigation } from '@react-navigation/native';
 
 // import { Container } from './styles';
 
 const CompanyRegistrationType = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-      <TouchableOpacity style={styles.backButton}>
+      <TouchableOpacity 
+        style={styles.backButton}
+        onPress={() => {navigation.goBack()}}
+      >
           <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.secondary} style={styles.backIcon}/>
       </TouchableOpacity>
       <View style={styles.centeredContainer}>
