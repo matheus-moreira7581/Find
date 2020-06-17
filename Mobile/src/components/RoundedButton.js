@@ -12,11 +12,11 @@ const RoundedButton = (props) => (
     <TouchableOpacity 
         onPress={props.onPress} 
         style={props.selected === true 
-            ? {...props.style,...styles.selected, ...{
+            ? {...styles.selected,...props.style, ...{
                 width: adjustHorizontalMeasure(props.width),
                 height: adjustVerticalMeasure(props.height)
             }} 
-            : {...props.style,...styles.unselected, ...{
+            : {...styles.unselected,...props.style, ...{
                 width: adjustHorizontalMeasure(props.width),
                 height: adjustVerticalMeasure(props.height)
             }}}
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         // overflow: 'hidden',
     },
     selectedText:{
-        color: '#FFF',
+        color: colors.branco,
         fontFamily: fonts.montserratBold,
         fontSize: adjustFontSize(16),
     },
