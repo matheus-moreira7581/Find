@@ -79,7 +79,7 @@ module.exports = {
            const { id_categories } = request.query;
 
            const companies = await knex('company')
-           .where({ id_categories });
+           .where({ id_categories }).select('id','name', 'address', 'img_url', 'id_categories');
 
            return response.json(companies);
 
@@ -90,7 +90,7 @@ module.exports = {
     },
 
 
-    // Mostrar dados de uma empresa especifico
+    // Mostrar dados de uma empresa especifico (perfil)
 
     async show(request, response, next) {
    
