@@ -6,11 +6,11 @@ const routes = express.Router();
 //Company
 
 routes.post('/register', CompanyController.create)
-      .post('/company_login', CompanyController.login)
-      .get('/company', CompanyController.index)
-      .get('/company/:id', CompanyController.show)
-      .put('/company/:id', CompanyController.update)
-      .delete('/company/:id', CompanyController.delete) 
+      .post('/login-company', CompanyController.login)
+      .get('/companies', CompanyController.index)
+      .get('/edit-company/:id', CompanyController.show)
+      .put('/edit-company/:id', CompanyController.update)
+      .delete('/edit-company/:id', CompanyController.delete) 
 
 
 

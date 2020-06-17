@@ -7,9 +7,9 @@ const routes = express.Router();
 
 //Endereço
 
-routes.post('/address/:id_clients', AddressesController.create)
-      .get('/address/:id_clients', AddressesController.show)
-      .get('/address', AddressesController.index)
+routes.post('/add-address/:id_clients', AddressesController.create)
+      .get('/add-address/:id_clients', AddressesController.show)
+      .get('/addresses', AddressesController.index)
       
       
 
