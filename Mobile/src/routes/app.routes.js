@@ -13,6 +13,7 @@ import PaymentOptionsScreen from '../pages/PaymentOptions';
 import DeliveryOptionsScreen from '../pages/DeliveryOptions';
 import DeliveryAddressScreen from '../pages/DeliveryAddress';
 import SuccessOrderScreen from '../pages/SuccessOrder';
+import RequestsMadeScreen from '../pages/RequestsMade';
 
 const CustomerAppStack = createStackNavigator();
 const CompanyAppStack = createStackNavigator();
@@ -28,6 +29,7 @@ export const CustomerAppRoutes = () => (
         <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
         <CustomerAppStack.Screen name="DeliveryAddress" component={DeliveryAddressScreen}/>
         <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
+        <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
     </CustomerAppStack.Navigator>
 );
 
@@ -50,7 +52,7 @@ export const TabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="History" 
-            component={HomeScreen}
+            component={RequestsMadeScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="receipt" size={size} color={color} />
