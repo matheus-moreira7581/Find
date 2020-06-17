@@ -25,7 +25,7 @@ import PaymentOptions from './src/pages/PaymentOptions';
 import ProductDetails from './src/pages/ProductDetails';
 import OpeningHours from './src/pages/OpeningHours';
 import RedeemProduct from './src/pages/RedeemProduct';
-
+import DeliveryAddress from './src/pages/DeliveryAddress';
 
 export default function App() {
 
@@ -49,7 +49,7 @@ export default function App() {
        
       // <CompanyProducts/>
       // <Companies />
-      // <Home />
+       <Home />
       //<Login />
        //<DeliveryOptions/>
       // <SuccessOrder />
@@ -59,6 +59,7 @@ export default function App() {
        //<OpeningHours/>
       // <ProductDetails />
       // <RedeemProduct/>
+      //<DeliveryAddress/>
     )
   }
 }
