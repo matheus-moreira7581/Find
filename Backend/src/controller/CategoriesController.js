@@ -1,7 +1,9 @@
 const knex = require('../database');
-const { show } = require('./CompanyController');
+
 
 module.exports = {
+
+    // Listar seções e subseções
 
     async index(request, response, next) {
         try {
@@ -33,5 +35,6 @@ module.exports = {
        
 
     }
+
 
 };
