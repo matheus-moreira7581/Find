@@ -9,11 +9,10 @@ module.exports = {
     async create(request, response, next) {
 
          try {
-            const { id_categories } = request.params;
-
+    
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
-            const { name, email, cpf, cell, address} = request.body;
+            const { name, email, cpf, cell, address, id_categories } = request.body;
     
             const company = { name, email, cpf, cell, address, password: hashedPassword, id_categories};
 
@@ -140,12 +139,8 @@ module.exports = {
         try {
             const { id } = request.params;
     
-            const trx = await knex.transaction();
-
-            await trx('company').where('id', id).del();
-    
-            await trx.commit();
-    
+            await knex('company').where('id', id).del();
+      
             return response.json({msg: 'empresa deletado com sucesso!'});
             
         } catch (error) {
