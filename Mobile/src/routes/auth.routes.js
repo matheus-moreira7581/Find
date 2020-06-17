@@ -3,6 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import LoginScreen from '../pages/Login';
+import RegistrationType from '../pages/RegistrationType';
 
 // Telas de cadastro do cliente
 import CustomerRegistrationScreen from '../pages/CustomerRegistration';
@@ -16,6 +17,7 @@ const AuthStack = createStackNavigator();
 const AuthRoutes = () => (
     <AuthStack.Navigator headerMode="none" initialRouteName="Login">
         <AuthStack.Screen name="Login" component={LoginScreen}/>
+        <AuthStack.Screen name="RegistrationType" component={RegistrationType}/>
         <AuthStack.Screen name="CustomerRegistration" component={CustomerRegistrationScreen}/>
         <AuthStack.Screen name="OpeningHours" component={OpeningHoursScreen}/>
     </AuthStack.Navigator>

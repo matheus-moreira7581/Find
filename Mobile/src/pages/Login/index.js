@@ -3,10 +3,14 @@ import { View, Text, TextInput, Image, Alert, CheckBox } from 'react-native';
 import styles from './styles';
 import RoundedButton from '../../components/RoundedButton';
 import { useAuth } from '../../contexts/auth';
+import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // import { Container } from './styles';
 
 const Login = () => {
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState(null);
   const [senha, setSenha] = useState(null);
 
@@ -35,6 +39,10 @@ const Login = () => {
         )
       )
     }
+  }
+
+  const navigateToRegistrationType = () => {
+    navigation.navigate('RegistrationType');
   }
 
   return (
@@ -73,9 +81,16 @@ const Login = () => {
             width={328}
             height={51}
         />
-        <Text style={styles.text}>
-          Nao tem uma conta? <Text style={styles.registerText}>Cadastre-se já!</Text>
-        </Text>
+        <View style={styles.registerTextContainer}>
+          <Text style={styles.text}>
+            {"Nao tem uma conta? "}
+          </Text>
+            <TouchableOpacity
+              onPress={navigateToRegistrationType}
+            >
+              <Text style={styles.registerText}>Cadastre-se já!</Text>
+            </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
