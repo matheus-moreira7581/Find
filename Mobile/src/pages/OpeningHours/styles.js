@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         height: adjustVerticalMeasure(98.5),
         borderBottomWidth: 1,
-        borderBottomColor: '#E5E5E5',
+        borderBottomColor: colors.bordarCinza,
     },
     centeredContainer:{
         position: 'absolute',

@@ -13,6 +13,7 @@ import ThreeWayPhase from '../../components/ThreeWayPhase';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
+import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 
 const hours = [
     '8:00', '8:30', '9:00', '9:30', '10:00', '10:30', 
@@ -28,7 +29,7 @@ const OpeningHours = () => {
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
                 <TouchableOpacity style={styles.backButton} onPress={() => {}}>
-                    <MaterialIcons name="arrow-back" size={20/375 * SCREEN_WIDTH} color={colors.cinzaEscuro}/>
+                    <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
                     <Text style={styles.headerText}>Cadastre-se</Text>
