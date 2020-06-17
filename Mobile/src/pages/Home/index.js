@@ -3,12 +3,14 @@ import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity } fro
 import styles from './styles';
 import HomeList from '../../components/HomeList';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../contexts/auth';
 
 
 // import { Container } from './styles';
 
 const Home = () => {
   const navigation = useNavigation();
+  const { signOut } = useAuth();
 
   const [showProduct, setShowProduct] = useState(true);
   // This data array is temporary only for test
@@ -114,6 +116,10 @@ const Home = () => {
       <View style={styles.headerContainer}>
         <View style={styles.welcomeContainer}>
           <Text style={styles.welcomeText}>Olá, Lucas.</Text>
+          {/* Temporary logout button */}
+          <TouchableOpacity onPress={signOut}>
+            <Text>Logout</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.typeContainer}>
           <TouchableOpacity onPress={() => navigateList('product')}> 

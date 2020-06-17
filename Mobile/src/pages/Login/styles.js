@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
     fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
   },
+  registerTextContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'center',
+  },
   registerText: {
     color: colors.primary,
     textDecorationLine: "underline"

@@ -27,6 +27,7 @@ import OpeningHours from './src/pages/OpeningHours';
 import RedeemProduct from './src/pages/RedeemProduct';
 import DeliveryAddress from './src/pages/DeliveryAddress';
 import RegistrationType from './src/pages/RegistrationType';
+import CompanyRegistrationType from './src/pages/CompanyRegistrationType';
 
 export default function App() {
 
@@ -42,16 +43,16 @@ export default function App() {
   else {
     return (
       
-      // <NavigationContainer>
-      //   <AuthProvider>
-      //     <Routes />
-      //   </AuthProvider>
-      // </NavigationContainer>
+      <NavigationContainer>
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+      </NavigationContainer>
        
       // <CompanyProducts/>
       // <Companies />
       // <Home />
-      //<Login />
+      // <Login />
       // <DeliveryOptions/>
       // <SuccessOrder />
       //<CustomerRegistration/>
@@ -60,7 +61,8 @@ export default function App() {
       // <OpeningHours/>
       // <RedeemProduct/>
       // <DeliveryAddress/>
-      <RegistrationType />
+      // <RegistrationType />
+      // <CompanyRegistrationType />
     )
   }
 }
