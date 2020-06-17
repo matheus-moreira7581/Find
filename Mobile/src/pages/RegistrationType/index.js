@@ -7,14 +7,28 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import colors from '../../assets/var/colors';
 import adjustFontSize from '../../utils/adjustFontSize';
+import { useNavigation } from '@react-navigation/native';
 
 // import { Container } from './styles';
 
 const RegistrationType = () => {
+  const navigation = useNavigation();
+
+  const navigateToClientRegistration = () => {
+    navigation.navigate('CustomerRegistration');
+  }
+
+  const navigateToCompanyRegistrationType = () => {
+    navigation.navigate('CompanyRegistrationType');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-      <TouchableOpacity style={styles.backButton}>
+      <TouchableOpacity 
+        style={styles.backButton}
+        onPress={() => {navigation.goBack()}}
+      >
           <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.secondary} style={styles.backIcon}/>
       </TouchableOpacity>
       <View style={styles.centeredContainer}>
@@ -26,7 +40,7 @@ const RegistrationType = () => {
           <RoundedButton 
             text="Sou Profisional"
             style={styles.button}
-            onPress={() => {}} 
+            onPress={navigateToCompanyRegistrationType} 
             selected={true}
             fontSize={adjustFontSize(20)} 
             width={327.5}
@@ -36,7 +50,7 @@ const RegistrationType = () => {
         <View style={styles.clientTypeContainer}>
           <RoundedButton 
             text="Sou Cliente" 
-            onPress={() => {}} 
+            onPress={navigateToClientRegistration} 
             style={styles.button}
             fontSize={adjustFontSize(20)} 
             selected={true} 

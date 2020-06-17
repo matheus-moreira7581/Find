@@ -9,13 +9,17 @@ import styles from './styles';
 import colors from '../../assets/var/colors';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
+import { useNavigation } from '@react-navigation/native';
 
 
 const CustomerRegistration = () => {
+    const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {navigation.goBack()}}
+                >
                     <MaterialIcons 
                         name="arrow-back" 
                         size={adjustHorizontalMeasure(20)} 
