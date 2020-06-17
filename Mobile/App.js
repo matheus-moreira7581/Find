@@ -27,6 +27,7 @@ import OpeningHours from './src/pages/OpeningHours';
 import RedeemProduct from './src/pages/RedeemProduct';
 import DeliveryAddress from './src/pages/DeliveryAddress';
 import RegistrationType from './src/pages/RegistrationType';
+import RequestsMade from './src/pages/RequestsMade';
 
 export default function App() {
 
@@ -60,7 +61,8 @@ export default function App() {
       // <OpeningHours/>
       // <RedeemProduct/>
       // <DeliveryAddress/>
-      <RegistrationType />
+      //<RegistrationType />
+      <RequestsMade/>
     )
   }
 }

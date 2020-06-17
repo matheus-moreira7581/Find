@@ -2,7 +2,7 @@ import React from 'react';
 
 import { SafeAreaView, View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
 
-import { SCREEN_WIDTH } from '../../utils/constants';
+import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import RoundedButton from '../../components/RoundedButton';
@@ -16,7 +16,7 @@ const RedeemProduct = () => {
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
                 <TouchableOpacity style={styles.backButton}>
-                    <MaterialIcons name="arrow-back" size={20/375 * SCREEN_WIDTH} color={colors.cinzaEscuro}/>
+                    <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
                     <Text style={styles.headerText}>Retirar no local</Text>
