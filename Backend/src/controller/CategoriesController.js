@@ -34,7 +34,17 @@ module.exports = {
         }
        
 
-    }
+    },
 
+    // Listar todas as categorias
+    async listCategories(request, response, next) {
+        try {
+            const categories = await knex('categories').select('id', 'title');
+
+            return response.json(categories);
+        } catch (error) {
+            next(error)
+        }
+    }
 
 };

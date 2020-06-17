@@ -5,7 +5,8 @@ const routes = express.Router();
 
 //Categorias
 
-routes.get('/', CategoriesController.index);
+routes.get('/', CategoriesController.index)
+      .get('/register-company', CategoriesController.listCategories)
 
 
 module.exports = routes;
