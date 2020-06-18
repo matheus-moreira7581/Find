@@ -67,8 +67,8 @@ export default function App() {
       // <RequestsMade/>
       // <RegistrationType />
       // <CompanyRegistrationType />
-      // <CompanyPersonalData />
-      <CompanyRegistration />
+      <CompanyPersonalData />
+      // <CompanyRegistration />
     )
   }
 }

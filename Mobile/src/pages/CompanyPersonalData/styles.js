@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserratBold,
     fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
+    marginBottom: adjustVerticalMeasure(4),
   },
   nomeInput: {
     height: adjustVerticalMeasure(32),
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserratBold,
     fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
+    marginBottom: adjustVerticalMeasure(4),
   },
   cpfInput: {
     height: adjustVerticalMeasure(32),
@@ -89,6 +91,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserratBold,
     fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
+    marginBottom: adjustVerticalMeasure(4),
   },
   dataNascInput: {
     height: adjustVerticalMeasure(32),
@@ -106,6 +109,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserratBold,
     fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
+    marginBottom: adjustVerticalMeasure(4),
   },
   emailInput: {
     height: adjustVerticalMeasure(32),
@@ -123,6 +127,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserratBold,
     fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
+    marginBottom: adjustVerticalMeasure(4),
   },
   passwordInput: {
     height: adjustVerticalMeasure(32),
