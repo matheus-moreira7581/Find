@@ -12,7 +12,6 @@ import RoundedButton from '../../components/RoundedButton';
 import colors from '../../assets/var/colors';
 import styles from './styles';
 
-// import { Container } from './styles';
 
 const CompanyPersonalData = () => {
   return (

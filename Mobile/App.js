@@ -29,6 +29,7 @@ import DeliveryAddress from './src/pages/DeliveryAddress';
 import RegistrationType from './src/pages/RegistrationType';
 import RequestsMade from './src/pages/RequestsMade';
 import CompanyPersonalData from './src/pages/CompanyPersonalData';
+import CompanyRegistration from './src/pages/CompanyRegistration';
 
 export default function App() {
 
@@ -66,7 +67,8 @@ export default function App() {
       // <RequestsMade/>
       // <RegistrationType />
       // <CompanyRegistrationType />
-      <CompanyPersonalData />
+      // <CompanyPersonalData />
+      <CompanyRegistration />
     )
   }
 }
