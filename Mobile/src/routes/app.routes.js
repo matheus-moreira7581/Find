@@ -15,7 +15,7 @@ import DeliveryAddressScreen from '../pages/DeliveryAddress';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
 
-import CreateNewProductScreen from '../pages/CreateNewProduct'; //TEMP FOR TESTING
+import ProductManagementScreen from '../pages/ProductManagement'; //TEMP FOR TESTING
 
 const CustomerAppStack = createStackNavigator();
 const CompanyAppStack = createStackNavigator();
@@ -23,7 +23,7 @@ const AppTab = createBottomTabNavigator();
 
 export const CustomerAppRoutes = () => (
     <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
-        <CustomerAppStack.Screen name="Home" component={CreateNewProductScreen}/>
+        <CustomerAppStack.Screen name="Home" component={ProductManagementScreen}/>
         <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
         <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
         <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
@@ -37,7 +37,7 @@ export const CustomerAppRoutes = () => (
 
 export const CompanyAppRoutes = () => (
     <CompanyAppStack.Navigator headerMode="none">
-        <CompanyAppStack.Screen name="NewProduct" component={CreateNewProductScreen}/>
+        <CompanyAppStack.Screen name="NewProduct" component={ProductManagementScreen}/>
     </CompanyAppStack.Navigator>
 );
 
