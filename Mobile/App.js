@@ -28,6 +28,8 @@ import RedeemProduct from './src/pages/RedeemProduct';
 import DeliveryAddress from './src/pages/DeliveryAddress';
 import RegistrationType from './src/pages/RegistrationType';
 import RequestsMade from './src/pages/RequestsMade';
+import CompanyPersonalData from './src/pages/CompanyPersonalData';
+import CompanyRegistration from './src/pages/CompanyRegistration';
 
 export default function App() {
 
@@ -43,11 +45,11 @@ export default function App() {
   else {
     return (
       
-      <NavigationContainer>
-        <AuthProvider>
-          <Routes />
-        </AuthProvider>
-      </NavigationContainer>
+      // <NavigationContainer>
+      //   <AuthProvider>
+      //     <Routes />
+      //   </AuthProvider>
+      // </NavigationContainer>
        
       // <CompanyProducts/>
       // <Companies />
@@ -62,9 +64,11 @@ export default function App() {
       // <RedeemProduct/>
       // <DeliveryAddress/>
       //<RegistrationType />
-      //<RequestsMade/>
+      // <RequestsMade/>
       // <RegistrationType />
       // <CompanyRegistrationType />
+      <CompanyPersonalData />
+      // <CompanyRegistration />
     )
   }
 }
