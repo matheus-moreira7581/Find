@@ -12,7 +12,7 @@ const SuccessOrder = () => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.Title}>Pedido</Text>
+          <Text style={styles.Title}>Concluído</Text>
         </View>
       </View>
       <View style={styles.contentContainer}>

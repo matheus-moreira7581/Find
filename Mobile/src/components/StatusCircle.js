@@ -8,7 +8,8 @@ const StatusCircle = (props) => (
         borderRadius: props.radius,
         backgroundColor: props.color,
         
-    }} />
+    }} 
+    />
 );
 
 

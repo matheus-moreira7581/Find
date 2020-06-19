@@ -1,25 +1,83 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { MaterialIcons } from '@expo/vector-icons';
 
 import HomeScreen from '../pages/Home';
 import CompaniesScreen from '../pages/Companies';
 import CompanyProductsScreen from '../pages/CompanyProducts';
+import ProductDeatilsScreen from '../pages/ProductDetails';
 import PaymentOptionsScreen from '../pages/PaymentOptions';
 import DeliveryOptionsScreen from '../pages/DeliveryOptions';
+import DeliveryAddressScreen from '../pages/DeliveryAddress';
 import SuccessOrderScreen from '../pages/SuccessOrder';
+import RequestsMadeScreen from '../pages/RequestsMade';
 
-const AppStack = createStackNavigator();
+import ProductManagementScreen from '../pages/ProductManagement'; //TEMP FOR TESTING
 
-const AppRoutes = () => (
-    <AppStack.Navigator headerMode="none">
-        <AppStack.Screen name="Home" component={HomeScreen}/>
-        <AppStack.Screen name="Companies" component={CompaniesScreen}/>
-        <AppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
-        <AppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
-        <AppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
-        <AppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
-    </AppStack.Navigator>
+const CustomerAppStack = createStackNavigator();
+const CompanyAppStack = createStackNavigator();
+const AppTab = createBottomTabNavigator();
+
+export const CustomerAppRoutes = () => (
+    <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
+        <CustomerAppStack.Screen name="Home" component={ProductManagementScreen}/>
+        <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
+        <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
+        <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
+        <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
+        <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
+        <CustomerAppStack.Screen name="DeliveryAddress" component={DeliveryAddressScreen}/>
+        <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
+        <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
+    </CustomerAppStack.Navigator>
 );
 
-export default AppRoutes;
+export const CompanyAppRoutes = () => (
+    <CompanyAppStack.Navigator headerMode="none">
+        <CompanyAppStack.Screen name="NewProduct" component={ProductManagementScreen}/>
+    </CompanyAppStack.Navigator>
+);
+
+export const TabAppRoutes = () => (
+    <AppTab.Navigator initialRouteName="Home" tabBarOptions={{showLabel: false}}>
+        <AppTab.Screen 
+            name="Home" 
+            component={CustomerAppRoutes}
+            options={{
+                tabBarIcon: ({color, size}) => (
+                    <MaterialIcons name="home" size={size} color={color} />
+                ),
+            }}
+        />
+        <AppTab.Screen 
+            name="History" 
+            component={RequestsMadeScreen}
+            options={{
+                tabBarIcon: ({color, size}) => (
+                    <MaterialIcons name="receipt" size={size} color={color} />
+                ),
+            }}
+        />
+        <AppTab.Screen 
+            name="Chat" 
+            component={HomeScreen}
+            options={{
+                tabBarIcon: ({color, size}) => (
+                    <MaterialIcons name="speaker-notes" size={size} color={color} />
+                ),
+            }}
+        />
+        <AppTab.Screen 
+            name="Profile" 
+            component={HomeScreen}
+            options={{
+                tabBarIcon: ({color, size}) => (
+                    <MaterialIcons name="person" size={size} color={color} />
+                ),
+            }}
+        />
+    </AppTab.Navigator>
+)

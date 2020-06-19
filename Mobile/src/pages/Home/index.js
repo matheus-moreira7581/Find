@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import HomeList from '../../components/HomeList';
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../contexts/auth';
+
 
 // import { Container } from './styles';
 
 const Home = () => {
+  const navigation = useNavigation();
+  const { signOut } = useAuth();
 
   const [showProduct, setShowProduct] = useState(true);
   // This data array is temporary only for test
@@ -93,7 +98,11 @@ const Home = () => {
     },
   ]
 
-  let showList = <HomeList DATA={productDATA}/>;
+  const navigateToCompanies = () => {
+    navigation.navigate('Companies');
+  }
+
+  let showList = <HomeList DATA={productDATA} onPress={navigateToCompanies}/>;
   if(showProduct === false) showList = <HomeList DATA={serviceData}/>
 
   const navigateList = (type) => {
@@ -106,7 +115,11 @@ const Home = () => {
     <SafeAreaView style={styles.container}> 
       <View style={styles.headerContainer}>
         <View style={styles.welcomeContainer}>
-          <Text style={styles.welcomeText}>Olá, Lucas. Oque você deseja?</Text>
+          <Text style={styles.welcomeText}>Olá, Lucas.</Text>
+          {/* Temporary logout button */}
+          <TouchableOpacity onPress={signOut}>
+            <Text>Logout</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.typeContainer}>
           <TouchableOpacity onPress={() => navigateList('product')}> 

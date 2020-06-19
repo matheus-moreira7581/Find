@@ -9,18 +9,29 @@ import colors from '../../assets/var/colors';
 
 const ProductDetails = () => {
   const [amount, setAmount] = useState(1);
+  const [price, setPrice] = useState(44);
 
   const addAmount = () => {
     let v = amount;
+    let a = price
     v = v + 1;
-    if(amount < 99) setAmount(v);
+    a = a + 44;
+    if(amount < 99) {
+      setAmount(v);
+      setPrice(a);
+    }
 
   }
   
   const subtractAmount = () => {
     let v = amount;
+    let a = price
     v = v - 1;
-    if (amount > 1) setAmount(v);
+    a = a - 44;
+    if (amount > 1) {
+      setAmount(v);
+      setPrice(a);
+    }
   }
 
   return (
@@ -103,7 +114,7 @@ const ProductDetails = () => {
             </TouchableOpacity>
           </View>
           <RoundedButton 
-            text="Adicionar R$ 44,00" 
+            text={`Adicionar R$ ${price},00`} 
             onPress={() => {}} 
             selected={true} 
             width={168}

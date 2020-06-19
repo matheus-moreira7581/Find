@@ -1,16 +1,20 @@
 import React from 'react';
 
-import { View, Text, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
 
 import CompaniesList from '../../components/CompaniesList'
+import { useNavigation } from '@react-navigation/native';
+
+import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 
 let category = 'Alimentação';
 let subCategory = 'Pizzaria';
 //temp names, to be retrieved via api later
+
 
 const companies = [
     {
@@ -79,20 +83,30 @@ const companies = [
     }
 ]
 
+
+
 const Companies = () => {
+    const navigation = useNavigation();
+    
+    const navigateToCompanyProducts = () => {
+        navigation.navigate('CompanyProducts');
+    }
+
     return (
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
-                <MaterialIcons name="arrow-back" size={20} color={colors.secondary} style={styles.backIcon}/>
+                <TouchableOpacity style={styles.backButton}>
+                    <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
+                </TouchableOpacity>
                 <View style={styles.centeredContainer}>
                     <Text style={styles.categoryText}>{category}</Text>
                 </View> 
             </View>
             <View style={styles.subCategoryContainer}>
                 <Text style={styles.subCategoryText}>{subCategory}</Text>
-                <MaterialIcons name="filter-list" size={20} color={colors.secondary}/>
+                <MaterialIcons name="filter-list" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
             </View>
-            <CompaniesList Companies={companies} />
+            <CompaniesList Companies={companies} onPress={navigateToCompanyProducts}/>
         </SafeAreaView>
     );
 }

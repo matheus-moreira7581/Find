@@ -3,59 +3,60 @@ import { StyleSheet } from 'react-native';
 import colors from '../../assets/var/colors';
 import fonts from '../../assets/var/fonts';
 
+import Constants from 'expo-constants';
+import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adjustMeasures';
+import adjustFontSize from '../../utils/adjustFontSize';
+
 export default StyleSheet.create({
     screenContainer:{
-        width: '100%',
-        height: '100%',
+        flex: 1,
+        top: Constants.statusBarHeight,
     },
     headerContainer:{
         backgroundColor: colors.background,
         flexDirection: 'row',
         alignItems: 'flex-end',
         borderBottomWidth: 1,
-        borderBottomColor: '#E5E5E5', 
+        borderBottomColor: colors.bordarCinza, 
         width: '100%',
-        height: 98.5,
+        height: adjustVerticalMeasure(98.5),
     },
     centeredContainer:{
         position: 'absolute',
         right: 0,
         left: 0,
-        bottom: 13.5,
+        bottom: adjustVerticalMeasure(13.5),
         flexDirection: 'row',
         justifyContent: 'center', 
     },
-    backIcon:{
-        marginLeft: 24,
-        marginBottom: 18.5,
+    backButton:{
+        marginLeft: adjustHorizontalMeasure(24),
+        marginBottom: adjustVerticalMeasure(18.5),
     },
     headerText:{
         fontFamily: fonts.montserratBold,
-        fontSize: 20,
+        fontSize: adjustFontSize(20),
     },
     bodyContainer:{
+        flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        height: '100%',
         backgroundColor: colors.background,
-        paddingTop: '17.56%',
-        paddingBottom: 50,
+        paddingBottom: adjustVerticalMeasure(164),
     },
     questionContainer:{
         alignItems: 'center',
-        marginBottom: 69,
-    },
-    text:{
-        fontFamily: fonts.montserratBold,
-        fontSize: 20,
+        marginTop: adjustVerticalMeasure(125.5),
+        marginBottom: adjustVerticalMeasure(69),
     },
     middleText: {
         fontFamily: fonts.montserratSemiBold,
-        fontSize: 20,
+        fontSize: adjustFontSize(20),
         color: colors.cinza,
-        marginVertical: 19,
+        marginVertical: adjustVerticalMeasure(19),
     },
-    deliveryButton:{
-        marginBottom: 120,
-    },
+    deliveryButton: {
+        marginBottom: adjustVerticalMeasure(120),
+    }
+
 });
