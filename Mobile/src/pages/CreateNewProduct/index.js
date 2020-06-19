@@ -22,7 +22,7 @@ const CreateNewProduct = () => {
                 </UnderlinedTextButton>
             </View>
             <View style={styles.bodyContainer}>
-                <View style={styles.tempView}>
+                <View style={styles.myProductsContainer}>
                     <View style={styles.topicContainer}>
                         <Text style={styles.topicTitleText}>Nome do Produto</Text>
                         <TextInput 

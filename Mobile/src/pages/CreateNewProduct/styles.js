@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
         top: Constants.statusBarHeight,
     },
     headerContainer:{
+        backgroundColor: colors.background,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
@@ -30,14 +31,36 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
+    myProductsContainer:{
+        backgroundColor: colors.background,
+        width: '100%',
+        height: '100%',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingTop: adjustVerticalMeasure(40.5),
+        paddingBottom: adjustVerticalMeasure(140),
+    },
+    requestsContainer:{
+        //TODO
+    },
     topicContainer:{
         width: '100%',
-        backgroundColor: '#DE7777',
+        justifyContent: 'center',
+        paddingHorizontal: adjustHorizontalMeasure(24),
     },
     topicTitleText:{
         fontFamily: fonts.montserratBold,
         fontSize: adjustFontSize(15),
-    }
+        marginTop: adjustVerticalMeasure(25),
+    },
+    input:{
+        backgroundColor: colors.textInput,
+        fontFamily: fonts.montserratRegular,
+        fontSize: adjustFontSize(13),
+        borderRadius: 7,
+        paddingLeft: adjustHorizontalMeasure(15),
+        marginTop: adjustVerticalMeasure(6),
+    },
 });
 
 export default styles;
