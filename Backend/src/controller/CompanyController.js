@@ -4,18 +4,19 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
 
-    // Cadastrar um cliente (tela de cadastro - cliente)
+    // Cadastrar uma empresa (tela de cadastro)
 
     async create(request, response, next) {
 
          try {
+    
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
-            const { name, email, cell } = request.body;
+            const { name, email, cpf, cell, address, id_categories } = request.body;
     
-            const client = { name, email, cell, password: hashedPassword };
+            const company = { name, email, cpf, cell, address, password: hashedPassword, id_categories};
 
-            const checkEmail = await knex('clients').where({ email });
+            const checkEmail = await knex('company').where({ email });
 
             if (checkEmail.length !== 0) {
 
@@ -23,9 +24,9 @@ module.exports = {
 
             }
 
-            await knex('clients').insert(client);
+            await knex('company').insert(company);
     
-            return response.json(client);
+            return response.json(company);
             
         } catch (error) {
             next(error)
@@ -34,24 +35,24 @@ module.exports = {
     },
 
 
-    // Login do Cliente
+    // Login para Empresas (tela de login)
 
     async login(request, response, next) {
         try 
         {
         const { email, password} = request.body;
             
-        const client = await knex('clients')
+        const company = await knex('company')
         .where({ email });
 
        
-       if (client.length == 0) {
+       if (company.length == 0) {
 
           return response.status(400).send('Cannot find user')
 
         } 
         
-        if(await bcrypt.compare(password, client[0].password)) {
+        if(await bcrypt.compare(password, company[0].password)) {
 
             response.send('Success')
 
@@ -69,33 +70,37 @@ module.exports = {
 
    },
 
-
-    // Listar clientes (apenas para desenvolvimento)
+   
+    // Listar empresas filtrando pela categoria 
 
     async index(request, response, next) {
 
         try {
-            const clients = await knex('clients');
-    
-            return response.json(clients);
-            
+           const { id_categories } = request.query;
+
+           const companies = await knex('company')
+           .where({ id_categories }).select('id','name', 'address', 'img_url', 'id_categories');
+
+           return response.json(companies);
+
         } catch (error) {  
             next(error)
         }
 
     },
 
-    // Mostrar dados de um cliente especifico (perfil)
+
+    // Mostrar dados de uma empresa especifico (perfil)
 
     async show(request, response, next) {
    
         try {
             const { id } = request.params;
             
-            const client = await knex('clients')
+            const company = await knex('company')
             .where({ id });
     
-            return response.json(client)
+            return response.json(company)
             
         } catch (error) {
             next(error)
@@ -103,7 +108,8 @@ module.exports = {
 
     },
 
-    // Atualizar dados de um cliente (perfil)
+
+    // Atualizar dados de uma empresa (perfil)
 
     async update(request, response, next) { 
 
@@ -111,11 +117,11 @@ module.exports = {
           
             const { id } = request.params;
 
-            const { name, cell, img_url} = request.body;
+            const { name, cell, address, img_url} = request.body;
 
-            await knex('clients').where({ id }).update({name, cell, img_url})
+            await knex('company').where({ id }).update({name, cell, address, img_url})
 
-            const newdata = await knex('clients').where({ id })
+            const newdata = await knex('company').where({ id })
 
             return response.json(newdata)
 
@@ -125,23 +131,17 @@ module.exports = {
 
     },
 
-    // Deletar um cliente e seus endereços (perfil)
+
+    // Deletar uma empresa  (perfil)
 
     async delete(request, response, next) {
 
         try {
             const { id } = request.params;
     
-            const trx = await knex.transaction();
-
-            await trx('addresses').where('id_clients', id).del();
-    
-            await trx('clients').where('id', id).del();
-    
-    
-            await trx.commit();
-    
-            return response.json({msg: 'cliente deletado com sucesso!'});
+            await knex('company').where('id', id).del();
+      
+            return response.json({msg: 'empresa deletado com sucesso!'});
             
         } catch (error) {
             next(error)

@@ -48,7 +48,7 @@ module.exports = {
 
     },
 
-    // Listar todos os endereços
+    // Listar todos os endereços (apenas para desenvolvimento)
 
     async index(request, response, next) {
 
