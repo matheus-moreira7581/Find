@@ -1,11 +1,17 @@
 const express = require('express');
-const routes = require('./routes');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const clientRoutes = require('./routes/client');
+const addressRoutes = require('./routes/address');
+const categoryRoutes = require('./routes/category');
+const companyRoutes = require('./routes/company');
 
 const app = express();
 
 app.use(express.json());
-app.use(routes);
+app.use(clientRoutes);
+app.use(addressRoutes);
+app.use(categoryRoutes);
+app.use(companyRoutes);
 
 // not Found
 
