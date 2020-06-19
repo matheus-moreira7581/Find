@@ -55,7 +55,7 @@ const RedeemProduct = () => {
                                 <View style={styles.horizontalLink}/>
                                 <MaterialIcons 
                                     name="hourglass-empty" 
-                                    size={12/375 * SCREEN_WIDTH}
+                                    size={adjustHorizontalMeasure(12)}
                                     color={colors.cinza}
                                 />
                                 <Text style={styles.conclusionTimeText}>50min - 1hr</Text>
