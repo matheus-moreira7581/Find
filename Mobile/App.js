@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { StyleSheet, Text, View } from 'react-native';
@@ -23,8 +23,16 @@ import Login from './src/pages/Login';
 import CustomerRegistration from './src/pages/CustomerRegistration';
 import PaymentOptions from './src/pages/PaymentOptions';
 import ProductDetails from './src/pages/ProductDetails';
+import OpeningHours from './src/pages/OpeningHours';
+import RedeemProduct from './src/pages/RedeemProduct';
+import DeliveryAddress from './src/pages/DeliveryAddress';
+import RegistrationType from './src/pages/RegistrationType';
+import RequestsMade from './src/pages/RequestsMade';
+import CompanyPersonalData from './src/pages/CompanyPersonalData';
+import CompanyRegistration from './src/pages/CompanyRegistration';
 
 export default function App() {
+
   const [fontsLoaded] = useFonts ({
     Montserrat_400Regular,
     Montserrat_500Medium,
@@ -36,22 +44,31 @@ export default function App() {
   }
   else {
     return (
-      /*
-      <NavigationContainer>
-        <AuthProvider>
-          <Routes />
-        </AuthProvider>
-      </NavigationContainer>*/
+      
+       <NavigationContainer>
+         <AuthProvider>
+           <Routes />
+         </AuthProvider>
+       </NavigationContainer>
        
       // <CompanyProducts/>
       // <Companies />
       // <Home />
-      //<Login />
-       //<DeliveryOptions/>
-      //<SuccessOrder />
-      //<CustomerRegistration/>
+      // <Login />
+      // <DeliveryOptions/>
+      // <SuccessOrder />
+      // <CustomerRegistration/>
       // <PaymentOptions />
-      <ProductDetails />
+      // <ProductDetails />
+      // <OpeningHours/>
+      // <RedeemProduct/>
+      // <DeliveryAddress/>
+      //<RegistrationType />
+      // <RequestsMade/>
+      // <RegistrationType />
+      // <CompanyRegistrationType />
+      // <CompanyPersonalData />
+      // <CompanyRegistration />
     )
   }
 }

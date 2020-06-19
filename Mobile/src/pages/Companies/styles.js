@@ -1,47 +1,52 @@
 import { StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
+
 import colors from '../../assets/var/colors';
 import fonts from '../../assets/var/fonts';
 
+import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adjustMeasures';
+import adjustFontSize from '../../utils/adjustFontSize';
+
 const styles = StyleSheet.create({
     screenContainer:{
-        backgroundColor: colors.backgroundGrey,
-        height: '100%',
-        width: '100%',
-        paddingLeft: 30
+        top: Constants.statusBarHeight,
+        backgroundColor: colors.background,
+        flex: 1,
     },
     headerContainer:{
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 61,
-        marginBottom: 18.5
+        justifyContent: 'flex-end',
+        height: adjustVerticalMeasure(98.5),
+        borderBottomWidth: 1,
+        borderBottomColor: colors.bordarCinza,
     },
     centeredContainer:{
         position: 'absolute',
-        top: 0,
-        bottom: 0,
+        bottom: adjustVerticalMeasure(13.5),
         right: 0,
         left: 0,
         justifyContent: 'center',
         alignItems: 'center'
     },
     categoryText:{
-        fontFamily: fonts.montserratSemiBold,
-        fontSize: 20,
-        color: colors.secondary,
+        fontFamily: fonts.montserratBold,
+        fontSize: adjustFontSize(20),
+        color: colors.cinzaEscuro,
     },
     subCategoryText:{
         fontFamily: fonts.montserratBold,
-        fontSize: 20,
-        color: colors.secondary, 
+        fontSize: adjustFontSize(20),
+        color: colors.cinzaEscuro,
     },
     subCategoryContainer:{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 23,
-        marginBottom: 16
+        marginHorizontal: adjustHorizontalMeasure(23),
+        marginBottom: adjustVerticalMeasure(16),
+        marginTop: adjustVerticalMeasure(18.5), 
     },
-    backIcon:{
-        marginLeft: 25
+    backButton:{
+        marginLeft: adjustHorizontalMeasure(24),
+        marginBottom: adjustVerticalMeasure(18.5),
     }
 });
 
