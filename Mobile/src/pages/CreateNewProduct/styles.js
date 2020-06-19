@@ -11,3 +11,5 @@ const styles = StyleSheet.create({
     headerContainer:{},
     bodyContainer:{},
 });
+
+export default styles;

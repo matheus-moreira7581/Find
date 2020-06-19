@@ -8,6 +8,7 @@ import colors from '../../assets/var/colors';
 import styles from './styles';
 
 import RoundedButton from '../../components/RoundedButton';
+import ToggleableUnderlinedText from '../../components/UnderlinedTextButton';
 
 const CreateNewProduct = () => {
     return (
@@ -23,6 +24,9 @@ const CreateNewProduct = () => {
                     height={50}
                     fontSize={adjustFontSize(16)}
                 />
+                <ToggleableUnderlinedText selected={true} fontSize={adjustFontSize(20)}>
+                    Teste
+                </ToggleableUnderlinedText>
             </View>
         </SafeAreaView>
     );
