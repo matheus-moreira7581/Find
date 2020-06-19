@@ -42,12 +42,12 @@ export default function App() {
   }
   else {
     return (
-      /*
+      
       <NavigationContainer>
         <AuthProvider>
           <Routes />
         </AuthProvider>
-      </NavigationContainer>*/
+      </NavigationContainer>
        
       // <CompanyProducts/>
       // <Companies />
@@ -62,7 +62,7 @@ export default function App() {
       // <RedeemProduct/>
       // <DeliveryAddress/>
       //<RegistrationType />
-      <RequestsMade/>
+      //<RequestsMade/>
       // <RegistrationType />
       // <CompanyRegistrationType />
     )

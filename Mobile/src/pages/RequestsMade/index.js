@@ -15,11 +15,11 @@ import RoundedButton from '../../components/RoundedButton';
 const RequestsMade = () => {
     const [requestList, setRequestList] = useState(null);
     //Future api call must fill list of requests
-    //const navigation = useNavigation();
+    const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backArrowButton} onPress={() => {}}>
+                <TouchableOpacity style={styles.backArrowButton} onPress={() => navigation.goBack()}>
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
@@ -46,7 +46,7 @@ const RequestsMade = () => {
                                 width={256}
                                 height={55}
                                 fontSize={adjustFontSize(16)}
-                                onPress={() => {}}
+                                onPress={() => navigation.navigate('CustomerHome')}
                             />
                         </>
                 }

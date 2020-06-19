@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils/constants';
+import { AdjustHorizontalMeasure, adjustVerticalMeasure, adjustHorizontalMeasure } from '../utils/adjustMeasures';
 
 import adjustFontSize from '../utils/adjustFontSize';
 
@@ -11,21 +11,29 @@ import fonts from '../assets/var/fonts';
 
 
 const HourGrade = ({datasource, style}) => {
-    const [selectedHours, setSelectedHours] = useState([
-        false, false, false, false, false, false, 
-        false, false, false, false, false, false,
-        false, false, false, false, false, false,
-        false, false, false, false, false, false,
-        false, false, false, false, false, false, 
-        false, false
-    ]);
+
+    const initialState = [];
+
+    useEffect(() => {
+        const setInitialState = async () => {
+            setSelectedHours([]);
+            await datasource.map(() => {
+                initialState.push(false);
+            })
+
+        }
+        setInitialState();
+        setSelectedHours(initialState);
+    }, []);
+
+    const [selectedHours, setSelectedHours] = useState([]);
     
+
     const handleHourSelection = (index) => {
-        const changedSelectedHours = [...selectedHours];
-        changedSelectedHours[index] = !changedSelectedHours[index]
-        
-        setSelectedHours(changedSelectedHours);
-        console.log(selectedHours[index]);   
+        const hoursToChange = [...selectedHours];
+        hoursToChange[index] = hoursToChange[index] === true ? false : true;
+        setSelectedHours(hoursToChange);
+        console.log(selectedHours);
     }
 
 
@@ -58,15 +66,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'flex-start',
-        width: 295/375 * SCREEN_WIDTH,
-        height: 259/812 * SCREEN_HEIGHT,
+        width: adjustHorizontalMeasure(295),
+        height: adjustVerticalMeasure(259),
+        paddingLeft: adjustHorizontalMeasure(7),
     },
     buttonContainer:{
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        width: 50/375 * SCREEN_WIDTH,
-        height: 40/812 * SCREEN_HEIGHT,
-        marginLeft: 7.5/375 * SCREEN_WIDTH,
+        width: adjustHorizontalMeasure(50),
+        height: adjustVerticalMeasure(40),
+        marginLeft: adjustHorizontalMeasure(7.5),
     },
     selectedButtonText:{
         fontFamily: fonts.montserratBold,

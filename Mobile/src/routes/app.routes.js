@@ -15,13 +15,15 @@ import DeliveryAddressScreen from '../pages/DeliveryAddress';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
 
+import OpeningHours from '../pages/OpeningHours';
+
 const CustomerAppStack = createStackNavigator();
 const CompanyAppStack = createStackNavigator();
 const AppTab = createBottomTabNavigator();
 
 export const CustomerAppRoutes = () => (
-    <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
-        <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
+    <CustomerAppStack.Navigator headerMode="none" initialRouteName="CustomerHome">
+        <CustomerAppStack.Screen name="CustomerHome" component={OpeningHours}/>
         <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
         <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
         <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
