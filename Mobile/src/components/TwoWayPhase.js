@@ -6,12 +6,12 @@ import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils/constants';
 
 import colors from '../assets/var/colors';
 
-const TwoWayPhase = ({ phase, style }) => {
+const TwoWayPhase = ({ phase, style, dafaultCircleStyle, expandedCircleStyle }) => {
     if(phase === 1){
         return (
             <View style={{...styles.container, ...style}}>
-                <View style={styles.expandedCircle}/>
-                <View style={styles.defaultCircle}/>
+                <View style={{...styles.expandedCircle, ...expandedCircleStyle}}/>
+                <View style={{...styles.defaultCircle, ...dafaultCircleStyle}}/>
             </View>
         );
     }
@@ -19,8 +19,8 @@ const TwoWayPhase = ({ phase, style }) => {
         if(phase === 2){
             return (
                 <View style={{...styles.container, ...style}}>
-                    <View style={styles.defaultCircle}/>
-                    <View style={styles.expandedCircle}/>
+                    <View style={{...styles.defaultCircle, ...dafaultCircleStyle}}/>
+                    <View style={{...styles.expandedCircle, ...expandedCircleStyle}}/>
                  </View>       
             );
         }

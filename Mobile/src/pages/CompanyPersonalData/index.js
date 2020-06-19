@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -11,9 +12,29 @@ import RoundedButton from '../../components/RoundedButton';
 
 import colors from '../../assets/var/colors';
 import styles from './styles';
+import ThreeWayPhase from '../../components/ThreeWayPhase';
 
 
 const CompanyPersonalData = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  const { registrationType } = route.params;
+
+  const navigateToCompanyRegistration = (type) => {
+    navigation.navigate('CompanyRegistration', {
+      registrationType: type
+    });
+  }
+
+  let phase = <ThreeWayPhase phase={1} />
+  let type = 'Service'
+
+  if(registrationType === 'Product') {
+    phase = <TwoWayPhase phase={1} />
+    type = 'Product'
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -29,7 +50,7 @@ const CompanyPersonalData = () => {
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.dotsContainer}>
-          <TwoWayPhase phase={1} />
+          {phase}
         </View>
         <View style={styles.nomeContainer}>
           <Text style={styles.nomeLabel}>Nome</Text>
@@ -75,7 +96,7 @@ const CompanyPersonalData = () => {
             width={328}
             height={51}
             fontSize={adjustFontSize(16)}
-            onPress={() => {}}
+            onPress={() => {navigateToCompanyRegistration(type)}}
           />
         </View>
       </View>

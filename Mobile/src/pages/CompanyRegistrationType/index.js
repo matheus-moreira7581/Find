@@ -14,6 +14,18 @@ import { useNavigation } from '@react-navigation/native';
 const CompanyRegistrationType = () => {
   const navigation = useNavigation();
 
+  const navigateToProductType = () => {
+    navigation.navigate('CompanyPersonalData', {
+      registrationType: 'Product'
+    });
+  }
+  
+  const navigateToServiceType = () => {
+    navigation.navigate('CompanyPersonalData', {
+      registrationType: 'Service'
+    });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -37,7 +49,7 @@ const CompanyRegistrationType = () => {
           <RoundedButton 
             text="Produto"
             style={styles.button}
-            onPress={() => {}} 
+            onPress={() => {navigateToProductType()}} 
             selected={true}
             fontSize={adjustFontSize(20)} 
             width={327.5}
@@ -47,7 +59,7 @@ const CompanyRegistrationType = () => {
         <View style={styles.clientTypeContainer}>
           <RoundedButton 
             text="Serviço" 
-            onPress={() => {}} 
+            onPress={() => {navigateToServiceType()}} 
             style={styles.button}
             fontSize={adjustFontSize(20)} 
             selected={true} 

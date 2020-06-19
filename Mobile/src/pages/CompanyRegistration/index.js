@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Picker } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -11,10 +12,37 @@ import RoundedButton from '../../components/RoundedButton';
 
 import colors from '../../assets/var/colors';
 import styles from './styles';
+import ThreeWayPhase from '../../components/ThreeWayPhase';
 
 
 const CompanyRegistration = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+
   const [pickerValue, setPickerValue] = useState("Selecione uma área");
+
+  const { registrationType } = route.params;
+
+  const navigateToOpeningHours = () => {
+    navigation.navigate('OpeningHours');
+  }
+
+  const finishCompanyRegistration = () => {
+    navigation.navigate('Login');
+  }
+
+  let phase = <ThreeWayPhase phase={2}/>
+  let button = <RoundedButton selected={true} text="Continuar" width={328}
+                height={51} fontSize={adjustFontSize(16)} 
+                onPress={() => {navigateToOpeningHours()}}/>
+
+  if(registrationType === 'Product') {
+    phase = <TwoWayPhase phase={2} dafaultCircleStyle={styles.dafaultCircle} />
+    button = <RoundedButton selected={true} text="Concluir" width={328}
+              height={51} fontSize={adjustFontSize(16)} 
+              onPress={() => {finishCompanyRegistration()}}/>
+  }
+
 
   return (
     <View style={styles.container}>
@@ -31,7 +59,7 @@ const CompanyRegistration = () => {
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.dotsContainer}>
-          <TwoWayPhase phase={2} />
+          {phase}
         </View>
         <View style={styles.pickerContainer}>
           <Text style={styles.pickerLabel}>
@@ -73,14 +101,7 @@ const CompanyRegistration = () => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <RoundedButton
-            selected={true}
-            text="Continuar"
-            width={328}
-            height={51}
-            fontSize={adjustFontSize(16)}
-            onPress={() => {}}
-          />
+          {button}
         </View>
       </View>
     </View>

@@ -6,6 +6,9 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
 import adjustFontSize from '../../utils/adjustFontSize';
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.branco,
+  },
   headerContainer:{
     backgroundColor: colors.branco,
     flexDirection: 'row',
@@ -58,6 +61,8 @@ const styles = StyleSheet.create({
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
+    fontFamily: fonts.montserratRegular,
+    fontSize: adjustFontSize(13),
   },
   doubleInputContainer: {
     marginTop: adjustVerticalMeasure(41),
@@ -82,6 +87,8 @@ const styles = StyleSheet.create({
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
+    fontFamily: fonts.montserratRegular,
+    fontSize: adjustFontSize(13),
   },
   dataNascContainer: {
     flexDirection: 'column',
@@ -99,6 +106,8 @@ const styles = StyleSheet.create({
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
+    fontFamily: fonts.montserratRegular,
+    fontSize: adjustFontSize(13),
   },
   emailContainer: {
     marginTop: adjustVerticalMeasure(41),
@@ -117,6 +126,8 @@ const styles = StyleSheet.create({
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
+    fontFamily: fonts.montserratRegular,
+    fontSize: adjustFontSize(13),
   },
   passwordContainer: {
     marginTop: adjustVerticalMeasure(41),
@@ -135,6 +146,8 @@ const styles = StyleSheet.create({
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
+    fontFamily: fonts.montserratRegular,
+    fontSize: adjustFontSize(13),
   },
   buttonContainer: {
     marginTop: adjustVerticalMeasure(80),

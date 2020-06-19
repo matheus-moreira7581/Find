@@ -14,6 +14,11 @@ import { useNavigation } from '@react-navigation/native';
 
 const CustomerRegistration = () => {
     const navigation = useNavigation();
+
+    const finishContumerRegistration = () => {
+        navigation.navigate('Login');
+    }
+
     return (
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
@@ -62,6 +67,7 @@ const CustomerRegistration = () => {
                         selected={true}
                         width={328}
                         height={50}
+                        onPress={() => {finishContumerRegistration()}}
                     />
                 </>
             </View>
