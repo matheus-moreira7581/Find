@@ -3,7 +3,7 @@ const knex = require('../database');
 
 module.exports = {
 
-    // Listar seções e subseções
+    // Listar seções e subseções (tela da home)
 
     async index(request, response, next) {
         try {
@@ -36,7 +36,8 @@ module.exports = {
 
     },
 
-    // Listar todas as categorias
+    // Listar todas as categorias (opções para tela de cadastro)
+
     async listCategories(request, response, next) {
         try {
             const categories = await knex('categories').select('id', 'title');

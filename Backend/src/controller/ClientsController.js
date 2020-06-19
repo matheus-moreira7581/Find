@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
 
-    // Cadastrar um cliente
+    // Cadastrar um cliente (tela de cadastro - cliente)
 
     async create(request, response, next) {
 
@@ -34,7 +34,7 @@ module.exports = {
     },
 
 
-    // Login Clientes
+    // Login do Cliente
 
     async login(request, response, next) {
         try 
@@ -70,7 +70,7 @@ module.exports = {
    },
 
 
-    // Listar clientes
+    // Listar clientes (apenas para desenvolvimento)
 
     async index(request, response, next) {
 
@@ -85,7 +85,7 @@ module.exports = {
 
     },
 
-    // Mostrar dados de um cliente especifico
+    // Mostrar dados de um cliente especifico (perfil)
 
     async show(request, response, next) {
    
@@ -103,7 +103,7 @@ module.exports = {
 
     },
 
-    // Atualizar dados de um cliente
+    // Atualizar dados de um cliente (perfil)
 
     async update(request, response, next) { 
 
@@ -125,7 +125,7 @@ module.exports = {
 
     },
 
-    // Deletar um cliente e seus endereços;
+    // Deletar um cliente e seus endereços (perfil)
 
     async delete(request, response, next) {
 

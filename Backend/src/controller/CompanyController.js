@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
 
-    // Cadastrar uma empresa
+    // Cadastrar uma empresa (tela de cadastro)
 
     async create(request, response, next) {
 
@@ -35,7 +35,7 @@ module.exports = {
     },
 
 
-    // Login Empresa
+    // Login para Empresas (tela de login)
 
     async login(request, response, next) {
         try 
@@ -109,7 +109,7 @@ module.exports = {
     },
 
 
-    // Atualizar dados de uma empresa
+    // Atualizar dados de uma empresa (perfil)
 
     async update(request, response, next) { 
 
@@ -132,7 +132,7 @@ module.exports = {
     },
 
 
-    // Deletar uma empresa
+    // Deletar uma empresa  (perfil)
 
     async delete(request, response, next) {
 
