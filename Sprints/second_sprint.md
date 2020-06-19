@@ -1,4 +1,4 @@
-# 2° Sprint
+# 2° SPRINT
 
 O foco na primeira sprint está em torno do primeiro contato do usuário com o
 aplicativo, principalmente pelo lado do cliente. Trabalhando no cadastramento e
