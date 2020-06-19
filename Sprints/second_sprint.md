@@ -10,6 +10,8 @@ login.
 - Canva do Mapa de Empatia
 - StyleGuide
 
+---
+
 ## FRONT-END (Mobile):
 
 - Tela tipo de cadastro profissional/cliente [Estática] - cliente/empresa;
@@ -22,6 +24,8 @@ login.
 - Tela Endereço de Delivery [Estática] - cliente;
 - Criar a navegação entre as telas já feitas - cliente/empresa;
 - Refatoração de medidas das telas das telas Sprint 1 - cliente
+
+---
 
 ## BACK-END (API):
 
