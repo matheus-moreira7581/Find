@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustMeasures';
 import colors from '../assets/var/colors';
 
-const ImagePicker = ({style}) => (
-    <View style={{...styles.view, ...style}}>
+const ImagePicker = ({style, onPress}) => (
+    <TouchableOpacity style={{...styles.view, ...style}} onPress={onPress}>
         <View style={styles.verticalView}/>
         <View style={styles.horizontalView}/>
-    </View>
+    </TouchableOpacity>
 );
 
 
