@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingTop: adjustVerticalMeasure(40.5),
+        paddingTop: adjustVerticalMeasure(5.5),
         paddingBottom: adjustVerticalMeasure(140),
     },
     requestsContainer:{
@@ -60,7 +60,38 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         paddingLeft: adjustHorizontalMeasure(15),
         marginTop: adjustVerticalMeasure(6),
+        height: adjustVerticalMeasure(30),
     },
+    multilineInput:{
+        backgroundColor: colors.textInput,
+        fontFamily: fonts.montserratRegular,
+        fontSize: adjustFontSize(13),
+        borderRadius: 7,
+        paddingLeft: adjustHorizontalMeasure(15),
+        paddingTop: adjustVerticalMeasure(7),
+        marginTop: adjustVerticalMeasure(6),
+        height: adjustVerticalMeasure(54),
+        alignContent: 'flex-start',
+        textAlignVertical: 'top',
+    },
+    picker:{
+        marginTop: adjustVerticalMeasure(6),
+        paddingVertical: adjustVerticalMeasure(7),
+        paddingLeft: adjustHorizontalMeasure(15),
+        height: adjustVerticalMeasure(30),
+        backgroundColor: colors.textInput,
+    },
+    pickerItem:{
+        fontFamily: fonts.montserratRegular,
+        fontSize: adjustFontSize(13),
+        color: colors.cinza,
+    },
+    doneButton:{
+        marginTop: adjustVerticalMeasure(40),
+    },
+    imageToChoose:{
+        marginTop: adjustVerticalMeasure(4),
+    }
 });
 
 export default styles;
