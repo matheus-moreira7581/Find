@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         height: adjustVerticalMeasure(98.5),
         justifyContent: 'flex-end',
         borderBottomWidth: 1,
-        borderBottomColor: '#E5E5E5'
+        borderBottomColor: colors.bordarCinza,
     },
     backButton: {
         bottom: adjustVerticalMeasure(18.5),

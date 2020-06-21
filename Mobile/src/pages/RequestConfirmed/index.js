@@ -23,10 +23,10 @@ const RequestConfirmed = () => {
                         size={adjustHorizontalMeasure(20)} 
                         color={colors.cinzaEscuro}
                     />
+                    </TouchableOpacity>
                     <View style={styles.centeredContainer}>
                         <Text style={styles.headerText}>Confirmado</Text>
                     </View>
-                </TouchableOpacity>
             </View>
             <View style={styles.bodyContainer}>
                 <Text style={styles.streetText}>{street}</Text>
@@ -36,12 +36,15 @@ const RequestConfirmed = () => {
                     estiver tudo pronto, clique {"\n"}
                     no botão "concluído".
                 </Text>
-                <RoundedButton
-                    text="Concluído"
-                    selected={true}
-                    width={adjustHorizontalMeasure(256)}
-                    height={adjustVerticalMeasure(51)}
-                />
+                <View style={styles.buttonContainer}>
+                    <RoundedButton
+                        text="Concluído"
+                        selected={true}
+                        width={adjustHorizontalMeasure(256)}
+                        height={adjustVerticalMeasure(51)}
+                    />
+                </View>
+                
             </View>
         </SafeAreaView>
     );
