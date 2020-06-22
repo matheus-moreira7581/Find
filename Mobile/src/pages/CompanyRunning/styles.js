@@ -40,6 +40,18 @@ const styles = StyleSheet.create({
     fontSize: adjustFontSize(15),
     color: colors.cinza,
   },
+  roundedButtonContainer: {
+    width: '100%',
+    marginTop: adjustVerticalMeasure(24.5),
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: colors.vermelho,
+  },
+  contentContainer: {
+    height: adjustVerticalMeasure(638),
+    width: '100%',
+  }
 
 });
 

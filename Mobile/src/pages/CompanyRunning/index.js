@@ -26,6 +26,20 @@ const CompanyRunning = () => {
           </TouchableOpacity>
         </View>
       </View>
+      <View style={styles.roundedButtonContainer}>
+          <RoundedButton 
+            text="Encerrar Expediente" 
+            onPress={() => {}} 
+            style={styles.button}
+            fontSize={adjustFontSize(15)} 
+            selected={true} 
+            width={256}
+            height={40}
+          />
+      </View>
+      <View style={styles.contentContainer}>
+
+      </View>
     </View>
   );
 }
