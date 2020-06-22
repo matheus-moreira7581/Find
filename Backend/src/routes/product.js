@@ -5,7 +5,7 @@ const routes = express.Router()
 
 // Products
 
-
+routes.post('/add', ProductsController.create)
 
 
 
