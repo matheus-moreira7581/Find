@@ -26,7 +26,7 @@ const AppTab = createBottomTabNavigator();
 
 export const CustomerAppRoutes = () => (
     <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
-        <CustomerAppStack.Screen name="Home" component={RequestConfirmedScreen}/>
+        <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
         <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
         <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
         <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
@@ -100,16 +100,16 @@ export const CompanyTabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="History" 
-            component={RequestsMadeScreen}
+            component={HomeCompanyScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
-                    <MaterialIcons name="receipt" size={size} color={color} />
+                    <MaterialIcons name="payment" size={size} color={color} />
                 ),
             }}
         />
         <AppTab.Screen 
             name="Chat" 
-            component={HomeScreen}
+            component={HomeCompanyScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="speaker-notes" size={size} color={color} />
@@ -118,7 +118,7 @@ export const CompanyTabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="Profile" 
-            component={HomeScreen}
+            component={HomeCompanyScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="person" size={size} color={color} />

@@ -64,7 +64,7 @@ export default function App() {
       // <OpeningHours/>
       // <RedeemProduct/>
       // <DeliveryAddress/>
-      //<RegistrationType />
+      // <RegistrationType />
       // <RequestsMade/>
       // <RegistrationType />
       // <CompanyRegistrationType />

@@ -45,7 +45,7 @@ const Login = () => {
         );
       }
       else{
-        if(email === 'teste@teste.com' && senha === '123456') {
+        if(email === 'teste@teste.com' || email === 'company@company.com' && senha === '123456') {
           signIn(email, senha);
         }
         else{

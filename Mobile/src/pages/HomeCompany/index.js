@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import RoundedButton from '../../components/RoundedButton';
 
@@ -11,10 +11,15 @@ import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import { useNavigation } from '@react-navigation/native';
+import CompanyRunning from '../CompanyRunning';
 
 
 const HomeCompany = () => {
+  const [shift, setShift] = useState(true);
+
+
   return (
+    shift ? <CompanyRunning /> : 
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.companyLogoContainer}>
@@ -49,7 +54,7 @@ const HomeCompany = () => {
         <View style={styles.smileContainer}>
             <Text style={styles.smileText}>:)</Text>
         </View>
-      </View>
+        </View> 
     </View>
   )
 }
