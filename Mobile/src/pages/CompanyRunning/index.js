@@ -38,7 +38,7 @@ const CompanyRunning = () => {
           />
       </View>
       <View style={styles.contentContainer}>
-
+        
       </View>
     </View>
   );

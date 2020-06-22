@@ -19,6 +19,7 @@ import ProductManagementScreen from '../pages/ProductManagement';
 import RequestConfirmedScreen from '../pages/RequestConfirmed';
 
 import HomeCompanyScreen from '../pages/HomeCompany';
+import CompanyIncomeScreen from '../pages/CompanyIncome';
 
 const CustomerAppStack = createStackNavigator();
 const CompanyAppStack = createStackNavigator();
@@ -99,8 +100,8 @@ export const CompanyTabAppRoutes = () => (
             }}
         />
         <AppTab.Screen 
-            name="History" 
-            component={HomeCompanyScreen}
+            name="Income" 
+            component={CompanyIncomeScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="payment" size={size} color={color} />
