@@ -22,23 +22,44 @@ const Login = () => {
   const getSenha = (typed) => {
     setSenha(typed);
   }
-  const logInHandle = () => {
-    
-    if(email === 'teste' && senha === '123456') {
-      signIn(email, senha);
+  const handleLogin = () => {
+    if(email === null || email === '' || senha === null || senha === ''){
+      Alert.alert(
+        'Erro',
+        'Preencha todos os campos!',
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: false }
+      );
     }
-    else { 
-      return (
+    else{
+      if(!(String(email).includes('@') && String(email).includes('.'))){
         Alert.alert(
-          'Error',
-          'Login Invalido!',
+          'Erro',
+          'Digite um endereço de e-mail válido!',
           [
             { text: 'OK' }
           ],
           { cancelable: false }
-        )
-      )
-    }
+        );
+      }
+      else{
+        if(email === 'teste@teste.com' && senha === '123456') {
+          signIn(email, senha);
+        }
+        else{
+          Alert.alert(
+            'Erro',
+            'Login inválido!',
+            [
+              { text: "OK" }
+            ],
+            { cancelable: false }
+          );
+        }
+      }       
+    }          
   }
 
   const navigateToRegistrationType = () => {
@@ -76,7 +97,7 @@ const Login = () => {
       <View style={styles.buttonContainer}>
         <RoundedButton 
             text="Entrar" 
-            onPress={() => {logInHandle()}} 
+            onPress={() => {handleLogin()}} 
             selected={true} 
             width={328}
             height={51}
