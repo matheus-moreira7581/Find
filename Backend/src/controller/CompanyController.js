@@ -36,7 +36,7 @@ module.exports = {
 
 
     // Login para Empresas (tela de login)
-
+    /*
     async login(request, response, next) {
         try 
         {
@@ -68,7 +68,7 @@ module.exports = {
             next(error)
         }
 
-   },
+   },*/
 
    
     // Listar empresas filtrando pela categoria 
