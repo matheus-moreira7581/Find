@@ -30,6 +30,7 @@ import RegistrationType from './src/pages/RegistrationType';
 import RequestsMade from './src/pages/RequestsMade';
 import CompanyPersonalData from './src/pages/CompanyPersonalData';
 import CompanyRegistration from './src/pages/CompanyRegistration';
+import HomeCompany from './src/pages/HomeCompany';
 
 export default function App() {
 
@@ -63,12 +64,13 @@ export default function App() {
       // <OpeningHours/>
       // <RedeemProduct/>
       // <DeliveryAddress/>
-      //<RegistrationType />
+      // <RegistrationType />
       // <RequestsMade/>
       // <RegistrationType />
       // <CompanyRegistrationType />
       // <CompanyPersonalData />
       // <CompanyRegistration />
+      // <HomeCompany />
     )
   }
 }

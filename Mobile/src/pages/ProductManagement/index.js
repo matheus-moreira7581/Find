@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, Text, TextInput, TouchableHighlight, Picker } from 'react-native';
+import { View, SafeAreaView, Text, TextInput, TouchableWithoutFeedback, Picker, Keyboard } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -13,8 +13,17 @@ import RoundedButton from '../../components/RoundedButton';
 import UnderlinedTextButton from '../../components/UnderlinedTextButton';
 import ImagePicker from '../../components/ImagePicker';
 
-const ProductManagement = ({ mode = 'new' }) => { // Change default value here to switch screen contnt in the future
+const ProductManagement = ({ mode = 'new' }) => { // Change default value here to switch screen contnt in the future 
     const [screenMode, setScreenMode] = useState(mode); //Mode is new for creating new product, list for listing products
+    const [selectedTimeRange, setSelectedTimeRange] = useState (0);
+
+    const timeRanges = [
+        { id: 0, range: '5min - 10min' },
+        { id: 1, range: '10min - 15min' },
+        { id: 2, range: '15min - 20min' },
+        { id: 3, range: '20min - 25min' },
+    ];
+
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -41,7 +50,7 @@ const ProductManagement = ({ mode = 'new' }) => { // Change default value here t
                     Meus Produtos
                 </UnderlinedTextButton>
             </View>
-            <View style={styles.bodyContainer}>
+            <TouchableWithoutFeedback style={styles.bodyContainer} onPress={() => Keyboard.dismiss()}>
                 {
                     screenMode === 'new'
                     ?
@@ -56,9 +65,31 @@ const ProductManagement = ({ mode = 'new' }) => { // Change default value here t
                             </View>
                             <View style={styles.topicContainer}>
                                 <Text style={styles.topicTitleText}>Descrição do Serviço</Text>
+                                <TextInput style={styles.multilineInput} 
+                                    placeholder="Digite uma descrição"
+                                    placeholderTextColor={colors.cinza}
+                                    multiline={true}
+                                />
                             </View>
                             <View style={styles.topicContainer}>
                                 <Text style={styles.topicTitleText}>Tempo médio de conclusão</Text>
+                                <Picker 
+                                    style={styles.picker}
+                                    selectedValue={selectedTimeRange}
+                                    onValueChange={(value) => setSelectedTimeRange(value)}
+                                    itemStyle={styles.pickerItem}
+                                >
+                                    {
+                                        timeRanges.map((timeRange, index) => {
+                                            return <Picker.Item 
+                                                        label={timeRange.range} 
+                                                        value={timeRange.id} 
+                                                        key={index}
+                                                    />
+                                         })
+                                    }
+                                </Picker>
+                                
                             </View>
                             <View style={styles.topicContainer}>
                                 <Text style={styles.topicTitleText}>Preço Fixo</Text>
@@ -70,7 +101,7 @@ const ProductManagement = ({ mode = 'new' }) => { // Change default value here t
                             </View>
                             <View style={styles.topicContainer}>
                                 <Text style={styles.topicTitleText}>Adicione uma imagem</Text>
-                                <ImagePicker/>
+                                <ImagePicker style={styles.imageToChoose}/>
                             </View>
                             <RoundedButton
                                 text="Concluir"
@@ -78,6 +109,7 @@ const ProductManagement = ({ mode = 'new' }) => { // Change default value here t
                                 width={256}
                                 height={50}
                                 fontSize={adjustFontSize(16)}
+                                style={styles.doneButton}
                                 //onPress={() => navigation.navigate('')}
                             />
                         </View>
@@ -86,7 +118,7 @@ const ProductManagement = ({ mode = 'new' }) => { // Change default value here t
                 }
                 
                 
-            </View>
+            </TouchableWithoutFeedback>
         </SafeAreaView>
     );
 }
