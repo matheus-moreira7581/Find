@@ -59,7 +59,7 @@ const CustomerRegistration = () => {
                             style={styles.input}
                             placeholder="Digite sua senha" 
                             placeholderTextColor={colors.cinza}
-                            
+                            secureTextEntry={true}
                         />
                     </View>
                     <RoundedButton 
