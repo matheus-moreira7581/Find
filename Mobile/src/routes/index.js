@@ -1,16 +1,25 @@
 import React from 'react';
+import { View} from 'react-native';
 
 import { useAuth } from '../contexts/auth';
 
-import { CustomerAppRoutes, CompanyAppRoutes, TabAppRoutes } from './app.routes';
+import { CustomerAppRoutes, CompanyAppRoutes, TabAppRoutes, CompanyTabAppRoutes } from './app.routes';
 import AuthRoutes from './auth.routes';
 
 const Routes = () => {
-    const { signedIn } = useAuth();
+    const { signedIn, loggedUser} = useAuth();
+
+    const checkLoginType = (email) => {
+        if(loggedUser.email === 'teste@teste.com') {
+            return <TabAppRoutes />
+        }
+        else return <CompanyTabAppRoutes />
+    }
 
     return (
-        signedIn ? <TabAppRoutes />  : <AuthRoutes/> 
-    )
-};
-
-export default Routes;
+        signedIn ? checkLoginType() : <AuthRoutes/> 
+    ) 
+        
+    };
+    
+    export default Routes;
