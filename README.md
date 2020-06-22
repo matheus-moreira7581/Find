@@ -18,13 +18,17 @@ Find é um aplicativo onde o comerciante poderá anunciar sua empresa ou marca, 
 
 ## Tecnologias
 
-**Back-End**
+**UX Design**
 
- - [x] Node.js (Express);
+- [x] Adobe XD;
 
 **Front-End**
 
 - [x] React Native (Expo);
+
+**Back-End**
+
+ - [x] Node.js (Express);
 
 **Database**
 
