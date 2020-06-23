@@ -39,12 +39,13 @@ module.exports = {
     async login(request, response, next) {
         try 
         {
+
         const { email, password} = request.body;
             
         const client = await knex('clients')
-        .where({ email });
+        .where({ email })
+        
 
-       
        if (client.length == 0) {
 
           return response.status(400).send('Cannot find user')
@@ -55,8 +56,7 @@ module.exports = {
 
             response.send('Success')
 
-          } 
-          else {
+          } else {
 
             response.send('Not Allowed')
 

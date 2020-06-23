@@ -6,7 +6,8 @@ const routes = express.Router()
 // Products
 
 routes.post('/add', ProductsController.create)
-
+      .get('/home/:id_company', ProductsController.index)
+      .get('/company', ProductsController.show)
 
 
 
