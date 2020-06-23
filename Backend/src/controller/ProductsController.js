@@ -9,9 +9,9 @@ module.exports = {
 
         try {
 
-            const { name, description, price, img_url, limit_time, id_company } = request.body;
+        const { name, description, price, img_url, limit_time, /*id_company*/ } = request.body;
 
-            const item = { name, description, price, img_url, limit_time, id_company };
+            const item = { name, description, price, img_url, limit_time, /*id_company*/ };
 
             await knex('products').insert(item);
 
@@ -82,6 +82,46 @@ module.exports = {
 
             next(error)
 
+        }
+
+    },
+
+    // Atualizar dados de um produto
+
+    async update(request, response, next) { 
+
+        try {
+          
+            const { id_company } = request.query;
+
+            await knex('products')
+            .where({ id_company })
+            .select('id', 'img_url', 'name', 'description', 'price');
+
+            const newdata = await knex('products').where({ id_company })
+
+            return response.json(newdata)
+
+        } catch (error) {
+            next(error)
+        }
+
+    },
+
+
+    // Deletar um produto
+
+    async delete(request, response, next) {
+
+        try {
+            const { id } = request.params;
+    
+            await knex('products').where('id', id).del();
+      
+            return response.json({msg: 'product successfully deleted!'});
+            
+        } catch (error) {
+            next(error)
         }
 
     }
