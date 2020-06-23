@@ -26,14 +26,29 @@ module.exports = {
             return response.status(400).send('Cannot find user')
 
           } 
+
+          function validation() {
+            if(company.length !== 0) {
+
+              return company[0].password
+
+            }else {
+
+              return client[0].password
+
+            }
+          }
+          
         
-          if(await bcrypt.compare(password, client[0].password)) {
+          if(await bcrypt.compare(password, validation())) {
 
             response.send('Success')
 
           } 
           else {
+
             response.send('Not Allowed')
+
           } 
   
         } catch (error) 
@@ -43,4 +58,5 @@ module.exports = {
       
 
    }
+
 }
