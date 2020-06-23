@@ -5,12 +5,12 @@ const routes = express.Router();
 
 //Cliente
 
-routes.post('/register', ClientsController.create)
-      .post('/login', ClientsController.login)
+routes.post('/register-client', ClientsController.create)
+      //.post('/login', ClientsController.login)
       .get('/clients', ClientsController.index)
-      .get('/edit/:id', ClientsController.show)
-      .put('/edit/:id', ClientsController.update)
-      .delete('/edit/:id', ClientsController.delete) 
+      .get('/edit-client/:id', ClientsController.show)
+      .put('/edit-client/:id', ClientsController.update)
+      .delete('/edit-client/:id', ClientsController.delete) 
 
 
 

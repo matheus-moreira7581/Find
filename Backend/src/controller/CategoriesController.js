@@ -9,9 +9,10 @@ module.exports = {
         try {
 
             const category = await knex('categories').select('title', 'img_url','id_section');
+
             const section = await knex('sections');
     
-    
+            
             const mixed = section.map(items => {
     
                 if(category.find(e => items.id == e.id_section ? true : false)) {

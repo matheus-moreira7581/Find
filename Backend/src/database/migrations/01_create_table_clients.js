@@ -4,7 +4,7 @@ exports.up = knex => knex.schema.createTable('clients', table => {
     table.string('name', 255).notNullable()
     table.string('email').unique().notNullable()
     table.string('password').notNullable()
-    table.integer('cell', 11).notNullable()
+    table.string('cell', 255).notNullable()
     table.string('img_url').nullable()
 
 })
