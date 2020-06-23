@@ -34,42 +34,6 @@ module.exports = {
 
     },
 
-
-    // Login para Empresas (tela de login)
-    /*
-    async login(request, response, next) {
-        try 
-        {
-        const { email, password} = request.body;
-            
-        const company = await knex('company')
-        .where({ email });
-
-       
-       if (company.length == 0) {
-
-          return response.status(400).send('Cannot find user')
-
-        } 
-        
-        if(await bcrypt.compare(password, company[0].password)) {
-
-            response.send('Success')
-
-          } 
-          else {
-
-            response.send('Not Allowed')
-
-          } 
-  
-        } catch (error) 
-        {  
-            next(error)
-        }
-
-   },*/
-
    
     // Listar empresas filtrando pela categoria (parte clientes)
 

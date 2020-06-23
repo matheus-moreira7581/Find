@@ -7,8 +7,8 @@ module.exports = {
     connection: {
       host: "localhost",
       user: "postgres",
-      password: "root",
-      database: "find_db"
+      password: "db123",
+      database: "find"
     },
     migrations: {
       directory: `${__dirname}/src/database/migrations`

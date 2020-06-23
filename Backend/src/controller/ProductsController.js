@@ -9,9 +9,9 @@ module.exports = {
 
         try {
 
-        const { name, description, price, img_url, limit_time, /*id_company*/ } = request.body;
+        const { name, description, price, img_url, limit_time, id_company } = request.body;
 
-            const item = { name, description, price, img_url, limit_time, /*id_company*/ };
+            const item = { name, description, price, img_url, limit_time, id_company };
 
             await knex('products').insert(item);
 
@@ -86,19 +86,22 @@ module.exports = {
 
     },
 
+
     // Atualizar dados de um produto
 
     async update(request, response, next) { 
 
         try {
           
-            const { id_company } = request.query;
+            const { id } = request.params;
+
+            const { img_url, name, description, price, limit_time } = request.body;
 
             await knex('products')
-            .where({ id_company })
-            .select('id', 'img_url', 'name', 'description', 'price');
+            .where({ id })
+            .update({img_url, name, description, price, limit_time});
 
-            const newdata = await knex('products').where({ id_company })
+            const newdata = await knex('products').where({ id })
 
             return response.json(newdata)
 
@@ -107,6 +110,7 @@ module.exports = {
         }
 
     },
+
 
 
     // Deletar um produto
