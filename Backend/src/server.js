@@ -5,6 +5,8 @@ const addressRoutes = require('./routes/address')
 const categoryRoutes = require('./routes/category')
 const companyRoutes = require('./routes/company')
 const productsRoutes = require('./routes/product')
+const authRoutes = require('./routes/auth')
+
 
 const app = express();
 
@@ -14,6 +16,7 @@ app.use(addressRoutes)
 app.use(categoryRoutes)
 app.use(companyRoutes)
 app.use(productsRoutes)
+app.use(authRoutes)
 
 // not Found
 
