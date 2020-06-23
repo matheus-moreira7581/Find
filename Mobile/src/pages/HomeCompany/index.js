@@ -18,8 +18,9 @@ const HomeCompany = () => {
   const [shift, setShift] = useState(true);
 
 
+
   return (
-    shift ? <CompanyRunning /> : 
+    shift ? <CompanyRunning onPressButton={() => {setShift(!shift)}}/> : 
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.companyLogoContainer}>
@@ -32,7 +33,7 @@ const HomeCompany = () => {
         <View style={styles.buttonContainer}>
           <RoundedButton 
             text="Iniciar Expediente" 
-            onPress={() => {}} 
+            onPress={() => {setShift(!shift)}} 
             style={styles.button}
             fontSize={adjustFontSize(15)} 
             selected={true} 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
 import RoundedButton from '../../components/RoundedButton';
 
 import styles from './styles';
@@ -11,8 +11,15 @@ import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import { useNavigation } from '@react-navigation/native';
+import OrderCard from '../../components/OrderCard';
 
-const CompanyRunning = () => {
+const ordersData = [
+  {title: 'Corte Masculino', user: 'Lucas B.'},
+  {title: 'Corte Masculino, Barba Masculina', user: 'Evandro S.'},
+  {title: 'Sobrancelha Masculina, Corte Masculino', user: 'Tiago V.'}
+];
+
+const CompanyRunning = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -29,7 +36,7 @@ const CompanyRunning = () => {
       <View style={styles.roundedButtonContainer}>
           <RoundedButton 
             text="Encerrar Expediente" 
-            onPress={() => {}} 
+            onPress={props.onPressButton} 
             style={styles.button}
             fontSize={adjustFontSize(15)} 
             selected={true} 
@@ -38,7 +45,19 @@ const CompanyRunning = () => {
           />
       </View>
       <View style={styles.contentContainer}>
-        
+        <View style={styles.ordersListContainer}>
+          <FlatList 
+            data={ordersData}
+            keyExtractor={(item, index) => item + index}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <OrderCard 
+                title={item.title}
+                user={item.user}
+              />
+            )}
+          />
+        </View>
       </View>
     </View>
   );

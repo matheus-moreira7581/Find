@@ -10,7 +10,7 @@ import adjustFontSize from '../../utils/adjustFontSize';
 import { useNavigation } from '@react-navigation/native';
 import IncomeCard from '../../components/IncomeCard';
 
-
+// This is a temporary data set for test.
 const incomeData = [
   {date: '01/10/2020',price: '73,00'},{date: '02/10/2020',price: '85,00'},
   {date: '03/10/2020',price: '62,00'},{date: '04/10/2020',price: '76,00'},

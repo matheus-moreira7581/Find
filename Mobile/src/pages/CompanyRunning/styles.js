@@ -51,6 +51,9 @@ const styles = StyleSheet.create({
   contentContainer: {
     height: adjustVerticalMeasure(638),
     width: '100%',
+  },
+  ordersListContainer: {
+    marginTop: adjustVerticalMeasure(24),
   }
 
 });
