@@ -71,7 +71,7 @@ module.exports = {
    },*/
 
    
-    // Listar empresas filtrando pela categoria 
+    // Listar empresas filtrando pela categoria (parte clientes)
 
     async index(request, response, next) {
 

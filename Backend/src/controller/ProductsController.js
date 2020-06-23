@@ -49,6 +49,7 @@ module.exports = {
     
     // Listar produtos na tela do cliente, 
     // classificar por empresa (tela 28)
+    // Parte do cliente
 
     async show(request, response, next) {
 
