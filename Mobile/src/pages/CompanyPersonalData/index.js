@@ -67,16 +67,13 @@ const CompanyPersonalData = () => {
   }
 
   const birthdayMask = (birthday) => {
-    // if(!String(birthday).includes('/') && String(birthday).length === 8) {
-    //   birthday = String(birthday).replace(/\D/g,"");
-    //   birthday = String(birthday).replace(/(\d{2})(\d{2})(\d{4})/g,"$1/$2/$3");
-      
-    //   return birthday; 
-    // } else return birthday
+    if(!String(birthday).includes('/') && String(birthday).length === 8) {
       birthday = String(birthday).replace(/\D/g,"");
       birthday = String(birthday).replace(/(\d{2})(\d{2})(\d{4})/g,"$1/$2/$3");
       
       return birthday; 
+    } else return birthday
+      
 
   }
 
