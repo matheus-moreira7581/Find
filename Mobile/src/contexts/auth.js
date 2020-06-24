@@ -16,11 +16,10 @@ export const AuthProvider = ({children}) => {
         loadStoragedData();
     }, []);
 
-    const signIn = async (email, password) => {
+    const signIn = async (user) => {
         // Utilização da api pra login vem aqui
         //const { user } = retorno da api aqui (response)
         //setLoggedUser(user);
-        const user = {email: email, password: password}
         setLoggedUser(user);
         await AsyncStorage.setItem('@Find:user', JSON.stringify(user));
     }

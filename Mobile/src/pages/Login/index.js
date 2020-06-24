@@ -46,7 +46,12 @@ const Login = () => {
       }
       else{
         if(email === 'teste@teste.com' || email === 'company@company.com' && senha === '123456') {
-          signIn(email, senha);
+          let user = {
+            email: email,
+            password: senha,
+            type: email === 'teste@teste.com' ? 'client' : 'company'
+          }
+          signIn(user);
         }
         else{
           Alert.alert(
