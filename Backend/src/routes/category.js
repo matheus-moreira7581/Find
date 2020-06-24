@@ -5,7 +5,7 @@ const routes = express.Router();
 
 //Categorias
 
-routes.get('/', CategoriesController.index)
+routes.get('/home-client', CategoriesController.index)
       .get('/register-company', CategoriesController.listCategories)
 
 

@@ -1,28 +1,36 @@
-GET http://localhost:3333/company
+GET http://localhost:3333//edit-company/:id
+
 
 ###
 
-POST http://localhost:3333/company
+POST http://localhost:3333/add-product
 Content-Type: application/json
 
 {
-"name": "Ouro puro", 
-"email": "ouro@mail.com", 
-"password": "123456", 
-"cpf": "123456789", 
-"cell": "139876543", 
-"address": "av. são simão", 
-"img_url": "my-photo"
+"name": "pizza", 
+"description": "queijo", 
+"price": "20", 
+"img_url": "uio", 
+"limit_time": "89"
 }
 
 ###
 
-POST http://localhost:3333/company_login
+POST http://localhost:3333/login
 Content-Type: application/json
 
 {  
-"email": "aço@mail.com",    
-"password": "987654" 
+"email": "siclano@mmail.com",    
+"password": "123456" 
+}
+
+###
+
+DELETE  http://localhost:3333/products/:id
+Content-Type: application/json
+
+{  
+"id": "1"
 }
 
 
