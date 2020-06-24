@@ -11,9 +11,14 @@ module.exports = {
 
           const { email, password } = request.body;
             
-          const client = await knex('clients').where({ email });
+          const client = await knex('clients')
+          .where({ email });
+          
 
-          const company = await knex('company').where({ email });
+          const company = await knex('company')
+          .where({ email });
+          
+
 
        
           if (client.length == 0 && company.length == 0) {
@@ -25,17 +30,18 @@ module.exports = {
           function validation() {
             if(company.length !== 0) {
 
-              return company[0].password
+              return company[0]
 
             }else {
 
-              return client[0].password
+              return client[0]
 
             }
           }
           
-          
-          if(await bcrypt.compare(password, validation())) {
+          let user = validation();
+        
+          if(await bcrypt.compare(password, user.password)) {
 
             response.send('Success')
 
