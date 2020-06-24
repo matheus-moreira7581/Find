@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -21,10 +21,76 @@ const CompanyPersonalData = () => {
 
   const { registrationType } = route.params;
 
+  const [name, setName] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const cpfPatter = /[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}/g;
+  const birthdayPatter = /[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g;
+
+  const getName = (typed) => {
+    setName(typed);
+  }
+  const getCpf = (typed) => {
+    typed = cpfMask(typed);
+    setCpf(typed);
+  }
+  const getBirthday = (typed) => {
+    typed = birthdayMask(typed);
+    setBirthday(typed);
+  }
+  const getEmail = (typed) => {
+    setEmail(typed);
+  }
+  const getPassword = (typed) => {
+    setPassword(typed);
+  }
+  
   const navigateToCompanyRegistration = (type) => {
     navigation.navigate('CompanyRegistration', {
       registrationType: type
     });
+  }
+
+  const cpfMask = (cpf) => {
+    if(
+        !(String(cpf).includes('.') || String(cpf).includes('-')) 
+        && String(cpf).length === 11
+      ) {
+        cpf = String(cpf).replace(/\D/g,"");
+        cpf = String(cpf).replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"$1.$2.$3-$4");
+        
+        return cpf;
+      } else return cpf
+  }
+
+  const birthdayMask = (birthday) => {
+    // if(!String(birthday).includes('/') && String(birthday).length === 8) {
+    //   birthday = String(birthday).replace(/\D/g,"");
+    //   birthday = String(birthday).replace(/(\d{2})(\d{2})(\d{4})/g,"$1/$2/$3");
+      
+    //   return birthday; 
+    // } else return birthday
+      birthday = String(birthday).replace(/\D/g,"");
+      birthday = String(birthday).replace(/(\d{2})(\d{2})(\d{4})/g,"$1/$2/$3");
+      
+      return birthday; 
+
+  }
+
+  const handleRegister = () => {
+    if(name === '' || cpf === '' || birthday === '' || email === '' || password === '') {
+      return Alert.alert('Error', 'Preencha todos os campos!');
+    } else if (cpfPatter.test(String(cpf)) === false) {
+      return Alert.alert('Error', 'Cpf invalido! Digite o cpf com "." e "-" ');
+    } else if (birthdayPatter.test(String(birthday)) === false) {
+      return Alert.alert('Error', 'Data de nascimento invalida! Digite a data com "/"');
+    } else if (!(String(email).includes('@') && String(email).includes('.'))) {
+        return Alert.alert('Error', 'Digite um endereço de email válido!');
+    }
+    else return navigateToCompanyRegistration(registrationType)
   }
 
   let phase = <ThreeWayPhase phase={1} />
@@ -57,6 +123,8 @@ const CompanyPersonalData = () => {
           <TextInput style={styles.nomeInput} 
             placeholder="Digite seu nome" 
             placeholderTextColor={colors.cinza}
+            onChangeText={getName}
+            value={name}
           />
         </View>
         <View style={styles.doubleInputContainer}>
@@ -65,6 +133,9 @@ const CompanyPersonalData = () => {
             <TextInput style={styles.cpfInput} 
               placeholder="xxx.xxx.xxx-xx" 
               placeholderTextColor={colors.cinza}
+              onChangeText={getCpf}
+              value={cpf}
+              maxLength={14}
             />
           </View>
           <View style={styles.dataNascContainer}>
@@ -72,6 +143,9 @@ const CompanyPersonalData = () => {
             <TextInput style={styles.dataNascInput} 
               placeholder="xx/xx/xxxx" 
               placeholderTextColor={colors.cinza}
+              onChangeText={getBirthday}
+              value={birthday}
+              maxLength={10}
             />
           </View>
         </View>
@@ -80,6 +154,8 @@ const CompanyPersonalData = () => {
           <TextInput style={styles.emailInput} 
             placeholder="Digite seu e-mail" 
             placeholderTextColor={colors.cinza}
+            onChangeText={getEmail}
+            value={email}
           />
         </View>
         <View style={styles.passwordContainer}>
@@ -87,6 +163,9 @@ const CompanyPersonalData = () => {
           <TextInput style={styles.passwordInput} 
             placeholder="Digite sua senha" 
             placeholderTextColor={colors.cinza}
+            secureTextEntry={true}
+            onChangeText={getPassword}
+            value={password}
           />
         </View>
         <View style={styles.buttonContainer}>
@@ -96,7 +175,7 @@ const CompanyPersonalData = () => {
             width={328}
             height={51}
             fontSize={adjustFontSize(16)}
-            onPress={() => {navigateToCompanyRegistration(type)}}
+            onPress={() => {handleRegister()}}
           />
         </View>
       </View>

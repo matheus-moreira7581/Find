@@ -56,12 +56,10 @@ const CustomerRegistration = () => {
            phone = String(phone).replace(/^(\d{2})(\d)/g,"($1) $2");
            phone = String(phone).replace(/(\d)(\d{4})$/,"$1-$2");
            return phone;
-       }
+       } else return phone
     }
     const getPhone = (typed) => {
-        // typed = phoneMask(typed);
-        console.log(phonePattern.test(typed));
-        
+        typed = phoneMask(typed);
         setPhone(typed);
     }
     const getEmail = (typed) => {
