@@ -6,7 +6,7 @@ exports.up = knex => knex.schema.createTable('addresses', table => {
     table.integer('ad_number').notNullable()
     table.string('additional').nullable()
     table.string('landmark').nullable()
-    table.integer('id_order').references('orders.id').notNullable().onDelete()
+  //  table.integer('id_order').references('orders.id').notNullable().onDelete()
 })
 
 
