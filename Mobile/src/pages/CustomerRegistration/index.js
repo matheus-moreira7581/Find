@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { View, SafeAreaView, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 
+import api from '../../services/api';
+
+import { useNavigation } from '@react-navigation/native';
+
 import { MaterialIcons } from '@expo/vector-icons';
 
 import RoundedButton from '../../components/RoundedButton';
@@ -9,27 +13,64 @@ import styles from './styles';
 import colors from '../../assets/var/colors';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import { useNavigation } from '@react-navigation/native';
+
+import { useAuth } from '../../contexts/auth';
 
 
 const CustomerRegistration = () => {
     const navigation = useNavigation();
 
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
+    const [cell, setCell] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const phonePattern = /^\([1-9]{2}\)\s?[9]{1}[0-9]{4}\-[0-9]{4}$/g;
+    const { signIn } = useAuth();
 
-    const finishContumerRegistration = () => {
-        navigation.navigate('Login');
+    const cellPattern = /^\([1-9]{2}\)\s?[9]{1}[0-9]{4}\-[0-9]{4}$/g;
+
+    const finishContumerRegistration = async () => {
+        try{
+            const response = await api.post('/register-client', {
+                name,
+                email,
+                cell,
+                password
+            });
+            console.log(response);
+            if(response.status >= 200 && response.status <=299) {
+                if(!!response.data.msg){
+                    Alert.alert(
+                        'Erro', 
+                        response.data.msg,
+                        [ { text: 'OK' } ],
+                        {  cancelable: false }
+                    )
+                }
+                else{
+                    signIn(email, password);
+                }
+            }
+            else{
+                Alert.alert(
+                    'Erro', 
+                    'Falha no cadastro!', 
+                    [ { text: 'OK' } ], 
+                    { cancelable: true }
+                )
+            }
+                
+
+        }
+        catch(error){
+            console.log(error)
+        }   
     }
 
     const handleRegister = () => {
-        if(name === '' || phone === '' || email === '' || password === '') {
+        if(name === '' || cell === '' || email === '' || password === '') {
             return Alert.alert('Error', 'Preencha todos os campos!');
-        } else if (phonePattern.test(phone) === false) {
+        } else if (cellPattern.test(cell) === false) {
             return Alert.alert(
                 'Error', 
                 'Celular invalido! preencha o campo com o DDD e o hífen'
@@ -45,22 +86,22 @@ const CustomerRegistration = () => {
     const getName = (typed) => {
         setName(typed);
     }
-    const phoneMask = (phone) => {
+    const cellMask = (cell) => {
        if(
-        !(String(phone).includes('(') && 
-        String(phone).includes(')') ||
-        String(phone).includes('-')) &&
-        String(phone).length === 11
+        !(String(cell).includes('(') && 
+        String(cell).includes(')') ||
+        String(cell).includes('-')) &&
+        String(cell).length === 11
        ) {
-           phone = String(phone).replace(/\D/g,"");
-           phone = String(phone).replace(/^(\d{2})(\d)/g,"($1) $2");
-           phone = String(phone).replace(/(\d)(\d{4})$/,"$1-$2");
-           return phone;
-       } else return phone
+           cell = String(cell).replace(/\D/g,"");
+           cell = String(cell).replace(/^(\d{2})(\d)/g,"($1) $2");
+           cell = String(cell).replace(/(\d)(\d{4})$/,"$1-$2");
+           return cell;
+       } else return cell
     }
-    const getPhone = (typed) => {
-        typed = phoneMask(typed);
-        setPhone(typed);
+    const getcell = (typed) => {
+        typed = cellMask(typed);
+        setCell(typed);
     }
     const getEmail = (typed) => {
         setEmail(typed);
@@ -104,10 +145,10 @@ const CustomerRegistration = () => {
                             style={styles.input}
                             placeholder="(xx) xxxxx-xxxx" 
                             placeholderTextColor={colors.cinza}
-                            value={phone}
-                            onChangeText={getPhone}
+                            value={cell}
+                            onChangeText={getcell}
                             maxLength={15}
-                            keyboardType='name-phone-pad'
+                            keyboardType='name-cell-pad'
                         />
                     </View>
                     <View style={styles.emailContainer}>
