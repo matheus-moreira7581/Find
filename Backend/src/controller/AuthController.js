@@ -1,5 +1,6 @@
 const knex = require('../database')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+
 
 module.exports = {
 
@@ -27,20 +28,31 @@ module.exports = {
           function validation() {
             if(company.length !== 0) {
 
-              return company[0]
+              return {
+                "type": "company",
+                "data": company[0]
+              }
 
             }else {
 
-              return client[0]
-
+              return {
+                "type": "client",
+                "data": client[0]
+              }
+              
             }
           }
           
           let user = validation();
-        
-          if(await bcrypt.compare(password, user.password)) {
 
-            response.send('Success')
+        
+          if(await bcrypt.compare(password, user.data.password)) {
+
+            const res = user;
+
+            delete res.data.password;
+
+            response.json(res)
 
           } 
           else {
