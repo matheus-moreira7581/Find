@@ -19,7 +19,9 @@ import ProductManagementScreen from '../pages/ProductManagement';
 import RequestConfirmedScreen from '../pages/RequestConfirmed';
 
 import HomeCompanyScreen from '../pages/HomeCompany';
+import HomeRunningScreen from '../pages/CompanyRunning';
 import CompanyIncomeScreen from '../pages/CompanyIncome';
+import CompanyProfileScreen from '../pages/CompanyProfile';
 
 const CustomerAppStack = createStackNavigator();
 const CompanyAppStack = createStackNavigator();
@@ -42,6 +44,7 @@ export const CustomerAppRoutes = () => (
 export const CompanyAppRoutes = () => (
     <CompanyAppStack.Navigator headerMode="none" initialRouteName="HomeCompany">
         <CompanyAppStack.Screen name="HomeCompany" component={HomeCompanyScreen}/>
+        <CompanyAppStack.Screen name="CompanyRunning" component={HomeRunningScreen}/>
         <CompanyAppStack.Screen name="NewProduct" component={ProductManagementScreen}/>
         <CompanyAppStack.Screen name="RequestConfirmed" component={RequestConfirmedScreen}/>
     </CompanyAppStack.Navigator>
@@ -119,7 +122,7 @@ export const CompanyTabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="Profile" 
-            component={HomeCompanyScreen}
+            component={CompanyProfileScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="person" size={size} color={color} />

@@ -15,7 +15,12 @@ import CompanyRunning from '../CompanyRunning';
 
 
 const HomeCompany = () => {
+  const navigation = useNavigation();
   const [shift, setShift] = useState(true);
+
+  // const navigatoCompanyRunning = () => {
+  //   navigation.navigate('CompanyRunning');
+  // }
 
 
 

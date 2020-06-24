@@ -40,21 +40,22 @@ const styles = StyleSheet.create({
     fontSize: adjustFontSize(15),
     color: colors.cinza,
   },
-  roundedButtonContainer: {
-    width: '100%',
-    marginTop: adjustVerticalMeasure(24.5),
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: colors.vermelho,
-  },
   contentContainer: {
     height: adjustVerticalMeasure(638),
     width: '100%',
   },
-  ordersListContainer: {
+  companySellingItemsContainer: {
     marginTop: adjustVerticalMeasure(24),
     height: adjustVerticalMeasure(570),
+    alignItems: 'center',
+  },
+  addButtonContainer: {
+    position: 'absolute',
+    bottom: adjustVerticalMeasure(20),
+    right: adjustHorizontalMeasure(39),
+  },
+  button: {
+    backgroundColor: colors.primary
   }
 
 });

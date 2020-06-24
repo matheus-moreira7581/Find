@@ -19,7 +19,7 @@ export const AuthProvider = ({children}) => {
         loadStoragedData();
     }, []);
 
-    const signIn = async (email, password) => {
+    const signIn = async (user) => {
         // Utilização da api pra login vem aqui
         //const { user } = retorno da api aqui (response)
         try{
