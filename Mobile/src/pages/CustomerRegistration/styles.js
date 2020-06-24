@@ -35,7 +35,12 @@ const styles = StyleSheet.create({
     nameContainer:{
         width: '100%',
         paddingHorizontal: adjustHorizontalMeasure(24),
-        marginTop: adjustVerticalMeasure(126.5),
+        marginTop: adjustVerticalMeasure(30.5),
+    },
+    celularContainer:{
+        width: '100%',
+        paddingHorizontal: adjustHorizontalMeasure(24),
+        marginTop: adjustVerticalMeasure(41),
     },
     emailContainer:{
         width: '100%',
@@ -46,7 +51,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingHorizontal: adjustHorizontalMeasure(24),
         marginTop: adjustVerticalMeasure(41),
-        marginBottom: 'auto',
+        marginBottom: adjustVerticalMeasure(79),
     },
     headerText: {
         fontFamily: fonts.montserratBold,
