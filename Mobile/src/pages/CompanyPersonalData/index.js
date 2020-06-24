@@ -49,7 +49,15 @@ const CompanyPersonalData = () => {
   }
   
   const navigateToCompanyRegistration = (type) => {
+    const user = {
+      name: name,
+      cpf: cpf,
+      birthday: birthday,
+      email: email,
+      password: password,
+    }
     navigation.navigate('CompanyRegistration', {
+      user: user,
       registrationType: type
     });
   }

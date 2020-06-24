@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Picker } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Picker, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -20,11 +20,28 @@ const CompanyRegistration = () => {
   const route = useRoute();
 
   const [pickerValue, setPickerValue] = useState("Selecione uma área");
+  const [companyName, setCompanyName] = useState('');
+  const [companyAddress, setCompanyAddress] = useState('');
 
-  const { registrationType } = route.params;
+  const { user, registrationType } = route.params;
+
+  const getCompanyName = (typed) => {
+    setCompanyName(typed);
+  }
+  const getCompanyAddress = (typed) => {
+    setCompanyAddress(typed);
+  }
 
   const navigateToOpeningHours = () => {
-    navigation.navigate('OpeningHours');
+    const company = {
+      user: user,
+      companyData: {
+        area: pickerValue,
+        companyName: companyName,
+        companyAddress: companyAddress,
+      }
+    }
+    navigation.navigate('OpeningHours', company);
   }
 
   const finishCompanyRegistration = () => {
@@ -34,15 +51,26 @@ const CompanyRegistration = () => {
   let phase = <ThreeWayPhase phase={2}/>
   let button = <RoundedButton selected={true} text="Continuar" width={328}
                 height={51} fontSize={adjustFontSize(16)} 
-                onPress={() => {navigateToOpeningHours()}}/>
+                onPress={() => {handleRegistration()}}/>
 
   if(registrationType === 'Product') {
     phase = <TwoWayPhase phase={2} dafaultCircleStyle={styles.dafaultCircle} />
     button = <RoundedButton selected={true} text="Concluir" width={328}
               height={51} fontSize={adjustFontSize(16)} 
-              onPress={() => {finishCompanyRegistration()}}/>
+              onPress={() => {handleRegistration()}}/>
   }
 
+  const handleRegistration = () => {
+    if(pickerValue === '' || companyName === '' || companyAddress === '') {
+      return Alert.alert('Error', 'Preencha todos os campos');
+    }
+    else if(pickerValue === "Selecione uma área") {
+      return Alert.alert('Error', 'Seleciona uma área válida!')
+    } else {
+      if( registrationType === 'Product' ) return finishCompanyRegistration();
+      else return navigateToOpeningHours();
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -72,6 +100,7 @@ const CompanyRegistration = () => {
             mode={"dropdown"}
             prompt="Selecione uma área"
           >
+            <Picker.Item label="Selecione uma área" value="Selecione uma área"/>
             <Picker.Item label="Restaurante" value="Restaurante"/>
             <Picker.Item label="Pizzaria" value="Pizzaria" />
             <Picker.Item label="Hambúrguer" value="Hambúrguer" />
@@ -91,6 +120,8 @@ const CompanyRegistration = () => {
           <TextInput style={styles.nameCompanyInput} 
             placeholder="Digite o nome da sua empresa" 
             placeholderTextColor={colors.cinza}
+            onChangeText={getCompanyName}
+            value={companyName}
           />
         </View>
         <View style={styles.addressContainer}>
@@ -98,6 +129,8 @@ const CompanyRegistration = () => {
           <TextInput style={styles.addressInput} 
             placeholder="Digite o endereço da sua empresa" 
             placeholderTextColor={colors.cinza}
+            onChangeText={getCompanyAddress}
+            value={companyAddress}
           />
         </View>
         <View style={styles.buttonContainer}>
