@@ -6,7 +6,7 @@ const categoryRoutes = require('./routes/category')
 const companyRoutes = require('./routes/company')
 const productsRoutes = require('./routes/product')
 const authRoutes = require('./routes/auth')
-const requestRoutes = require('./routes/request')
+const ordersRoutes = require('./routes/order')
 
 
 const app = express();
@@ -18,7 +18,7 @@ app.use(categoryRoutes)
 app.use(companyRoutes)
 app.use(productsRoutes)
 app.use(authRoutes)
-app.use(requestRoutes)
+app.use(ordersRoutes)
 
 // not Found
 
