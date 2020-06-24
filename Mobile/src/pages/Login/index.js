@@ -27,9 +27,7 @@ const Login = () => {
       Alert.alert(
         'Erro',
         'Preencha todos os campos!',
-        [
-          { text: 'OK' },
-        ],
+        [ { text: 'OK' } ],
         { cancelable: false }
       );
     }
@@ -38,9 +36,7 @@ const Login = () => {
         Alert.alert(
           'Erro',
           'Digite um endereço de e-mail válido!',
-          [
-            { text: 'OK' }
-          ],
+          [ { text: 'OK' } ],
           { cancelable: false }
         );
       }

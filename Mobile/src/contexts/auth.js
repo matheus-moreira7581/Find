@@ -19,28 +19,34 @@ export const AuthProvider = ({children}) => {
         loadStoragedData();
     }, []);
 
-    const signIn = async (user) => {
-        // Utilização da api pra login vem aqui
-        //const { user } = retorno da api aqui (response)
+    const signIn = async (email, password) => {
         try{
-            const response = await api.post('/auth',{
+            const response = await api.post('/auth', {
                 email, 
                 password
             });
-            console.log(response);
-
-        //setLoggedUser(user);
-        //const user = {email: email, password: password}
-        //setLoggedUser(user);
-        //await AsyncStorage.setItem('@Find:user', JSON.stringify(user));
+            const user = response.data;
+            
+            if(user === 'Not Allowed'){
+                setLoggedUser(null);
+                Alert.alert(
+                    'Erro', 
+                    'Senha incorreta para este usuário!', 
+                    [ {text: 'OK'} ], 
+                    { cancelable: false }
+                );
+            }
+            else
+                setLoggedUser(user);
+            
+            await AsyncStorage.setItem('@Find:user', JSON.stringify(user));
         }
         catch(error){
             console.log(error)
             Alert.alert(
                 'Erro',
                 'Falha no login',
-                [ { text: 'OK' },
-                ],
+                [ { text: 'OK' } ],
                 { cancelable: false }
             );
         }
