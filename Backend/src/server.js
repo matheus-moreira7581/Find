@@ -6,10 +6,11 @@ const categoryRoutes = require('./routes/category')
 const companyRoutes = require('./routes/company')
 const productsRoutes = require('./routes/product')
 const authRoutes = require('./routes/auth')
-
+const cors = require('cors');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json())
 app.use(clientRoutes)
 app.use(addressRoutes)

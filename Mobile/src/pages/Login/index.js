@@ -45,20 +45,8 @@ const Login = () => {
         );
       }
       else{
-        if(email === 'teste@teste.com' || email === 'company@company.com' && senha === '123456') {
-          signIn(email, senha);
-        }
-        else{
-          Alert.alert(
-            'Erro',
-            'Login inválido!',
-            [
-              { text: "OK" }
-            ],
-            { cancelable: false }
-          );
-        }
-      }       
+        signIn(email, senha);
+      }
     }          
   }
 
