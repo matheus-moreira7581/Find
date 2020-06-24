@@ -13,22 +13,32 @@ import adjustFontSize from '../../utils/adjustFontSize';
 import { useNavigation } from '@react-navigation/native';
 import OrderCard from '../../components/OrderCard';
 
+import CompanySellingItems from '../CompanySellingItems'
+
 const ordersData = [
   {title: 'Corte Masculino', user: 'Lucas B.'},
   {title: 'Corte Masculino, Barba Masculina', user: 'Evandro S.'},
-  {title: 'Sobrancelha Masculina, Corte Masculino', user: 'Tiago V.'}
+  {title: 'Sobrancelha Masculina, Corte Masculino', user: 'Tiago V.'},
 ];
 
 const CompanyRunning = (props) => {
+  const [showSellingItems, setShowSellingItems] = useState(false);
+
   return (
+    showSellingItems ? <CompanySellingItems onPress={() => {setShowSellingItems(false)}}/> :
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.headerButtonContainer}>
-          <TouchableOpacity style={styles.orderButton}>
+          <TouchableOpacity 
+            style={styles.orderButton}
+          >
             <Text style={styles.orderButtonText}>Pedidos</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.serviceListButton}>
+          <TouchableOpacity 
+            style={styles.serviceListButton}
+            onPress={() => {setShowSellingItems(true)}}
+          >
             <Text style={styles.serviceListButtonText}>Meus Serviços</Text>
           </TouchableOpacity>
         </View>
