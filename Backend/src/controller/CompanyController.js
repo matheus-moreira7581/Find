@@ -12,9 +12,9 @@ module.exports = {
     
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
-            const { name, email, cpf, date_birth, address, id_categories, type } = request.body;
+            const { name, email, cpf, date_birth, address, id_categories, type, hours_schedule } = request.body;
     
-            const company = { name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type};
+            const company = { name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, hours_schedule};
 
             const checkEmail = await knex('company').where({ email });
 
