@@ -25,7 +25,7 @@ app.use(ordersRoutes)
 app.use((request, response, next) => {
 
     const error = new Error('Not found')
-    error.status = 404
+    response.status(500).send()
     next(error)
 
 });

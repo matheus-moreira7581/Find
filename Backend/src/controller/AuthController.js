@@ -57,13 +57,14 @@ module.exports = {
           } 
           else {
 
-            response.send('Not Allowed')
+            response.status(403).send()
 
           } 
   
         } catch (error) 
         {  
-            next(error)
+          response.status(404).send()
+          next(error)
         }
       
 
