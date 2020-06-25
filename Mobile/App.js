@@ -31,6 +31,9 @@ import RequestsMade from './src/pages/RequestsMade';
 import CompanyPersonalData from './src/pages/CompanyPersonalData';
 import CompanyRegistration from './src/pages/CompanyRegistration';
 import HomeCompany from './src/pages/HomeCompany';
+import CompanyRunning from './src/pages/CompanyRunning';
+import CompanySellingItems from './src/pages/CompanySellingItems';
+import ServiceScheduling from './src/pages/ServiceScheduling';
 
 export default function App() {
 
@@ -46,11 +49,11 @@ export default function App() {
   else {
     return (
       
-       <NavigationContainer>
-         <AuthProvider>
-           <Routes />
-         </AuthProvider>
-       </NavigationContainer>
+      //  <NavigationContainer>
+      //    <AuthProvider>
+      //      <Routes />
+      //    </AuthProvider>
+      //  </NavigationContainer>
        
       // <CompanyProducts/>
       // <Companies />
@@ -71,6 +74,8 @@ export default function App() {
       // <CompanyPersonalData />
       // <CompanyRegistration />
       // <HomeCompany />
+      //<CompanySellingItems/>
+      <ServiceScheduling/>
     )
   }
 }
