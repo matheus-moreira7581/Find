@@ -7,37 +7,34 @@ module.exports = {
     async create(request, response, next) {
         try {
 
-            const elements = request.body;
+           const elements = request.body;
 
-            const trx = await knex.transaction();
-            const order = elements.order;
-            const insertedIds = await trx('orders').insert(order);
-            
-            const id_order = insertedIds[0];
+           const trx = await knex.transaction();
 
+           const id_order = await trx('orders')
+           .returning('id')
+           .insert(elements.order);
 
-           /*const data = elements.itens_cart.map(itens => {   
+           const data = elements.itens_cart.map(itens => {   
                 return {
-                    "id_order": id_order,
-                    "id_product": itens.id_products,
+                    "id_order": id_order[0],
+                    "id_products": itens.id_products,
                     "amount": itens.amount,
                     "Details": itens.Details
                 }   
             });
 
-        await trx('itens_cart').insert(data)
+           await trx('itens_cart').insert(data)
 
-           const address = elements.address;
+           const id_address = await trx('addresses')
+           .returning('id')
+           .insert(elements.address);
 
-           const insertAddress = await trx('addresses').insert(address);
-
-           const id_address = insertAddress[0];
-
-           await trx('orders').where('id', id_order).update(id_address)*/
+           await trx('orders').where('id', id_order[0]).update('id_address', id_address[0])
 
            await trx.commit();
 
-        return response.json({id: id_order })
+           return response.json({ status: "boa  mlk"})
 
             
         } catch (error) {
