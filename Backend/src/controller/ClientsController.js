@@ -18,7 +18,7 @@ module.exports = {
             const checkEmail = await knex('clients').where({ email });
 
             if (checkEmail.length !== 0) {
-
+                response.status(403).send()
                return response.json({ msg: 'Já existe uma conta com esse email cadastrado' });
 
             }
@@ -28,6 +28,7 @@ module.exports = {
             return response.json(client);
             
         } catch (error) {
+            response.status(404).send()
             next(error)
         }
 
@@ -44,6 +45,7 @@ module.exports = {
             return response.json(clients);
             
         } catch (error) {  
+            response.status(404).send()
             next(error)
         }
 
@@ -62,6 +64,7 @@ module.exports = {
             return response.json(client)
             
         } catch (error) {
+            response.status(404).send()
             next(error)
         }
 
@@ -84,6 +87,7 @@ module.exports = {
             return response.json(newdata)
 
         } catch (error) {
+            response.status(404).send()
             next(error)
         }
 
@@ -108,6 +112,7 @@ module.exports = {
             return response.json({msg: 'cliente deletado com sucesso!'});
             
         } catch (error) {
+            response.status(404).send()
             next(error)
         }
 

@@ -41,6 +41,7 @@ module.exports = {
 
             
         } catch (error) {
+            response.status(403).send()
             next(error)
         }
     }

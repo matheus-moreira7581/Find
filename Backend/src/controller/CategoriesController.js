@@ -29,7 +29,7 @@ module.exports = {
             return response.json(mixed);
             
         } catch (error) {
-
+            response.status(403).send()
             next(error)
 
         }
@@ -45,6 +45,7 @@ module.exports = {
 
             return response.json(categories);
         } catch (error) {
+            response.status(404).send()
             next(error)
         }
     }
