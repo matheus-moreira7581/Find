@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Picker, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -14,16 +14,28 @@ import colors from '../../assets/var/colors';
 import styles from './styles';
 import ThreeWayPhase from '../../components/ThreeWayPhase';
 
+import api from '../../services/api';
+
 
 const CompanyRegistration = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const [pickerValue, setPickerValue] = useState("Selecione uma área");
+  const [pickerValue, setPickerValue] = useState(0);
   const [companyName, setCompanyName] = useState('');
   const [companyAddress, setCompanyAddress] = useState('');
+  const [categories, setCategories] = useState([]);
 
   const { user, registrationType } = route.params;
+
+  const fetchCategories = async () => {
+    const categories = await api.get('/register-company');
+    setCategories(categories.data);
+  }
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   const getCompanyName = (typed) => {
     setCompanyName(typed);
@@ -44,7 +56,17 @@ const CompanyRegistration = () => {
     navigation.navigate('OpeningHours', company);
   }
 
-  const finishCompanyRegistration = () => {
+  const finishCompanyRegistration = async () => {
+    const response = await api.post('/register-company', {
+      name: companyName,
+      email: user.email,
+      cpf: user.cpf,
+      cell: 25648745,
+      password: user.password,
+      address: companyAddress,
+      id_categories: pickerValue,
+      type: registrationType
+    })
     navigation.navigate('Login');
   }
 
@@ -53,7 +75,7 @@ const CompanyRegistration = () => {
                 height={51} fontSize={adjustFontSize(16)} 
                 onPress={() => {handleRegistration()}}/>
 
-  if(registrationType === 'Product') {
+  if(registrationType === 'product') {
     phase = <TwoWayPhase phase={2} dafaultCircleStyle={styles.dafaultCircle} />
     button = <RoundedButton selected={true} text="Concluir" width={328}
               height={51} fontSize={adjustFontSize(16)} 
@@ -64,10 +86,10 @@ const CompanyRegistration = () => {
     if(pickerValue === '' || companyName === '' || companyAddress === '') {
       return Alert.alert('Error', 'Preencha todos os campos');
     }
-    else if(pickerValue === "Selecione uma área") {
+    else if(pickerValue === 0) {
       return Alert.alert('Error', 'Seleciona uma área válida!')
     } else {
-      if( registrationType === 'Product' ) return finishCompanyRegistration();
+      if( registrationType === 'product' ) return finishCompanyRegistration();
       else return navigateToOpeningHours();
     }
   }
@@ -100,19 +122,12 @@ const CompanyRegistration = () => {
             mode={"dropdown"}
             prompt="Selecione uma área"
           >
-            <Picker.Item label="Selecione uma área" value="Selecione uma área"/>
-            <Picker.Item label="Restaurante" value="Restaurante"/>
-            <Picker.Item label="Pizzaria" value="Pizzaria" />
-            <Picker.Item label="Hambúrguer" value="Hambúrguer" />
-            <Picker.Item label="Padaria" value="Padaria" />
-            <Picker.Item label="Farmácia" value="Farmacia" />
-            <Picker.Item label="Suplementos" value="Suplementos" />
-            <Picker.Item label="Estética" value="Estetica" />
-            <Picker.Item label="Moda e Acessórios" value="Moda e Acessorios" />
-            <Picker.Item label="Papelaria" value="Papelaria" />
-            <Picker.Item label="Livraria" value="Livraria" />
-            <Picker.Item label="Material de Contrução" value="Material de Contrucao" />
-            <Picker.Item label="Ferramenta de Contrução" value="Ferramenta de Contrucao" />
+            <Picker.Item label="Selecione uma área" value={0}/>
+            {
+              categories.map((item, index) => {
+                return <Picker.Item label={item.title} value={item.id} key={index}/>
+              })
+            }
           </Picker>
         </View>
         <View style={styles.nameCompanyContainer}>

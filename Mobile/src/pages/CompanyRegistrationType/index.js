@@ -16,13 +16,13 @@ const CompanyRegistrationType = () => {
 
   const navigateToProductType = () => {
     navigation.navigate('CompanyPersonalData', {
-      registrationType: 'Product'
+      registrationType: 'product'
     });
   }
   
   const navigateToServiceType = () => {
     navigation.navigate('CompanyPersonalData', {
-      registrationType: 'Service'
+      registrationType: 'service'
     });
   }
 

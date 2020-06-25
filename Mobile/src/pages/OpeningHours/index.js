@@ -14,7 +14,7 @@ import ThreeWayPhase from '../../components/ThreeWayPhase';
 import styles from './styles';
 import colors from '../../assets/var/colors';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const hours = [
     '8:00', '8:30', '9:00', '9:30', '10:00', '10:30', 
@@ -27,6 +27,10 @@ const hours = [
 
 const OpeningHours = () => {
     const navigation = useNavigation();
+    const route = useRoute();
+
+    const {company} = route.params;
+
 
     const finishCompaniRegistrarion = () => {
         navigation.navigate('Login');

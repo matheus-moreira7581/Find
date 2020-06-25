@@ -99,11 +99,11 @@ const CompanyPersonalData = () => {
   }
 
   let phase = <ThreeWayPhase phase={1} />
-  let type = 'Service'
+  let type = 'service'
 
-  if(registrationType === 'Product') {
+  if(registrationType === 'product') {
     phase = <TwoWayPhase phase={1} />
-    type = 'Product'
+    type = 'product'
   }
 
   return (
