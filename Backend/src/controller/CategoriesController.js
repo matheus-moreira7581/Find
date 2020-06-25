@@ -27,6 +27,8 @@ module.exports = {
     
             });
     
+            response.status(200).send()
+
             return response.json(mixed);
             
         } catch (error) {

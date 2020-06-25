@@ -12,9 +12,9 @@ module.exports = {
     
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
-            const { name, email, cpf, cell, address, id_categories, type } = request.body;
+            const { name, email, cpf, date_birth, address, id_categories, type } = request.body;
     
-            const company = { name, email, cpf, cell, address, password: hashedPassword, id_categories, type};
+            const company = { name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type};
 
             const checkEmail = await knex('company').where({ email });
 
@@ -26,10 +26,14 @@ module.exports = {
 
             await knex('company').insert(company);
     
+            response.status(201).send()
+
             return response.json(company);
             
         } catch (error) {
+            
             response.status(404).send()
+            
             next(error)
         }
 
@@ -46,10 +50,14 @@ module.exports = {
            const companies = await knex('company')
            .where({ id_categories }).select('id','name', 'address', 'img_url', 'id_categories');
 
+           response.status(200).send()
+
            return response.json(companies);
 
         } catch (error) {  
+            
             response.status(404).send()
+            
             next(error)
         }
 
@@ -66,10 +74,14 @@ module.exports = {
             const company = await knex('company')
             .where({ id });
     
+            response.status(200).send()
+
             return response.json(company)
             
         } catch (error) {
+            
             response.status(404).send()
+           
             next(error)
         }
 
@@ -90,10 +102,14 @@ module.exports = {
 
             const newdata = await knex('company').where({ id })
 
+            response.status(200).send()
+            
             return response.json(newdata)
 
         } catch (error) {
+            
             response.status(404).send()
+            
             next(error)
         }
 
@@ -109,10 +125,14 @@ module.exports = {
     
             await knex('company').where('id', id).del();
       
+            response.status(200).send()
+           
             return response.json({msg: 'empresa deletado com sucesso!'});
             
         } catch (error) {
+            
             response.status(404).send()
+            
             next(error)
         }
 

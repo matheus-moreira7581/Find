@@ -21,7 +21,7 @@ module.exports = {
           
           if (client.length == 0 && company.length == 0) {
 
-            return response.status(400).send('Cannot find user')
+            return response.status(400).send('Usuário não encontrado')
 
           } 
 
