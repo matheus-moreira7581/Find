@@ -13,20 +13,23 @@ import CompanyRegistrationTypeScreen from '../pages/CompanyRegistrationType';
 import CompanyPersonalDataScreen from '../pages/CompanyPersonalData'
 import CompanyRegistrationScreen from '../pages/CompanyRegistration'
 import OpeningHoursScreen from '../pages/OpeningHours';
+import { HoursProvider } from '../contexts/SelectedHours';
 
 
 const AuthStack = createStackNavigator();
 
 const AuthRoutes = () => (
-    <AuthStack.Navigator headerMode="none" initialRouteName="Login">
-        <AuthStack.Screen name="Login" component={LoginScreen}/>
-        <AuthStack.Screen name="RegistrationType" component={RegistrationTypeScreen}/>
-        <AuthStack.Screen name="CompanyRegistrationType" component={CompanyRegistrationTypeScreen}/>
-        <AuthStack.Screen name="CompanyPersonalData" component={CompanyPersonalDataScreen}/>
-        <AuthStack.Screen name="CompanyRegistration" component={CompanyRegistrationScreen}/>
-        <AuthStack.Screen name="OpeningHours" component={OpeningHoursScreen}/>
-        <AuthStack.Screen name="CustomerRegistration" component={CustomerRegistrationScreen}/>
-    </AuthStack.Navigator>
+    <HoursProvider>
+        <AuthStack.Navigator headerMode="none" initialRouteName="Login">
+            <AuthStack.Screen name="Login" component={LoginScreen}/>
+            <AuthStack.Screen name="RegistrationType" component={RegistrationTypeScreen}/>
+            <AuthStack.Screen name="CompanyRegistrationType" component={CompanyRegistrationTypeScreen}/>
+            <AuthStack.Screen name="CompanyPersonalData" component={CompanyPersonalDataScreen}/>
+            <AuthStack.Screen name="CompanyRegistration" component={CompanyRegistrationScreen}/>
+            <AuthStack.Screen name="OpeningHours" component={OpeningHoursScreen}/>
+            <AuthStack.Screen name="CustomerRegistration" component={CustomerRegistrationScreen}/>
+        </AuthStack.Navigator>
+    </HoursProvider>
 );
 
 export default AuthRoutes;
