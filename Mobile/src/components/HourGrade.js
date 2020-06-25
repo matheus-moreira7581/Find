@@ -8,9 +8,11 @@ import adjustFontSize from '../utils/adjustFontSize';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
 
-
+import { useHours } from '../contexts/SelectedHours';
 
 const HourGrade = ({datasource, style}) => {
+
+    const { saveHours } = useHours();
 
     const initialState = [];
 
@@ -26,14 +28,18 @@ const HourGrade = ({datasource, style}) => {
         setSelectedHours(initialState);
     }, []);
 
-    const [selectedHours, setSelectedHours] = useState([]);
     
+    const [selectedHours, setSelectedHours] = useState([]);
 
+    // useEffect(() => {
+    //     saveHours(selectedHours);
+    // }, [selectedHours])
+    
     const handleHourSelection = (index) => {
         const hoursToChange = [...selectedHours];
         hoursToChange[index] = hoursToChange[index] === true ? false : true;
+        saveHours(hoursToChange);
         setSelectedHours(hoursToChange);
-        console.log(selectedHours);
     }
 
 

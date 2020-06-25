@@ -16,6 +16,8 @@ import colors from '../../assets/var/colors';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
+import { useHours } from '../../contexts/SelectedHours';
+
 const hours = [
     '8:00', '8:30', '9:00', '9:30', '10:00', '10:30', 
     '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', 
@@ -29,11 +31,16 @@ const OpeningHours = () => {
     const navigation = useNavigation();
     const route = useRoute();
 
+    const { getHours } = useHours();
+
     const {company} = route.params;
 
 
     const finishCompaniRegistrarion = () => {
-        navigation.navigate('Login');
+        const selectedHours = getHours();
+        const chosenHours = hours.filter((item, index) => selectedHours[index] === true );
+        console.log(chosenHours);
+        // navigation.navigate('Login');
     }
 
     return (

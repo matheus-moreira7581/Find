@@ -5,28 +5,29 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import api from '../services/api';
 
-const SelectedHoursContext = createContext({selectedHours: []});
+const HoursContext = createContext({selectedHours: []});
 
-export const SelectedHoursProvider = ({children}) => {
-    const [selectedHours, setSelectedHours] = useState(null);
+export const HoursProvider = ({children}) => {
+    const [selectedHours, setSelectedHours] = useState([]);
 
     const saveHours = (hours) => {
         setSelectedHours(hours);
-    }
-    const getHours = () => {
+    };
+
+    const getHours = (hours) => {
         return selectedHours;
-    }
+    };
 
     
     return (
-        <AuthContext.Provider value={{ selectedHours, saveHours, getHours }}>
+        <HoursContext.Provider value={{ selectedHours, saveHours, getHours }}>
             {children}
-        </AuthContext.Provider>
+        </HoursContext.Provider>
     );
 }
 
-export const useSelectedHoursContext = () => {
-    const context = useContext(SelectedHoursContext);
+export const useHours = () => {
+    const context = useContext(HoursContext);
 
     return context;
 }
