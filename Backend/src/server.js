@@ -11,6 +11,7 @@ const ordersRoutes = require('./routes/order')
 
 const app = express();
 
+app.use(cors());
 app.use(express.json())
 app.use(clientRoutes)
 app.use(addressRoutes)
