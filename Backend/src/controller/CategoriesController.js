@@ -44,6 +44,7 @@ module.exports = {
             const categories = await knex('categories').select('id', 'title');
 
             return response.json(categories);
+            
         } catch (error) {
             response.status(404).send()
             next(error)

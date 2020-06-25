@@ -15,7 +15,8 @@ module.exports = {
            .returning('id')
            .insert(elements.order);
 
-           const data = elements.itens_cart.map(itens => {   
+           const data = elements.itens_cart.map(itens => { 
+
                 return {
                     "id_order": id_order[0],
                     "id_products": itens.id_products,
