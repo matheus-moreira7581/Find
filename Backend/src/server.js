@@ -7,6 +7,8 @@ const companyRoutes = require('./routes/company')
 const productsRoutes = require('./routes/product')
 const authRoutes = require('./routes/auth')
 const cors = require('cors');
+const ordersRoutes = require('./routes/order')
+
 
 const app = express();
 
@@ -18,13 +20,14 @@ app.use(categoryRoutes)
 app.use(companyRoutes)
 app.use(productsRoutes)
 app.use(authRoutes)
+app.use(ordersRoutes)
 
 // not Found
 
 app.use((request, response, next) => {
 
     const error = new Error('Not found')
-    error.status = 404
+    response.status(500).send()
     next(error)
 
 });

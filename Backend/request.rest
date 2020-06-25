@@ -1,36 +1,46 @@
-GET http://localhost:3333//edit-company/:id
+//Request client.js
+
+GET http://localhost:3333/clients
+Content-Type: application/json
 
 
 ###
 
-POST http://localhost:3333/add-product
+POST http://localhost:3333/register-client
 Content-Type: application/json
 
 {
-"name": "pizza", 
-"description": "queijo", 
-"price": "20", 
-"img_url": "uio", 
-"limit_time": "89"
+"name": "Joao", 
+"email": "joao@mail.com", 
+"cell": "13988", 
+"password": "123"
 }
 
 ###
 
-POST http://localhost:3333/login
-Content-Type: application/json
-
-{  
-"email": "siclano@mmail.com",    
-"password": "123456" 
-}
-
-###
-
-DELETE  http://localhost:3333/products/:id
+GET http://localhost:3333/edit-client/:id
 Content-Type: application/json
 
 {  
 "id": "1"
 }
 
+###
 
+PUT  http://localhost:3333/edit-client/:id
+Content-Type: application/json
+
+{  
+"id": "1"
+}
+
+###
+
+DELETE http://localhost:3333/edit-client/:id
+Content-Type: application/json
+
+{  
+"id": "1"
+}
+
+###

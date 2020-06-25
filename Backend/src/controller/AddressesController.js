@@ -19,6 +19,7 @@ module.exports = {
             return response.json(address);
             
         } catch (error) {
+            response.status(404).send()
             next(error)
         }
 
@@ -35,7 +36,8 @@ module.exports = {
             .where({ id_clients });
 
             if (clientAddresses.length == 0) { 
-
+                
+                response.status(401).send()
                 return response.json({msg: 'Você ainda não possui endereços cadastrados'});
 
             }
@@ -43,6 +45,7 @@ module.exports = {
             return response.json(clientAddresses);
             
         } catch (error) {
+            response.status(404).send()
             next(error)
         }
 
@@ -58,6 +61,7 @@ module.exports = {
             return response.json(addresses);
             
         } catch (error) {
+            response.status(404).send()
             next(error)
         }
 

@@ -3,7 +3,7 @@ const AuthController = require('../controller/AuthController');
 
 const routes = express.Router();
 
-//Company
+//Authentication
 
 routes.post('/auth', AuthController.login)
        

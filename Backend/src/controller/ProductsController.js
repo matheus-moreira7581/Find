@@ -19,6 +19,8 @@ module.exports = {
             
 
         } catch (error) {
+            
+            response.status(404).send()
             next(error)
         }
     },
@@ -38,7 +40,7 @@ module.exports = {
 
             
         } catch (error) {
-
+            response.status(404).send()
             next(error)
 
         }
@@ -79,7 +81,7 @@ module.exports = {
             return response.json(mixed);
             
         } catch (error) {
-
+            response.status(403).send()
             next(error)
 
         }
@@ -106,6 +108,7 @@ module.exports = {
             return response.json(newdata)
 
         } catch (error) {
+            response.status(403).send()
             next(error)
         }
 
@@ -125,6 +128,7 @@ module.exports = {
             return response.json({msg: 'product successfully deleted!'});
             
         } catch (error) {
+            response.status(403).send()
             next(error)
         }
 
