@@ -11,6 +11,7 @@ const ordersRoutes = require('./routes/order')
 
 const app = express();
 
+app.use(cors());
 app.use(express.json())
 app.use(clientRoutes)
 app.use(addressRoutes)
@@ -40,5 +41,7 @@ app.use((error, request, response, next) => {
 
 });
 
+const port = process.env.PORT || 3333;
 
-app.listen(3333, () => console.log("Server rodando!"));
+
+app.listen(port, () => console.log("Server rodando!"));
