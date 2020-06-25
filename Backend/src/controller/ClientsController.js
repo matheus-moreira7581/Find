@@ -18,17 +18,23 @@ module.exports = {
             const checkEmail = await knex('clients').where({ email });
 
             if (checkEmail.length !== 0) {
+                
                 response.status(403).send()
-               return response.json({ msg: 'Já existe uma conta com esse email cadastrado' });
+               
+                return response.json({ msg: 'Já existe uma conta com esse email cadastrado' });
 
             }
 
             await knex('clients').insert(client);
-    
+            
+            response.status(201).send()
+            
             return response.json(client);
             
         } catch (error) {
+            
             response.status(404).send()
+            
             next(error)
         }
 
@@ -45,7 +51,9 @@ module.exports = {
             return response.json(clients);
             
         } catch (error) {  
+            
             response.status(404).send()
+            
             next(error)
         }
 
@@ -61,10 +69,14 @@ module.exports = {
             const client = await knex('clients')
             .where({ id });
     
+            response.status(200).send()
+
             return response.json(client)
             
         } catch (error) {
+            
             response.status(404).send()
+            
             next(error)
         }
 
@@ -84,10 +96,14 @@ module.exports = {
 
             const newdata = await knex('clients').where({ id })
 
+            response.status(200).send()
+            
             return response.json(newdata)
 
         } catch (error) {
+            
             response.status(404).send()
+            
             next(error)
         }
 
@@ -109,10 +125,14 @@ module.exports = {
     
             await trx.commit();
     
+            response.status(200).send()
+            
             return response.json({msg: 'cliente deletado com sucesso!'});
             
         } catch (error) {
+            
             response.status(404).send()
+            
             next(error)
         }
 

@@ -26,6 +26,8 @@ module.exports = {
     
             });
     
+            response.status(200).send()
+
             return response.json(mixed);
             
         } catch (error) {
@@ -42,6 +44,8 @@ module.exports = {
     async listCategories(request, response, next) {
         try {
             const categories = await knex('categories').select('id', 'title');
+
+            response.status(200).send()
 
             return response.json(categories);
             

@@ -15,6 +15,8 @@ module.exports = {
 
             await knex('products').insert(item);
 
+            response.status(201).send()
+
             response.json(item);
             
 
@@ -81,7 +83,9 @@ module.exports = {
             return response.json(mixed);
             
         } catch (error) {
+            
             response.status(403).send()
+            
             next(error)
 
         }
@@ -105,10 +109,14 @@ module.exports = {
 
             const newdata = await knex('products').where({ id })
 
+            response.status(200).send()
+
             return response.json(newdata)
 
         } catch (error) {
+            
             response.status(403).send()
+            
             next(error)
         }
 
@@ -125,10 +133,14 @@ module.exports = {
     
             await knex('products').where('id', id).del();
       
-            return response.json({msg: 'product successfully deleted!'});
+            response.status(200).send()
+
+            return response.json({msg: 'Produto deletado com sucesso!'});
             
         } catch (error) {
+           
             response.status(403).send()
+           
             next(error)
         }
 

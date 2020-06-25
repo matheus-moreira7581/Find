@@ -25,7 +25,7 @@ app.use(ordersRoutes)
 
 app.use((request, response, next) => {
 
-    const error = new Error('Not found')
+    const error = new Error('Não encontrado')
     response.status(500).send()
     next(error)
 
@@ -44,4 +44,4 @@ app.use((error, request, response, next) => {
 const port = process.env.PORT || 3333;
 
 
-app.listen(port, () => console.log("Server rodando!"));
+app.listen(port, () => console.log("Servidor funcionando!"));
