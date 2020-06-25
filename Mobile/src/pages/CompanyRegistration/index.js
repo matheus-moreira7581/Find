@@ -57,16 +57,18 @@ const CompanyRegistration = () => {
   }
 
   const finishCompanyRegistration = async () => {
+    let cpf = String(user.cpf).replace(/\D/g,"");
+    console.log(cpf);
     const response = await api.post('/register-company', {
       name: companyName,
       email: user.email,
-      cpf: user.cpf,
+      cpf: cpf,
       cell: 25648745,
       password: user.password,
       address: companyAddress,
       id_categories: pickerValue,
       type: registrationType
-    })
+    }).catch(err => console.log(err))
     navigation.navigate('Login');
   }
 

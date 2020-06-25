@@ -2,7 +2,7 @@ exports.up = knex => knex.schema.createTable('company', table => {
 
     table.increments('id')
     table.string('name', 255).notNullable()
-    table.integer('cpf', 12).notNullable()
+    table.string('cpf').notNullable()
     table.string('email').unique().notNullable()
     table.string('password').notNullable()
     table.enu('type', ['service', 'product']).notNullable()
