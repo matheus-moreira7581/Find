@@ -27,12 +27,9 @@ module.exports = {
     
             });
     
-            response.status(200).send()
-
-            return response.json(mixed);
+            response.status(200).json(mixed);
             
         } catch (error) {
-            response.status(403).send()
             next(error)
 
         }
@@ -46,26 +43,29 @@ module.exports = {
         try {
 
             const { type } = request.query;
+            
             if(type) {
-            const categories = await knex('sections')
-            .join('categories', 'sections.id', 'categories.id_section')
-            .select('sections.type', 'categories.id', 'categories.title');
-            const filtryingCategorioes = {}
-            const filterCategories = categories.filter(elements => {
-                if(elements.type == type) {
-                    return {
-                        "id": elements.id,
-                        "title": elements.title
-                    }
-                }  
-            });
+                const categories = await knex('sections')
+                .join('categories', 'sections.id', 'categories.id_section')
+                .select('sections.type', 'categories.id', 'categories.title');
 
-            return response.json(filterCategories); 
-        }
-        else throw new Error('Nenhum tipo recebido!');
+                const filterCategories = categories.map(elements => {
+
+                    if(elements.type == type) {
+
+                        return {
+                            "id": elements.id,
+                            "title": elements.title
+                        }
+
+                    }
+
+                });
+
+                response.json(filterCategories);
+            } else throw new Error('Nenhum tipo recebido')
             
         } catch (error) {
-            response.status(404).send()
             next(error)
         }
     }

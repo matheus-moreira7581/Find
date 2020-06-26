@@ -20,16 +20,16 @@ module.exports = {
             const checkEmail = await knex('company').where({ email });
 
             if (checkEmail.length !== 0) {
-                response.status(403).json({ msg: 'Já existe uma conta com esse email cadastrado' });
+                return response.status(403).json({ msg: 'Já existe uma conta com esse email cadastrado' });
 
             }
 
             await knex('company').insert(company);
     
-            return response.status(201).json(company);
+            response.status(201).json(company);
             
         } catch (error) {
-           console.log(error);
+            next(error)
         }
 
     },
@@ -45,12 +45,9 @@ module.exports = {
            const companies = await knex('company')
            .where({ id_categories }).select('id','name', 'address', 'img_url', 'id_categories');
 
-           return response.status(200).json(companies);
+           response.status(200).json(companies);
 
         } catch (error) {  
-            
-            response.status(404).send()
-            
             next(error)
         }
 
@@ -70,9 +67,6 @@ module.exports = {
             response.status(200).json(company)
             
         } catch (error) {
-            
-            response.status(404).send()
-           
             next(error)
         }
 
@@ -96,9 +90,6 @@ module.exports = {
             response.status(200).json(newdata)
 
         } catch (error) {
-            
-            response.status(404).send()
-            
             next(error)
         }
 
@@ -117,9 +108,6 @@ module.exports = {
             response.status(200).json({msg: 'empresa deletado com sucesso!'});
             
         } catch (error) {
-            
-            
-            
             next(error)
         }
 
