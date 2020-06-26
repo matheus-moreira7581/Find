@@ -58,11 +58,14 @@ module.exports = {
                             "title": elements.title
                         }
 
-                    }
+                    } 
 
                 });
 
-                response.json(filterCategories);
+                const filteredCategories = filterCategories.filter(item => item !== undefined)
+
+                return response.json(filteredCategories);
+
             } else throw new Error('Nenhum tipo recebido')
             
         } catch (error) {

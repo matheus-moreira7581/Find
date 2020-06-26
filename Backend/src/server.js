@@ -11,9 +11,9 @@ const ordersRoutes = require("./routes/order");
 
 const app = express();
 
-require('dotenv').config()
+//require('dotenv').config()
 
-app.use(cors());
+//app.use(cors());
 app.use(express.json())
 app.use(clientRoutes)
 app.use(addressRoutes)
