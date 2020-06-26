@@ -6,6 +6,7 @@ const routes = express.Router()
 // Requests
 
 routes.post('/request', OrdersController.create)
+      .get('/orders/:id_company', OrdersController.index)
 
 
 

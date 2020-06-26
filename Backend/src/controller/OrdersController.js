@@ -91,7 +91,26 @@ module.exports = {
     },
 
 
-    
+    // Listar pedidos de uma empresa
+
+    async index(request, response, next) {
+        try {
+
+            const { id_company } = request.params;
+
+            const orders = await knex('orders')
+            .where({ id_company })
+            .join('clients', 'clients.id', 'orders.id_client')
+            .orderBy('order_date', 'desc')
+            .select('clients.name', 'orders.id');
+
+            return response.json(orders)
+
+            
+        } catch (error) {
+            next(error)
+        }
+    },
 
 
     
