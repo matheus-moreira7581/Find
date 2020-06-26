@@ -18,6 +18,7 @@ module.exports = {
                 if(category.find(e => items.id == e.id_section ? true : false)) {
     
                     return {
+                        "Type": items.type,
                         "Section" : items.name,
                         "Subcategory": category.filter(elements => elements.id_section == items.id)
                     }
@@ -26,6 +27,8 @@ module.exports = {
     
             });
     
+            response.status(200).send()
+
             return response.json(mixed);
             
         } catch (error) {
@@ -41,9 +44,28 @@ module.exports = {
 
     async listCategories(request, response, next) {
         try {
-            const categories = await knex('categories').select('id', 'title');
 
-            return response.json(categories);
+            const { type } = request.query;
+
+            const categories = await knex('sections')
+            .join('categories', 'sections.id', 'categories.id_section')
+            .select('sections.type', 'categories.id', 'categories.title');
+
+            const filterCategories = categories.map(elements => {
+
+                if(elements.type == type) {
+
+                    return {
+                        "id": elements.id,
+                        "title": elements.title
+                    }
+
+                }
+
+            });
+
+            return response.json(filterCategories);
+            
         } catch (error) {
             response.status(404).send()
             next(error)

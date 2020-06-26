@@ -16,10 +16,14 @@ module.exports = {
     
             await knex('addresses').insert(address);
     
-            return response.json(address);
+            response.status(201).send()
             
+            return response.json(address);
+
         } catch (error) {
+            
             response.status(404).send()
+            
             next(error)
         }
 
@@ -39,9 +43,11 @@ module.exports = {
                 
                 response.status(401).send()
                 return response.json({msg: 'Você ainda não possui endereços cadastrados'});
-
+ 
             }
     
+            response.status(200).send()
+
             return response.json(clientAddresses);
             
         } catch (error) {
@@ -58,6 +64,8 @@ module.exports = {
         try {
             const addresses = await knex('addresses');
     
+            response.status(200).send()
+
             return response.json(addresses);
             
         } catch (error) {

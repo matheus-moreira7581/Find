@@ -4,7 +4,7 @@ exports.up = knex => knex.schema.createTable('itens_cart', table => {
     table.integer('id_order').references('orders.id').notNullable().onDelete()
     table.integer('id_products').references('products.id').notNullable().onDelete()
     table.integer('amount').notNullable()
-    table.text('Details').nullable()
+    table.text('details').nullable()
 })
 
 
