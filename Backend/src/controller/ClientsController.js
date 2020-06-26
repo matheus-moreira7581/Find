@@ -19,22 +19,15 @@ module.exports = {
 
             if (checkEmail.length !== 0) {
                 
-                response.status(403).send()
-               
-                return response.json({ msg: 'Já existe uma conta com esse email cadastrado' });
+                return response.status(403).json({ msg: 'Já existe uma conta com esse email cadastrado' });
 
             }
 
             await knex('clients').insert(client);
             
-            response.status(201).send()
-            
-            return response.json(client);
+            response.status(201).json(client);
             
         } catch (error) {
-            
-            response.status(404).send()
-            
             next(error)
         }
 
@@ -48,12 +41,9 @@ module.exports = {
         try {
             const clients = await knex('clients');
     
-            return response.json(clients);
+            response.json(clients);
             
         } catch (error) {  
-            
-            response.status(404).send()
-            
             next(error)
         }
 
@@ -69,14 +59,9 @@ module.exports = {
             const client = await knex('clients')
             .where({ id });
     
-            response.status(200).send()
-
-            return response.json(client)
+            response.status(200).json(client)
             
         } catch (error) {
-            
-            response.status(404).send()
-            
             next(error)
         }
 
@@ -96,14 +81,9 @@ module.exports = {
 
             const newdata = await knex('clients').where({ id })
 
-            response.status(200).send()
-            
-            return response.json(newdata)
+            response.status(200).json(newdata)
 
         } catch (error) {
-            
-            response.status(404).send()
-            
             next(error)
         }
 
@@ -125,14 +105,9 @@ module.exports = {
     
             await trx.commit();
     
-            response.status(200).send()
-            
-            return response.json({msg: 'cliente deletado com sucesso!'});
+            response.status(200).json({msg: 'cliente deletado com sucesso!'});
             
         } catch (error) {
-            
-            response.status(404).send()
-            
             next(error)
         }
 

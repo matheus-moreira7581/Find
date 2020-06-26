@@ -15,14 +15,10 @@ module.exports = {
 
             await knex('products').insert(item);
 
-            response.status(201).send()
-
-            response.json(item);
+            response.status(201).json(item);
             
 
         } catch (error) {
-            
-            response.status(404).send()
             next(error)
         }
     },
@@ -38,11 +34,10 @@ module.exports = {
     
             const products = await knex('products').where({ id_company });
     
-            return response.json(products);
+            response.json(products);
 
             
         } catch (error) {
-            response.status(404).send()
             next(error)
 
         }
@@ -80,14 +75,10 @@ module.exports = {
 
             });
 
-            return response.json(mixed);
+            response.json(mixed);
             
         } catch (error) {
-            
-            response.status(403).send()
-            
             next(error)
-
         }
 
     },
@@ -109,14 +100,9 @@ module.exports = {
 
             const newdata = await knex('products').where({ id })
 
-            response.status(200).send()
-
-            return response.json(newdata)
+            response.status(200).json(newdata)
 
         } catch (error) {
-            
-            response.status(403).send()
-            
             next(error)
         }
 
@@ -133,14 +119,9 @@ module.exports = {
     
             await knex('products').where('id', id).del();
       
-            response.status(200).send()
-
-            return response.json({msg: 'Produto deletado com sucesso!'});
+            response.status(200).json({msg: 'Produto deletado com sucesso!'});
             
         } catch (error) {
-           
-            response.status(403).send()
-           
             next(error)
         }
 

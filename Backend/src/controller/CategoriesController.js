@@ -27,12 +27,9 @@ module.exports = {
     
             });
     
-            response.status(200).send()
-
-            return response.json(mixed);
+            response.status(200).json(mixed);
             
         } catch (error) {
-            response.status(403).send()
             next(error)
 
         }
@@ -64,10 +61,9 @@ module.exports = {
 
             });
 
-            return response.json(filterCategories);
+            response.json(filterCategories);
             
         } catch (error) {
-            response.status(404).send()
             next(error)
         }
     }

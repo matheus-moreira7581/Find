@@ -75,15 +75,10 @@ module.exports = {
 
            await trx.commit();
            
-           response.status(201).send()
-
-           return response.json({ status: "boa  mlk"})
+           response.status(201).json({ status: "boa  mlk"})
 
             
         } catch (error) {
-            
-            response.status(403).send()
-            
             next(error)
         }
     }

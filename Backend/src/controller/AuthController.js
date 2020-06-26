@@ -52,18 +52,17 @@ module.exports = {
 
             delete res.data.password;
 
-            response.json(res)
+            return response.json(res)
 
           } 
           else {
 
-            response.status(403).send()
+            return response.status(403).send()
 
           } 
   
         } catch (error) 
         {  
-          response.status(404).send()
           next(error)
         }
       
