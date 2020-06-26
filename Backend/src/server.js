@@ -7,7 +7,7 @@ const companyRoutes = require("./routes/company");
 const productsRoutes = require("./routes/product");
 const authRoutes = require("./routes/auth");
 const ordersRoutes = require("./routes/order");
-const cors = require("cors");
+//const cors = require("cors");
 
 const app = express();
 

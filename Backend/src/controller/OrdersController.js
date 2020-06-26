@@ -2,6 +2,8 @@ const knex = require('../database');
 
 module.exports = {
 
+    // Cadastrando pedido 
+
     async create(request, response, next) {
         try {
 
@@ -77,7 +79,7 @@ module.exports = {
            
            response.status(201).send()
 
-           return response.json({ status: "boa  mlk"})
+           return response.json({ status: "Pedido realizado com sucesso."})
 
             
         } catch (error) {
@@ -86,6 +88,11 @@ module.exports = {
             
             next(error)
         }
-    }
+    },
+
+
+    
+
+
     
 }
