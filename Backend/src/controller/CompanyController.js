@@ -13,28 +13,23 @@ module.exports = {
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
             const { name, email, cpf, date_birth, address, id_categories, type, hours_schedule } = request.body;
+
     
             const company = { name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, hours_schedule};
 
             const checkEmail = await knex('company').where({ email });
 
             if (checkEmail.length !== 0) {
-                response.status(403).send()
-               return response.json({ msg: 'Já existe uma conta com esse email cadastrado' });
+                response.status(403).json({ msg: 'Já existe uma conta com esse email cadastrado' });
 
             }
 
             await knex('company').insert(company);
     
-            response.status(201).send()
-
-            return response.json(company);
+            return response.status(201).json(company);
             
         } catch (error) {
-            
-            response.status(404).send()
-            
-            next(error)
+           console.log(error);
         }
 
     },
@@ -50,9 +45,7 @@ module.exports = {
            const companies = await knex('company')
            .where({ id_categories }).select('id','name', 'address', 'img_url', 'id_categories');
 
-           response.status(200).send()
-
-           return response.json(companies);
+           return response.status(200).json(companies);
 
         } catch (error) {  
             
@@ -74,9 +67,7 @@ module.exports = {
             const company = await knex('company')
             .where({ id });
     
-            response.status(200).send()
-
-            return response.json(company)
+            response.status(200).json(company)
             
         } catch (error) {
             
@@ -102,9 +93,7 @@ module.exports = {
 
             const newdata = await knex('company').where({ id })
 
-            response.status(200).send()
-            
-            return response.json(newdata)
+            response.status(200).json(newdata)
 
         } catch (error) {
             
@@ -125,13 +114,11 @@ module.exports = {
     
             await knex('company').where('id', id).del();
       
-            response.status(200).send()
-           
-            return response.json({msg: 'empresa deletado com sucesso!'});
+            response.status(200).json({msg: 'empresa deletado com sucesso!'});
             
         } catch (error) {
             
-            response.status(404).send()
+            
             
             next(error)
         }

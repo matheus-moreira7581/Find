@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { useAuth } from '../contexts/auth';
 
-import { CustomerAppRoutes, CompanyAppRoutes, TabAppRoutes, CompanyTabAppRoutes } from './app.routes';
+import { CustomerAppRoutes, CompanyAppRoutes, TabAppRoutes, ServiceCompanyTabAppRoutes } from './app.routes';
 import AuthRoutes from './auth.routes';
 
 const Routes = () => {
@@ -12,7 +12,7 @@ const Routes = () => {
         if(loggedUser.type === 'client')
             return <TabAppRoutes/>
         else
-            return <CompanyTabAppRoutes/>
+            return <ServiceCompanyTabAppRoutes/>
     }
     return (
         signedIn ? checkLoginType() : <AuthRoutes/> 

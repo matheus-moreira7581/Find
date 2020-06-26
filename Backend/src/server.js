@@ -11,7 +11,7 @@ const cors = require("cors");
 
 const app = express();
 
-//app.use(cors());
+app.use(cors());
 app.use(express.json())
 app.use(clientRoutes)
 app.use(addressRoutes)
@@ -20,6 +20,30 @@ app.use(companyRoutes)
 app.use(productsRoutes)
 app.use(authRoutes)
 app.use(ordersRoutes)
+// app.use(logErrors);
+// app.use(clientErrorHandler);
+// app.use(errorHandler);
+
+app.get('/', function (req, res) {
+    res.send('Find Api');
+  })
+
+function logErrors(err, req, res, next) {
+    console.error(err.stack);
+    next(err);
+  }
+
+function clientErrorHandler(err, req, res, next) {
+    if (req.xhr) {
+        res.status(500).json({ error: 'Something failed!' });
+    } else {
+        next(err);
+    }
+}
+
+function errorHandler(err, req, res, next) {
+    res.status(500).json({ error: err });
+}
 
 // not Found
 
@@ -33,11 +57,11 @@ app.use((request, response, next) => {
 
 // pegar todos os erros
 
-app.use((error, request, response, next) => {
+app.use((err, req, res, next) => {
 
-    response.status(error.status || 500)
+    let status = err.status || 500
 
-    response.json({ error: error.message })
+    res.status(status).json({ error: err.message })
 
 });
 

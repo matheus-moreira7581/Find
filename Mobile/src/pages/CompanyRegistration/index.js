@@ -29,7 +29,7 @@ const CompanyRegistration = () => {
   const { user, registrationType } = route.params;
 
   const fetchCategories = async () => {
-    const categories = await api.get('/register-company');
+    const categories = await api.get(`/register-company?type=${registrationType}`);
     setCategories(categories.data);
   }
 
@@ -51,19 +51,20 @@ const CompanyRegistration = () => {
         area: pickerValue,
         companyName: companyName,
         companyAddress: companyAddress,
-      }
+      },
+      registrationType: registrationType
     }
     navigation.navigate('OpeningHours', company);
   }
 
   const finishCompanyRegistration = async () => {
     let cpf = String(user.cpf).replace(/\D/g,"");
-    console.log(cpf);
+    console.log(cpf + '\n\n\n\n');
     const response = await api.post('/register-company', {
       name: companyName,
       email: user.email,
       cpf: cpf,
-      cell: 25648745,
+      date_birth: user.birthday,
       password: user.password,
       address: companyAddress,
       id_categories: pickerValue,

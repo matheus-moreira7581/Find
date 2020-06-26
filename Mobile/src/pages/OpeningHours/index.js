@@ -18,6 +18,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { useHours } from '../../contexts/SelectedHours';
 
+import api from '../../services/api';
+
 const hours = [
     '8:00', '8:30', '9:00', '9:30', '10:00', '10:30', 
     '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', 
@@ -33,14 +35,28 @@ const OpeningHours = () => {
 
     const { getHours } = useHours();
 
-    const {company} = route.params;
+    const {user, companyData, registrationType} = route.params;
 
 
-    const finishCompaniRegistrarion = () => {
+    const finishCompanyRegistrarion = async () => {
+        
         const selectedHours = getHours();
         const chosenHours = hours.filter((item, index) => selectedHours[index] === true );
-        console.log(chosenHours);
-        // navigation.navigate('Login');
+        const stringHours = JSON.stringify(Object.assign({}, chosenHours));
+        const jsonHours = JSON.parse(stringHours);
+        let cpf = String(user.cpf).replace(/\D/g,"");
+        const response = await api.post('/register-company', {
+            name: companyData.companyName,
+            email: user.email,
+            cpf: cpf,
+            date_birth: user.birthday,
+            password: user.password,
+            address: companyData.companyAddress,
+            id_categories: companyData.area,
+            type: "service", 
+            hours_schedule:jsonHours
+        }).catch(err => console.log(err))
+        navigation.navigate('Login');
     }
 
     return (
@@ -72,7 +88,7 @@ const OpeningHours = () => {
                     width={328}
                     height={50} 
                     fontSize={adjustFontSize(16)}
-                    onPress={() => {finishCompaniRegistrarion()}}
+                    onPress={() => {finishCompanyRegistrarion()}}
                 />
                 
             </View>

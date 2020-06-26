@@ -46,25 +46,23 @@ module.exports = {
         try {
 
             const { type } = request.query;
-
+            if(type) {
             const categories = await knex('sections')
             .join('categories', 'sections.id', 'categories.id_section')
             .select('sections.type', 'categories.id', 'categories.title');
-
-            const filterCategories = categories.map(elements => {
-
+            const filtryingCategorioes = {}
+            const filterCategories = categories.filter(elements => {
                 if(elements.type == type) {
-
                     return {
                         "id": elements.id,
                         "title": elements.title
                     }
-
-                }
-
+                }  
             });
 
-            return response.json(filterCategories);
+            return response.json(filterCategories); 
+        }
+        else throw new Error('Nenhum tipo recebido!');
             
         } catch (error) {
             response.status(404).send()
