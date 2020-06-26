@@ -1,4 +1,5 @@
 const knex = require('../database');
+const { update } = require('../database');
 
 module.exports = {
 
@@ -125,7 +126,9 @@ module.exports = {
             .join('clients', 'clients.id', 'orders.id_client')
             .select('clients.name', 'orders.total', 'orders.payment', 'orders.receivement', 'orders.id_address', 'orders.id');
 
+
             const order = orders.filter(e => e.id == id_order);
+
 
             const itens_cart = await knex('itens_cart')
             .where({ id_order })
@@ -138,7 +141,6 @@ module.exports = {
             .select('street', 'neighborhood', 'ad_number', 'additional', 'landmark');
 
             
-
             return response.json({
                 "Order": order[0],
                 "Address": address[0],
@@ -148,7 +150,32 @@ module.exports = {
         } catch (error) {
             next(error)
         }
+    },
+
+
+    // Atualizar status 
+
+    async update(request, response, next) {
+        try {
+            
+            const { id_order } = request.query;
+    
+            const { status } = request.body;
+    
+            await knex('orders').where('id', id_order)
+            .update({ status });
+    
+            return response.json({status});
+
+        } catch (error) {
+
+            next(error)
+            
+        }
+
     }
+
+
 
 
     
