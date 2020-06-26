@@ -4,9 +4,11 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { adjustVerticalMeasure, adjustHorizontalMeasure } from '../utils/adjustMeasures';
 
 import adjustFontSize from '../utils/adjustFontSize';
+import parseDateTime from '../utils/parseDateTime';
 
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
+
 import { useScheduledHour } from '../contexts/serviceScheduling';
 
 const ServiceHourGrade = ({datasource, style}) => { //a estilização a ser enviada como prop deverá ser somente de espaçamento do container externo do componente
@@ -23,11 +25,7 @@ const ServiceHourGrade = ({datasource, style}) => { //a estilização a ser envi
         }
         setInitialState();
     }, []);
-
-    // useEffect(() => {
-    //     console.log(selectedHours);
-    // }, [selectedHours]); for testing
-
+    
     const [selectedHours, setSelectedHours] = useState(initialState);
 
     const handleHourSelection = (index) => {
@@ -39,6 +37,15 @@ const ServiceHourGrade = ({datasource, style}) => { //a estilização a ser envi
         saveScheduledHour(datasource[index]);
     }
 
+    const handleSelectability = async (hourText) => {
+        // const response = await fetch('https://worldtimeapi.org/api/timezone/America/Sao_Paulo');
+        // const { datetime } = await response.json(); TODO IN FUTURE
+        
+        const now = new Date();
+        const currentSelectedHour = parseDateTime(hourText);  
+        
+        return currentSelectedHour > now;
+    }
 
     return (
         <View style={{...styles.container, ...style}}>
@@ -49,7 +56,7 @@ const ServiceHourGrade = ({datasource, style}) => { //a estilização a ser envi
                             key={index}  
                             style={selectedHours[index]
                                 ? styles.selectedButtonContainer
-                                :styles.unselectedButtonContainer}
+                                : styles.unselectedButtonContainer}
                             onPress={() => handleHourSelection(index)}
                         >
                             <Text style={selectedHours[index]

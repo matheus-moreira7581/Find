@@ -33,7 +33,7 @@ const AppTab = createBottomTabNavigator();
 export const CustomerAppRoutes = () => (
     <ServiceSchedulingProvider>
         <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
-            <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
+            <CustomerAppStack.Screen name="Home" component={ServiceSchedulingScreen}/>
             <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
             <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
             <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
