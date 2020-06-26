@@ -62,9 +62,10 @@ module.exports = {
 
                 });
 
-                const filtredCategories = filterCategories.filter(item => item !== undefined)
+                const filteredCategories = filterCategories.filter(item => item !== undefined)
 
-                response.json(filtredCategories);
+                return response.json(filteredCategories);
+
             } else throw new Error('Nenhum tipo recebido')
             
         } catch (error) {

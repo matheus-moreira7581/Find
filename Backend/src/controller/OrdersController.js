@@ -1,6 +1,9 @@
 const knex = require('../database');
 
+
 module.exports = {
+
+    // Cadastrando pedido 
 
     async create(request, response, next) {
         try {
@@ -74,13 +77,101 @@ module.exports = {
 
 
            await trx.commit();
-           
-           response.status(201).json({ status: "boa  mlk"})
+        
+           return response.status(201).json({ status: "Pedido realizado com sucesso."})
 
             
         } catch (error) {
             next(error)
         }
+    },
+
+
+    // Listar pedidos de uma empresa
+
+    async index(request, response, next) {
+        try {
+
+            const { id_company } = request.params;
+
+            const orders = await knex('orders')
+            .where({ id_company })
+            .join('clients', 'clients.id', 'orders.id_client')
+            .orderBy('order_date', 'desc')
+            .select('clients.name', 'orders.id');
+
+            response.status(200).json(orders)
+
+            
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    // Detalhando pedido
+
+    async show(request, response, next) {
+        try {
+
+            const { id_order } = request.query;
+
+
+            const orders = await knex('orders')
+            .join('clients', 'clients.id', 'orders.id_client')
+            .select('clients.name', 'orders.total', 'orders.payment', 'orders.receivement', 'orders.id_address', 'orders.id');
+
+
+            const order = orders.filter(e => e.id == id_order);
+
+
+            const itens_cart = await knex('itens_cart')
+            .where({ id_order })
+            .join('products', 'products.id', 'itens_cart.id_products')
+            .select( 'products.name', 'products.description', 'products.price', 'products.img_url', 'itens_cart.amount', 'itens_cart.Details');
+
+
+            const address = await knex('addresses')
+            .where('id', orders[0].id_address)
+            .select('street', 'neighborhood', 'ad_number', 'additional', 'landmark');
+
+            
+            response.status(200).json({
+                "Order": order[0],
+                "Address": address[0],
+                "Items": itens_cart
+            })
+            
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    // Atualizar status 
+
+    async update(request, response, next) {
+        try {
+            
+            const { id_order } = request.query;
+    
+            const { status } = request.body;
+    
+            await knex('orders').where('id', id_order)
+            .update({ status });
+    
+            response.status(200).json({status});
+
+        } catch (error) {
+
+            next(error)
+            
+        }
+
     }
+
+
+
+
     
 }
