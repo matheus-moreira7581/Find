@@ -9,7 +9,11 @@ exports.seed = function(knex) {
             {name: "Saúde", type:"product"},
             {name: "Moda e beleza", type:"product"},
             {name: "Educação", type:"product"},
-            {name: "Construção", type:"product"}
+            {name: "Construção", type:"product"},
+            {name: "Moda e Beleza", type:"service"},
+            {name: "Saúde", type:"service"},
+            {name: "Design", type:"service"},
+            {name: "Serviços Domésticos", type:"service"}
         ]);
 
     });

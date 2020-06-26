@@ -1,5 +1,5 @@
 const knex = require('../database');
-const { update } = require('../database');
+
 
 module.exports = {
 
@@ -77,16 +77,11 @@ module.exports = {
 
 
            await trx.commit();
-           
-           response.status(201).send()
-
-           return response.json({ status: "Pedido realizado com sucesso."})
+        
+           return response.status(201).json({ status: "Pedido realizado com sucesso."})
 
             
         } catch (error) {
-            
-            response.status(403).send()
-            
             next(error)
         }
     },

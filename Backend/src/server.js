@@ -11,7 +11,9 @@ const ordersRoutes = require("./routes/order");
 
 const app = express();
 
-//app.use(cors());
+require('dotenv').config()
+
+app.use(cors());
 app.use(express.json())
 app.use(clientRoutes)
 app.use(addressRoutes)
@@ -20,6 +22,11 @@ app.use(companyRoutes)
 app.use(productsRoutes)
 app.use(authRoutes)
 app.use(ordersRoutes)
+
+// Initial route
+app.get('/', function (req, res) {
+    res.send('Find Api');
+  })
 
 // not Found
 
@@ -34,6 +41,9 @@ app.use((request, response, next) => {
 // pegar todos os erros
 
 app.use((error, request, response, next) => {
+    if(response.headersSent) {
+        return next(error)
+    }
 
     response.status(error.status || 500)
 
