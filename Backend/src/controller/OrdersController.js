@@ -100,7 +100,7 @@ module.exports = {
             .orderBy('order_date', 'desc')
             .select('clients.name', 'orders.id');
 
-            return response.json(orders)
+            response.status(200).json(orders)
 
             
         } catch (error) {
@@ -136,7 +136,7 @@ module.exports = {
             .select('street', 'neighborhood', 'ad_number', 'additional', 'landmark');
 
             
-            return response.json({
+            response.status(200).json({
                 "Order": order[0],
                 "Address": address[0],
                 "Items": itens_cart
@@ -160,7 +160,7 @@ module.exports = {
             await knex('orders').where('id', id_order)
             .update({ status });
     
-            return response.json({status});
+            response.status(200).json({status});
 
         } catch (error) {
 
