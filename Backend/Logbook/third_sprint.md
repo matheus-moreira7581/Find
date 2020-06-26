@@ -61,6 +61,6 @@ O foco da terceira sprint está nos produtos, pedidos e no carrinho.
 - [x]  Detalhar pedido;
 - [x]  Atualizar status do pedido;
 - [x]  Finalizar a 3° sprint;
-- [ ]  Dar merge na master;
-- [ ]  Definir 4° sprint;
-- [ ]  Add status code.
+- [x]  Dar merge na master;
+- [x]  Definir 4° sprint;
+- [x]  Add status code.
