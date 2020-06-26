@@ -35,6 +35,7 @@ import CompanyRunning from './src/pages/CompanyRunning';
 import CompanySellingItems from './src/pages/CompanySellingItems';
 import ServiceScheduling from './src/pages/ServiceScheduling';
 
+import { TabAppRoutes } from './src/routes/app.routes';
 export default function App() {
 
   const [fontsLoaded] = useFonts ({
@@ -49,11 +50,11 @@ export default function App() {
   else {
     return (
       
-      //  <NavigationContainer>
-      //    <AuthProvider>
-      //      <Routes />
-      //    </AuthProvider>
-      //  </NavigationContainer>
+       <NavigationContainer>
+         <AuthProvider>
+           <TabAppRoutes />
+         </AuthProvider>
+       </NavigationContainer>
        
       // <CompanyProducts/>
       // <Companies />
@@ -75,7 +76,7 @@ export default function App() {
       // <CompanyRegistration />
       // <HomeCompany />
       //<CompanySellingItems/>
-      <ServiceScheduling/>
+      //<ServiceScheduling/>
     )
   }
 }

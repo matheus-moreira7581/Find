@@ -15,7 +15,6 @@ import CompanyRegistrationScreen from '../pages/CompanyRegistration'
 import OpeningHoursScreen from '../pages/OpeningHours';
 import { HoursProvider } from '../contexts/SelectedHours';
 
-
 const AuthStack = createStackNavigator();
 
 const AuthRoutes = () => (

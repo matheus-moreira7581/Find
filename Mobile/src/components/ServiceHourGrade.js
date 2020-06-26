@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-import { AdjustHorizontalMeasure, adjustVerticalMeasure, adjustHorizontalMeasure } from '../utils/adjustMeasures';
+import { adjustVerticalMeasure, adjustHorizontalMeasure } from '../utils/adjustMeasures';
 
 import adjustFontSize from '../utils/adjustFontSize';
 
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
+import { useScheduledHour } from '../contexts/serviceScheduling';
 
 const ServiceHourGrade = ({datasource, style}) => { //a estilização a ser enviada como prop deverá ser somente de espaçamento do container externo do componente
-
     const initialState = [];
+
+    const { saveScheduledHour } = useScheduledHour();
+
     useEffect(() => {
         const setInitialState = async () => {
             await datasource.map(() => {
@@ -21,9 +24,9 @@ const ServiceHourGrade = ({datasource, style}) => { //a estilização a ser envi
         setInitialState();
     }, []);
 
-    useEffect(() => {
-        console.log(selectedHours);
-    }, [selectedHours]);
+    // useEffect(() => {
+    //     console.log(selectedHours);
+    // }, [selectedHours]); for testing
 
     const [selectedHours, setSelectedHours] = useState(initialState);
 
@@ -32,6 +35,8 @@ const ServiceHourGrade = ({datasource, style}) => { //a estilização a ser envi
         const resetedHours = currentHoursSelected.map((item, index) => currentHoursSelected[index] = false );
         resetedHours[index] = true;
         setSelectedHours(resetedHours);
+
+        saveScheduledHour(datasource[index]);
     }
 
 
@@ -67,7 +72,6 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'flex-start',
         width: adjustHorizontalMeasure(295),
-        height: adjustVerticalMeasure(259),
         //paddingLeft: adjustHorizontalMeasure(7),
     },
     unselectedButtonContainer:{

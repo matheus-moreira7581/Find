@@ -64,13 +64,8 @@ const styles = StyleSheet.create({
         marginBottom: adjustVerticalMeasure(37),
     },
     buttonContainer:{
-        height: adjustVerticalMeasure(354),
+        flex: 1,
         justifyContent: 'center',
-    },
-    tempContainer:{
-        backgroundColor: '#C1C1CC',
-        height: adjustVerticalMeasure(139),
-        marginBottom: 'auto',
     },
     backButton:{
         marginLeft: adjustHorizontalMeasure(24),
