@@ -1,18 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import HomeList from '../../components/HomeList';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
 
+import api from '../../services/api';
+
 
 // import { Container } from './styles';
 
 const Home = () => {
   const navigation = useNavigation();
-  const { signOut } = useAuth();
+  const { signOut, loggedUser, signedIn } = useAuth();
 
   const [showProduct, setShowProduct] = useState(true);
+  //const [productData, setProductData] = useState(productDATA);
+ // const [serviceData, setServiceData] = useState([]);
+
+
+  useEffect(() => {
+    loadScreenInfo();
+    console.log(loggedUser.data.name);
+  }, []);
+
+
+  
+  const loadScreenInfo = async () => {
+    const response = await api.get('/home-client');
+    const teste = []
+    teste.push(response.data[0]);
+    //setProductData(teste);
+    
+  }
   // This data array is temporary only for test
   const productDATA = [
     {
@@ -65,7 +85,7 @@ const Home = () => {
     },
   ]
   // This data array is temporary only for test
-  const serviceData = [
+  const serviceDATA = [
     {
       title: 'Moda e Beleza',
       data: [[
@@ -103,7 +123,7 @@ const Home = () => {
   }
 
   let showList = <HomeList DATA={productDATA} onPress={navigateToCompanies}/>;
-  if(showProduct === false) showList = <HomeList DATA={serviceData}/>
+  if(showProduct === false) showList = <HomeList DATA={serviceDATA}/>
 
   const navigateList = (type) => {
     if(type === 'service') setShowProduct(false);
@@ -115,7 +135,7 @@ const Home = () => {
     <SafeAreaView style={styles.container}> 
       <View style={styles.headerContainer}>
         <View style={styles.welcomeContainer}>
-          <Text style={styles.welcomeText}>Olá, Lucas.</Text>
+          <Text style={styles.welcomeText}>Olá, {signedIn ? loggedUser.data.name : Usuário}.</Text>
           {/* Temporary logout button */}
           <TouchableOpacity onPress={signOut}>
             <Text>Logout</Text>

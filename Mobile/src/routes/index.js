@@ -15,7 +15,7 @@ const Routes = () => {
             return <ServiceCompanyTabAppRoutes/>
     }
     return (
-        <TabAppRoutes/> 
+        signedIn ? checkLoginType() : <AuthRoutes/>
     ); 
         
 };
