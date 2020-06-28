@@ -15,16 +15,58 @@ const Home = () => {
   const { signOut, loggedUser, signedIn } = useAuth();
 
   const [showProduct, setShowProduct] = useState(true);
-  //const [productData, setProductData] = useState(productDATA);
+  const [productData, setProductData] = useState(defaultData);
  // const [serviceData, setServiceData] = useState([]);
 
-
+  const defaultData = [
+    {
+      Type: "product",
+      Section: "Alimentação",
+      data: [
+        [{
+          title: "Restaurante",
+          img_url: require('../../assets/images/ProductCategory/pizzaria.png'),
+          id_section: 1,
+        },
+        {
+          title: "Pizzaria",
+          img_url: require('../../assets/images/ProductCategory/pizzaria.png'),
+          id_section: 1,
+        },
+        { 
+          title: "Hamburguer",
+          img_url: require('../../assets/images/ProductCategory/pizzaria.png'),
+          id_section: 1,
+        }]
+      ]
+    },
+    {
+      Type: "product",
+      Section: "Alimentação",
+      data: [
+        [{
+          title: "Restaurante",
+          img_url: require('../../assets/images/ProductCategory/pizzaria.png'),
+          id_section: 1,
+        },
+        {
+          title: "Pizzaria",
+          img_url: require('../../assets/images/ProductCategory/pizzaria.png'),
+          id_section: 1,
+        },
+        { 
+          title: "Hamburguer",
+          img_url: require('../../assets/images/ProductCategory/pizzaria.png'),
+          id_section: 1,
+        }]
+      ]
+    },
+  ]
   useEffect(() => {
     loadScreenInfo();
-    console.log(loggedUser.data.name);
   }, []);
 
-
+  useEffect(() => console.log(productData), [productData]);
   
   const loadScreenInfo = async () => {
     const response = await api.get('/home-client');
@@ -122,8 +164,8 @@ const Home = () => {
     navigation.navigate('Companies');
   }
 
-  let showList = <HomeList DATA={productDATA} onPress={navigateToCompanies}/>;
-  if(showProduct === false) showList = <HomeList DATA={serviceDATA}/>
+  let showList = <HomeList datasource={defaultData} onPress={navigateToCompanies}/>;
+  if(showProduct === false) showList = <HomeList datasource={serviceDATA}/>
 
   const navigateList = (type) => {
     if(type === 'service') setShowProduct(false);

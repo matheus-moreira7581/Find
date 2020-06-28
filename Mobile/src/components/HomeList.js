@@ -1,65 +1,60 @@
 import React from 'react';
-import { View, Text, SectionList, FlatList, StyleSheet } from 'react-native';
+import { View, Text, SectionList, FlatList, StyleSheet, ScrollView } from 'react-native';
 import CategoryCard from './CategoryCard';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SCREEN_HEIGHT ,SCREEN_WIDTH } from '../utils/constants';
 import adjustFontSize from '../utils/adjustFontSize';
+import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustMeasures';
 
 // import { Container } from './styles';
 
-const HomeList = (props) => {
+const HomeList = ({ datasource, onPress }) => {
   return (
     <View style={styles.listContainer}>
-        <SectionList 
-          sections={props.DATA}
-          keyExtractor={(item, index) => item + index}
+       <SectionList 
+          sections={datasource}
+          keyExtractor={(item, index) => String(index)}
           showsVerticalScrollIndicator={false}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text style={styles.listTitle}>{title}</Text>
+          renderSectionHeader={({ section }) => (
+            <Text style={styles.listTitle}>{section.Section}</Text>
           )}
           renderItem={({ item, index }) => 
               <FlatList 
                 data={item}
-                keyExtractor={(item, index) => item + index}
-                horizontal={true}
+                keyExtractor={(item, index) => String(index)}
+                horizontal
                 showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={props.onPress}
-                >
-                <View style={styles.listItem}>
-                  <CategoryCard 
-                    Title={item.name} 
-                    Image={item.image}
-                  />
-                </View>
-                </TouchableOpacity>
-                )
-              }
+                renderItem={({ item, index }) => (
+                  <TouchableOpacity key={index} onPress={onPress}>
+                    <View style={styles.listItem}>
+                      <CategoryCard Title={item.title} Image={item.img_url}/>
+                    </View>
+                  </TouchableOpacity>
+                )}
               />
           }
         />
-      </View>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   listContainer: {
-    marginLeft: 20 / 375 * SCREEN_WIDTH,
+    marginLeft: adjustHorizontalMeasure(20),
     backgroundColor: colors.background,
   },
   listTitle: {
     color: colors.cinzaEscuro,
     fontFamily: fonts.montserratBold,
-    fontSize: adjustFontSize(19),
-    marginBottom: 5 / 812 * SCREEN_HEIGHT,
-    marginTop: 23 / 812 * SCREEN_HEIGHT,
+    fontSize: adjustFontSize(16),
+    marginBottom: adjustVerticalMeasure(5),
+    marginTop: adjustVerticalMeasure(23),
   },
   listItem: {
-    height: 90 / 812 * SCREEN_HEIGHT,
-    marginRight: 14 / 375 * SCREEN_WIDTH,
+    height: adjustVerticalMeasure(90),
+    marginRight: adjustHorizontalMeasure(14),
     justifyContent: 'center',
   }
 });
