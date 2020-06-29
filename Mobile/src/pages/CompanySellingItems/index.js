@@ -48,7 +48,6 @@ const CompanySellingItems = (props) => {
   const fetchCompanySellingItems = async () => {
     const user = loggedUser;
     const response = await api.get(`/my-products/${user.data.id}`)
-    console.log(response.data);
     setSellingItemsData(response.data);
   }
 
@@ -82,6 +81,7 @@ const CompanySellingItems = (props) => {
               <ProductCard 
                 Title={item.name}
                 Price={item.price}
+                Image={item.img_url}
                 Description={item.description}
               />
             )}

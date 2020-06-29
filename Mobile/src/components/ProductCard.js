@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
@@ -8,17 +8,21 @@ import adjustFontSize from '../utils/adjustFontSize';
 // import { Container } from './styles';
 
 const ProductCard = (props) => {
+  const [image, setImage] = useState(props.Image);
+
   return (
     <TouchableOpacity
       onPress={props.onPress}
     >
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image 
-            source={props.Image}
-            style={styles.image}
-          />
-          
+          {
+          image ? 
+            <Image 
+              source={image}
+              style={styles.image}
+            /> : <Text style={styles.noImageText}>No Image</Text>
+          }
         </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>{props.Title}</Text>
@@ -49,12 +53,19 @@ const styles = StyleSheet.create({
     width: 88 / 375 * SCREEN_WIDTH,
     height: 88 / 812 * SCREEN_HEIGHT,
     borderRadius: 8,
-    backgroundColor: colors.cinza,
+    backgroundColor: colors.bordarCinza,
     marginRight: 7 / 375 * SCREEN_WIDTH,
+    justifyContent:'center',
   },
   image: {
     width: 88 / 375 * SCREEN_WIDTH,
     height: 88 / 812 * SCREEN_HEIGHT,
+  },
+  noImageText: {
+    textAlign: 'center',
+    fontFamily: fonts.montserrat,
+    fontSize: adjustFontSize(15),
+    color: colors.cinzaEscuro,
   },
   detailsContainer: {
     width: 270 / 375 * SCREEN_WIDTH,
