@@ -57,9 +57,29 @@ filterListButton: {
   marginRight: adjustHorizontalMeasure(23),
 },
 listContainer: {
-  height: adjustVerticalMeasure(603),
+  // height: adjustVerticalMeasure(603),
+  height: adjustVerticalMeasure(545),
   width: '100%',
   alignItems: 'center',
+},
+totalContainer: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  paddingHorizontal: adjustHorizontalMeasure(32),
+  alignItems: 'center',
+  height: adjustVerticalMeasure(50),
+  width: '100%',
+  backgroundColor: colors.background,
+},
+totalLabelText: {
+  fontFamily: fonts.montserratBold,
+  fontSize: adjustFontSize(20),
+  color: colors.cinzaEscuro,
+},
+totalPriceText: {
+  fontFamily: fonts.montserrat,
+  fontSize: adjustFontSize(20),
+  color: colors.cinzaEscuro,
 }
 
 });
