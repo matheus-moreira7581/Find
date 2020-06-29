@@ -13,6 +13,7 @@ import CompanyProductsScreen from '../pages/CompanyProducts';
 import ProductDeatilsScreen from '../pages/ProductDetails';
 import PaymentOptionsScreen from '../pages/PaymentOptions';
 import DeliveryOptionsScreen from '../pages/DeliveryOptions';
+import ServiceOptionsScreen from '../pages/ServiceOptions';
 import DeliveryAddressScreen from '../pages/DeliveryAddress';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
@@ -39,6 +40,7 @@ export const CustomerAppRoutes = () => (
             <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
             <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
             <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
+            <CustomerAppStack.Screen name="ServiceOptions" component={ServiceOptionsScreen}/>
             <CustomerAppStack.Screen name="DeliveryAddress" component={DeliveryAddressScreen}/>
             <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
             <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
