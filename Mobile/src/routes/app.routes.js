@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { ServiceSchedulingProvider } from '../contexts/serviceScheduling';
+import { CategoryProvider } from '../contexts/categorySelection';
 
 import HomeScreen from '../pages/Home';
 import CompaniesScreen from '../pages/Companies';

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity, Button } from 'react-native';
+
 import styles from './styles';
 import HomeList from '../../components/HomeList';
+
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
+import { useCategory } from '../../contexts/categorySelection';
 
 import api from '../../services/api';
 
@@ -18,7 +21,9 @@ const Home = () => {
   const [productData, setProductData] = useState([]);
   const [serviceData, setServiceData] = useState([]);
 
-  const defaultData = [
+  const { selectedCategory } = useCategory();
+
+  const defaultDataModel = [
     {
       Type: "product",
       Section: "Alimentação",
@@ -64,10 +69,10 @@ const Home = () => {
   ]
 
   useEffect(() => {
-    loadScreenInfo();
+    fetchCategories();
   }, []);
   
-  const loadScreenInfo = async () => {
+  const fetchCategories = async () => {
     const response = await api.get('/home-client');
     const allCategories = response.data;
 
@@ -77,14 +82,23 @@ const Home = () => {
     setProductData(productCategories);
     setServiceData(serviceCategories);
   }
-  // This data array is temporary only for test
 
-  const navigateToCompanies = () => {
-    navigation.navigate('Companies');
+  const navigateToProductTypeCompanies = () => {
+      navigation.navigate('Companies', {
+        selectedCategory, 
+        type: "product"
+      });
   }
+  const navigateToServiceTypeCompanies = () => {
+    navigation.navigate('Companies', {
+      selectedCategory, 
+      type: "service"
+    });
+}
 
-  let showList = <HomeList datasource={productData} onPress={navigateToCompanies}/>;
-  if(showProduct === false) showList = <HomeList datasource={serviceData}/>
+
+  let showList = <HomeList datasource={productData} onPress={navigateToProductTypeCompanies}/>;
+  if(showProduct === false) showList = <HomeList datasource={serviceData} onPress={navigateToServiceTypeCompanies}/>
 
   const navigateList = (type) => {
     if(type === 'service') setShowProduct(false);
