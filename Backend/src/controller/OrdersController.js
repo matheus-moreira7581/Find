@@ -50,7 +50,7 @@ module.exports = {
                     "id_order": id_order[0],
                     "id_products": itens.id_products,
                     "amount": itens.amount,
-                    "Details": itens.Details
+                    "details": itens.Details
                 }  
 
             });
