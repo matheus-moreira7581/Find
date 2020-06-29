@@ -108,8 +108,6 @@ module.exports = {
         }
     },
 
-    
-
     async indexForIncome(request, response, next) {
         try {
 
