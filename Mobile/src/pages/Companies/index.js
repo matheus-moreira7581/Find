@@ -96,11 +96,7 @@ const Companies = () => {
     return (
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
-<<<<<<< HEAD
                 <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-=======
-                <TouchableOpacity style={styles.backButton} onPress={navigation.goBack()}>
->>>>>>> parent of d34f308... delete mobile
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
