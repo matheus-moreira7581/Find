@@ -15,8 +15,8 @@ const Home = () => {
   const { signOut, loggedUser, signedIn } = useAuth();
 
   const [showProduct, setShowProduct] = useState(true);
-  const [productData, setProductData] = useState(defaultData);
- // const [serviceData, setServiceData] = useState([]);
+  const [productData, setProductData] = useState([]);
+  const [serviceData, setServiceData] = useState([]);
 
   const defaultData = [
     {
@@ -62,111 +62,29 @@ const Home = () => {
       ]
     },
   ]
+
   useEffect(() => {
     loadScreenInfo();
   }, []);
   
-  //useEffect(() => console.log(productData), [productData]);
-
   const loadScreenInfo = async () => {
     const response = await api.get('/home-client');
     const allCategories = response.data;
+
     const productCategories = allCategories.filter(category =>  !!category && category.Type === "product");
     const serviceCategories = allCategories.filter(category => !!category && category.Type === "service");
-    setProductData(productCategories);
     
+    setProductData(productCategories);
+    setServiceData(serviceCategories);
   }
   // This data array is temporary only for test
-  const productDATA = [
-    {
-      title: 'Alimentação',
-      data: [[
-        {name: 'Restaurante',image: require('../../assets/images/ProductCategory/comida.png')},
-        {name: 'Pizzaria',image: require('../../assets/images/ProductCategory/pizzaria.png')},
-        {name: 'Hamburguer',image: require('../../assets/images/ProductCategory/hamburguer.png')},
-        {name: 'Padaria',image: require('../../assets/images/ProductCategory/padaria.png')}
-      ]]
-    },
-    {
-      title: 'Derivados',
-      data: 
-      [[
-        {name: 'Mercados',image: require('../../assets/images/ProductCategory/mercado.png')},
-        {name: 'Atacados',image: require('../../assets/images/ProductCategory/atacado.png')},
-      ]]
-    },
-    {
-      title: 'Saúde',
-      data: 
-      [[
-        {name: 'Farmácia',image: require('../../assets/images/ProductCategory/farmacia.png')},
-        {name: 'Suplementos',image: require('../../assets/images/ProductCategory/suplementos.png')},
-      ]]
-    },
-    {
-      title: 'Beleza',
-      data: 
-      [[
-        {name: 'Estética',image: require('../../assets/images/ProductCategory/estetica.png')}
-      ]]
-    },
-    {
-      title: 'Educação',
-      data: 
-      [[
-        {name: 'Papelaria',image: require('../../assets/images/ProductCategory/papelaria.png')}, 
-        {name: 'Livraria',image: require('../../assets/images/ProductCategory/livros.png')}
-      ]]
-    },
-    {
-      title: 'Construção',
-      data: 
-      [[
-        {name: 'Material',image: require('../../assets/images/ProductCategory/material.png')}, 
-        {name: 'Ferramenta',image: require('../../assets/images/ProductCategory/ferramenta.png')}
-      ]]
-    },
-  ]
-  // This data array is temporary only for test
-  const serviceDATA = [
-    {
-      title: 'Moda e Beleza',
-      data: [[
-        {name: 'Moda',image: require('../../assets/images/ServicesCategory/roupas.png')},
-        {name: 'Salão de Beleza',image: require('../../assets/images/ServicesCategory/salaoDeBeleza.png')},
-        {name: 'Barbeiro',image: require('../../assets/images/ServicesCategory/barbeiro.png')},
-        {name: 'Estética',image: require('../../assets/images/ServicesCategory/estética.png')}
-      ]]
-    },
-    {
-      title: 'Saúde',
-      data: [[
-        {name: 'Odontologia',image: require('../../assets/images/ServicesCategory/odonto.png')},
-        {name: 'Psicologia',image: require('../../assets/images/ServicesCategory/psicologi.png')},
-      ]]
-    },
-    {
-      title: 'Design',
-      data: [[
-        {name: 'UX | UI Design',image: require('../../assets/images/ServicesCategory/UX-UI.png')},
-        {name: 'Psicologia',image: require('../../assets/images/ServicesCategory/designGrafico.png')},
-      ]]
-    },
-    {
-      title: 'Serviços Domésticos',
-      data: [[
-        {name: 'Babá',image: require('../../assets/images/ServicesCategory/baba.png')},
-        {name: 'Cozinheiro',image: require('../../assets/images/ServicesCategory/cozinheira.png')},
-      ]]
-    },
-  ]
 
   const navigateToCompanies = () => {
     navigation.navigate('Companies');
   }
 
   let showList = <HomeList datasource={productData} onPress={navigateToCompanies}/>;
-  if(showProduct === false) showList = <HomeList datasource={serviceDATA}/>
+  if(showProduct === false) showList = <HomeList datasource={serviceData}/>
 
   const navigateList = (type) => {
     if(type === 'service') setShowProduct(false);
@@ -178,8 +96,9 @@ const Home = () => {
     <SafeAreaView style={styles.container}> 
       <View style={styles.headerContainer}>
         <View style={styles.welcomeContainer}>
-          <Text style={styles.welcomeText}>Olá, {signedIn ? loggedUser.data.name : Usuário}.</Text>
-          
+          <Text style={styles.welcomeText}>
+            Olá, {signedIn ? loggedUser.data.name.split(' ')[0] : 'Usuário'}.
+          </Text>
           <TouchableOpacity onPress={signOut}>
             <Text>Logout</Text>
           </TouchableOpacity>
