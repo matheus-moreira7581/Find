@@ -73,6 +73,10 @@ const CompanyIncome = () => {
             )}
           />
        </View>
+        <View style={styles.totalContainer}>
+            <Text style={styles.totalLabelText}>Total:</Text>
+            <Text style={styles.totalPriceText}>R$720,00</Text>
+        </View>
       </View>
     </View>
   )

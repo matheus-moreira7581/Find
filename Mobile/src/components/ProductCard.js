@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
@@ -9,6 +9,8 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustM
 // import { Container } from './styles';
 
 const ProductCard = (props) => {
+  const [image, setImage] = useState(props.Image);
+
   return (
     <TouchableOpacity
       onPress={props.onPress}
@@ -52,6 +54,12 @@ const styles = StyleSheet.create({
   image: {
     width: adjustHorizontalMeasure(88),
     height: adjustVerticalMeasure(88),
+  },
+  noImageText: {
+    textAlign: 'center',
+    fontFamily: fonts.montserrat,
+    fontSize: adjustFontSize(15),
+    color: colors.cinzaEscuro,
   },
   detailsContainer: {
     width: adjustHorizontalMeasure(270),
