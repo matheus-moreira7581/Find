@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
 import RoundedButton from '../../components/RoundedButton';
 
@@ -14,28 +14,47 @@ import { useNavigation } from '@react-navigation/native';
 import ProductCard from '../../components/ProductCard';
 import CircleButton from '../../components/CircleButton';
 
-const sellingItemsData = [
-  {
-    title: 'Corte Masculino', price: '25,00', 
-    image: require('../../assets/images/CompanyServices/corteCabelo.png'),
-    description: "Corte Masculino utilizando maquina e tesoura."
-  },
-  {
-    title: 'Sobrancelha Masculina', price: '5,00', 
-    image: require('../../assets/images/CompanyServices/sobrancelha.png'),
-    description: "A sobrancelha é feita por meio da gilete e tesoura."
-  },
-  {
-    title: 'Sobrancelha Masculina', price: '15,00', 
-    image: require('../../assets/images/CompanyServices/barba.png'),
-    description: "A barba é feita utilizando a gilete e a maquina com regulagem."
-  },
+import { useAuth } from '../../contexts/auth'
+
+import api from '../../services/api';
+
+// const sellingItemsData = [
+//   {
+//     title: 'Corte Masculino', price: '25,00', 
+//     image: require('../../assets/images/CompanyServices/corteCabelo.png'),
+//     description: "Corte Masculino utilizando maquina e tesoura."
+//   },
+//   {
+//     title: 'Sobrancelha Masculina', price: '5,00', 
+//     image: require('../../assets/images/CompanyServices/sobrancelha.png'),
+//     description: "A sobrancelha é feita por meio da gilete e tesoura."
+//   },
+//   {
+//     title: 'Sobrancelha Masculina', price: '15,00', 
+//     image: require('../../assets/images/CompanyServices/barba.png'),
+//     description: "A barba é feita utilizando a gilete e a maquina com regulagem."
+//   },
   
 
 
-];
+// ];
 
 const CompanySellingItems = (props) => {
+
+  const [sellingItemsData, setSellingItemsData] = useState({});
+
+  const {loggedUser} = useAuth();
+
+  const fetchCompanySellingItems = async () => {
+    const user = loggedUser;
+    const response = await api.get(`/my-products/${user.data.id}`)
+    console.log(response.data);
+    setSellingItemsData(response.data);
+  }
+
+  useEffect(() => {
+    fetchCompanySellingItems();
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -61,9 +80,8 @@ const CompanySellingItems = (props) => {
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <ProductCard 
-                Title={item.title}
+                Title={item.name}
                 Price={item.price}
-                Image={item.image}
                 Description={item.description}
               />
             )}

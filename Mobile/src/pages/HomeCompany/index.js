@@ -16,13 +16,7 @@ import CompanyRunning from '../CompanyRunning';
 
 const HomeCompany = () => {
   const navigation = useNavigation();
-  const [shift, setShift] = useState(true);
-
-  // const navigatoCompanyRunning = () => {
-  //   navigation.navigate('CompanyRunning');
-  // }
-
-
+  const [shift, setShift] = useState(false);
 
   return (
     shift ? <CompanyRunning onPressButton={() => {setShift(!shift)}}/> : 

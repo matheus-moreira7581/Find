@@ -18,6 +18,7 @@ const ProductCard = (props) => {
             source={props.Image}
             style={styles.image}
           />
+          
         </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>{props.Title}</Text>
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     width: 88 / 375 * SCREEN_WIDTH,
     height: 88 / 812 * SCREEN_HEIGHT,
     borderRadius: 8,
-    backgroundColor: colors.background,
+    backgroundColor: colors.cinza,
     marginRight: 7 / 375 * SCREEN_WIDTH,
   },
   image: {
