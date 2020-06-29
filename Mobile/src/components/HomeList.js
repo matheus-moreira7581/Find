@@ -27,7 +27,7 @@ const HomeList = ({ datasource, onPress }) => {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item, index }) => (
-                  <TouchableOpacity key={index} onPress={onPress}>
+                  <TouchableOpacity key={item.id} onPress={onPress}>
                     <View style={styles.listItem}>
                       <CategoryCard Title={item.title} Image={item.img_url}/>
                     </View>

@@ -8,7 +8,7 @@ module.exports = {
     async index(request, response, next) {
         try {
 
-            const category = await knex('categories').select('title', 'img_url','id_section');
+            const category = await knex('categories').select('title', 'img_url','id_section', 'id');
 
             const section = await knex('sections');
     
