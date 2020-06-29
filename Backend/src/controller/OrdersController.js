@@ -121,7 +121,6 @@ module.exports = {
             const groups = orders.reduce((groups, income) => {
                 const date = new Date(income.order_date).toLocaleDateString();
                 // const sp = Date(date).split('T')[0];
-                console.log(date);
                 if(!groups[date]) {
                     groups[date] = [];
                 }
@@ -130,7 +129,6 @@ module.exports = {
             }, {});
 
             const groupArrays = Object.keys(groups).map((order_date) => {
-                console.log(order_date);
                 return {
                     order_date,
                     income: groups[order_date]

@@ -36,6 +36,7 @@ import CompanySellingItems from './src/pages/CompanySellingItems';
 import ServiceScheduling from './src/pages/ServiceScheduling';
 
 import { TabAppRoutes } from './src/routes/app.routes';
+import ServiceOptions from './src/pages/ServiceOptions';
 export default function App() {
 
   const [fontsLoaded] = useFonts ({
@@ -77,6 +78,7 @@ export default function App() {
       // <HomeCompany />
       //<CompanySellingItems/>
       //<ServiceScheduling/>
+      // <ServiceOptions />
     )
   }
 }
