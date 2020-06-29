@@ -5,17 +5,25 @@ import fonts from '../assets/var/fonts';
 import adjustFontSize from '../utils/adjustFontSize';
 import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustMeasures';
 
+import { MaterialIcons } from '@expo/vector-icons';
 // import { Container } from './styles';
 
 const CategoryCard = (props) => {
 
   return (
     <View style={{...styles.container, ...props.style}}>
-      <Image 
-        source={props.Image}
-        resizeMode="stretch"
-        style={styles.image}
-      />
+      <View style={styles.imageContainer}>
+        {
+          props.Image != "" 
+          ? <Image source={props.Image} style={styles.image}/>
+          : <MaterialIcons 
+              name="insert-photo" 
+              size={adjustHorizontalMeasure(25)} 
+              color={colors.cinza} 
+            />
+        } 
+      </View>
+             
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{props.Title}</Text>
       </View>
@@ -36,6 +44,13 @@ const styles = StyleSheet.create({
   image: {
     height: adjustVerticalMeasure(68),
     width: adjustHorizontalMeasure(120),
+  },
+  imageContainer:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: adjustVerticalMeasure(68),
+    width: adjustHorizontalMeasure(120),
+    overflow: 'hidden',
   },
   titleContainer: {
     height: adjustVerticalMeasure(22),
