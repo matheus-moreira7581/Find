@@ -65,14 +65,15 @@ const Home = () => {
   useEffect(() => {
     loadScreenInfo();
   }, []);
-
-  useEffect(() => console.log(productData), [productData]);
   
+  //useEffect(() => console.log(productData), [productData]);
+
   const loadScreenInfo = async () => {
     const response = await api.get('/home-client');
-    const teste = []
-    teste.push(response.data[0]);
-    //setProductData(teste);
+    const allCategories = response.data;
+    const productCategories = allCategories.filter(category =>  !!category && category.Type === "product");
+    const serviceCategories = allCategories.filter(category => !!category && category.Type === "service");
+    setProductData(productCategories);
     
   }
   // This data array is temporary only for test
@@ -164,7 +165,7 @@ const Home = () => {
     navigation.navigate('Companies');
   }
 
-  let showList = <HomeList datasource={defaultData} onPress={navigateToCompanies}/>;
+  let showList = <HomeList datasource={productData} onPress={navigateToCompanies}/>;
   if(showProduct === false) showList = <HomeList datasource={serviceDATA}/>
 
   const navigateList = (type) => {
@@ -178,7 +179,7 @@ const Home = () => {
       <View style={styles.headerContainer}>
         <View style={styles.welcomeContainer}>
           <Text style={styles.welcomeText}>Olá, {signedIn ? loggedUser.data.name : Usuário}.</Text>
-          {/* Temporary logout button */}
+          
           <TouchableOpacity onPress={signOut}>
             <Text>Logout</Text>
           </TouchableOpacity>

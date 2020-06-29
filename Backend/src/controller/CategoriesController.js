@@ -15,12 +15,12 @@ module.exports = {
             
             const mixed = section.map(items => {
     
-                if(category.find(e => items.id == e.id_section ? true : false)) {
+                if(category.find(e => items.id === e.id_section)) {
     
                     return {
                         "Type": items.type,
                         "Section" : items.name,
-                        "Subcategory": category.filter(elements => elements.id_section == items.id)
+                        "data": [category.filter(elements => elements.id_section === items.id)]
                     }
                 
                 } 

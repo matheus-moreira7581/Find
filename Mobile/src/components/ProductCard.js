@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../utils/constants';
+
 import adjustFontSize from '../utils/adjustFontSize';
+import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustMeasures';
 
 // import { Container } from './styles';
 
@@ -15,14 +16,8 @@ const ProductCard = (props) => {
       onPress={props.onPress}
     >
       <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          {
-          image ? 
-            <Image 
-              source={image}
-              style={styles.image}
-            /> : <Text style={styles.noImageText}>No Image</Text>
-          }
+        <View style={styles.imageContainer}>         
+          <Image source={props.Image} style={styles.image}/>
         </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>{props.Title}</Text>
@@ -38,28 +33,27 @@ const ProductCard = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10 / 812 * SCREEN_HEIGHT,
-    width: 360 / 375 * SCREEN_WIDTH,
-    height: 104 / 812 * SCREEN_HEIGHT,
+    marginTop: adjustVerticalMeasure(10),
+    width: adjustHorizontalMeasure(360),
+    height: adjustVerticalMeasure(104),
     flexDirection: 'row',
     // padding: 5,
-    paddingHorizontal: 5 / 375 * SCREEN_WIDTH,
-    paddingVertical: 5 / 812 * SCREEN_HEIGHT,
+    paddingHorizontal: adjustHorizontalMeasure(5),
+    paddingVertical: adjustVerticalMeasure(5),
     borderWidth: 2,
     borderRadius: 8,
     borderColor: colors.bordarCinza,
   },
   imageContainer: {
-    width: 88 / 375 * SCREEN_WIDTH,
-    height: 88 / 812 * SCREEN_HEIGHT,
+    width: adjustHorizontalMeasure(88),
+    height: adjustVerticalMeasure(88),
     borderRadius: 8,
-    backgroundColor: colors.bordarCinza,
-    marginRight: 7 / 375 * SCREEN_WIDTH,
-    justifyContent:'center',
+    backgroundColor: colors.cinza,
+    marginRight: adjustHorizontalMeasure(7),
   },
   image: {
-    width: 88 / 375 * SCREEN_WIDTH,
-    height: 88 / 812 * SCREEN_HEIGHT,
+    width: adjustHorizontalMeasure(88),
+    height: adjustVerticalMeasure(88),
   },
   noImageText: {
     textAlign: 'center',
@@ -68,7 +62,7 @@ const styles = StyleSheet.create({
     color: colors.cinzaEscuro,
   },
   detailsContainer: {
-    width: 270 / 375 * SCREEN_WIDTH,
+    width: adjustHorizontalMeasure(270),
     height: '100%',
   },
   title: {
@@ -77,7 +71,7 @@ const styles = StyleSheet.create({
     color: colors.cinzaEscuro,
   },
   descriptionContainer: {
-    height: 43 / 812 * SCREEN_HEIGHT,
+    height: adjustVerticalMeasure(43),
   },
   description: {
     fontFamily: fonts.montserrat,
