@@ -148,7 +148,7 @@ const CustomerRegistration = () => {
                             value={cell}
                             onChangeText={getcell}
                             maxLength={15}
-                            keyboardType='name-cell-pad'
+                            keyboardType='name-phone-pad'
                         />
                     </View>
                     <View style={styles.emailContainer}>

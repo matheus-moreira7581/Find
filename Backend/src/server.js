@@ -55,9 +55,12 @@ app.get('/', function (req, res) {
 // not Found
 
 app.use((request, response, next) => {
+    if(response.headersSent) {
+        return next(error)
+    }
 
     const error = new Error('Not found')
-    response.status(500).send()
+    // response.status(500).send()
     next(error)
 
 });
@@ -69,9 +72,9 @@ app.use((error, request, response, next) => {
         return next(error)
     }
 
-    let status = err.status || 500
+    let status = error.status || 500
 
-    res.status(status).json({ error: err.message })
+    response.status(status).json({ error: error.message })
 
 });
 
