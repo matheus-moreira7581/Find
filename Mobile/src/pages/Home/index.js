@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity, Button } from 'react-native';
 
 import styles from './styles';
@@ -7,6 +8,13 @@ import HomeList from '../../components/HomeList';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
 import { useCategory } from '../../contexts/categorySelection';
+=======
+import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import styles from './styles';
+import HomeList from '../../components/HomeList';
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../contexts/auth';
+>>>>>>> parent of d34f308... delete mobile
 
 import api from '../../services/api';
 
@@ -21,9 +29,13 @@ const Home = () => {
   const [productData, setProductData] = useState([]);
   const [serviceData, setServiceData] = useState([]);
 
+<<<<<<< HEAD
   const { selectedCategory } = useCategory();
 
   const defaultDataModel = [
+=======
+  const defaultData = [
+>>>>>>> parent of d34f308... delete mobile
     {
       Type: "product",
       Section: "Alimentação",
@@ -69,10 +81,17 @@ const Home = () => {
   ]
 
   useEffect(() => {
+<<<<<<< HEAD
     fetchCategories();
   }, []);
   
   const fetchCategories = async () => {
+=======
+    loadScreenInfo();
+  }, []);
+  
+  const loadScreenInfo = async () => {
+>>>>>>> parent of d34f308... delete mobile
     const response = await api.get('/home-client');
     const allCategories = response.data;
 
@@ -82,6 +101,7 @@ const Home = () => {
     setProductData(productCategories);
     setServiceData(serviceCategories);
   }
+<<<<<<< HEAD
 
   const navigateToProductTypeCompanies = () => {
       navigation.navigate('Companies', {
@@ -99,6 +119,16 @@ const Home = () => {
 
   let showList = <HomeList datasource={productData} onPress={navigateToProductTypeCompanies}/>;
   if(showProduct === false) showList = <HomeList datasource={serviceData} onPress={navigateToServiceTypeCompanies}/>
+=======
+  // This data array is temporary only for test
+
+  const navigateToCompanies = () => {
+    navigation.navigate('Companies');
+  }
+
+  let showList = <HomeList datasource={productData} onPress={navigateToCompanies}/>;
+  if(showProduct === false) showList = <HomeList datasource={serviceData}/>
+>>>>>>> parent of d34f308... delete mobile
 
   const navigateList = (type) => {
     if(type === 'service') setShowProduct(false);

@@ -36,8 +36,11 @@ import CompanySellingItems from './src/pages/CompanySellingItems';
 import ServiceScheduling from './src/pages/ServiceScheduling';
 
 import { TabAppRoutes } from './src/routes/app.routes';
+<<<<<<< HEAD
 //import ServiceOptions from './src/pages/ServiceOptions';
 
+=======
+>>>>>>> parent of d34f308... delete mobile
 export default function App() {
 
   const [fontsLoaded] = useFonts ({
@@ -79,7 +82,10 @@ export default function App() {
       // <HomeCompany />
       //<CompanySellingItems/>
       //<ServiceScheduling/>
+<<<<<<< HEAD
       // <ServiceOptions />
+=======
+>>>>>>> parent of d34f308... delete mobile
     )
   }
 }
