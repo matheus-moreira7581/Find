@@ -108,6 +108,24 @@ module.exports = {
         }
     },
 
+    async indexForIncome(request, response, next) {
+        try {
+
+            const { id_company } = request.params;
+
+            const orders = await knex('orders')
+            .where({ id_company })
+            .orderBy('order_date', 'desc')
+            .select('total', 'order_date');
+
+            response.status(200).json(orders)
+
+            
+        } catch (error) {
+            next(error)
+        }
+    },
+
 
     // Detalhando pedido
 
