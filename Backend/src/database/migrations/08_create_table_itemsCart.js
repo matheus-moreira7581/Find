@@ -1,4 +1,4 @@
-exports.up = knex => knex.schema.createTable('itens_cart', table => {
+exports.up = knex => knex.schema.createTable('items_cart', table => {
 
     table.increments('id')
     table.integer('id_order').references('orders.id').notNullable().onDelete()
@@ -8,4 +8,4 @@ exports.up = knex => knex.schema.createTable('itens_cart', table => {
 })
 
 
-exports.down = knex => knex.schema.dropTable('itens_cart')
+exports.down = knex => knex.schema.dropTable('items_cart')

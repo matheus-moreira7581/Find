@@ -50,13 +50,13 @@ module.exports = {
                     "id_order": id_order[0],
                     "id_products": itens.id_products,
                     "amount": itens.amount,
-                    "details": itens.Details
+                    "details": itens.details
                 }  
 
             });
 
 
-           await trx('itens_cart').insert(data)
+           await trx('items_cart').insert(data)
 
 
            const id_address = await trx('addresses')
@@ -125,10 +125,10 @@ module.exports = {
             const order = orders.filter(e => e.id == id_order);
 
 
-            const itens_cart = await knex('itens_cart')
+            const itens_cart = await knex('items_cart')
             .where({ id_order })
-            .join('products', 'products.id', 'itens_cart.id_products')
-            .select( 'products.name', 'products.description', 'products.price', 'products.img_url', 'itens_cart.amount', 'itens_cart.Details');
+            .join('products', 'products.id', 'items_cart.id_products')
+            .select( 'products.name', 'products.description', 'products.price', 'products.img_url', 'items_cart.amount', 'items_cart.details');
 
 
             const address = await knex('addresses')
