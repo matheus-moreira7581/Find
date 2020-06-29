@@ -36,6 +36,7 @@ export default StyleSheet.create({
     headerText:{
         fontFamily: fonts.montserratBold,
         fontSize: adjustFontSize(20),
+        textAlign: 'center',
     },
     bodyContainer:{
         flex: 1,

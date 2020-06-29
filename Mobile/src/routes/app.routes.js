@@ -6,10 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { ServiceSchedulingProvider } from '../contexts/serviceScheduling';
-<<<<<<< HEAD
 import { CategoryProvider } from '../contexts/categorySelection';
-=======
->>>>>>> parent of d34f308... delete mobile
 
 import HomeScreen from '../pages/Home';
 import CompaniesScreen from '../pages/Companies';
@@ -17,6 +14,7 @@ import CompanyProductsScreen from '../pages/CompanyProducts';
 import ProductDeatilsScreen from '../pages/ProductDetails';
 import PaymentOptionsScreen from '../pages/PaymentOptions';
 import DeliveryOptionsScreen from '../pages/DeliveryOptions';
+import ServiceOptionsScreen from '../pages/ServiceOptions';
 import DeliveryAddressScreen from '../pages/DeliveryAddress';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
@@ -36,22 +34,6 @@ const AppTab = createBottomTabNavigator();
 
 export const CustomerAppRoutes = () => (
     <ServiceSchedulingProvider>
-<<<<<<< HEAD
-        <CategoryProvider>
-            <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
-                <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
-                <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
-                <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
-                <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
-                <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
-                <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
-                <CustomerAppStack.Screen name="DeliveryAddress" component={DeliveryAddressScreen}/>
-                <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
-                <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
-                <CustomerAppStack.Screen name="ServiceScheduling" component={ServiceSchedulingScreen}/>
-            </CustomerAppStack.Navigator> 
-        </CategoryProvider>
-=======
         <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
             <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
             <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
@@ -59,12 +41,12 @@ export const CustomerAppRoutes = () => (
             <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
             <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
             <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
+            <CustomerAppStack.Screen name="ServiceOptions" component={ServiceOptionsScreen}/>
             <CustomerAppStack.Screen name="DeliveryAddress" component={DeliveryAddressScreen}/>
             <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
             <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
             <CustomerAppStack.Screen name="ServiceScheduling" component={ServiceSchedulingScreen}/>
         </CustomerAppStack.Navigator>
->>>>>>> parent of d34f308... delete mobile
     </ServiceSchedulingProvider>
 );
 
