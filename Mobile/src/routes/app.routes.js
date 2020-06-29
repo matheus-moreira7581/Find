@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { ServiceSchedulingProvider } from '../contexts/serviceScheduling';
+import { CategoryProvider } from '../contexts/categorySelection';
 
 import HomeScreen from '../pages/Home';
 import CompaniesScreen from '../pages/Companies';
@@ -32,18 +33,20 @@ const AppTab = createBottomTabNavigator();
 
 export const CustomerAppRoutes = () => (
     <ServiceSchedulingProvider>
-        <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
-            <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
-            <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
-            <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
-            <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
-            <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
-            <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
-            <CustomerAppStack.Screen name="DeliveryAddress" component={DeliveryAddressScreen}/>
-            <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
-            <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
-            <CustomerAppStack.Screen name="ServiceScheduling" component={ServiceSchedulingScreen}/>
-        </CustomerAppStack.Navigator>
+        <CategoryProvider>
+            <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
+                <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
+                <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
+                <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
+                <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
+                <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
+                <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
+                <CustomerAppStack.Screen name="DeliveryAddress" component={DeliveryAddressScreen}/>
+                <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
+                <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
+                <CustomerAppStack.Screen name="ServiceScheduling" component={ServiceSchedulingScreen}/>
+            </CustomerAppStack.Navigator> 
+        </CategoryProvider>
     </ServiceSchedulingProvider>
 );
 
