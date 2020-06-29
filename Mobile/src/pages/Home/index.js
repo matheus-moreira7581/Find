@@ -85,13 +85,11 @@ const Home = () => {
 
   const navigateToProductTypeCompanies = () => {
       navigation.navigate('Companies', {
-        selectedCategory, 
         type: "product"
       });
   }
   const navigateToServiceTypeCompanies = () => {
     navigation.navigate('Companies', {
-      selectedCategory, 
       type: "service"
     });
 }

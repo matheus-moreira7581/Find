@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -6,18 +6,21 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 
+import { useCategory } from '../../contexts/categorySelection';
+
 import styles from './styles';
 import colors from '../../assets/var/colors';
 
 import CompaniesList from '../../components/CompaniesList'
+
+import api from '../../services/api';
 
 
 let category = 'Alimentação';
 let subCategory = 'Pizzaria';
 //temp names, to be retrieved via api later
 
-
-const companies = [
+const companiesModel = [
     {
         id: "1",
         name: 'Tasty Pizza',
@@ -84,11 +87,26 @@ const companies = [
     }
 ]
 
-
-
 const Companies = () => {
+    const [companies, setCompanies] = useState([]);
+
     const navigation = useNavigation();
+
+    const route = useRoute();
+    const { type } = route.params;
+
+    const { selectedCategory } = useCategory();
     
+    const fetchCompanies = async () => {
+        const response = await api.get(`/companies?id_categories=${selectedCategory}`);
+        setCompanies(response.data);
+    }
+
+    useEffect(() => {
+        fetchCompanies();
+    }, []);
+
+
     const navigateToCompanyProducts = () => {
         navigation.navigate('CompanyProducts');
     }

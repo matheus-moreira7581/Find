@@ -25,31 +25,36 @@ const CompaniesList = (props) => {
                 <TouchableOpacity
                     onPress={props.onPress}
                 >
-                <View style={styles.companyContainer}>
-                    <Image 
-                        source={item.imgUrl}
-                        resizeMode='stretch'
-                        style={styles.companyLogo}
-                    />
-                    <View style={styles.companyInfoContainer}>
-                        <View style={styles.companyTitleContainer}>
-                            <Text style={styles.companyName}>{item.name}</Text>
-                            <MaterialIcons name="star" size={adjustHorizontalMeasure(13)} color={colors.dourado} style={styles.ratingIcon}/>
-                            <Text style={styles.ratingText}>{item.rating}</Text>
+                    <View style={styles.companyContainer}>
+                        {
+                            item.img_url === "" || item.img_url === "my-photo"
+                            ? <MaterialIcons name="insert-photo" size={24} color="black" />
+                            : <Image 
+                                source={item.img_url}
+                                resizeMode='stretch'
+                                style={styles.companyLogo}
+                             />
+                        }
+                        
+                        <View style={styles.companyInfoContainer}>
+                            <View style={styles.companyTitleContainer}>
+                                <Text style={styles.companyName}>{item.name}</Text>
+                                <MaterialIcons name="star" size={adjustHorizontalMeasure(13)} color={colors.dourado} style={styles.ratingIcon}/>
+                                <Text style={styles.ratingText}>-</Text> 
+                            </View>
+                            <View style={styles.companyAddressContainer}>
+                                <Text style={styles.addressText}>{item.address}</Text>
+                                <StatusCircle color={colors.cinzaEscuro} radius={adjustHorizontalMeasure(2)} style={styles.separatorCircle} />
+                                <Text style={styles.minDistanceText}>--km</Text>
+                            </View>
+                            <View style={styles.companyStatusContainer}>
+                                <StatusCircle color={colors.vermelho} radius={adjustHorizontalMeasure(2)} />
+                                <Text style={styles.minDistanceText}>Fechado</Text>
+                            </View>
                         </View>
-                        <View style={styles.companyAddressContainer}>
-                            <Text style={styles.addressText}>{item.address}</Text>
-                            <StatusCircle color={colors.cinzaEscuro} radius={adjustHorizontalMeasure(2)} style={styles.separatorCircle} />
-                            <Text style={styles.minDistanceText}>{item.minDistance}km</Text>
-                        </View>
-                        <View style={styles.companyStatusContainer}>
-                            <StatusCircle color={colors.vermelho} radius={adjustHorizontalMeasure(2)} />
-                            <Text style={styles.minDistanceText}>Fechado</Text>
-                        </View>
-                    </View>
-                </View> 
-            </TouchableOpacity>
-        )}
+                    </View> 
+                </TouchableOpacity>
+            )}
         />
     );
 };

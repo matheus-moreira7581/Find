@@ -35,7 +35,7 @@ const HomeList = ({ datasource, onPress: navigateToCompanies }) => {
                 keyExtractor={(item, index) => String(index)}
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                renderItem={({ item, index,  }) => (
+                renderItem={({ item }) => (
                   <TouchableOpacity 
                     key={item.id} 
                     onPress={() => {
