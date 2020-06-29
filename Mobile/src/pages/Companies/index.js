@@ -1,15 +1,16 @@
 import React from 'react';
-
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
 import { MaterialIcons } from '@expo/vector-icons'; 
+
+import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
 
 import CompaniesList from '../../components/CompaniesList'
-import { useNavigation } from '@react-navigation/native';
 
-import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 
 let category = 'Alimentação';
 let subCategory = 'Pizzaria';
