@@ -10,6 +10,7 @@ import styles from './styles';
 import colors from '../../assets/var/colors';
 
 import api from '../../services/api';
+import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 // import { Container } from './styles';
 
 const ProductDetails = () => {
@@ -20,20 +21,23 @@ const ProductDetails = () => {
 
   const loadScreenInfo = async () => {
     const response = await api.get(`/company?id_company=${companyId}`);
-    const companyProducts = response.data[0].product;
+    
+    const { product: companyProducts, title, img_url } = response.data[0];
 
     const product = companyProducts.find(product => product.id === productId);
 
-    setScreenInfo(product);
+    setScreenInfo(product, img_url, title);
   };
 
-  const setScreenInfo = (product) => {
+  const setScreenInfo = (product, companyLogo, companyName) => {
      setAmount(1);
      setPrice(parseFloat(product.price).toFixed(2));
      setAddPrice(parseFloat(product.price).toFixed(2));
      setProductTitle(product.name);
      setProductBackgroundImage(product.img_url);
      setProductDescription(product.description);
+     setCompanyLogoUrl(companyLogo);
+     setCompanyName(companyName);
   }
 
   useEffect(() => {
@@ -46,6 +50,8 @@ const ProductDetails = () => {
   const [productTitle, setProductTitle] = useState('Produto');
   const [productDescription, setProductDescription] = useState('Descrição do produto...');
   const [productBackgroundImage, setProductBackgroundImage] = useState('');
+  const [companyLogoUrl, setCompanyLogoUrl] = useState('my-photo');
+  const [companyName, setCompanyName] = useState('Empresa');
 
   const addAmount = () => {
     let a = amount;
@@ -54,7 +60,7 @@ const ProductDetails = () => {
     
     if(amount < 99) {
       setAmount(a);
-      setAddPrice(a * price);
+      setAddPrice((a * price).toFixed(2));
     }
   }
   
@@ -65,7 +71,7 @@ const ProductDetails = () => {
     
     if (amount > 1) {
       setAmount(a);
-      setAddPrice(a * price);
+      setAddPrice((a * price).toFixed(2));
     }
   }
 
@@ -73,11 +79,7 @@ const ProductDetails = () => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
           <ImageBackground
-            source={
-              productBackgroundImage == ''
-                ? require('../../assets/images/ProductDetail/calabresaComQueijo.png')
-                : productBackgroundImage
-            }
+            source={productBackgroundImage}
             style={styles.productImage}
           > 
             <ImageBackground 
@@ -110,12 +112,20 @@ const ProductDetails = () => {
         </View>
         <View style={styles.companyContainer}>
           <View style={styles.companyImageContainer}>
-            <Image 
-              source={require('../../assets/images/ProductDetail/TastyPizzaLogo.png')}
-            /> 
+            {
+              companyLogoUrl !== '' && companyLogoUrl !== 'my-photo'
+              ? <Image source={companyLogoUrl}/> 
+              : <View style={styles.companyLogoPlaceholder}>
+                  <MaterialIcons 
+                    name="broken-image" 
+                    size={adjustHorizontalMeasure(15)} 
+                    color={colors.cinza} />
+                </View>
+            }
+            
           </View>
           <View style={styles.companyTitleContainer}>
-            <Text style={styles.companyTitle}>Tasty Pizza</Text>
+            <Text style={styles.companyTitle}>{companyName}</Text>
             <View style={styles.rateContainer}>
               <MaterialIcons name="star" style={styles.rate}/>
               <MaterialIcons name="star" style={styles.rate}/>
@@ -136,7 +146,6 @@ const ProductDetails = () => {
               placeholderTextColor={colors.cinza}
               style={styles.noteTextInput}
               multiline={true}
-            
             />
           </View>
         </View>
