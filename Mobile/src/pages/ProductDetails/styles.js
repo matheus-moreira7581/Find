@@ -3,7 +3,9 @@ import Constants from 'expo-constants'
 import colors from "../../assets/var/colors";
 import fonts from "../../assets/var/fonts";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../utils/constants";
+
 import adjustFontSize from "../../utils/adjustFontSize";
+import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adjustMeasures';
 
  const styles = StyleSheet.create({
     container: {
@@ -11,7 +13,7 @@ import adjustFontSize from "../../utils/adjustFontSize";
       width: '100%',
     },
     headerContainer: {
-      height: 220 / 812 * SCREEN_HEIGHT,
+      height: adjustVerticalMeasure(220),
       width: '100%',
     },
     imageContainer: {
@@ -23,39 +25,39 @@ import adjustFontSize from "../../utils/adjustFontSize";
       width: '100%',
     },
     gradientImage: {
-      marginTop: 10 / 812 * SCREEN_HEIGHT,
+      marginTop: adjustVerticalMeasure(10),
       height: '100%',
       width: '100%',
 
     },
     arrowContainer: {
-      marginLeft: 24 / 375 * SCREEN_WIDTH,
-      width: 318 / 375 * SCREEN_WIDTH,
-      height: 66 / 812 * SCREEN_HEIGHT,
+      marginLeft: adjustHorizontalMeasure(24),
+      width: adjustHorizontalMeasure(318),
+      height: adjustVerticalMeasure(66),
       justifyContent: 'flex-end',
     },
     productTitle: {
-      marginLeft: 24 / 375 * SCREEN_WIDTH,
-      marginTop: 50 / 812 * SCREEN_HEIGHT,
+      marginLeft: adjustHorizontalMeasure(24),
+      marginTop: adjustVerticalMeasure(50),
       fontFamily: fonts.montserratBold,
       fontSize: adjustFontSize(30),
       color: colors.branco,
     },
     contentContainer: {
       position: 'absolute',
-      bottom: -50 / 812 * SCREEN_HEIGHT,
-      height: 596 / 812 * SCREEN_HEIGHT,
+      bottom: adjustVerticalMeasure(-50),
+      height: adjustVerticalMeasure(596),
       width: '100%',
       backgroundColor: colors.background,
       borderRadius: 30,
-      paddingVertical: 33 / 812 * SCREEN_HEIGHT,
+      paddingVertical: adjustVerticalMeasure(33),
       // paddingHorizontal: 24,
       
     },
     descriptionContainer: {
-      height: 67 / 812 * SCREEN_HEIGHT,
-      width: 277 / 375 * SCREEN_WIDTH,
-      marginLeft: 24 / 375 * SCREEN_WIDTH,
+      height: adjustVerticalMeasure(67),
+      width: adjustHorizontalMeasure(277),
+      marginLeft: adjustHorizontalMeasure(24),
     },
     descriptionText: {
       fontFamily: fonts.montserratRegular,
@@ -68,35 +70,35 @@ import adjustFontSize from "../../utils/adjustFontSize";
       color: colors.cinzaEscuro,
     },
     chatContainer: {
-      marginHorizontal: 58.5 / 375 * SCREEN_WIDTH,
-      marginTop: 35 / 812 * SCREEN_HEIGHT,
-      width: 262 / 375 * SCREEN_WIDTH,
+      marginHorizontal: adjustHorizontalMeasure(58.5),
+      marginTop: adjustVerticalMeasure(35),
+      width: adjustHorizontalMeasure(262),
       alignItems: 'center',
     },
     chatText: {
       fontFamily: fonts.montserratBold,
       fontSize: adjustFontSize(15),
       color: colors.cinzaEscuro,
-      marginBottom: 15 / 812 * SCREEN_HEIGHT,
+      marginBottom: adjustVerticalMeasure(15),
     },
     companyContainer: {
       flexDirection: 'row',
-      marginLeft: 23.5 / 375 * SCREEN_WIDTH,
-      height: 64 / 812 * SCREEN_HEIGHT,
-      width: 329 / 375 * SCREEN_WIDTH,
-      paddingHorizontal: 24.5 / 375 * SCREEN_WIDTH,
-      marginTop: 27 / 812 * SCREEN_HEIGHT, 
+      marginLeft: adjustHorizontalMeasure(23.5),
+      height: adjustVerticalMeasure(64),
+      width: adjustHorizontalMeasure(329),
+      paddingHorizontal: adjustHorizontalMeasure(24.5),
+      marginTop: adjustVerticalMeasure(27), 
       borderWidth: 2,
       borderRadius: 8,
       borderColor: colors.bordarCinza,
-      paddingVertical: 4 / 812 * SCREEN_HEIGHT,
+      paddingVertical: adjustVerticalMeasure(4),
     },
     companyImageContainer: {
-      height: 56 / 812 * SCREEN_HEIGHT,
-      width: 56 / 375 * SCREEN_WIDTH,
+      height: adjustVerticalMeasure(56),
+      width: adjustHorizontalMeasure(56),
     },
     companyTitleContainer: {
-      marginLeft: 8 / 375 * SCREEN_WIDTH,
+      marginLeft: adjustHorizontalMeasure(8),
       flexDirection: 'column',
     },
     companyTitle: {
@@ -110,13 +112,21 @@ import adjustFontSize from "../../utils/adjustFontSize";
     rate: {
       fontSize: adjustFontSize(13),
       color: colors.dourado,
-      marginRight: 5 / 375 * SCREEN_WIDTH,
+      marginRight: adjustHorizontalMeasure(5),
+    },
+    companyLogoPlaceholder:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: adjustHorizontalMeasure(40),
+      height: adjustHorizontalMeasure(40),
+      borderRadius: adjustHorizontalMeasure(20),
+      backgroundColor: colors.bordarCinza
     },
     noteContainer: {
-      marginLeft: 23 / 375 * SCREEN_WIDTH,
-      width: 325 / 375 * SCREEN_WIDTH,
-      height: 101 / 812 * SCREEN_HEIGHT,
-      marginTop: 30 / 812 * SCREEN_HEIGHT,
+      marginLeft: adjustHorizontalMeasure(23),
+      width: adjustHorizontalMeasure(325),
+      height: adjustVerticalMeasure(101),
+      marginTop: adjustVerticalMeasure(30),
     },
     noteHeaderContainer: {
       flexDirection: 'row',
@@ -127,34 +137,34 @@ import adjustFontSize from "../../utils/adjustFontSize";
       fontFamily: fonts.montserratBold,
       fontSize: adjustFontSize(15),
       color: colors.cinzaEscuro,
-      marginLeft: 9 / 375 * SCREEN_WIDTH,
+      marginLeft: adjustHorizontalMeasure(9),
     },
     noteIcon: {
       fontSize: adjustFontSize(16),
     },
     noteContentContainer: {
-      marginTop: 4 / 812 * SCREEN_HEIGHT,
+      marginTop: adjustVerticalMeasure(4),
       width: '100%',
-      height: 82 / 812 * SCREEN_HEIGHT,
+      height: adjustVerticalMeasure(82),
       backgroundColor: colors.textInput,
       borderRadius: 8,
-      paddingHorizontal: 15 / 375 * SCREEN_WIDTH,
+      paddingHorizontal: adjustHorizontalMeasure(15),
       justifyContent: 'center',
       alignItems: 'center',
     },
     noteTextInput: {
-      paddingVertical: 15 / 812 * SCREEN_HEIGHT,
+      paddingVertical: adjustVerticalMeasure(15),
       textAlignVertical: "top",
       width: '100%',
-      height: 75 / 812 * SCREEN_HEIGHT,
+      height: adjustVerticalMeasure(75),
       fontFamily: fonts.montserratRegular,
       fontSize: adjustFontSize(13),
       color: colors.cinzaEscuro,
     },
     addContainer: {
-      marginTop: 44 / 812 * SCREEN_HEIGHT,
-      width: 375 / 375 * SCREEN_WIDTH,
-      paddingHorizontal: 24 / 375 * SCREEN_WIDTH,
+      marginTop: adjustVerticalMeasure(44),
+      width: '100%',
+      paddingHorizontal: adjustHorizontalMeasure(24),
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between'
@@ -164,8 +174,8 @@ import adjustFontSize from "../../utils/adjustFontSize";
       backgroundColor: colors.textInput,
       alignItems: 'center',
       justifyContent: 'space-around',
-      width: 104 / 375 * SCREEN_WIDTH,
-      height: 32 / 812 * SCREEN_HEIGHT,
+      width: adjustHorizontalMeasure(104),
+      height: adjustVerticalMeasure(32),
       flexDirection: 'row',
     },
     amountText: {
@@ -176,7 +186,7 @@ import adjustFontSize from "../../utils/adjustFontSize";
     addIcon: {
       fontSize: adjustFontSize(22),
       color: colors.primary,
-      paddingLeft: 2 / 375 * SCREEN_WIDTH,
+      paddingLeft: adjustHorizontalMeasure(2),
     },
     removeIcon: {
       fontSize: adjustFontSize(22),
