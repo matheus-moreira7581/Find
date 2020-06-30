@@ -98,7 +98,7 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
       width: adjustHorizontalMeasure(56),
     },
     companyTitleContainer: {
-      marginLeft: 8 / 375 * SCREEN_WIDTH,
+      marginLeft: adjustHorizontalMeasure(8),
       flexDirection: 'column',
     },
     companyTitle: {
@@ -113,6 +113,14 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
       fontSize: adjustFontSize(13),
       color: colors.dourado,
       marginRight: adjustHorizontalMeasure(5),
+    },
+    companyLogoPlaceholder:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: adjustHorizontalMeasure(40),
+      height: adjustHorizontalMeasure(40),
+      borderRadius: adjustHorizontalMeasure(20),
+      backgroundColor: colors.bordarCinza
     },
     noteContainer: {
       marginLeft: adjustHorizontalMeasure(23),

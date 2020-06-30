@@ -119,7 +119,8 @@ const ProductDetails = () => {
                   <MaterialIcons 
                     name="broken-image" 
                     size={adjustHorizontalMeasure(15)} 
-                    color={colors.cinza} />
+                    color={colors.cinza} 
+                  />
                 </View>
             }
             
