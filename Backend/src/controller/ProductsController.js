@@ -83,7 +83,19 @@ module.exports = {
 
     },
 
+    //Listar um único produto
+    async getProduct(request, response, next){
+        try{
+            const { id } = request.params;
 
+            const product = await knex('products').where({ id });
+
+            response.json(product);
+        }
+        catch(error){
+            next(error);
+        }
+    },
     // Atualizar dados de um produto
 
     async update(request, response, next) { 
