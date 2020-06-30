@@ -23,12 +23,23 @@ const CompanyIncome = () => {
   const {loggedUser} = useAuth()
 
   const [incomeData, setIncomeData] = useState([]);
+  const [total, setTotal] = useState(0);
 
   const fetchCompanyIncome = async () => {
     try {
       const user = loggedUser;
-      const response = await api.get(`/income/${user.data.id}`);
-      setIncomeData(await response.data);
+      const getIncome = async() => {
+        const response = await api.get(`/income/${user.data.id}`);
+        return response.data
+      }
+      const data = await getIncome();
+      setIncomeData(data);
+      let arr = Object.values(data);
+      let total = 0;
+      for(let i = 0; i < arr.length; i++) {
+        total += arr[i].income;
+      }
+      setTotal(total);
       
     } catch (error) {
       console.log(error);
@@ -83,7 +94,7 @@ const CompanyIncome = () => {
        </View>
         <View style={styles.totalContainer}>
             <Text style={styles.totalLabelText}>Total:</Text>
-            <Text style={styles.totalPriceText}>R$720,00</Text>
+            <Text style={styles.totalPriceText}>{"R$ " + total}</Text>
         </View>
       </View>
     </View>
