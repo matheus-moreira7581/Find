@@ -1,36 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
-import RoundedButton from '../../components/RoundedButton';
+
 import styles from './styles';
+import colors from '../../assets/var/colors';
+
+import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
+import adjustFontSize from '../../utils/adjustFontSize';
+
+import { useNavigation } from '@react-navigation/native';
+import {useAuth} from '../../contexts/auth'
+
+import api from '../../services/api';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
-import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import colors from '../../assets/var/colors';
-import adjustFontSize from '../../utils/adjustFontSize';
-import { useNavigation } from '@react-navigation/native';
+import RoundedButton from '../../components/RoundedButton';
 import IncomeCard from '../../components/IncomeCard';
 
 // This is a temporary data set for test.
-const incomeData = [
-  {date: '01/10/2020',price: '73,00'},{date: '02/10/2020',price: '85,00'},
-  {date: '03/10/2020',price: '62,00'},{date: '04/10/2020',price: '76,00'},
-  {date: '05/10/2020',price: '67,00'},{date: '06/10/2020',price: '52,00'},
-  {date: '07/10/2020',price: '80,00'},{date: '08/10/2020',price: '114,00'},
-  {date: '09/10/2020',price: '43,00'},{date: '10/10/2020',price: '68,00'},
-  {date: '11/10/2020',price: '55,00'},{date: '12/10/2020',price: '85,00'},
-  {date: '13/10/2020',price: '62,00'},{date: '14/10/2020',price: '76,00'},
-  {date: '15/10/2020',price: '67,00'},{date: '16/10/2020',price: '52,00'},
-  {date: '17/10/2020',price: '80,00'},{date: '18/10/2020',price: '114,00'},
-  {date: '19/10/2020',price: '43,00'},{date: '20/10/2020',price: '68,00'},
-  {date: '21/10/2020',price: '73,00'},{date: '22/10/2020',price: '85,00'},
-  {date: '23/10/2020',price: '62,00'},{date: '24/10/2020',price: '76,00'},
-  {date: '25/10/2020',price: '67,00'},{date: '26/10/2020',price: '52,00'},
-  {date: '27/10/2020',price: '80,00'},{date: '28/10/2020',price: '114,00'},
-  {date: '29/10/2020',price: '43,00'},{date: '30/10/2020',price: '68,00'},
-]
 
 const CompanyIncome = () => {
   const navigation = useNavigation();
+  const {loggedUser} = useAuth()
+
+  const [incomeData, setIncomeData] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  const fetchCompanyIncome = async () => {
+    try {
+      const user = loggedUser;
+      const getIncome = async() => {
+        const response = await api.get(`/income/${user.data.id}`);
+        return response.data
+      }
+      const data = await getIncome();
+      setIncomeData(data);
+      let arr = Object.values(data);
+      let total = 0;
+      for(let i = 0; i < arr.length; i++) {
+        total += arr[i].income;
+      }
+      setTotal(total);
+      
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
+  useEffect(() => {
+    fetchCompanyIncome();
+  }, [])
 
   const navigateToClientRegistration = () => {
     navigation.navigate('CustomerRegistration');
@@ -67,15 +86,15 @@ const CompanyIncome = () => {
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <IncomeCard 
-                date={item.date}
-                price={item.price}
+                date={item.order_date}
+                price={item.income}
               />
             )}
           />
        </View>
         <View style={styles.totalContainer}>
             <Text style={styles.totalLabelText}>Total:</Text>
-            <Text style={styles.totalPriceText}>R$720,00</Text>
+            <Text style={styles.totalPriceText}>{"R$ " + total}</Text>
         </View>
       </View>
     </View>

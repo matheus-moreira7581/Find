@@ -115,8 +115,11 @@ module.exports = {
 
             const orders = await knex('orders')
             .where({ id_company })
-            .orderBy('order_date', 'asc')
+            .orderBy('order_date', 'desc')
             .select('total', 'order_date');
+
+            // console.log(orders);
+            
 
             const groups = orders.reduce((groups, income) => {
                 const date = new Date(income.order_date).toLocaleDateString();
@@ -124,18 +127,29 @@ module.exports = {
                 if(!groups[date]) {
                     groups[date] = [];
                 }
-                groups[date].push(income.total);
+                groups[date].push(parseFloat(income.total));
                 return groups;
             }, {});
+            
+ 
 
             const groupArrays = Object.keys(groups).map((order_date) => {
                 return {
                     order_date,
                     income: groups[order_date]
                 };
-              });
-              
+            });
 
+            for(i = 0; i < groupArrays.length; i++) {
+                const total = Object.values(groupArrays[i].income).reduce((previous, current) => {
+                    return previous + current;
+                });
+
+                groupArrays[i].income = total
+
+            }
+
+            
             response.status(200).json(groupArrays);
 
             

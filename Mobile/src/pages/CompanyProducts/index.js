@@ -1,65 +1,55 @@
-import React from 'react';
-import { View, Text, FlatList, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, Image, Alert, TouchableOpacity } from 'react-native';
+
 import styles from '../CompanyProducts/styles';
+
 import { MaterialIcons } from '@expo/vector-icons';
 import ProductCard from '../../components/ProductCard';
-import { useNavigation } from '@react-navigation/native';
 
-// import { Container } from './styles';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import api from '../../services/api';
 
 const CompanyProducts = () => {
   const navigation = useNavigation();
-  //This data is temporary, only for tests
-  const DATA = [
-    {
-      image: require('../../assets/images/CompanyProducts/calabresa.png'),
-      title: 'Calabresa c/ Queijo',
-      description: 'Molho, calabresa, mozzarella e azeitona.',
-      price: '44,00'
-    },
-    {
-      image: require('../../assets/images/CompanyProducts/3queijos.png'),
-      title: 'Três Queijos',
-      description: 'Molho, mozzarella, requeijão e parmesão ralado.',
-      price: '40,00'
-    },
-    {
-      image: require('../../assets/images/CompanyProducts/marguerita.png'),
-      title: 'Marguerita',
-      description: 'Molho, mozzarella, tomate e manjericão.',
-      price: '39,00'
-    },
-    {
-      image: require('../../assets/images/CompanyProducts/calabresa.png'),
-      title: 'Carne seca',
-      description: 'Molho, mozzarella e carne seca.',
-      price: '40,50'
-    },
-    {
-      image: require('../../assets/images/CompanyProducts/frangoCatupiry.png'),
-      title: 'Frango c/ Catupiry',
-      description: 'Molho, frango desfiado e catupiry.',
-      price: '38,00'
-    },
-    {
-      image: require('../../assets/images/CompanyProducts/portuguesa.png'),
-      title: 'Portuguesa',
-      description: 'Molho, mozzarella, tomate, milho, calabresa, cebola, ovo, palmito e azeitona.',
-      price: '40,00'
-    },
-  ]
+  const route = useRoute();
 
-  const navigateToProductDetails = () => {
-    navigation.navigate('ProductDetails');
+  const {companyId} = route.params;
+
+  const [product, setProduct] = useState({});
+  const [company, setCompany] = useState({});
+
+  const fetchCompanyProducts = async () => {
+    const getProdutct = async () => {
+      const res = await api.get(`/company/?id_company=${companyId}`);
+      return res.data
+    }
+    const res = await getProdutct();
+    
+
+    setCompany(res[0]);
+    setProduct(res[0].product);
+  }
+
+  useEffect(()=> {
+    fetchCompanyProducts();
+  }, [])
+
+  const navigateToProductDetails = (productId, companyId) => {
+    navigation.navigate('ProductDetails', {
+      productId: productId,
+      companyId: companyId
+    });
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.imageContainer}>
-          <View style={styles.arrowBack}>
-            <MaterialIcons name="arrow-back" color="black" size={24}/>
-          </View>
+            <View style={styles.arrowBack}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="arrow-back" color="black" size={24}/>
+              </TouchableOpacity>
+            </View>
           <View style={styles.ImageCompany}>
             <Image 
               source={require('../../assets/images/CompanyLogos/logo.png')}
@@ -67,7 +57,7 @@ const CompanyProducts = () => {
           </View>
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.companyName}>Tasti Pizza</Text>
+          <Text style={styles.companyName}>{company.title}</Text>
           <View style={styles.rateContainer}>
             <MaterialIcons name="star" style={styles.rate}/>
             <MaterialIcons name="star" style={styles.rate}/>
@@ -76,21 +66,21 @@ const CompanyProducts = () => {
             <MaterialIcons name="star-half" style={styles.rate}/>
           </View>
           <Text style={styles.companyStatus}>Aberto</Text>
-          <Text style={styles.companyAddress}>R. José da Costa Monteiro, 625 - 0,94km</Text>
+          <Text style={styles.companyAddress}>{company.address}</Text>
         </View>
       </View>
       <View style={styles.productsContainer}>
         <FlatList 
-          data={DATA}
+          data={product}
           keyExtractor={(item, index) => item + index}
           renderItem={({ item }) => (
             <View style={styles.cardContainer}>
               <ProductCard 
                 Image={item.image}
-                Title={item.title}
+                Title={item.name}
                 Description={item.description}
                 Price={item.price}
-                onPress={navigateToProductDetails}
+                onPress={() => navigateToProductDetails(item.id, companyId)}
               />
             </View>
           )}

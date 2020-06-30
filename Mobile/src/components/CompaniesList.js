@@ -15,41 +15,52 @@ import StatusCircle from './StatusCircle';
 - Current timestamp on the phone
 */
 
-const CompaniesList = (props) => {
+const CompaniesList = ({ datasource, onPress: navigateToCompanyProducts }) => {
     return (
         <FlatList
-            data={props.Companies}
+            data={datasource}
             keyExtractor={item => String(item.id)}
             showsVerticalScrollIndicator={false}
             renderItem={({item})=> (
                 <TouchableOpacity
-                    onPress={props.onPress}
+                    onPress={() => {navigateToCompanyProducts(item.id)}}
                 >
-                <View style={styles.companyContainer}>
-                    <Image 
-                        source={item.imgUrl}
-                        resizeMode='stretch'
-                        style={styles.companyLogo}
-                    />
-                    <View style={styles.companyInfoContainer}>
-                        <View style={styles.companyTitleContainer}>
-                            <Text style={styles.companyName}>{item.name}</Text>
-                            <MaterialIcons name="star" size={adjustHorizontalMeasure(13)} color={colors.dourado} style={styles.ratingIcon}/>
-                            <Text style={styles.ratingText}>{item.rating}</Text>
+                    <View style={styles.companyContainer}>
+                        {
+                            item.img_url === "" || item.img_url === "my-photo"
+                            ? <View style={styles.companyLogoPlaceholder}>
+                                <MaterialIcons 
+                                    name="insert-photo" 
+                                    size={adjustHorizontalMeasure(24)} 
+                                    color={colors.cinza}    
+                                />
+                              </View>
+                            : <Image 
+                                source={item.img_url}
+                                resizeMode='stretch'
+                                style={styles.companyLogo}
+                              />
+                        }
+                        
+                        <View style={styles.companyInfoContainer}>
+                            <View style={styles.companyTitleContainer}>
+                                <Text style={styles.companyName}>{item.name}</Text>
+                                <MaterialIcons name="star" size={adjustHorizontalMeasure(13)} color={colors.dourado} style={styles.ratingIcon}/>
+                                <Text style={styles.ratingText}>-</Text> 
+                            </View>
+                            <View style={styles.companyAddressContainer}>
+                                <Text style={styles.addressText}>{item.address}</Text>
+                                <StatusCircle color={colors.cinzaEscuro} radius={adjustHorizontalMeasure(2)} style={styles.separatorCircle} />
+                                <Text style={styles.minDistanceText}>--km</Text>
+                            </View>
+                            <View style={styles.companyStatusContainer}>
+                                <StatusCircle color={colors.vermelho} radius={adjustHorizontalMeasure(2)} />
+                                <Text style={styles.minDistanceText}>Fechado</Text>
+                            </View>
                         </View>
-                        <View style={styles.companyAddressContainer}>
-                            <Text style={styles.addressText}>{item.address}</Text>
-                            <StatusCircle color={colors.cinzaEscuro} radius={adjustHorizontalMeasure(2)} style={styles.separatorCircle} />
-                            <Text style={styles.minDistanceText}>{item.minDistance}km</Text>
-                        </View>
-                        <View style={styles.companyStatusContainer}>
-                            <StatusCircle color={colors.vermelho} radius={adjustHorizontalMeasure(2)} />
-                            <Text style={styles.minDistanceText}>Fechado</Text>
-                        </View>
-                    </View>
-                </View> 
-            </TouchableOpacity>
-        )}
+                    </View> 
+                </TouchableOpacity>
+            )}
         />
     );
 };
@@ -83,6 +94,17 @@ const styles = StyleSheet.create({
         fontFamily: fonts.montserratBold       
     },
     companyLogo:{
+        marginLeft: adjustHorizontalMeasure(24),
+        marginTop: adjustVerticalMeasure(11),
+        marginBottom: adjustVerticalMeasure(14),
+    },
+    companyLogoPlaceholder: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: adjustHorizontalMeasure(56),
+        height: adjustHorizontalMeasure(56),
+        borderRadius: adjustHorizontalMeasure(28),
+        backgroundColor: colors.bordarCinza,
         marginLeft: adjustHorizontalMeasure(24),
         marginTop: adjustVerticalMeasure(11),
         marginBottom: adjustVerticalMeasure(14),

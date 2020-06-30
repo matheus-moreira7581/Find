@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
+
+import { useCategory } from '../../contexts/categorySelection';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
 
 import CompaniesList from '../../components/CompaniesList'
 
-
-let category = 'Alimentação';
-let subCategory = 'Pizzaria';
-//temp names, to be retrieved via api later
+import api from '../../services/api';
 
 
-const companies = [
+const companiesModel = [
     {
         id: "1",
         name: 'Tasty Pizza',
@@ -82,36 +81,51 @@ const companies = [
         rating: 4.5,
         imgUrl: require('../../assets/images/CompanyLogos/pizzaria_8.png')
     }
-]
-
-
+] //just a base model to help us construct the screen and check attributes [NOT IN USE]
 
 const Companies = () => {
+    const [companies, setCompanies] = useState([]);
+
+    const [sectionTitle, setSectionTitle] = useState('Seção');
+    const [categoryTitle, setCategoryTitle] = useState('Categoria');
+
     const navigation = useNavigation();
+
+    const { selectedCategoryCardInfo } = useCategory();
     
-    const navigateToCompanyProducts = () => {
-        navigation.navigate('CompanyProducts');
+    const fetchCompanies = async () => {
+        const response = await api.get(`/companies?id_categories=${selectedCategoryCardInfo.categoryId}`);
+        setCompanies(response.data);
+    }
+
+    useEffect(() => {
+        fetchCompanies();
+        setSectionTitle(selectedCategoryCardInfo.section);
+        setCategoryTitle(selectedCategoryCardInfo.category);
+    }, []);
+
+
+    const navigateToCompanyProducts = (companyId) => {
+        navigation.navigate('CompanyProducts', {
+            companyId,
+        });
     }
 
     return (
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
-<<<<<<< HEAD
                 <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-=======
-                <TouchableOpacity style={styles.backButton} onPress={navigation.goBack()}>
->>>>>>> parent of d34f308... delete mobile
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
-                    <Text style={styles.categoryText}>{category}</Text>
+                    <Text style={styles.categoryText}>{sectionTitle}</Text>
                 </View> 
             </View>
             <View style={styles.subCategoryContainer}>
-                <Text style={styles.subCategoryText}>{subCategory}</Text>
+                <Text style={styles.subCategoryText}>{categoryTitle}</Text>
                 <MaterialIcons name="filter-list" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
             </View>
-            <CompaniesList Companies={companies} onPress={navigateToCompanyProducts}/>
+            <CompaniesList datasource={companies} onPress={navigateToCompanyProducts}/>
         </SafeAreaView>
     );
 }
