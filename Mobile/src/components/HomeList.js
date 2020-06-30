@@ -43,7 +43,7 @@ const HomeList = ({ datasource, onPress: navigateToCompanies }) => {
                         section: section.Section,
                         type: section.type,
                         categoryId: item.id,
-                        category: item.name, 
+                        category: item.title, 
                       });
                       navigateToCompanies();
                     }}

@@ -89,7 +89,9 @@ const companiesModel = [
 
 const Companies = () => {
     const [companies, setCompanies] = useState([]);
-    const [headerTitle, setHeaderTitle] = useState('Seção');
+
+    const [sectionTitle, setSectionTitle] = useState('Seção');
+    const [categoryTitle, setCategoryTitle] = useState('Categoria');
 
     const navigation = useNavigation();
 
@@ -104,7 +106,8 @@ const Companies = () => {
 
     useEffect(() => {
         fetchCompanies();
-        setHeaderTitle(selectedCategoryCardInfo.section);
+        setSectionTitle(selectedCategoryCardInfo.section);
+        setCategoryTitle(selectedCategoryCardInfo.category);
     }, []);
 
 
@@ -119,11 +122,11 @@ const Companies = () => {
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
-                    <Text style={styles.categoryText}>{headerTitle}</Text>
+                    <Text style={styles.categoryText}>{sectionTitle}</Text>
                 </View> 
             </View>
             <View style={styles.subCategoryContainer}>
-                <Text style={styles.subCategoryText}>{subCategory}</Text>
+                <Text style={styles.subCategoryText}>{categoryTitle}</Text>
                 <MaterialIcons name="filter-list" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
             </View>
             <CompaniesList Companies={companies} onPress={navigateToCompanyProducts}/>
