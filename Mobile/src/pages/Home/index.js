@@ -83,20 +83,13 @@ const Home = () => {
     setServiceData(serviceCategories);
   }
 
-  const navigateToProductTypeCompanies = () => {
-      navigation.navigate('Companies', {
-        type: "product"
-      });
+  const navigateToCompanies = () => {
+      navigation.navigate('Companies');
   }
-  const navigateToServiceTypeCompanies = () => {
-    navigation.navigate('Companies', {
-      type: "service"
-    });
-}
 
 
-  let showList = <HomeList datasource={productData} onPress={navigateToProductTypeCompanies}/>;
-  if(showProduct === false) showList = <HomeList datasource={serviceData} onPress={navigateToServiceTypeCompanies}/>
+  let showList = <HomeList datasource={productData} onPress={navigateToCompanies}/>;
+  if(showProduct === false) showList = <HomeList datasource={serviceData} onPress={navigateToCompanies}/>
 
   const navigateList = (type) => {
     if(type === 'service') setShowProduct(false);

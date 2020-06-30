@@ -89,21 +89,22 @@ const companiesModel = [
 
 const Companies = () => {
     const [companies, setCompanies] = useState([]);
+    const [headerTitle, setHeaderTitle] = useState('Seção');
 
     const navigation = useNavigation();
 
     const route = useRoute();
-    const { type } = route.params;
 
-    const { selectedCategory } = useCategory();
+    const { selectedCategoryCardInfo } = useCategory();
     
     const fetchCompanies = async () => {
-        const response = await api.get(`/companies?id_categories=${selectedCategory}`);
+        const response = await api.get(`/companies?id_categories=${selectedCategoryCardInfo.categoryId}`);
         setCompanies(response.data);
     }
 
     useEffect(() => {
         fetchCompanies();
+        setHeaderTitle(selectedCategoryCardInfo.section);
     }, []);
 
 
@@ -118,7 +119,7 @@ const Companies = () => {
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
-                    <Text style={styles.categoryText}>{category}</Text>
+                    <Text style={styles.categoryText}>{headerTitle}</Text>
                 </View> 
             </View>
             <View style={styles.subCategoryContainer}>

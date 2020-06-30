@@ -18,7 +18,7 @@ import { useCategory } from '../contexts/categorySelection';
 
 const HomeList = ({ datasource, onPress: navigateToCompanies }) => {
 
-  const { selectedCategory, setSelectedCategory } = useCategory();
+  const { setSelectedCategoryCardInfo } = useCategory();
 
   return (
     <View style={styles.listContainer}>
@@ -29,7 +29,7 @@ const HomeList = ({ datasource, onPress: navigateToCompanies }) => {
           renderSectionHeader={({ section }) => (
             <Text style={styles.listTitle}>{section.Section}</Text>
           )}
-          renderItem={({ item, index }) => 
+          renderItem={({ item, index, section }) => 
               <FlatList 
                 data={item}
                 keyExtractor={(item, index) => String(index)}
@@ -39,7 +39,12 @@ const HomeList = ({ datasource, onPress: navigateToCompanies }) => {
                   <TouchableOpacity 
                     key={item.id} 
                     onPress={() => {
-                      setSelectedCategory(item.id);
+                      setSelectedCategoryCardInfo({
+                        section: section.Section,
+                        type: section.type,
+                        categoryId: item.id,
+                        category: item.name, 
+                      });
                       navigateToCompanies();
                     }}
                   >
