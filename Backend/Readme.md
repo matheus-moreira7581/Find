@@ -10,7 +10,12 @@
 
 - Atualizar as informações de usuário e senha no arquivo "knexfile.js"
 
-- Instalar pacotes do node modules 
+- Acessar pasta "Backend"
+```node
+cd Backend
+```
+
+- Instalar pacotes do node modules(caso não tenha) 
 ```node
 npm i
 ```

@@ -6,7 +6,6 @@ const routes = express.Router();
 //Company
 
 routes.post('/register-company', CompanyController.create)
-      //.post('/login-company', CompanyController.login)
       .get('/companies', CompanyController.index)
       .get('/edit-company/:id', CompanyController.show)
       .put('/edit-company/:id', CompanyController.update)
