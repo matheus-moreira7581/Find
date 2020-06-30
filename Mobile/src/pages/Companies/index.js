@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
@@ -15,10 +15,6 @@ import CompaniesList from '../../components/CompaniesList'
 
 import api from '../../services/api';
 
-
-let category = 'Alimentação';
-let subCategory = 'Pizzaria';
-//temp names, to be retrieved via api later
 
 const companiesModel = [
     {
@@ -85,7 +81,7 @@ const companiesModel = [
         rating: 4.5,
         imgUrl: require('../../assets/images/CompanyLogos/pizzaria_8.png')
     }
-]
+] //just a base model to help us construct the screen and check attributes [NOT IN USE]
 
 const Companies = () => {
     const [companies, setCompanies] = useState([]);
@@ -94,8 +90,6 @@ const Companies = () => {
     const [categoryTitle, setCategoryTitle] = useState('Categoria');
 
     const navigation = useNavigation();
-
-    const route = useRoute();
 
     const { selectedCategoryCardInfo } = useCategory();
     
@@ -111,8 +105,10 @@ const Companies = () => {
     }, []);
 
 
-    const navigateToCompanyProducts = () => {
-        navigation.navigate('CompanyProducts');
+    const navigateToCompanyProducts = (companyId) => {
+        navigation.navigate('CompanyProducts', {
+            companyId,
+        });
     }
 
     return (
@@ -129,7 +125,7 @@ const Companies = () => {
                 <Text style={styles.subCategoryText}>{categoryTitle}</Text>
                 <MaterialIcons name="filter-list" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
             </View>
-            <CompaniesList Companies={companies} onPress={navigateToCompanyProducts}/>
+            <CompaniesList datasource={companies} onPress={navigateToCompanyProducts}/>
         </SafeAreaView>
     );
 }

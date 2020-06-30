@@ -1,14 +1,17 @@
-import React from 'react';
-import { View, Text, FlatList, Image } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, FlatList, Image, Alert } from 'react-native';
 import styles from '../CompanyProducts/styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import ProductCard from '../../components/ProductCard';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 // import { Container } from './styles';
 
 const CompanyProducts = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  //useEffect(() => console.log(route.params.companyId)); testing return from previous screen via route params
   //This data is temporary, only for tests
   const DATA = [
     {

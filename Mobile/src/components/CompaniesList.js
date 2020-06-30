@@ -15,15 +15,15 @@ import StatusCircle from './StatusCircle';
 - Current timestamp on the phone
 */
 
-const CompaniesList = (props) => {
+const CompaniesList = ({ datasource, onPress: navigateToCompanyProducts }) => {
     return (
         <FlatList
-            data={props.Companies}
+            data={datasource}
             keyExtractor={item => String(item.id)}
             showsVerticalScrollIndicator={false}
             renderItem={({item})=> (
                 <TouchableOpacity
-                    onPress={props.onPress}
+                    onPress={() => {navigateToCompanyProducts(item.id)}}
                 >
                     <View style={styles.companyContainer}>
                         {
