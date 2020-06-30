@@ -1,40 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ImageBackground, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-import RoundedButton from '../../components/RoundedButton';
-import styles from './styles';
-import colors from '../../assets/var/colors';
+
 import { useNavigation, useRoute } from '@react-navigation/native';
 
+import { MaterialIcons } from '@expo/vector-icons';
+import RoundedButton from '../../components/RoundedButton';
+
+import styles from './styles';
+import colors from '../../assets/var/colors';
+
+import api from '../../services/api';
 // import { Container } from './styles';
 
 const ProductDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
+  const { productId, companyId } = route.params;
+
+  const loadScreenInfo = async () => {
+    const response = await api.get(`/company?id_company=${companyId}`);
+    const companyProducts = response.data[0].product;
+
+    const product = companyProducts.find(product => product.id === productId);
+
+    setScreenInfo(product);
+  };
+
+  const setScreenInfo = (product) => {
+     setAmount(1);
+     setPrice(parseFloat(product.price).toFixed(2));
+     setAddPrice(parseFloat(product.price).toFixed(2));
+     setProductTitle(product.name);
+     setProductBackgroundImage(product.img_url);
+     setProductDescription(product.description);
+  }
+
+  useEffect(() => {
+    loadScreenInfo();
+  }, []);
+
   const [amount, setAmount] = useState(1);
-  const [price, setPrice] = useState(44);
+  const [price, setPrice] = useState(1);
+  const [addPrice, setAddPrice] = useState(1);
+  const [productTitle, setProductTitle] = useState('Produto');
+  const [productDescription, setProductDescription] = useState('Descrição do produto...');
+  const [productBackgroundImage, setProductBackgroundImage] = useState('');
 
   const addAmount = () => {
-    let v = amount;
-    let a = price
-    v = v + 1;
-    a = a + 44;
+    let a = amount;
+    
+    a++;
+    
     if(amount < 99) {
-      setAmount(v);
-      setPrice(a);
+      setAmount(a);
+      setAddPrice(a * price);
     }
-
   }
   
   const subtractAmount = () => {
-    let v = amount;
-    let a = price
-    v = v - 1;
-    a = a - 44;
+    let a = amount;
+    
+    a--;
+    
     if (amount > 1) {
-      setAmount(v);
-      setPrice(a);
+      setAmount(a);
+      setAddPrice(a * price);
     }
   }
 
@@ -42,7 +73,11 @@ const ProductDetails = () => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
           <ImageBackground
-            source={require('../../assets/images/ProductDetail/calabresaComQueijo.png')}
+            source={
+              productBackgroundImage == ''
+                ? require('../../assets/images/ProductDetail/calabresaComQueijo.png')
+                : productBackgroundImage
+            }
             style={styles.productImage}
           > 
             <ImageBackground 
@@ -54,14 +89,14 @@ const ProductDetails = () => {
                   <MaterialIcons name="arrow-back" color="white" size={24}/>
                 </TouchableOpacity>
               </View>
-              <Text style={styles.productTitle}>Calabresa c/ Queijo</Text>
+              <Text style={styles.productTitle}>{productTitle}</Text>
             </ImageBackground>
           </ImageBackground>
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>Molho, Calabresa, mozzarella e azeitona.</Text>
-          <Text style={styles.priceText}>R$ 44,00</Text>
+          <Text style={styles.descriptionText}>{productDescription}</Text>
+          <Text style={styles.priceText}>R$ {price}</Text>
         </View>
         <View style={styles.chatContainer}>
           <Text style={styles.chatText}>Alguma dúvida sobre o produto?</Text>
@@ -120,7 +155,7 @@ const ProductDetails = () => {
             </TouchableOpacity>
           </View>
           <RoundedButton 
-            text={`Adicionar R$ ${price},00`} 
+            text={`Adicionar R$ ${addPrice}`} 
             onPress={() => {}} 
             selected={true} 
             width={168}
