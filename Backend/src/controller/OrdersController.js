@@ -115,7 +115,7 @@ module.exports = {
 
             const orders = await knex('orders')
             .where({ id_company })
-            .orderBy('order_date', 'asc')
+            .orderBy('order_date', 'desc')
             .select('total', 'order_date');
 
             // console.log(orders);
