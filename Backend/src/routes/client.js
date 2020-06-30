@@ -6,7 +6,6 @@ const routes = express.Router();
 //Cliente
 
 routes.post('/register-client', ClientsController.create)
-      //.post('/login', ClientsController.login)
       .get('/clients', ClientsController.index)
       .get('/edit-client/:id', ClientsController.show)
       .put('/edit-client/:id', ClientsController.update)
