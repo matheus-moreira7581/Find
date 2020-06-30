@@ -15,24 +15,29 @@ const CompanyProducts = () => {
 
   const {companyId} = route.params;
 
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState({});
+  const [company, setCompany] = useState({});
 
   const fetchCompanyProducts = async () => {
     const getProdutct = async () => {
-      const res = await api.get(`/my-products/${companyId}`);
+      const res = await api.get(`/company/?id_company=${companyId}`);
       return res.data
     }
     const res = await getProdutct();
-    setProduct(res);
+    
+
+    setCompany(res[0]);
+    setProduct(res[0].product);
   }
 
   useEffect(()=> {
     fetchCompanyProducts();
   }, [])
 
-  const navigateToProductDetails = (productId) => {
+  const navigateToProductDetails = (productId, companyId) => {
     navigation.navigate('ProductDetails', {
-      productId
+      productId: productId,
+      companyId: companyId
     });
   }
 
@@ -52,7 +57,7 @@ const CompanyProducts = () => {
           </View>
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.companyName}>Tasti Pizza</Text>
+          <Text style={styles.companyName}>{company.title}</Text>
           <View style={styles.rateContainer}>
             <MaterialIcons name="star" style={styles.rate}/>
             <MaterialIcons name="star" style={styles.rate}/>
@@ -61,7 +66,7 @@ const CompanyProducts = () => {
             <MaterialIcons name="star-half" style={styles.rate}/>
           </View>
           <Text style={styles.companyStatus}>Aberto</Text>
-          <Text style={styles.companyAddress}>R. José da Costa Monteiro, 625 - 0,94km</Text>
+          <Text style={styles.companyAddress}>{company.address}</Text>
         </View>
       </View>
       <View style={styles.productsContainer}>
@@ -75,7 +80,7 @@ const CompanyProducts = () => {
                 Title={item.name}
                 Description={item.description}
                 Price={item.price}
-                onPress={() => navigateToProductDetails(item.id)}
+                onPress={() => navigateToProductDetails(item.id, companyId)}
               />
             </View>
           )}
