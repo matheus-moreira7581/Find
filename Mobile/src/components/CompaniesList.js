@@ -28,12 +28,18 @@ const CompaniesList = (props) => {
                     <View style={styles.companyContainer}>
                         {
                             item.img_url === "" || item.img_url === "my-photo"
-                            ? <MaterialIcons name="insert-photo" size={24} color="black" />
+                            ? <View style={styles.companyLogoPlaceholder}>
+                                <MaterialIcons 
+                                    name="insert-photo" 
+                                    size={adjustHorizontalMeasure(24)} 
+                                    color={colors.cinza}    
+                                />
+                              </View>
                             : <Image 
                                 source={item.img_url}
                                 resizeMode='stretch'
                                 style={styles.companyLogo}
-                             />
+                              />
                         }
                         
                         <View style={styles.companyInfoContainer}>
@@ -88,6 +94,17 @@ const styles = StyleSheet.create({
         fontFamily: fonts.montserratBold       
     },
     companyLogo:{
+        marginLeft: adjustHorizontalMeasure(24),
+        marginTop: adjustVerticalMeasure(11),
+        marginBottom: adjustVerticalMeasure(14),
+    },
+    companyLogoPlaceholder: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: adjustHorizontalMeasure(56),
+        height: adjustHorizontalMeasure(56),
+        borderRadius: adjustHorizontalMeasure(28),
+        backgroundColor: colors.bordarCinza,
         marginLeft: adjustHorizontalMeasure(24),
         marginTop: adjustVerticalMeasure(11),
         marginBottom: adjustVerticalMeasure(14),

@@ -1,12 +1,12 @@
 import React, { useState, useContext, createContext, Children } from 'react';
 
-const CategorySelectionContext = createContext(1);
+const CategorySelectionContext = createContext({});
 
 export const CategoryProvider = ({ children }) => {
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategoryCardInfo, setSelectedCategoryCardInfo] = useState({});
 
     return ( 
-        <CategorySelectionContext.Provider value={{ selectedCategory, setSelectedCategory }}>
+        <CategorySelectionContext.Provider value={{ selectedCategoryCardInfo, setSelectedCategoryCardInfo }}>
             {children}
         </CategorySelectionContext.Provider>
     );

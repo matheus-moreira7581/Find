@@ -90,20 +90,24 @@ const companiesModel = [
 const Companies = () => {
     const [companies, setCompanies] = useState([]);
 
+    const [sectionTitle, setSectionTitle] = useState('Seção');
+    const [categoryTitle, setCategoryTitle] = useState('Categoria');
+
     const navigation = useNavigation();
 
     const route = useRoute();
-    const { type } = route.params;
 
-    const { selectedCategory } = useCategory();
+    const { selectedCategoryCardInfo } = useCategory();
     
     const fetchCompanies = async () => {
-        const response = await api.get(`/companies?id_categories=${selectedCategory}`);
+        const response = await api.get(`/companies?id_categories=${selectedCategoryCardInfo.categoryId}`);
         setCompanies(response.data);
     }
 
     useEffect(() => {
         fetchCompanies();
+        setSectionTitle(selectedCategoryCardInfo.section);
+        setCategoryTitle(selectedCategoryCardInfo.category);
     }, []);
 
 
@@ -118,11 +122,11 @@ const Companies = () => {
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
-                    <Text style={styles.categoryText}>{category}</Text>
+                    <Text style={styles.categoryText}>{sectionTitle}</Text>
                 </View> 
             </View>
             <View style={styles.subCategoryContainer}>
-                <Text style={styles.subCategoryText}>{subCategory}</Text>
+                <Text style={styles.subCategoryText}>{categoryTitle}</Text>
                 <MaterialIcons name="filter-list" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
             </View>
             <CompaniesList Companies={companies} onPress={navigateToCompanyProducts}/>
