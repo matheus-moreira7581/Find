@@ -4,10 +4,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 import RoundedButton from '../../components/RoundedButton';
 import styles from './styles';
 import colors from '../../assets/var/colors';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 // import { Container } from './styles';
 
 const ProductDetails = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+
   const [amount, setAmount] = useState(1);
   const [price, setPrice] = useState(44);
 
@@ -46,7 +50,9 @@ const ProductDetails = () => {
               style={styles.gradientImage}
             > 
               <View style={styles.arrowContainer}>
-                <MaterialIcons name="arrow-back" color="white" size={24}/>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <MaterialIcons name="arrow-back" color="white" size={24}/>
+                </TouchableOpacity>
               </View>
               <Text style={styles.productTitle}>Calabresa c/ Queijo</Text>
             </ImageBackground>
