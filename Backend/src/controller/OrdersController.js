@@ -118,24 +118,38 @@ module.exports = {
             .orderBy('order_date', 'asc')
             .select('total', 'order_date');
 
+            // console.log(orders);
+            
+
             const groups = orders.reduce((groups, income) => {
                 const date = new Date(income.order_date).toLocaleDateString();
                 // const sp = Date(date).split('T')[0];
                 if(!groups[date]) {
                     groups[date] = [];
                 }
-                groups[date].push(income.total);
+                groups[date].push(parseFloat(income.total));
                 return groups;
             }, {});
+            
+ 
 
             const groupArrays = Object.keys(groups).map((order_date) => {
                 return {
                     order_date,
                     income: groups[order_date]
                 };
-              });
-              
+            });
 
+            for(i = 0; i < groupArrays.length; i++) {
+                const total = Object.values(groupArrays[i].income).reduce((previous, current) => {
+                    return previous + current;
+                });
+
+                groupArrays[i].income = total
+
+            }
+
+            
             response.status(200).json(groupArrays);
 
             
