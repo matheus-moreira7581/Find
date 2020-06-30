@@ -64,7 +64,7 @@ module.exports = {
             .where('id', id_company)
             .select('img_url', 'name', 'address');
 
-            const mixed = company.map(items => {
+            const data = company.map(items => {
 
                 return {
                     "img_url": items.img_url,
@@ -75,7 +75,7 @@ module.exports = {
 
             });
 
-            response.json(mixed);
+            response.json(data);
             
         } catch (error) {
             next(error)
