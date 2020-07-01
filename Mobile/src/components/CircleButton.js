@@ -17,7 +17,7 @@ const CircleButton = (props) => (
                 { 
                     ...{
                         width: adjustHorizontalMeasure(props.width),
-                        height: adjustVerticalMeasure(props.height),
+                        height: adjustHorizontalMeasure(props.height),
                         justifyContent: 'center',
                         alignItems: 'center',
                         borderRadius: (props.width + props.height) / 2,

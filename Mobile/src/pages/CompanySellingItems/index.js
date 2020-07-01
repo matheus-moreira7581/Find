@@ -12,6 +12,7 @@ import adjustFontSize from '../../utils/adjustFontSize';
 
 import ProductCard from '../../components/ProductCard';
 import CircleButton from '../../components/CircleButton';
+import UnderlinedTextButton from '../../components/UnderlinedTextButton';
 
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth'
@@ -43,16 +44,22 @@ const CompanySellingItems = (props) => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.headerButtonContainer}>
-          <TouchableOpacity 
+          <UnderlinedTextButton 
+            fontSize={adjustFontSize(15)}
+            selected={false}
             style={styles.orderButton}
             onPress={props.onPress}
           >
-            <Text style={styles.orderButtonText}>Pedidos</Text>
-          </TouchableOpacity>
+            Pedidos
+          </UnderlinedTextButton>
 
-          <TouchableOpacity style={styles.serviceListButton}>
-            <Text style={styles.serviceListButtonText}>Meus Serviços</Text>
-          </TouchableOpacity>
+          <UnderlinedTextButton 
+            fontSize={adjustFontSize(15)}
+            selected={true}
+            style={styles.serviceListButton}
+          >
+            Meus Produtos
+          </UnderlinedTextButton>
         </View>
       </View>
       <View style={styles.contentContainer}>

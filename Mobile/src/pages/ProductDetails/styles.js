@@ -38,14 +38,14 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
     },
     productTitle: {
       marginLeft: adjustHorizontalMeasure(24),
-      marginTop: adjustVerticalMeasure(50),
+      marginTop: adjustVerticalMeasure(70),
       fontFamily: fonts.montserratBold,
       fontSize: adjustFontSize(30),
       color: colors.branco,
     },
     contentContainer: {
       position: 'absolute',
-      bottom: adjustVerticalMeasure(-50),
+      bottom: adjustVerticalMeasure(-40),
       height: adjustVerticalMeasure(596),
       width: '100%',
       backgroundColor: colors.background,
@@ -55,11 +55,12 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
       
     },
     descriptionContainer: {
-      height: adjustVerticalMeasure(67),
+      height: adjustVerticalMeasure(76),
       width: adjustHorizontalMeasure(277),
       marginLeft: adjustHorizontalMeasure(24),
     },
     descriptionText: {
+      height: adjustVerticalMeasure(53),
       fontFamily: fonts.montserratRegular,
       fontSize: adjustFontSize(15),
       color: colors.cinzaEscuro,
@@ -94,11 +95,12 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
       paddingVertical: adjustVerticalMeasure(4),
     },
     companyImageContainer: {
-      height: adjustVerticalMeasure(56),
-      width: adjustHorizontalMeasure(56),
+      height: adjustVerticalMeasure(48),
+      width: adjustHorizontalMeasure(48),
     },
     companyTitleContainer: {
       marginLeft: adjustHorizontalMeasure(8),
+      marginTop: adjustVerticalMeasure(2),
       flexDirection: 'column',
     },
     companyTitle: {
@@ -117,16 +119,23 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
     companyLogoPlaceholder:{
       justifyContent: 'center',
       alignItems: 'center',
-      width: adjustHorizontalMeasure(40),
-      height: adjustHorizontalMeasure(40),
-      borderRadius: adjustHorizontalMeasure(20),
+      width: adjustHorizontalMeasure(48),
+      height: adjustHorizontalMeasure(48),
+      borderRadius: adjustHorizontalMeasure(56 / 2),
       backgroundColor: colors.bordarCinza
+    },
+    companyBottomBorder: {
+      width: adjustHorizontalMeasure(328),
+      marginHorizontal: adjustHorizontalMeasure(24),
+      marginTop: adjustVerticalMeasure(15),
+      borderBottomWidth: 1,
+      borderBottomColor: colors.bordarCinza,
     },
     noteContainer: {
       marginLeft: adjustHorizontalMeasure(23),
       width: adjustHorizontalMeasure(325),
       height: adjustVerticalMeasure(101),
-      marginTop: adjustVerticalMeasure(30),
+      marginTop: adjustVerticalMeasure(15),
     },
     noteHeaderContainer: {
       flexDirection: 'row',
@@ -161,8 +170,14 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
       fontSize: adjustFontSize(13),
       color: colors.cinzaEscuro,
     },
+    noteBottomBorder: {
+      width: '100%',
+      marginTop: adjustVerticalMeasure(28.5),
+      borderBottomWidth: 1,
+      borderBottomColor: colors.bordarCinza,
+    },
     addContainer: {
-      marginTop: adjustVerticalMeasure(44),
+      marginTop: adjustVerticalMeasure(21),
       width: '100%',
       paddingHorizontal: adjustHorizontalMeasure(24),
       flexDirection: 'row',
@@ -183,14 +198,30 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
       fontSize: adjustFontSize(20),
       color: colors.primary,
     },
+    addAmount: {
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderLeftWidth: 1,
+      borderLeftColor: colors.cinzaClaro,
+    },
     addIcon: {
       fontSize: adjustFontSize(22),
       color: colors.primary,
       paddingLeft: adjustHorizontalMeasure(2),
+      textAlign: "center",
+    },
+    removeAmount: {
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRightWidth: 1,
+      borderRightColor: colors.cinzaClaro,
     },
     removeIcon: {
       fontSize: adjustFontSize(22),
       color: colors.cinza,
+      paddingRight: adjustHorizontalMeasure(2),
     }
     
  });

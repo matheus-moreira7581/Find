@@ -36,6 +36,7 @@ import CompanySellingItems from './src/pages/CompanySellingItems';
 import ServiceScheduling from './src/pages/ServiceScheduling';
 
 import { TabAppRoutes } from './src/routes/app.routes';
+import OrderDetails from './src/pages/OrderDetails';
 //import ServiceOptions from './src/pages/ServiceOptions';
 
 export default function App() {
@@ -52,11 +53,11 @@ export default function App() {
   else {
     return (
       
-       <NavigationContainer>
-         <AuthProvider>
-           <Routes />
-         </AuthProvider>
-       </NavigationContainer>
+      //  <NavigationContainer>
+      //    <AuthProvider>
+      //      <Routes />
+      //    </AuthProvider>
+      //  </NavigationContainer>
        
       // <CompanyProducts/>
       // <Companies />
@@ -80,6 +81,7 @@ export default function App() {
       //<CompanySellingItems/>
       //<ServiceScheduling/>
       // <ServiceOptions />
+      <OrderDetails />
     )
   }
 }
