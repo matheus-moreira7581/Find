@@ -30,6 +30,8 @@ const CompanyRunning = (props) => {
   //const [showSellingItems, setShowSellingItems] = useState(false);
   const [screenMode, setScreenMode] = useState('orders'); //3 states: 1 is default (Orders) 2 is My Products and 3 is register new product
 
+  const navigation = useNavigation();
+
   const [orders, setOrders] = useState([]);
 
   const { loggedUser } = useAuth();
@@ -43,6 +45,10 @@ const CompanyRunning = (props) => {
   useEffect(() => {
     fetchOrders();
   }, [screenMode]);
+
+  const navigateToOrderDetails = () => {
+    navigation.navigate('OrderDetails');
+  }
 
   if(screenMode === 'list-products')
     return <CompanySellingItems onPress={() => setScreenMode('orders')}/>;
@@ -87,10 +93,13 @@ const CompanyRunning = (props) => {
                 keyExtractor={(item, index) => String(item.id)}
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item }) => (
-                  <OrderCard 
-                    title={`Pedido #${item.id}`}
-                    user={item.name}
-                  />
+                 
+                    <OrderCard 
+                      title={`Pedido #${item.id}`}
+                      user={item.name}
+                      onPress={() => navigateToOrderDetails()}
+                    />
+                
                 )}
               />
             </View>
