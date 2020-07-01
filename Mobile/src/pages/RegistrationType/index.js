@@ -38,7 +38,7 @@ const RegistrationType = () => {
       <View style={styles.contentContainer}>
         <View style={styles.profissionalTypeContainer}>
           <RoundedButton 
-            text="Sou Profisional"
+            text="Sou Profissional"
             style={styles.button}
             onPress={navigateToCompanyRegistrationType} 
             selected={true}
