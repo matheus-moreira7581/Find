@@ -13,8 +13,7 @@ import RoundedButton from '../../components/RoundedButton';
 import UnderlinedTextButton from '../../components/UnderlinedTextButton';
 import ImagePicker from '../../components/ImagePicker';
 
-const ProductManagement = ({ mode = 'new' }) => { // Change default value here to switch screen contnt in the future 
-    const [screenMode, setScreenMode] = useState(mode); //Mode is new for creating new product, list for listing products
+const ProductManagement = () => { 
     const [selectedTimeRange, setSelectedTimeRange] = useState (0);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -32,10 +31,6 @@ const ProductManagement = ({ mode = 'new' }) => { // Change default value here t
     const getName = (typed) => setName(typed);
     const getDescription = (typed) => setDescription(typed);
     const getPrice = (typed) => setPrice(typed);
-
-    useEffect(() => {
-        setScreenMode(mode);
-    }, [mode]);
 
     const checkSpecialCharacters = /[-'`~!@#$%^&*()_|+=?;:'"<>\{\}\[\]\\\/]/gi;
     const checkLetters = /[a-zA-Z]/g;
@@ -60,7 +55,7 @@ const ProductManagement = ({ mode = 'new' }) => { // Change default value here t
                     selected={false} 
                     fontSize={adjustFontSize(15)} 
                     style={styles.headerButton}
-                    onPress={() => {}}
+                    onPress={() => navigation.navigate('CompanyRunning')}
                 >
                     Pedidos
                 </UnderlinedTextButton>
@@ -74,80 +69,72 @@ const ProductManagement = ({ mode = 'new' }) => { // Change default value here t
                 </UnderlinedTextButton>
             </View>
             <TouchableWithoutFeedback style={styles.bodyContainer} onPress={() => Keyboard.dismiss()}>
-                {
-                    screenMode === 'new'
-                    ?
-                        <View style={styles.myProductsContainer}>
-                            <View style={styles.topicContainer}>
-                                <Text style={styles.topicTitleText}>Nome do Produto *</Text>
-                                <TextInput 
-                                    style={styles.input}
-                                    placeholder="Digite o nome do produto" 
-                                    placeholderTextColor={colors.cinza}
-                                    onChangeText={getName}
-                                    value={name}
-                                />
-                            </View>
-                            <View style={styles.topicContainer}>
-                                <Text style={styles.topicTitleText}>Descrição do Serviço *</Text>
-                                <TextInput style={styles.multilineInput} 
-                                    placeholder="Digite uma descrição"
-                                    placeholderTextColor={colors.cinza}
-                                    multiline={true}
-                                    onChangeText={getDescription}
-                                    value={description}
-                                />
-                            </View>
-                            <View style={styles.topicContainer}>
-                                <Text style={styles.topicTitleText}>Tempo médio de conclusão</Text>
-                                <Picker 
-                                    style={styles.picker}
-                                    selectedValue={selectedTimeRange}
-                                    onValueChange={(value) => setSelectedTimeRange(value)}
-                                    itemStyle={styles.pickerItem}
-                                >
-                                    {
-                                        timeRanges.map((timeRange, index) => {
-                                            return <Picker.Item 
-                                                        label={timeRange.range} 
-                                                        value={timeRange.id} 
-                                                        key={index}
-                                                    />
-                                         })
-                                    }
-                                </Picker>
-                                
-                            </View>
-                            <View style={styles.topicContainer}>
-                                <Text style={styles.topicTitleText}>Preço Fixo *</Text>
-                                <TextInput 
-                                    style={styles.input}
-                                    placeholder="Digite um valor" 
-                                    placeholderTextColor={colors.cinza}
-                                    onChangeText={getPrice}
-                                    value={price}
-                                    keyboardType="decimal-pad"
-                                />
-                            </View>
-                            <View style={styles.topicContainer}>
-                                <Text style={styles.topicTitleText}>Adicione uma imagem</Text>
-                                <ImagePicker style={styles.imageToChoose}/>
-                            </View>
-                            <RoundedButton
-                                text="Concluir"
-                                selected={true}
-                                width={256}
-                                height={50}
-                                fontSize={adjustFontSize(16)}
-                                style={styles.doneButton}
-                                onPress={() => handleSellingItemCreation()}
-                            />
-                        </View>
-                    :
-                        <View/> //To be replaced with list of created products
-                }
-                
-                
+                <View style={styles.myProductsContainer}>
+                    <View style={styles.topicContainer}>
+                        <Text style={styles.topicTitleText}>Nome do Produto *</Text>
+                        <TextInput 
+                            style={styles.input}
+                            placeholder="Digite o nome do produto" 
+                            placeholderTextColor={colors.cinza}
+                            onChangeText={getName}
+                            value={name}
+                        />
+                    </View>
+                    <View style={styles.topicContainer}>
+                        <Text style={styles.topicTitleText}>Descrição do Serviço *</Text>
+                        <TextInput style={styles.multilineInput} 
+                            placeholder="Digite uma descrição"
+                            placeholderTextColor={colors.cinza}
+                            multiline={true}
+                            onChangeText={getDescription}
+                            value={description}
+                        />
+                    </View>
+                    <View style={styles.topicContainer}>
+                        <Text style={styles.topicTitleText}>Tempo médio de conclusão</Text>
+                        <Picker 
+                            style={styles.picker}
+                            selectedValue={selectedTimeRange}
+                            onValueChange={(value) => setSelectedTimeRange(value)}
+                            itemStyle={styles.pickerItem}
+                        >
+                            {
+                                timeRanges.map((timeRange, index) => {
+                                    return <Picker.Item 
+                                                label={timeRange.range} 
+                                                value={timeRange.id} 
+                                                key={index}
+                                            />
+                                    })
+                            }
+                        </Picker>
+                        
+                    </View>
+                    <View style={styles.topicContainer}>
+                        <Text style={styles.topicTitleText}>Preço Fixo *</Text>
+                        <TextInput 
+                            style={styles.input}
+                            placeholder="Digite um valor" 
+                            placeholderTextColor={colors.cinza}
+                            onChangeText={getPrice}
+                            value={price}
+                            keyboardType="decimal-pad"
+                        />
+                    </View>
+                    <View style={styles.topicContainer}>
+                        <Text style={styles.topicTitleText}>Adicione uma imagem</Text>
+                        <ImagePicker style={styles.imageToChoose}/>
+                    </View>
+                    <RoundedButton
+                        text="Concluir"
+                        selected={true}
+                        width={256}
+                        height={50}
+                        fontSize={adjustFontSize(16)}
+                        style={styles.doneButton}
+                        onPress={() => handleSellingItemCreation()}
+                    />
+                </View>    
             </TouchableWithoutFeedback>
         </SafeAreaView>
     );
