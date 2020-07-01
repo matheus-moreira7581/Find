@@ -9,6 +9,7 @@ const productsRoutes = require("./routes/product");
 const servicesRoutes = require("./routes/service");
 const authRoutes = require("./routes/auth");
 const ordersRoutes = require("./routes/order");
+const requestRoutes = require("./routes/request");
 
 //const cors = require("cors");
 const uploadImages = require('./images/multer')
@@ -72,6 +73,7 @@ app.use(productsRoutes)
 app.use(servicesRoutes)
 app.use(authRoutes)
 app.use(ordersRoutes)
+app.use(requestRoutes)
 // app.use(logErrors);
 // app.use(clientErrorHandler);
 // app.use(errorHandler);
