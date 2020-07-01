@@ -10,36 +10,16 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
-import { useNavigation } from '@react-navigation/native';
 import ProductCard from '../../components/ProductCard';
 import CircleButton from '../../components/CircleButton';
 
+import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth'
 
 import api from '../../services/api';
 
-// const sellingItemsData = [
-//   {
-//     title: 'Corte Masculino', price: '25,00', 
-//     image: require('../../assets/images/CompanyServices/corteCabelo.png'),
-//     description: "Corte Masculino utilizando maquina e tesoura."
-//   },
-//   {
-//     title: 'Sobrancelha Masculina', price: '5,00', 
-//     image: require('../../assets/images/CompanyServices/sobrancelha.png'),
-//     description: "A sobrancelha é feita por meio da gilete e tesoura."
-//   },
-//   {
-//     title: 'Sobrancelha Masculina', price: '15,00', 
-//     image: require('../../assets/images/CompanyServices/barba.png'),
-//     description: "A barba é feita utilizando a gilete e a maquina com regulagem."
-//   },
-  
-
-
-// ];
-
 const CompanySellingItems = (props) => {
+  const navigation = useNavigation()
 
   const [sellingItemsData, setSellingItemsData] = useState({});
 
@@ -49,6 +29,10 @@ const CompanySellingItems = (props) => {
     const user = loggedUser;
     const response = await api.get(`/my-products/${user.data.id}`)
     setSellingItemsData(response.data);
+  }
+
+  const navigateToProductManagement = () => {
+    navigation.navigate('NewProduct');
   }
 
   useEffect(() => {
@@ -89,7 +73,7 @@ const CompanySellingItems = (props) => {
         </View>
         <View style={styles.addButtonContainer}>
           <CircleButton 
-            onPress={() => {}} 
+            onPress={() => navigateToProductManagement()} 
             style={styles.button}
             fontSize={52} 
             selected={true} 

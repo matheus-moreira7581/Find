@@ -30,7 +30,9 @@ const styles = StyleSheet.create({
   orderButtonText: {
     fontFamily: fonts.montserratSemiBold,
     fontSize: adjustFontSize(15),
-    color: colors.cinza,
+    color: colors.primary,
+    borderBottomColor: colors.primary,
+    borderBottomWidth: 2,
   },
   serviceListButton: {
     marginRight: adjustHorizontalMeasure(21.6),

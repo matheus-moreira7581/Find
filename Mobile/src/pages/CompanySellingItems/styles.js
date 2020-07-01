@@ -38,7 +38,9 @@ const styles = StyleSheet.create({
   serviceListButtonText: {
     fontFamily: fonts.montserratSemiBold,
     fontSize: adjustFontSize(15),
-    color: colors.cinza,
+    color: colors.primary,
+    borderBottomColor: colors.primary,
+    borderBottomWidth: 2,
   },
   contentContainer: {
     height: adjustVerticalMeasure(638),
