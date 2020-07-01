@@ -24,7 +24,7 @@ module.exports = {
 
             }
 
-            await knex('company').insert(company);
+            await knex('companies').insert(company);
     
             response.status(201).json(company);
             

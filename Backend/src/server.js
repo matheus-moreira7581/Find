@@ -6,17 +6,18 @@ const clientRoutes = require("./routes/client");
 const categoryRoutes = require("./routes/category");
 const companyRoutes = require("./routes/company");
 const productsRoutes = require("./routes/product");
+const servicesRoutes = require("./routes/service");
 const authRoutes = require("./routes/auth");
 const ordersRoutes = require("./routes/order");
 
 //const cors = require("cors");
-//const uploadImages = require('./images/multer')
-//const cloudinary = require('./images/cloudinary')
+const uploadImages = require('./images/multer')
+const cloudinary = require('./images/cloudinary')
 const fs = require('fs')
 
 const app = express();
 
-//require('dotenv').config()
+require('dotenv').config()
 
 
 //Upload de imagens Inicio
@@ -27,7 +28,7 @@ const { restart } = require('nodemon')
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
-/*app.use('/upload-images',uploadImages.array('image'), async(request, response) => {
+app.use('/upload-images',uploadImages.array('image'), async(request, response) => {
 
     const uploader = async (path) => await cloudinary.uploads(path,'Images')
 
@@ -59,7 +60,7 @@ app.use(bodyParser.json())
     }
 })
 
-//Upload de imagens Fim*/
+//Upload de imagens Fim
 
 
 //app.use(cors());
@@ -68,6 +69,7 @@ app.use(clientRoutes)
 app.use(categoryRoutes)
 app.use(companyRoutes)
 app.use(productsRoutes)
+app.use(servicesRoutes)
 app.use(authRoutes)
 app.use(ordersRoutes)
 // app.use(logErrors);
