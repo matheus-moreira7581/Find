@@ -13,6 +13,8 @@ import RoundedButton from '../../components/RoundedButton';
 import UnderlinedTextButton from '../../components/UnderlinedTextButton';
 import ImagePicker from '../../components/ImagePicker';
 
+import api from '../../services/api';
+
 const ProductManagement = () => { 
     const [selectedTimeRange, setSelectedTimeRange] = useState (0);
     const [name, setName] = useState('');
