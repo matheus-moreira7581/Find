@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
-import RoundedButton from '../../components/RoundedButton';
+
+import { useNavigation } from '@react-navigation/native';
+
+import { useAuth } from '../../contexts/auth';
+
+import { MaterialIcons } from '@expo/vector-icons'; 
+import api from '../../services/api';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
 
-import { MaterialIcons } from '@expo/vector-icons'; 
-
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
-import { useNavigation } from '@react-navigation/native';
 import OrderCard from '../../components/OrderCard';
+import RoundedButton from '../../components/RoundedButton';
 
 import CompanySellingItems from '../CompanySellingItems'
 
-const ordersData = [
+const ordersDataModel = [
   {title: 'Corte Masculino', user: 'Lucas B.'},
   {title: 'Corte Masculino, Barba Masculina', user: 'Evandro S.'},
   {title: 'Sobrancelha Masculina, Corte Masculino', user: 'Tiago V.'},
@@ -23,6 +27,18 @@ const ordersData = [
 
 const CompanyRunning = (props) => {
   const [showSellingItems, setShowSellingItems] = useState(false);
+  const [orders, setOrders] = useState([]);
+
+  const { loggedUser } = useAuth();
+
+  const fetchOrders = async () => {
+    const { data: orders } = await api.get(`/orders/${loggedUser.data.id}`);
+
+    setOrders(orders);
+  }
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
   return (
     showSellingItems ? <CompanySellingItems onPress={() => {setShowSellingItems(false)}}/> :
@@ -57,13 +73,13 @@ const CompanyRunning = (props) => {
       <View style={styles.contentContainer}>
         <View style={styles.ordersListContainer}>
           <FlatList 
-            data={ordersData}
-            keyExtractor={(item, index) => item + index}
+            data={orders}
+            keyExtractor={(item, index) => String(item.id)}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <OrderCard 
-                title={item.title}
-                user={item.user}
+                title={`Pedido #${item.id}`}
+                user={item.name}
               />
             )}
           />
