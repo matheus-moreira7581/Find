@@ -47,6 +47,11 @@ const styles = StyleSheet.create({
     fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
   },
+  orderNumber: {
+    fontFamily: fonts.montserrat,
+    fontSize: adjustFontSize(10),
+    color: colors.cinzaEscuro,
+  },
   listContainer: {
     width: '100%',
     alignItems: 'center',

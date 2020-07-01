@@ -58,7 +58,7 @@ const HomeCompany = () => {
             width={256}
             height={40}
           />
-          <Button title="LogoUrlut" onPress={() => signOut()}/>
+          <TouchableOpacity onPress={() => signOut()}><Text>Logout</Text></TouchableOpacity>
         </View>
       </View>
       <View style={styles.contentContainer}>

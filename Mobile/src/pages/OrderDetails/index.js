@@ -25,10 +25,12 @@ const product = [
 ];
 
 const OrderDetails = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-          <TouchableOpacity style={styles.backButton} onPress={() => {}}>
+          <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
               <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
           </TouchableOpacity>
           <View style={styles.centeredContainer}>
@@ -37,14 +39,13 @@ const OrderDetails = () => {
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.userContainer}>
-          <Text style={styles.userName}>Lucas Batista de Menezes N°2</Text>
+          <Text style={styles.userName}>Lucas Batista de Menezes <Text style={styles.orderNumber}>N°2</Text></Text>
         </View>
         <View style={styles.listContainer}>
           <FlatList 
             data={product}
             style={styles.list}
             keyExtractor={(item, index) => item + index}
-            showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <View style={styles.cardContainer}>
                 <ProductCard 
