@@ -135,6 +135,7 @@ const ProductDetails = () => {
             </View>
           </View>
         </View>
+        <View style={styles.companyBottomBorder}></View>
         <View style={styles.noteContainer}>
           <View style={styles.noteHeaderContainer}>
             <MaterialIcons name="speaker-notes" style={styles.noteIcon}/>
@@ -149,16 +150,19 @@ const ProductDetails = () => {
             />
           </View>
         </View>
+        <View style={styles.noteBottomBorder}></View>
         <View style={styles.addContainer}>
           <View style={styles.amountContainer}>
             <TouchableOpacity 
               onPress={subtractAmount}
+              style={styles.removeAmount}
             >
               <MaterialIcons name="remove" style={styles.removeIcon}/>
             </TouchableOpacity>
             <Text style={styles.amountText}>{amount}</Text>
             <TouchableOpacity
               onPress={addAmount}
+              style={styles.addAmount}
             >
               <MaterialIcons name="add" style={styles.addIcon}/>
             </TouchableOpacity>
