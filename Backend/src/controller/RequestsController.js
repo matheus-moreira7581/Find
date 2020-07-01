@@ -2,7 +2,7 @@ const knex = require('../database');
 
 module.exports ={ 
 
-// Cadastrando pedido 
+// Cadastrando solicitação de serviço
 
 async create(request, response, next) {
     try {
@@ -28,7 +28,7 @@ async create(request, response, next) {
 
 
        const services = await knex('services')
-       .where('id_company', elements.request.id_company)
+       .where('id_company', elements.requests.id_company)
        .select('id', 'price');
 
 
@@ -37,7 +37,7 @@ async create(request, response, next) {
 
        const id_request = await trx('requests')
        .returning('id')
-       .insert(elements.request);
+       .insert(elements.requests);
 
 
        const data = elements.items_request.map(items => { 
@@ -56,26 +56,32 @@ async create(request, response, next) {
        await trx('items_request').insert(data)
 
 
-       const id_address = await trx('addresses')
-       .returning('id')
-       .insert(elements.address);
+        // Calculando o total do serviço
+
+        const total = prices.reduce((total, prices) => total + prices, 0)
+
+        if(elements.requests.local !== "Endereço do profissional") {
+
+            const id_address = await trx('addresses')
+            .returning('id')
+            .insert(elements.address);
+     
+            await trx('requests').where('id', id_request[0])
+            .update({
+                'id_address': id_address[0], 
+                'total': total
+             });
+     
+            await trx.commit();
+        }else{
+
+            await trx('requests').where('id', id_request[0])
+            .update({'total': total});
+
+            await trx.commit();
+        }
 
 
-        // Calculando o total do pedido
-
-       const total = prices.reduce((total, prices) => total + prices, 0)
-
-
-       await trx('requests').where('id', id_request[0])
-       .update({
-           'id_address': id_address[0], 
-           'total': total
-        });
-
-
-       await trx.commit();
-
-    
        return response.status(201).json({ status: "Serviço solicitado com sucesso."})
 
         
@@ -85,7 +91,7 @@ async create(request, response, next) {
 },
 
 
-// Listar pedidos de uma empresa
+// Listar solicitações de serviço de uma empresa
 
 async index(request, response, next) {
     try {
@@ -106,6 +112,7 @@ async index(request, response, next) {
     }
 },
 
+//Calculando o fatoramento do dia
 
 async indexForIncome(request, response, next) {
     try {
@@ -158,7 +165,7 @@ async indexForIncome(request, response, next) {
 },
 
 
-// Detalhando pedido
+// Detalhando serviço
 
 async show(request, response, next) {
     try {
@@ -179,17 +186,26 @@ async show(request, response, next) {
         .join('services', 'services.id', 'items_request.id_service')
         .select( 'services.name', 'services.description', 'services.price', 'services.img_url', 'items_request.details');
 
+        if(req[0].local !== "Endereço do profissional") {
+            
+            const address = await knex('addresses')
+            .where('id', req[0].id_address)
+            .select('street', 'neighborhood', 'ad_number', 'additional', 'landmark');
+    
+            
+            return response.status(200).json({
+                "Order": req[0],
+                "Address": address[0],
+                "Items": items_request
+            })
+        }else{ 
 
-        const address = await knex('addresses')
-        .where('id', req[0].id_address)
-        .select('street', 'neighborhood', 'ad_number', 'additional', 'landmark');
+            return response.status(200).json({
+                "Order": req[0],
+                "Items": items_request
+            })
 
-        
-        response.status(200).json({
-            "Order": req[0],
-            "Address": address[0],
-            "Items": items_request
-        })
+        }
         
     } catch (error) {
         next(error)
@@ -197,7 +213,7 @@ async show(request, response, next) {
 },
 
 
-// Atualizar status 
+// Atualizando status 
 
 async update(request, response, next) {
     try {

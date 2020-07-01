@@ -59,24 +59,32 @@ module.exports = {
            await trx('items_order').insert(data)
 
 
-           const id_address = await trx('addresses')
-           .returning('id')
-           .insert(elements.address);
-
-
             // Calculando o total do pedido
 
-           const total = prices.reduce((total, prices) => total + prices, 0)
+            const total = prices.reduce((total, prices) => total + prices, 0)
 
+            if(elements.order.receivement !== "Retirar") {
 
-           await trx('orders').where('id', id_order[0])
-           .update({
-               'id_address': id_address[0], 
-               'total': total
-            });
+                const id_address = await trx('addresses')
+                .returning('id')
+                .insert(elements.address);
 
+                await trx('orders').where('id', id_order[0])
+                .update({
+                    'id_address': id_address[0], 
+                    'total': total
+                });
 
-           await trx.commit();
+                await trx.commit();
+
+            }else{
+
+                await trx('orders').where('id', id_order[0])
+                .update({'total': total});
+
+                await trx.commit();
+
+            }
         
            return response.status(201).json({ status: "Pedido realizado com sucesso."})
 
@@ -180,17 +188,27 @@ module.exports = {
             .join('products', 'products.id', 'items_order.id_product')
             .select( 'products.name', 'products.description', 'products.price', 'products.img_url', 'items_order.amount', 'items_order.details');
 
+            if(order[0].receivement !== "Retirar") {
+                
+                const address = await knex('addresses')
+                .where('id', orders[0].id_address)
+                .select('street', 'neighborhood', 'ad_number', 'additional', 'landmark');
+    
+                
+                return response.status(200).json({
+                    "Order": order[0],
+                    "Address": address[0],
+                    "Items": itens_order
+                })
 
-            const address = await knex('addresses')
-            .where('id', orders[0].id_address)
-            .select('street', 'neighborhood', 'ad_number', 'additional', 'landmark');
+            }else{
 
-            
-            response.status(200).json({
-                "Order": order[0],
-                "Address": address[0],
-                "Items": itens_order
-            })
+                return response.status(200).json({
+                    "Order": order[0],
+                    "Items": itens_order
+                })
+            }
+
             
         } catch (error) {
             next(error)
