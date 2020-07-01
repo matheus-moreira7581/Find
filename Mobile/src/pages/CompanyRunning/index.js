@@ -18,6 +18,7 @@ import OrderCard from '../../components/OrderCard';
 import RoundedButton from '../../components/RoundedButton';
 
 import CompanySellingItems from '../CompanySellingItems'
+import ProductManagement from '../ProductManagement';
 
 const ordersDataModel = [
   {title: 'Corte Masculino', user: 'Lucas B.'},
@@ -26,7 +27,9 @@ const ordersDataModel = [
 ];
 
 const CompanyRunning = (props) => {
-  const [showSellingItems, setShowSellingItems] = useState(false);
+  //const [showSellingItems, setShowSellingItems] = useState(false);
+  const [screenMode, setScreenMode] = useState('orders'); //3 states: 1 is default (Orders) 2 is My Products and 3 is register new product
+
   const [orders, setOrders] = useState([]);
 
   const { loggedUser } = useAuth();
@@ -36,60 +39,66 @@ const CompanyRunning = (props) => {
 
     setOrders(orders);
   }
+
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [screenMode]);
 
-  return (
-    showSellingItems 
-    ? 
-      <CompanySellingItems onPress={() => {setShowSellingItems(false)}}/> 
-    :
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <View style={styles.headerButtonContainer}>
-            <TouchableOpacity 
-              style={styles.orderButton}
-            >
-              <Text style={styles.orderButtonText}>Pedidos</Text>
-            </TouchableOpacity>
+  if(screenMode === 'list-products')
+    return <CompanySellingItems onPress={() => setScreenMode('orders')}/>;
+  
+  if(screenMode === 'create-product')
+    return <ProductManagement onPress={() => setScreenMode('orders')}/>;
 
-            <TouchableOpacity 
-              style={styles.serviceListButton}
-              onPress={() => {setShowSellingItems(true)}}
-            >
-              <Text style={styles.serviceListButtonText}>Meus Serviços</Text>
-            </TouchableOpacity>
+  if(screenMode === 'orders'){
+    return (
+        <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <View style={styles.headerButtonContainer}>
+              <TouchableOpacity 
+                style={styles.orderButton}
+              >
+                <Text style={styles.orderButtonText}>Pedidos</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity 
+                style={styles.serviceListButton}
+                onPress={() => setScreenMode('list-products')}
+              >
+                <Text style={styles.serviceListButtonText}>Meus Produtos</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.roundedButtonContainer}>
+              <RoundedButton 
+                text="Encerrar Expediente" 
+                onPress={props.onPressButton} 
+                style={styles.button}
+                fontSize={adjustFontSize(15)} 
+                selected={true} 
+                width={256}
+                height={40}
+              />
+          </View>
+          <View style={styles.contentContainer}>
+            <View style={styles.ordersListContainer}>
+              <FlatList 
+                data={orders}
+                keyExtractor={(item, index) => String(item.id)}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <OrderCard 
+                    title={`Pedido #${item.id}`}
+                    user={item.name}
+                  />
+                )}
+              />
+            </View>
           </View>
         </View>
-        <View style={styles.roundedButtonContainer}>
-            <RoundedButton 
-              text="Encerrar Expediente" 
-              onPress={props.onPressButton} 
-              style={styles.button}
-              fontSize={adjustFontSize(15)} 
-              selected={true} 
-              width={256}
-              height={40}
-            />
-        </View>
-        <View style={styles.contentContainer}>
-          <View style={styles.ordersListContainer}>
-            <FlatList 
-              data={orders}
-              keyExtractor={(item, index) => String(item.id)}
-              showsVerticalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <OrderCard 
-                  title={`Pedido #${item.id}`}
-                  user={item.name}
-                />
-              )}
-            />
-          </View>
-        </View>
-      </View>
-  );
+    );
+  }
+  return null;
 }
 
 export default CompanyRunning;
