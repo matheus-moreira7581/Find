@@ -13,7 +13,7 @@ import adjustFontSize from '../utils/adjustFontSize';
 const OrderCard = (props) => {
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={props.onPress}>
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
