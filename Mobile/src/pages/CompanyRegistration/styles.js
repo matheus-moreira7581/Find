@@ -10,10 +10,11 @@ import adjustFontSize from '../../utils/adjustFontSize';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.branco,
+    top: Constants.statusBarHeight,
+    backgroundColor: colors.background,
   },
   headerContainer:{
-    backgroundColor: colors.branco,
+    backgroundColor: colors.background,
     flexDirection: 'row',
     alignItems: 'flex-end',
     borderBottomWidth: 1,

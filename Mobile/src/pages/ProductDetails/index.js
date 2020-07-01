@@ -78,22 +78,22 @@ const ProductDetails = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-          <ImageBackground
-            source={productBackgroundImage}
-            style={styles.productImage}
+        <ImageBackground
+          source={productBackgroundImage}
+          style={styles.productImage}
+        > 
+          <ImageBackground 
+            source={require('../../assets/images/ProductDetail/gradient.png')}
+            style={styles.gradientImage}
           > 
-            <ImageBackground 
-              source={require('../../assets/images/ProductDetail/gradient.png')}
-              style={styles.gradientImage}
-            > 
-              <View style={styles.arrowContainer}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <MaterialIcons name="arrow-back" color="white" size={24}/>
-                </TouchableOpacity>
-              </View>
-              <Text style={styles.productTitle}>{productTitle}</Text>
-            </ImageBackground>
+            <View style={styles.arrowContainer}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="arrow-back" color="white" size={24}/>
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.productTitle}>{productTitle}</Text>
           </ImageBackground>
+        </ImageBackground>
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.descriptionContainer}>
@@ -123,7 +123,6 @@ const ProductDetails = () => {
                   />
                 </View>
             }
-            
           </View>
           <View style={styles.companyTitleContainer}>
             <Text style={styles.companyTitle}>{companyName}</Text>
