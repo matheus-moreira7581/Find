@@ -17,7 +17,7 @@ module.exports = {
     
             const company = { name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, hours_schedule};
 
-            const checkEmail = await knex('company').where({ email });
+            const checkEmail = await knex('companies').where({ email });
 
             if (checkEmail.length !== 0) {
                 return response.status(403).json({ msg: 'Já existe uma conta com esse email cadastrado' });
@@ -42,7 +42,7 @@ module.exports = {
         try {
            const { id_categories } = request.query;
 
-           const companies = await knex('company')
+           const companies = await knex('companies')
            .where({ id_categories }).select('id','name', 'address', 'img_url', 'id_categories');
 
            response.status(200).json(companies);
@@ -61,7 +61,7 @@ module.exports = {
         try {
             const { id } = request.params;
             
-            const company = await knex('company')
+            const company = await knex('companies')
             .where({ id });
     
             response.status(200).json(company)
@@ -83,9 +83,9 @@ module.exports = {
 
             const { name, cell, address, img_url} = request.body;
 
-            await knex('company').where({ id }).update({name, cell, address, img_url})
+            await knex('companies').where({ id }).update({name, cell, address, img_url})
 
-            const newdata = await knex('company').where({ id })
+            const newdata = await knex('companies').where({ id })
 
             response.status(200).json(newdata)
 
@@ -103,7 +103,7 @@ module.exports = {
         try {
             const { id } = request.params;
     
-            await knex('company').where('id', id).del();
+            await knex('companies').where('id', id).del();
       
             response.status(200).json({msg: 'empresa deletado com sucesso!'});
             

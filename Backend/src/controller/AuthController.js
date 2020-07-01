@@ -15,7 +15,7 @@ module.exports = {
           const client = await knex('clients')
           .where({ email });
           
-          const company = await knex('company')
+          const company = await knex('companies')
           .where({ email });
           
           

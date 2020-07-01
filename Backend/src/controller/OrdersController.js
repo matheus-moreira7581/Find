@@ -48,7 +48,7 @@ module.exports = {
 
                 return {
                     "id_order": id_order[0],
-                    "id_products": itens.id_products,
+                    "id_product": itens.id_products,
                     "amount": itens.amount,
                     "details": itens.details
                 }  
@@ -56,7 +56,7 @@ module.exports = {
             });
 
 
-           await trx('items_cart').insert(data)
+           await trx('items_order').insert(data)
 
 
            const id_address = await trx('addresses')
@@ -175,10 +175,10 @@ module.exports = {
             const order = orders.filter(e => e.id == id_order);
 
 
-            const itens_cart = await knex('items_cart')
+            const itens_order = await knex('items_order')
             .where({ id_order })
-            .join('products', 'products.id', 'items_cart.id_products')
-            .select( 'products.name', 'products.description', 'products.price', 'products.img_url', 'items_cart.amount', 'items_cart.details');
+            .join('products', 'products.id', 'items_order.id_product')
+            .select( 'products.name', 'products.description', 'products.price', 'products.img_url', 'items_order.amount', 'items_order.details');
 
 
             const address = await knex('addresses')
@@ -189,7 +189,7 @@ module.exports = {
             response.status(200).json({
                 "Order": order[0],
                 "Address": address[0],
-                "Items": itens_cart
+                "Items": itens_order
             })
             
         } catch (error) {
