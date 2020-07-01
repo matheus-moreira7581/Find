@@ -41,51 +41,54 @@ const CompanyRunning = (props) => {
   }, []);
 
   return (
-    showSellingItems ? <CompanySellingItems onPress={() => {setShowSellingItems(false)}}/> :
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View style={styles.headerButtonContainer}>
-          <TouchableOpacity 
-            style={styles.orderButton}
-          >
-            <Text style={styles.orderButtonText}>Pedidos</Text>
-          </TouchableOpacity>
+    showSellingItems 
+    ? 
+      <CompanySellingItems onPress={() => {setShowSellingItems(false)}}/> 
+    :
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <View style={styles.headerButtonContainer}>
+            <TouchableOpacity 
+              style={styles.orderButton}
+            >
+              <Text style={styles.orderButtonText}>Pedidos</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity 
-            style={styles.serviceListButton}
-            onPress={() => {setShowSellingItems(true)}}
-          >
-            <Text style={styles.serviceListButtonText}>Meus Serviços</Text>
-          </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.serviceListButton}
+              onPress={() => {setShowSellingItems(true)}}
+            >
+              <Text style={styles.serviceListButtonText}>Meus Serviços</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.roundedButtonContainer}>
+            <RoundedButton 
+              text="Encerrar Expediente" 
+              onPress={props.onPressButton} 
+              style={styles.button}
+              fontSize={adjustFontSize(15)} 
+              selected={true} 
+              width={256}
+              height={40}
+            />
+        </View>
+        <View style={styles.contentContainer}>
+          <View style={styles.ordersListContainer}>
+            <FlatList 
+              data={orders}
+              keyExtractor={(item, index) => String(item.id)}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <OrderCard 
+                  title={`Pedido #${item.id}`}
+                  user={item.name}
+                />
+              )}
+            />
+          </View>
         </View>
       </View>
-      <View style={styles.roundedButtonContainer}>
-          <RoundedButton 
-            text="Encerrar Expediente" 
-            onPress={props.onPressButton} 
-            style={styles.button}
-            fontSize={adjustFontSize(15)} 
-            selected={true} 
-            width={256}
-            height={40}
-          />
-      </View>
-      <View style={styles.contentContainer}>
-        <View style={styles.ordersListContainer}>
-          <FlatList 
-            data={orders}
-            keyExtractor={(item, index) => String(item.id)}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <OrderCard 
-                title={`Pedido #${item.id}`}
-                user={item.name}
-              />
-            )}
-          />
-        </View>
-      </View>
-    </View>
   );
 }
 
