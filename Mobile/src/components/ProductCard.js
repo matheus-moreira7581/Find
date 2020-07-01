@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
 
+import { MaterialIcons } from '@expo/vector-icons'; 
+
 import adjustFontSize from '../utils/adjustFontSize';
 import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustMeasures';
 
@@ -11,13 +13,22 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustM
 const ProductCard = (props) => {
   const [image, setImage] = useState(props.Image);
 
+  
+
   return (
     <TouchableOpacity
       onPress={props.onPress}
     >
       <View style={styles.container}>
-        <View style={styles.imageContainer}>         
-          <Image source={props.Image} style={styles.image}/>
+        <View style={styles.imageContainer}>
+          { image === null || image === undefined ?       
+            <MaterialIcons 
+                name="insert-photo" 
+                size={adjustHorizontalMeasure(24)} 
+                color={colors.cinza}    
+            /> :
+            <Image source={props.Image} style={styles.image}/>
+           }
         </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>{props.Title}</Text>
@@ -48,8 +59,10 @@ const styles = StyleSheet.create({
     width: adjustHorizontalMeasure(88),
     height: adjustVerticalMeasure(88),
     borderRadius: 8,
-    backgroundColor: colors.cinza,
+    backgroundColor: colors.bordarCinza,
     marginRight: adjustHorizontalMeasure(7),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     width: adjustHorizontalMeasure(88),
