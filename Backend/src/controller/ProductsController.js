@@ -1,5 +1,9 @@
 const knex = require('../database');
 
+const cloudinary = require('../images/cloudinary')
+const fs = require('fs')
+
+
 
 module.exports = {
 
@@ -9,14 +13,44 @@ module.exports = {
 
         try {
 
-        const { name, description, price, img_url, limit_time, id_company } = request.body;
+            const uploader = async (path) => await cloudinary.uploads(path,'images')
 
-            const item = { name, description, price, img_url, limit_time, id_company };
+            if(request.method === 'POST')
+            {
+                const urls = []
+
+                const files = request.files
+
+
+                for (const file of files) {
+            
+                    const {path} = file
+
+                    const newPath = await uploader(path)
+
+                    urls.push(newPath)
+
+                    fs.unlinkSync(path)
+                }
+                return response.status(200).json({
+                    message:'Imagem carregada com sucesso',
+                    data:urls
+                })
+            }else{
+               return response.status(405).json({
+                    err:"Imagem não carregada"
+                })
+            }
+            
+
+           /*const { name, description, price, limit_time, id_company } = request.body;
+
+            const item = { name, description, price, limit_time, id_company };
 
             await knex('products').insert(item);
-
-            response.status(201).json(item);
             
+            response.status(201).json(item);*/
+
 
         } catch (error) {
             next(error)

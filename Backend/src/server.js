@@ -12,13 +12,13 @@ const ordersRoutes = require("./routes/order");
 const requestRoutes = require("./routes/request");
 
 //const cors = require("cors");
-const uploadImages = require('./images/multer')
-const cloudinary = require('./images/cloudinary')
-const fs = require('fs')
+//const uploadImages = require('./images/multer')
+//const cloudinary = require('./images/cloudinary')
+//const fs = require('fs')
 
 const app = express();
 
-require('dotenv').config()
+//require('dotenv').config()
 
 
 //Upload de imagens Inicio
@@ -29,7 +29,7 @@ const { restart } = require('nodemon')
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
-app.use('/upload-images',uploadImages.array('image'), async(request, response) => {
+/*app.use('/upload-images',uploadImages.array('image'), async(request, response) => {
 
     const uploader = async (path) => await cloudinary.uploads(path,'Images')
 
@@ -51,16 +51,16 @@ app.use('/upload-images',uploadImages.array('image'), async(request, response) =
             fs.unlinkSync(path)
         }
 
-        response.status(200).json({
+       return response.status(200).json({
             message:'Imagem carregada com sucesso',
             data:urls
         })
     }else{
-        response.status(405).json({
+       return response.status(405).json({
             err:"Imagem não carregada"
         })
     }
-})
+})*/
 
 //Upload de imagens Fim
 
