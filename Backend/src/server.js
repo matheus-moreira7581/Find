@@ -29,41 +29,6 @@ const { restart } = require('nodemon')
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
-app.use('/upload-images',uploadImages.array('image'), async(request, response) => {
-
-    const uploader = async (path) => await cloudinary.uploads(path,'Images')
-
-    if(request.method === 'POST')
-    {
-        const urls = []
-
-        const files = request.files
-
-
-        for (const file of files) {
-            
-            const {path} = file
-
-            const newPath = await uploader(path)
-
-            urls.push(newPath)
-
-            fs.unlinkSync(path)
-        }
-
-        response.status(200).json({
-            message:'Imagem carregada com sucesso',
-            data:urls
-        })
-    }else{
-        response.status(405).json({
-            err:"Imagem não carregada"
-        })
-    }
-})
-
-//Upload de imagens Fim
-
 
 //app.use(cors());
 app.use(express.json())
