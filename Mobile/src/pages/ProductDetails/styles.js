@@ -92,7 +92,7 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
       borderWidth: 2,
       borderRadius: 8,
       borderColor: colors.bordarCinza,
-      paddingVertical: adjustVerticalMeasure(4),
+      alignItems: 'center',
     },
     companyImageContainer: {
       height: adjustVerticalMeasure(48),

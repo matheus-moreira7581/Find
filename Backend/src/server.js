@@ -12,8 +12,8 @@ const ordersRoutes = require("./routes/order");
 const requestRoutes = require("./routes/request");
 
 //const cors = require("cors");
-const uploadImages = require('./images/multer')
-const cloudinary = require('./images/cloudinary')
+const uploadImages = require('./config/multer')
+const cloudinary = require('./config/cloudinary')
 const fs = require('fs')
 
 const app = express();

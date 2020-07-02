@@ -97,7 +97,7 @@ export const TabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="Chat" 
-            component={HomeScreen}
+            component={RequestsMadeScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="speaker-notes" size={size} color={color} />
@@ -106,7 +106,7 @@ export const TabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="Profile" 
-            component={HomeScreen}
+            component={RequestsMadeScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="person" size={size} color={color} />

@@ -41,6 +41,12 @@ const ProductManagement = () => {
     const checkSpecialCharacters = /[-'`~!@#$%^&*()_|+=?;:'"<>\{\}\[\]\\\/]/gi;
     const checkLetters = /[a-zA-Z]/g;
 
+    const navigateToCompanyRunning = () => {
+        navigation.reset({
+            routes: [{name: 'CompanyRunning'}]
+          })  
+    }
+
     const handleSellingItemCreation = async () => {
         if(name === '' || description === '' || price === '0' || price === '') {
             return Alert.alert('Error', 'Preencha todos os campos marcados com "*"!');
@@ -71,7 +77,7 @@ const ProductManagement = () => {
                         Alert.alert(
                             'Concluído', 
                             'Produto criado com sucesso!',
-                            [{ text: 'OK', onPress: () => navigation.goBack() }]
+                            [{ text: 'OK', onPress: () => navigateToCompanyRunning() }]
                         );
                     }
                 }
