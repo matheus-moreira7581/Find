@@ -4,6 +4,7 @@ import colors from '../../assets/var/colors';
 import fonts from '../../assets/var/fonts';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../utils/constants';
 import adjustFontSize from '../../utils/adjustFontSize';
+import { adjustVerticalMeasure, adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 
 export default StyleSheet.create({
   container: {
@@ -70,12 +71,43 @@ export default StyleSheet.create({
   },
   productsContainer: {
     width: '100%',
-    height: 510 / 812 * SCREEN_HEIGHT,
+    height: adjustVerticalMeasure(490),
   },
   cardContainer: {
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  marketBagContainer: {
+    flexDirection: 'row',
+    height: adjustVerticalMeasure(54),
+    width: '100%',
+    backgroundColor: colors.cinzaClaro,
+    paddingHorizontal: adjustHorizontalMeasure(44),
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  iconContainer: {
+    width: adjustHorizontalMeasure(26),
+    height: adjustVerticalMeasure(26),
+  },
+  numberContainer: {
+    position: 'absolute',
+    width: adjustVerticalMeasure(14),
+    height: adjustVerticalMeasure(14),
+    right: 0,
+    top: 0,
+    backgroundColor: colors.primary,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: colors.branco,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  numberText: {
+    fontFamily: fonts.montserratSemiBold,
+    fontSize: adjustFontSize(9),
+    color: colors.branco,
   }
   
 });
