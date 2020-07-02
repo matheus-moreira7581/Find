@@ -44,6 +44,10 @@ const CompanyProducts = () => {
     });
   }
 
+  const navigatoToMarketBag = () => {
+    navigation.navigate('MarketBag');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -98,7 +102,7 @@ const CompanyProducts = () => {
         </View>
         <RoundedButton 
             text={`Continuar R$ 88,00`} 
-            onPress={() => {}} 
+            onPress={() => navigatoToMarketBag()} 
             selected={true} 
             width={168}
             height={32}

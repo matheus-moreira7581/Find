@@ -19,6 +19,7 @@ import ServiceOptionsScreen from '../pages/ServiceOptions';
 import DeliveryAddressScreen from '../pages/DeliveryAddress';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
+import MarketBagScreen from '../pages/MarketBag';
 
 import ProductManagementScreen from '../pages/ProductManagement';
 import RequestConfirmedScreen from '../pages/RequestConfirmed';
