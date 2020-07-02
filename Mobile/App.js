@@ -34,10 +34,11 @@ import HomeCompany from './src/pages/HomeCompany';
 import CompanyRunning from './src/pages/CompanyRunning';
 import CompanySellingItems from './src/pages/CompanySellingItems';
 import ServiceScheduling from './src/pages/ServiceScheduling';
+//import MarketBag from './src/pages/MarketBag';
 
 import { TabAppRoutes } from './src/routes/app.routes';
 import OrderDetails from './src/pages/OrderDetails';
-//import ServiceOptions from './src/pages/ServiceOptions';
+import ServiceOptions from './src/pages/ServiceOptions';
 
 export default function App() {
 
@@ -82,6 +83,7 @@ export default function App() {
       //<ServiceScheduling/>
       // <ServiceOptions />
       // <OrderDetails />
+      // <MarketBag />
     )
   }
 }

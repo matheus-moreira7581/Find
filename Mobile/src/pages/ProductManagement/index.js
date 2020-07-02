@@ -4,6 +4,8 @@ import { View, SafeAreaView, Text, TextInput, TouchableWithoutFeedback, Picker, 
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { useAuth } from '../../contexts/auth';
+
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import colors from '../../assets/var/colors';
@@ -13,6 +15,8 @@ import RoundedButton from '../../components/RoundedButton';
 import UnderlinedTextButton from '../../components/UnderlinedTextButton';
 import ImagePicker from '../../components/ImagePicker';
 
+import api from '../../services/api';
+
 const ProductManagement = () => { 
     const [selectedTimeRange, setSelectedTimeRange] = useState (0);
     const [name, setName] = useState('');
@@ -20,6 +24,8 @@ const ProductManagement = () => {
     const [price, setPrice] = useState('');
     
     const navigation = useNavigation();
+
+    const { loggedUser } = useAuth();
 
     const timeRanges = [
         { id: 0, range: '5min - 10min' },
@@ -35,16 +41,46 @@ const ProductManagement = () => {
     const checkSpecialCharacters = /[-'`~!@#$%^&*()_|+=?;:'"<>\{\}\[\]\\\/]/gi;
     const checkLetters = /[a-zA-Z]/g;
 
-    const handleSellingItemCreation = () => {
+    const handleSellingItemCreation = async () => {
         if(name === '' || description === '' || price === '0' || price === '') {
-            return Alert.alert('Error', 'Preencha todos os campos marcados com "*"');
+            return Alert.alert('Error', 'Preencha todos os campos marcados com "*"!');
         }
-        if(checkSpecialCharacters.test(name) || checkSpecialCharacters.test(description)) {
-            return Alert.alert('Error', '"Nome do produto" e "Descrição do produto" não podem conter caracters especiais!');
+        else {
+            if(checkSpecialCharacters.test(name) || checkSpecialCharacters.test(description)) 
+                return Alert.alert('Error', '"Nome do produto" e "Descrição do produto" não podem conter caracters especiais!');
+            else {
+                if(checkSpecialCharacters.test(price) || checkLetters.test(price)) 
+                    return Alert.alert('Error', 'Preço Fixo" só deve conter números e ponto!');
+                else {
+                    const productPrice = parseFloat(price)
+                    const newProduct = {
+                        name,
+                        description,
+                        price: productPrice,
+                        img_url: "",
+                        limit_time: timeRanges[selectedTimeRange].range,
+                        id_company: loggedUser.data.id,
+                    }
+
+                    const response = await api.post('/my-products', newProduct); 
+                    
+                    if(response.status !== 201){
+                        Alert.alert('Error', 'Falha na criação do produto!');
+                    }
+                    else{
+                        Alert.alert(
+                            'Concluído', 
+                            'Produto criado com sucesso!',
+                            [{ text: 'OK', onPress: () => navigation.goBack() }]
+                        );
+                    }
+                }
+            }
         }
-        if(checkSpecialCharacters.test(price) || checkLetters.test(price)) {
-            return Alert.alert('Error', '"Preço Fixo" só deve contem numeros e ponto');
-        }
+            
+                
+                
+        //----MÉTODO PARA UPAR A IMAGEM VEM AQUI, TODO----""
         
     }
 
@@ -81,7 +117,7 @@ const ProductManagement = () => {
                         />
                     </View>
                     <View style={styles.topicContainer}>
-                        <Text style={styles.topicTitleText}>Descrição do Serviço *</Text>
+                        <Text style={styles.topicTitleText}>Descrição do Produto *</Text>
                         <TextInput style={styles.multilineInput} 
                             placeholder="Digite uma descrição"
                             placeholderTextColor={colors.cinza}

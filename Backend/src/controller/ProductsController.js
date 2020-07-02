@@ -60,7 +60,7 @@ module.exports = {
             .where({ id_company })
             .select('id', 'img_url', 'name', 'description', 'price');
 
-            const company = await knex('company')
+            const company = await knex('companies')
             .where('id', id_company)
             .select('img_url', 'name', 'address');
 
@@ -70,7 +70,7 @@ module.exports = {
                     "img_url": items.img_url,
                     "title": items.name,
                     "address": items.address,
-                    product
+                    "products": product
                 }
 
             });
@@ -96,6 +96,7 @@ module.exports = {
             next(error);
         }
     },
+    
     // Atualizar dados de um produto
 
     async update(request, response, next) { 
@@ -119,7 +120,6 @@ module.exports = {
         }
 
     },
-
 
 
     // Deletar um produto

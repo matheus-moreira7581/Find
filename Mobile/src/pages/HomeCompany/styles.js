@@ -32,6 +32,14 @@ const styles = StyleSheet.create({
     height: adjustVerticalMeasure(79),
     borderRadius: 100,
   },
+  companyLogoPlaceholder:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.bordarCinza,
+    width: adjustHorizontalMeasure(79),
+    height: adjustHorizontalMeasure(79),
+    borderRadius: adjustHorizontalMeasure(79/2),
+  },
   headerText:{
     fontFamily: fonts.montserratBold,
     fontSize: adjustFontSize(15),
