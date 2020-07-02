@@ -75,30 +75,7 @@ app.use(servicesRoutes)
 app.use(authRoutes)
 app.use(ordersRoutes)
 app.use(requestRoutes)
-// app.use(logErrors);
-// app.use(clientErrorHandler);
-// app.use(errorHandler);
 
-app.get('/', function (req, res) {
-    res.send('Find Api');
-  })
-
-function logErrors(err, req, res, next) {
-    console.error(err.stack);
-    next(err);
-  }
-
-function clientErrorHandler(err, req, res, next) {
-    if (req.xhr) {
-        res.status(500).json({ error: 'Algo está errado!' });
-    } else {
-        next(err);
-    }
-}
-
-function errorHandler(err, req, res, next) {
-    res.status(500).json({ error: err });
-}
 
 // Initial route
 app.get('/', function (req, res) {
