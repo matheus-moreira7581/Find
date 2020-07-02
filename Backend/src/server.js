@@ -29,7 +29,7 @@ const { restart } = require('nodemon')
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
-app.use('/upload-images',uploadImages.array('image'), async(request, response) => {
+/*app.use('/upload-images',uploadImages.array('image'), async(request, response) => {
 
     const uploader = async (path) => await cloudinary.uploads(path,'Images')
 
@@ -60,7 +60,7 @@ app.use('/upload-images',uploadImages.array('image'), async(request, response) =
             err:"Imagem não carregada"
         })
     }
-})
+})*/
 
 //Upload de imagens Fim
 
