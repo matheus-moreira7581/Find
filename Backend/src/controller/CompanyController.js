@@ -43,7 +43,9 @@ module.exports = {
            const { id_categories } = request.query;
 
            const companies = await knex('companies')
-           .where({ id_categories }).select('id','name', 'address', 'img_url', 'id_categories');
+           .where({ id_categories })
+           .orderBy('status', 'desc')
+           .select('id','name', 'address', 'img_url', 'id_categories', 'status');
 
            response.status(200).json(companies);
 
@@ -81,9 +83,9 @@ module.exports = {
           
             const { id } = request.params;
 
-            const { name, cell, address, img_url} = request.body;
+            const { name, date_birth, address, img_url, hours_schedule} = request.body;
 
-            await knex('companies').where({ id }).update({name, cell, address, img_url})
+            await knex('companies').where({ id }).update({ name, date_birth, address, img_url, hours_schedule})
 
             const newdata = await knex('companies').where({ id })
 

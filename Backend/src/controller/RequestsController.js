@@ -233,6 +233,44 @@ async update(request, response, next) {
         
     }
 
+},
+
+
+
+async getTime(request, response, next) {
+
+    try {
+
+        let arr = [];
+
+        function filterTime(time) {
+             req.forEach(e => {
+                if(time !== e.schedule) {
+                    arr.push(time)
+                }
+            })
+        }
+
+        //const {id_company} = request.query;
+
+        const companySchedule = await knex('companies')
+        .where('id', 4)
+        .select('hours_schedule')
+
+        const req = await knex('requests')
+        .where('id_company', 4)
+        .select('schedule')
+
+        companySchedule.forEach(elements => {
+            filterTime(elements.hours_schedule)
+        })
+
+        
+        return response.json({"hours": arr})       
+        
+    } catch (error) {
+        next(error)
+    }
 }
 
 
