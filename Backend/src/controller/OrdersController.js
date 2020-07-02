@@ -122,7 +122,10 @@ module.exports = {
             const { id_company } = request.params;
 
             const orders = await knex('orders')
-            .where({ id_company })
+            .where({ 
+                id_company,
+                "status": "Finalizado" 
+            })
             .orderBy('order_date', 'desc')
             .select('total', 'order_date');
 
