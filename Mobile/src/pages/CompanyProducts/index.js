@@ -11,15 +11,19 @@ import api from '../../services/api';
 import adjustFontSize from '../../utils/adjustFontSize';
 import RoundedButton from '../../components/RoundedButton';
 import colors from '../../assets/var/colors';
+import {useCart} from '../../contexts/cart'
 
 const CompanyProducts = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
   const {companyId} = route.params;
+  const {total, cartItems} = useCart();
 
   const [product, setProduct] = useState({});
   const [company, setCompany] = useState({});
+  const [showMarketBag, setShowMarketBag] = useState(false);
+  const [itemsCount, setItemsCount] = useState(0);
 
   const fetchCompanyProducts = async () => {
     const getProdutct = async () => {
@@ -27,14 +31,21 @@ const CompanyProducts = () => {
       return res.data
     }
     const res = await getProdutct();
-    
 
     setCompany(res[0]);
     setProduct(res[0].products);
   }
 
+  const handleShowMarketBag = () => {
+    if(cartItems.length > 0) {
+      setShowMarketBag(!showMarketBag);
+      setItemsCount(cartItems.length);
+    }
+  }
+
   useEffect(()=> {
     fetchCompanyProducts();
+    handleShowMarketBag();
   }, [])
 
   const navigateToProductDetails = (productId, companyId) => {
@@ -48,12 +59,30 @@ const CompanyProducts = () => {
     navigation.navigate('MarketBag');
   }
 
+  const bagFootter = 
+  <View style={styles.marketBagContainer}>
+    <View style={styles.iconContainer}>
+      <MaterialIcons name="local-mall" color={colors.primary} size={adjustFontSize(26)}/>
+      <View style={styles.numberContainer}>
+        <Text style={styles.numberText}>{itemsCount}</Text>
+      </View>
+    </View>
+    <RoundedButton 
+        text={`Continuar R$ ${total}`} 
+        onPress={() => navigatoToMarketBag()} 
+        selected={true} 
+        width={168}
+        height={32}
+        fontSize={12}
+      />
+  </View>
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.imageContainer}>
             <View style={styles.arrowBack}>
-              <TouchableOpacity onPress={() => navigation.goBack()}>
+              <TouchableOpacity onPress={() => navigation.navigate('Companies')}>
                 <MaterialIcons name="arrow-back" color="black" size={24}/>
               </TouchableOpacity>
             </View>
@@ -93,22 +122,7 @@ const CompanyProducts = () => {
           )}
         />
       </View>
-      <View style={styles.marketBagContainer}>
-        <View style={styles.iconContainer}>
-          <MaterialIcons name="local-mall" color={colors.primary} size={adjustFontSize(26)}/>
-          <View style={styles.numberContainer}>
-            <Text style={styles.numberText}>99</Text>
-          </View>
-        </View>
-        <RoundedButton 
-            text={`Continuar R$ 88,00`} 
-            onPress={() => navigatoToMarketBag()} 
-            selected={true} 
-            width={168}
-            height={32}
-            fontSize={12}
-          />
-      </View>
+      {showMarketBag ? bagFootter : <View></View>}
 
     </View>
   )

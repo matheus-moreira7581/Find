@@ -4,10 +4,13 @@ import { MaterialIcons } from '@expo/vector-icons';
 import styles from './styles';
 import RoundedButton from '../../components/RoundedButton';
 import colors from '../../assets/var/colors';
+import { useNavigation } from '@react-navigation/native';
 
 // import { Container } from './styles';
 
 const SuccessOrder = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -29,7 +32,7 @@ const SuccessOrder = () => {
         <View style={styles.buttonContainer}>
           <RoundedButton 
             text="Voltar para o início" 
-            onPress={() => {}} 
+            onPress={() => navigation.navigate('Home')} 
             selected={true} 
             width={256}
             height={48}

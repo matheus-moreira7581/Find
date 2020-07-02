@@ -11,13 +11,14 @@ import colors from '../../assets/var/colors';
 
 import api from '../../services/api';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-// import { Container } from './styles';
+import {useCart} from '../../contexts/cart'
 
 const ProductDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
   const { productId, companyId } = route.params;
+  const {setOrderInfo, addProductToCart, orderInfo} = useCart();
 
   const loadScreenInfo = async () => {
     const response = await api.get(`/company?id_company=${companyId}`);
@@ -52,6 +53,9 @@ const ProductDetails = () => {
   const [productBackgroundImage, setProductBackgroundImage] = useState('');
   const [companyLogoUrl, setCompanyLogoUrl] = useState('my-photo');
   const [companyName, setCompanyName] = useState('Empresa');
+  const [details, setDetails] = useState('');
+
+  const getDetails = (typed) => setDetails(typed);
 
   const addAmount = () => {
     let a = amount;
@@ -73,6 +77,33 @@ const ProductDetails = () => {
       setAmount(a);
       setAddPrice((a * price).toFixed(2));
     }
+  }
+
+  const handleAddProductToMarketBag = () => {
+    setOrderInfo({
+      id_company: companyId,
+      id_client: orderInfo.id_client,
+      payment: orderInfo.payment,
+      receivement: orderInfo.receivement
+    });
+    const cartItem = {
+      "id_products": productId,
+      "title": productTitle,
+      "image": productBackgroundImage,
+      "amount": amount,
+      "details": details,
+      "price": price,
+      "description": productDescription
+    }
+    addProductToCart(cartItem, companyId);
+
+    navigation.reset({
+      routes: [
+        {name: 'Home'},
+        {name: 'Companies'},
+        {name: 'CompanyProducts', params: {companyId: companyId}}
+      ]
+    })  
   }
 
   return (
@@ -147,6 +178,8 @@ const ProductDetails = () => {
               placeholderTextColor={colors.cinza}
               style={styles.noteTextInput}
               multiline={true}
+              onChangeText={getDetails}
+              value={details}
             />
           </View>
         </View>
@@ -169,7 +202,7 @@ const ProductDetails = () => {
           </View>
           <RoundedButton 
             text={`Adicionar R$ ${addPrice}`} 
-            onPress={() => {}} 
+            onPress={() => handleAddProductToMarketBag()} 
             selected={true} 
             width={168}
             height={36}
