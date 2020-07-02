@@ -8,6 +8,9 @@ import ProductCard from '../../components/ProductCard';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 import api from '../../services/api';
+import adjustFontSize from '../../utils/adjustFontSize';
+import RoundedButton from '../../components/RoundedButton';
+import colors from '../../assets/var/colors';
 
 const CompanyProducts = () => {
   const navigation = useNavigation();
@@ -39,6 +42,10 @@ const CompanyProducts = () => {
       productId: productId,
       companyId: companyId
     });
+  }
+
+  const navigatoToMarketBag = () => {
+    navigation.navigate('MarketBag');
   }
 
   return (
@@ -85,6 +92,22 @@ const CompanyProducts = () => {
             </View>
           )}
         />
+      </View>
+      <View style={styles.marketBagContainer}>
+        <View style={styles.iconContainer}>
+          <MaterialIcons name="local-mall" color={colors.primary} size={adjustFontSize(26)}/>
+          <View style={styles.numberContainer}>
+            <Text style={styles.numberText}>99</Text>
+          </View>
+        </View>
+        <RoundedButton 
+            text={`Continuar R$ 88,00`} 
+            onPress={() => navigatoToMarketBag()} 
+            selected={true} 
+            width={168}
+            height={32}
+            fontSize={12}
+          />
       </View>
 
     </View>
