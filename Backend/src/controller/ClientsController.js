@@ -1,6 +1,5 @@
 const knex = require('../database');
-const bcrypt = require('bcrypt')
-
+const bcrypt = require('bcrypt');
 
 module.exports = {
 
@@ -66,6 +65,7 @@ module.exports = {
         }
 
     },
+
 
     // Atualizar dados de um cliente (perfil)
 
