@@ -1,5 +1,9 @@
 const knex = require('../database');
 
+const cloudinary = require('../config/cloudinary')
+const fs = require('fs')
+
+
 
 module.exports = {
 
@@ -9,14 +13,39 @@ module.exports = {
 
         try {
 
-        const { name, description, price, img_url, limit_time, id_company } = request.body;
+            const uploader = async (path) => await cloudinary.uploads(path,'images')
 
-            const item = { name, description, price, img_url, limit_time, id_company };
+            const urls = []
 
-            await knex('products').insert(item);
+            const files = request.files
 
-            response.status(201).json(item);
+            for (const file of files) {
             
+                const {path} = file
+
+                const newPath = await uploader(path)
+
+                urls.push(newPath)
+
+                fs.unlinkSync(path)
+            }
+
+          
+          const { name, description, price, limit_time, id_company } = request.body;
+
+            const item = [{ name, description, price, limit_time, id_company }];
+
+            const product = item.map(element => {
+                return {
+                    "img_url": urls[0].url,
+                    ...element
+                }
+            })
+
+            await knex('products').insert(product);
+            
+            return response.status(201).json(product);
+
 
         } catch (error) {
             next(error)

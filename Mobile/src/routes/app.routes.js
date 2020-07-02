@@ -7,6 +7,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { ServiceSchedulingProvider } from '../contexts/serviceScheduling';
 import { CategoryProvider } from '../contexts/categorySelection';
+import { CartProvider } from '../contexts/cart';
 
 import HomeScreen from '../pages/Home';
 import CompaniesScreen from '../pages/Companies';
@@ -18,6 +19,7 @@ import ServiceOptionsScreen from '../pages/ServiceOptions';
 import DeliveryAddressScreen from '../pages/DeliveryAddress';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
+import MarketBagScreen from '../pages/MarketBag';
 
 import ProductManagementScreen from '../pages/ProductManagement';
 import RequestConfirmedScreen from '../pages/RequestConfirmed';
@@ -34,23 +36,26 @@ const CompanyAppStack = createStackNavigator();
 const AppTab = createBottomTabNavigator();
 
 export const CustomerAppRoutes = () => (
-    <ServiceSchedulingProvider>
-        <CategoryProvider>
-            <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
-                <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
-                <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
-                <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
-                <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
-                <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
-                <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
-                <CustomerAppStack.Screen name="ServiceOptions" component={ServiceOptionsScreen}/>
-                <CustomerAppStack.Screen name="DeliveryAddress" component={DeliveryAddressScreen}/>
-                <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
-                <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
-                <CustomerAppStack.Screen name="ServiceScheduling" component={ServiceSchedulingScreen}/>
-            </CustomerAppStack.Navigator>
-        </CategoryProvider>      
-    </ServiceSchedulingProvider>
+    <CartProvider>
+        <ServiceSchedulingProvider>
+            <CategoryProvider>
+                <CustomerAppStack.Navigator headerMode="none" initialRouteName="Home">
+                    <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
+                    <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
+                    <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
+                    <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
+                    <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
+                    <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
+                    <CustomerAppStack.Screen name="ServiceOptions" component={ServiceOptionsScreen}/>
+                    <CustomerAppStack.Screen name="DeliveryAddress" component={DeliveryAddressScreen}/>
+                    <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
+                    <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
+                    <CustomerAppStack.Screen name="ServiceScheduling" component={ServiceSchedulingScreen}/>
+                </CustomerAppStack.Navigator>
+            </CategoryProvider>      
+        </ServiceSchedulingProvider>
+    </CartProvider>
+    
 );
 
 export const ProductCompanyAppRoutes = () => (
