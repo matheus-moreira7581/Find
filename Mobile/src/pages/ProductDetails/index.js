@@ -22,7 +22,7 @@ const ProductDetails = () => {
   const loadScreenInfo = async () => {
     const response = await api.get(`/company?id_company=${companyId}`);
     
-    const { product: companyProducts, title, img_url } = response.data[0];
+    const { products: companyProducts, title, img_url } = response.data[0];
 
     const product = companyProducts.find(product => product.id === productId);
 
