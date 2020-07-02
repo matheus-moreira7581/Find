@@ -1,6 +1,6 @@
 const knex = require('../database');
 
-const cloudinary = require('../images/cloudinary')
+const cloudinary = require('../config/cloudinary')
 const fs = require('fs')
 
 
@@ -15,41 +15,36 @@ module.exports = {
 
             const uploader = async (path) => await cloudinary.uploads(path,'images')
 
-            if(request.method === 'POST')
-            {
-                const urls = []
+            const urls = []
 
-                const files = request.files
+            const files = request.files
 
-
-                for (const file of files) {
+            for (const file of files) {
             
-                    const {path} = file
+                const {path} = file
 
-                    const newPath = await uploader(path)
+                const newPath = await uploader(path)
 
-                    urls.push(newPath)
+                urls.push(newPath)
 
-                    fs.unlinkSync(path)
-                }
-                return response.status(200).json({
-                    message:'Imagem carregada com sucesso',
-                    data:urls
-                })
-            }else{
-               return response.status(405).json({
-                    err:"Imagem não carregada"
-                })
+                fs.unlinkSync(path)
             }
+
+          
+          const { name, description, price, limit_time, id_company } = request.body;
+
+            const item = [{ name, description, price, limit_time, id_company }];
+
+            const product = item.map(element => {
+                return {
+                    "img_url": urls[0].url,
+                    ...element
+                }
+            })
+
+            await knex('products').insert(product);
             
-
-           /*const { name, description, price, limit_time, id_company } = request.body;
-
-            const item = { name, description, price, limit_time, id_company };
-
-            await knex('products').insert(item);
-            
-            response.status(201).json(item);*/
+            return response.status(201).json(product);
 
 
         } catch (error) {
