@@ -27,7 +27,7 @@ const CompanyProducts = () => {
     
 
     setCompany(res[0]);
-    setProduct(res[0].product);
+    setProduct(res[0].products);
   }
 
   useEffect(()=> {

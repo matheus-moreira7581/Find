@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, Children } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 
 const CategorySelectionContext = createContext({});
 

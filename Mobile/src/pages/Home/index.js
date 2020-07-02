@@ -21,8 +21,6 @@ const Home = () => {
   const [productData, setProductData] = useState([]);
   const [serviceData, setServiceData] = useState([]);
 
-  const { selectedCategory } = useCategory();
-
   const defaultDataModel = [
     {
       Type: "product",

@@ -19,7 +19,7 @@ import { useCategory } from '../contexts/categorySelection';
 const HomeList = ({ datasource, onPress: navigateToCompanies }) => {
 
   const { setSelectedCategoryCardInfo } = useCategory();
-
+  
   return (
     <View style={styles.listContainer}>
        <SectionList 
@@ -45,6 +45,7 @@ const HomeList = ({ datasource, onPress: navigateToCompanies }) => {
                         categoryId: item.id,
                         category: item.title, 
                       });
+                      
                       navigateToCompanies();
                     }}
                   >

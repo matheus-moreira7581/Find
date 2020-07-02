@@ -46,7 +46,7 @@ const RequestsMade = () => {
                                 width={256}
                                 height={55}
                                 fontSize={adjustFontSize(16)}
-                                onPress={() => navigation.navigate('CustomerHome')}
+                                onPress={() => navigation.navigate('Home')}
                             />
                         </>
                 }
