@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, Text, TouchableOpacity, Alert } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 import RoundedButton from '../../components/RoundedButton';
@@ -10,12 +10,42 @@ import colors from '../../assets/var/colors';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
+import { useNavigation } from '@react-navigation/native';
+import {useCart} from '../../contexts/cart'
+
 const DeliveryOptions = () => {
     const [deliveryOption, setDeliveryOption] = useState(false);
+    const navigation = useNavigation();
+
+    const {setOrderInfo,orderInfo} = useCart();
 
     useEffect(() => {
         setDeliveryOption(null);
     }, []);
+
+    const navigate = () => {
+        if(deliveryOption === null) {
+            Alert.alert('Error', 'Selecione uma opção para obter os produtos');
+        }
+        else if(deliveryOption === false) {
+            setOrderInfo({
+                id_company: orderInfo.id_company,
+                id_client: orderInfo.id_client,
+                payment: orderInfo.payment,
+                receivement: 'Retirar'
+            });
+            navigation.navigate('ReedemProduct');
+        }
+        else if(deliveryOption === true) {
+            setOrderInfo({
+                id_company: orderInfo.id_company,
+                id_client: orderInfo.id_client,
+                payment: orderInfo.payment,
+                receivement: 'Entregar'
+            })
+            navigation.navigate('DeliveryAddress');
+        }
+    }
 
     return ( 
         <SafeAreaView style={styles.screenContainer}>
@@ -55,7 +85,7 @@ const DeliveryOptions = () => {
                 />
                 <RoundedButton 
                     text="Continuar" 
-                    onPress={() => {}}
+                    onPress={() => navigate()}
                     fontSize={adjustFontSize(16)} 
                     selected={true} 
                     width={256}
