@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   image: {
     height: adjustVerticalMeasure(68),
     width: adjustHorizontalMeasure(120),    
+    resizeMode: 'stretch'
   },
   imageContainer:{
     justifyContent: 'center',
