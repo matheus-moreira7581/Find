@@ -10,6 +10,8 @@ import RoundedButton from '../../components/RoundedButton';
 import styles from './styles';
 import colors from '../../assets/var/colors';
 
+import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adjustMeasures';
+
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../utils/constants';
 
 import {useCart} from '../../contexts/cart'
@@ -86,8 +88,8 @@ const PaymentOptions = () => {
     return(
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backButton}>
-                    <MaterialIcons name="arrow-back" size={20/375 * SCREEN_WIDTH} color={colors.cinzaEscuro}/>
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                    <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
                     <Text style={styles.headerText}>{headerTitle}</Text>
@@ -104,24 +106,24 @@ const PaymentOptions = () => {
                     <SmallOptionButton 
                         text='Dinheiro' 
                         selected={paymentOption != null ? !paymentOption : false} 
-                        width={120/375 * SCREEN_WIDTH} 
-                        height={37/812 * (SCREEN_HEIGHT- Constants.statusBarHeight)}
+                        width={adjustHorizontalMeasure(120)} 
+                        height={adjustVerticalMeasure(37)}
                         onPress={() => setPaymentOption(false)}                       
                         
                     />
                     <SmallOptionButton 
                         text='Cartão' 
                         selected={paymentOption != null ? paymentOption : false} 
-                        width={120/375 * SCREEN_WIDTH} 
-                        height={37/812 * (SCREEN_HEIGHT - Constants.statusBarHeight)}
+                        width={adjustHorizontalMeasure(120)} 
+                        height={adjustVerticalMeasure(37)}
                         onPress={() => setPaymentOption(true)}
                     />
                 </View>
                 <RoundedButton 
                     text='Concluir' 
                     selected={true}
-                    height={50/812 * (SCREEN_HEIGHT - Constants.statusBarHeight)}
-                    width={256/375 * SCREEN_WIDTH}
+                    height={adjustVerticalMeasure(50)}
+                    width={adjustHorizontalMeasure(256)}
                     onPress={handleSelection}
                 />
             </View>
