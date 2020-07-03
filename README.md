@@ -9,8 +9,11 @@ Find é um aplicativo onde o comerciante poderá anunciar sua empresa ou marca, 
 
 ## Guia para ativação do código (SETUP) :pushpin:
 
-- **O Backend da aplicação** está sendo rodada no __Heroku__, porem caso queiram executá-la na sua maquina.
+- **O Backend da aplicação** está sendo rodada no __Heroku__, porem caso queiram executá-la na sua máquina.
   Sigam os passos disponibilizados no arquivo [`README.md`](./Backend/Readme.md) na pasta Backend :open_file_folder:.
+  
+  - Se o backend for rodado na sua maquina, lembre se de ir em [`./Mobile/src/services/api.js`](./Mobile/src/services/api.js). 
+  E adicionar o IP da máquina, e a porta (3333).
   
 **Executando a aplicação (front-end)**
 
@@ -22,7 +25,7 @@ Find é um aplicativo onde o comerciante poderá anunciar sua empresa ou marca, 
 cd Mobile
 ```
 
-- Instalar as dependencias;
+- Instalar as dependências;
 
 ```node
  npm i
@@ -44,17 +47,25 @@ ou
  yarn start
 ```
 
-- Depois de inicializar, irá abrir uma pagina em seu navegador. Nesta pagina, selecione a opção de LAN em **connection**;
+- Depois de inicializar, irá abrir uma página em seu navegador. Nesta página, selecione a opção de LAN em **connection**;
 - Logo após, abra o app do expo no seu celular, escaneie o QR Code que apareceu no navegador (O celular precisa estar conectado a mesma rede de seu computador);
 - Espere o aplicativo carregar e pronto! 
 
 
 ## Tecnologias :pushpin:
 
+- **UX Design** <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png" alt="icon" width="20px"/> 
+    - Adobe XD
+    
+- **Front-End** <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" alt="icon" width="35px"/>
+    - React Native (Expo)
+    
+- **Back-End** <img src="https://i0.wp.com/codigosimples.net/wp-content/uploads/2017/03/nodejs.png?fit=500%2C500&ssl=1" alt="icon" width="35px"/> 
+    - Node.js (Express)
+    
+- **Database** <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png" alt="icon" width="20px"/> 
 
-| UX Design |      Front-End     |      Back-End     |   Database  |
-|-----------|--------------------|-------------------|-------------|
-| Adobe XD  | React Native(Expo) | Node.js (Express) | PostgreSQL  |
+    - PostgreSQL
 
 
 
