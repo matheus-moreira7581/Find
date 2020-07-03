@@ -146,7 +146,7 @@ const ProductDetails = () => {
           <View style={styles.companyImageContainer}>
             {
               companyLogoUrl !== '' && companyLogoUrl !== 'my-photo'
-              ? <Image source={companyLogoUrl}/> 
+              ? <Image source={{uri: companyLogoUrl}} /> 
               : <View style={styles.companyLogoPlaceholder}>
                   <MaterialIcons 
                     name="broken-image" 

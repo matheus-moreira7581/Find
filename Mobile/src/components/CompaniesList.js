@@ -26,21 +26,23 @@ const CompaniesList = ({ datasource, onPress: navigateToCompanyProducts }) => {
                     onPress={() => {navigateToCompanyProducts(item.id)}}
                 >
                     <View style={styles.companyContainer}>
-                        {
-                            item.img_url === "" || item.img_url === "my-photo"
-                            ? <View style={styles.companyLogoPlaceholder}>
-                                <MaterialIcons 
-                                    name="insert-photo" 
-                                    size={adjustHorizontalMeasure(24)} 
-                                    color={colors.cinza}    
-                                />
-                              </View>
-                            : <Image 
-                                source={item.img_url}
-                                resizeMode='stretch'
-                                style={styles.companyLogo}
-                              />
-                        }
+                        <View style={styles.companyLogoPlaceholder}>
+                            {
+                                item.img_url === "" || item.img_url === "my-photo"
+                                ?
+                                    <MaterialIcons 
+                                        name="insert-photo" 
+                                        size={adjustHorizontalMeasure(24)} 
+                                        color={colors.cinza}    
+                                    />
+                                :
+                                    <Image 
+                                        source={{uri: item.img_url}}
+                                        resizeMode='stretch'
+                                        style={styles.companyLogo}
+                                    />
+                            }
+                        </View>
                         
                         <View style={styles.companyInfoContainer}>
                             <View style={styles.companyTitleContainer}>
