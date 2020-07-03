@@ -7,7 +7,7 @@ module.exports = {
     connection: {
       host: "localhost",
       user: "postgres",
-      password: "root",
+      password: "db123",
       database: "find_db"
     },
     migrations: {

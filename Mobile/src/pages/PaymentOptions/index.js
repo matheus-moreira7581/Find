@@ -29,7 +29,7 @@ const PaymentOptions = () => {
 
     const handleSelection = async () => {
         if(paymentOption === null){
-            Alert.alert("Error", "Escolha um tipo de pagamento");
+            return Alert.alert("Error", "Escolha um tipo de pagamento");
         }
         else if(paymentOption === true) {
             const id = loggedUser.data.id;
@@ -45,8 +45,14 @@ const PaymentOptions = () => {
                 itens_cart: cartItems
             }
             const response = await api.post('/order', object);
-            resetCart();
-            navigation.navigate('SuccessOrder');
+            if(response.status === 201) {
+                resetCart();
+                navigation.navigate('SuccessOrder');
+            } else {
+                Alert.alert('Error', 'Falha ao criar o pedido');
+                resetCart();
+                navigation.navigate('Home');
+            }
         }
         else if(paymentOption === false) {
             const id = loggedUser.data.id;
@@ -62,8 +68,14 @@ const PaymentOptions = () => {
                 itens_cart: cartItems
             }
             const response = await api.post('/order', object);
-            resetCart();
-            navigation.navigate('SuccessOrder');
+            if(response.status === 201) {
+                resetCart();
+                navigation.navigate('SuccessOrder');
+            } else {
+                Alert.alert('Error', 'Falha ao criar o pedido');
+                resetCart();
+                navigation.navigate('Home');
+            }
         }
     }
     return(
