@@ -11,6 +11,7 @@ import styles from './styles';
 import colors from '../../assets/var/colors';
 
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../utils/constants';
+
 import {useCart} from '../../contexts/cart'
 import {useAuth} from '../../contexts/auth'
 import { useNavigation } from '@react-navigation/native';
@@ -18,13 +19,17 @@ import api from '../../services/api';
 
 const PaymentOptions = () => {
     const [paymentOption, setPaymentOption] = useState(false);
+    const [headerTitle, setHeaderTitle] = useState('Opções de entrega');
 
     const navigation = useNavigation();
+
     const {setOrderInfo, orderInfo, cartItems, addressInfo, resetCart} = useCart();
+
     const {loggedUser} = useAuth();
 
     useEffect(() => {
         setPaymentOption(null);
+        setHeaderTitle(orderInfo.receivement === 'Entregar' ? 'Entregar para mim' : 'Retirar no local');
     }, []);
 
     const handleSelection = async () => {
@@ -85,7 +90,7 @@ const PaymentOptions = () => {
                     <MaterialIcons name="arrow-back" size={20/375 * SCREEN_WIDTH} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
-                    <Text style={styles.headerText}>Entregar para mim</Text>
+                    <Text style={styles.headerText}>{headerTitle}</Text>
                 </View>
             </View>
             <View style={styles.bodyContainer}>

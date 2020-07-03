@@ -76,6 +76,14 @@ const styles = StyleSheet.create({
         paddingVertical: adjustVerticalMeasure(11.5),
         marginBottom: adjustVerticalMeasure(184),
     },
+    companyLogoContainer:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: adjustHorizontalMeasure(56),
+        height: adjustHorizontalMeasure(56),
+        backgroundColor: colors.bordarCinza,
+        borderRadius: 28,
+    },
     requestInfoContainer:{
         marginLeft: adjustHorizontalMeasure(8),
     },

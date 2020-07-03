@@ -22,6 +22,7 @@ const RedeemProduct = () => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [companyTitle, setCompanyTitle] = useState('Empresa');
+    const [companyLogoUrl, setCompanyLogoUrl] = useState('Empresa');
     const [duration, setDuration] = useState('X min - X min');
     
     const navigation = useNavigation();
@@ -29,13 +30,14 @@ const RedeemProduct = () => {
     const { orderInfo } = useCart();
 
      useEffect(() => {
-        fetchRequestInfo();
-     }, [])
+        fetchCompanyInfo();
+     }, []);
 
-    const fetchRequestInfo = async () => {
+    const fetchCompanyInfo = async () => {
         try{
             const response = await api.get(`/edit-company/${orderInfo.id_company}`);
-            console.log(response.data.name);
+            setCompanyTitle(response.data[0].name);
+            setCompanyLogoUrl(response.data[0].img_url);
         }
         catch(error){
             throw error;
@@ -53,28 +55,32 @@ const RedeemProduct = () => {
 
     const cellMask = (cell) => {
         if(
-         !(String(cell).includes('(') && 
-         String(cell).includes(')') ||
-         String(cell).includes('-')) &&
-         String(cell).length === 11
+            !(String(cell).includes('(') && 
+            String(cell).includes(')') ||
+            String(cell).includes('-')) &&
+            String(cell).length === 11
         ) {
             cell = String(cell).replace(/\D/g,"");
             cell = String(cell).replace(/^(\d{2})(\d)/g,"($1) $2");
             cell = String(cell).replace(/(\d)(\d{4})$/,"$1-$2");
+
             return cell;
-        } else return cell
+        }
+        else 
+            return cell
      }
 
-     const finishOrderRegistration = () => {
+     const handleRedeemingProdecure = () => {
          if(name === null || name === '' || phone === null || phone === ''){
              Alert.alert('Error', 'Preencha todos os campos!')
          }
          else{
+             console.log(phone)
              if(!cellPattern.test(phone)){
                 Alert.alert('Error', 'Formato inválido de celular, preencha com DDD e hífen!');
              }
              else{
-                 navigation.navigate('PaymentOptions');
+                navigation.navigate('PaymentOptions');
              }
          }
      }
@@ -96,7 +102,7 @@ const RedeemProduct = () => {
                         style={styles.textInput} 
                         placeholder="Digite o nome completo"
                         placeholderTextColor={colors.cinza}
-                        onChange={getName}
+                        onChangeText={getName}
                         value={name}
                     />
                 </View>
@@ -106,14 +112,28 @@ const RedeemProduct = () => {
                         style={styles.textInput} 
                         placeholder="(00) 00000-0000"
                         placeholderTextColor={colors.cinza}
-                        onChange={getPhone}
+                        onChangeText={getPhone}
                         value={phone}
                     />
                 </View>
                 <View style={styles.requestContainer}>
-                    <Image source={require('../../assets/images/CompanyLogos/pizzaria_1.png')} style={styles.companyLogo}/>
+                    <View style={styles.companyLogoContainer}>
+                        {
+                            companyLogoUrl === '' || companyLogoUrl === null || companyLogoUrl === 'my-photo'
+                            ?   
+                                <MaterialIcons 
+                                    name="insert-photo" 
+                                    size={adjustHorizontalMeasure(20)} 
+                                    color={colors.cinza}
+                                />
+                            :
+                                <Image source={{uri: companyLogoUrl}} resizeMode="stretch"/>
+                        }
+                        
+                    </View>
+                    
                     <View style={styles.requestInfoContainer}>
-                        <Text style={styles.companyTitle}>Tasty Pizza</Text>
+                        <Text style={styles.companyTitle}>{companyTitle}</Text>
                         <View style={styles.request}>
                             <View style={styles.meanTimeContainer}>
                                 <View style={styles.verticalLink}/>
@@ -138,6 +158,7 @@ const RedeemProduct = () => {
                 </View>
                 <RoundedButton
                     text="Concluir"
+                    onPress={handleRedeemingProdecure}
                     selected={true}
                     width={256}
                     height={48}
