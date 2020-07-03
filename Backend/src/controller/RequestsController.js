@@ -238,7 +238,7 @@ async update(request, response, next) {
 
 },
 
-async getTime(request, response, next) {
+/*async getTime(request, response, next) {
 
     try {
         
@@ -246,6 +246,6 @@ async getTime(request, response, next) {
         next(error)
     }
 
-}
+}*/
 
 }
