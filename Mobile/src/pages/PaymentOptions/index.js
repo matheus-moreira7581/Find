@@ -12,8 +12,6 @@ import colors from '../../assets/var/colors';
 
 import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adjustMeasures';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../utils/constants';
-
 import {useCart} from '../../contexts/cart'
 import {useAuth} from '../../contexts/auth'
 import { useNavigation } from '@react-navigation/native';
