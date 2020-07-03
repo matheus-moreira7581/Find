@@ -15,7 +15,7 @@ const CategoryCard = (props) => {
       <View style={styles.imageContainer}>
         {
           props.Image != "" 
-          ? <Image source={props.Image} style={styles.image}/>
+          ? <Image source={{uri: props.Image}} style={styles.image}/>
           : <MaterialIcons 
               name="insert-photo" 
               size={adjustHorizontalMeasure(25)} 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: adjustVerticalMeasure(68),
-    width: adjustHorizontalMeasure(120),
+    width: adjustHorizontalMeasure(120),    
   },
   imageContainer:{
     justifyContent: 'center',
