@@ -54,6 +54,7 @@ const ProductDetails = () => {
   const [companyLogoUrl, setCompanyLogoUrl] = useState('my-photo');
   const [companyName, setCompanyName] = useState('Empresa');
   const [details, setDetails] = useState('');
+  const [limitTime, setLimitTime] = useState('X hrs - X hrs')
 
   const getDetails = (typed) => setDetails(typed);
 
