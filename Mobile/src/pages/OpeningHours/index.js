@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, SafeAreaView, Text, TouchableOpacity } from 'react-native'; 
+import { View, SafeAreaView, Text, TouchableOpacity, Alert } from 'react-native'; 
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
@@ -37,15 +37,13 @@ const OpeningHours = () => {
 
     const {user, companyData, registrationType} = route.params;
 
-
     const finishCompanyRegistrarion = async () => {
-        
         const selectedHours = getHours();
         const chosenHours = hours.filter((item, index) => selectedHours[index] === true );
         const stringHours = JSON.stringify(Object.assign({}, chosenHours));
         const jsonHours = JSON.parse(stringHours);
         let cpf = String(user.cpf).replace(/\D/g,"");
-        const response = await api.post('/register-company', {
+        const jsonObject = {
             name: companyData.companyName,
             email: user.email,
             cpf: cpf,
@@ -55,8 +53,13 @@ const OpeningHours = () => {
             id_categories: companyData.area,
             type: "service", 
             hours_schedule:jsonHours
-        }).catch(err => console.log(err))
-        navigation.navigate('Login');
+        }
+        const response = await api.post('/register-company', jsonObject).catch(err => console.log(err));
+        if(response.status === 201) return navigation.navigate('Login');
+        else {
+            Alert.alert('Error', 'Falha ao cadastrar uma nova empresa');
+            return navigation.navigate('Home');
+        }
     }
 
     return (
