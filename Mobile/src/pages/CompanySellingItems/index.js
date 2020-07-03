@@ -22,7 +22,7 @@ import api from '../../services/api';
 const CompanySellingItems = (props) => {
   const navigation = useNavigation()
 
-  const [sellingItemsData, setSellingItemsData] = useState({});
+  const [sellingItemsData, setSellingItemsData] = useState([]);
 
   const {loggedUser} = useAuth();
 

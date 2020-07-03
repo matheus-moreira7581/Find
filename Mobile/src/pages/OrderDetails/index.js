@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity, Button, Image } from 'react-native';
+import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity, Button, Image, Alert } from 'react-native';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
@@ -12,7 +12,7 @@ import RoundedButton from '../../components/RoundedButton';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize  from '../../utils/adjustFontSize';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
 import { useCategory } from '../../contexts/categorySelection';
 
@@ -26,6 +26,51 @@ const product = [
 
 const OrderDetails = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const [items, setItems] = useState([]);
+  const [order, setOrder] = useState({});
+
+  const {orderId} = route.params;
+
+  const fetchOrder = async () => {
+    const getOrder = async () => {
+      const response = api.get(`/details?id_order=${orderId}`);
+      return response;
+    }
+    const response = await getOrder();
+    const data = response.data;
+
+    setItems(data.Items);
+    setOrder(data.Order);
+
+  }
+
+  const confirmOrder = async () => {
+    const response = await api.put(`/details?id_order=${orderId}`, {
+      status: 'Aceito',
+    });
+    if(response.status === 200) return navigation.navigate('CompanyRunning');
+    else {
+      Alert.alert('Error', 'Falha ao tentar confirmar o pedido');
+      return navigation.navigate('CompanyRunning');
+    }
+  }
+
+  const cancelOrder = async () => {
+    const response = await api.put(`/details?id_order=${orderId}`, {
+      status: 'Cancelado',
+    });
+    if(response.status === 200) return navigation.navigate('CompanyRunning');
+    else {
+      Alert.alert('Error', 'Falha ao tentar cancelar o pedido');
+      return navigation.navigate('CompanyRunning');
+    }
+  }
+
+  useEffect(() => {
+    fetchOrder();
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -39,21 +84,20 @@ const OrderDetails = () => {
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.userContainer}>
-          <Text style={styles.userName}>Lucas Batista de Menezes <Text style={styles.orderNumber}>N°2</Text></Text>
+          <Text style={styles.userName}>{order.name}<Text style={styles.orderNumber}> N°2</Text></Text>
         </View>
         <View style={styles.listContainer}>
           <FlatList 
-            data={product}
+            data={items}
             style={styles.list}
             keyExtractor={(item, index) => item + index}
             renderItem={({ item }) => (
               <View style={styles.cardContainer}>
                 <ProductCard 
-                  Image={item.image}
+                  Image={item.img_url}
                   Title={item.name}
                   Description={item.description}
                   Price={item.price}
-                  onPress={() => navigateToProductDetails(item.id, companyId)}
                 />
               </View>
             )}
@@ -80,7 +124,7 @@ const OrderDetails = () => {
             width={256}
             height={51}
             fontSize={adjustFontSize(16)}
-            onPress={() => {}}
+            onPress={() => confirmOrder()}
           />
           <Text style={styles.buttonCenterText}>OU</Text>
           <RoundedButton
@@ -89,7 +133,7 @@ const OrderDetails = () => {
             width={256}
             height={51}
             fontSize={adjustFontSize(16)}
-            onPress={() => {}}
+            onPress={() => cancelOrder()}
           />
         </View>
       </View>

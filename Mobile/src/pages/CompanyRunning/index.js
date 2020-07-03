@@ -46,8 +46,8 @@ const CompanyRunning = (props) => {
     fetchOrders();
   }, [screenMode]);
 
-  const navigateToOrderDetails = () => {
-    navigation.navigate('OrderDetails');
+  const navigateToOrderDetails = (id) => {
+    navigation.navigate('OrderDetails', {orderId: id});
   }
 
   if(screenMode === 'list-products')
@@ -97,7 +97,7 @@ const CompanyRunning = (props) => {
                     <OrderCard 
                       title={`Pedido #${item.id}`}
                       user={item.name}
-                      onPress={() => navigateToOrderDetails()}
+                      onPress={() => navigateToOrderDetails(item.id)}
                     />
                 
                 )}

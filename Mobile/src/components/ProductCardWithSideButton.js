@@ -13,8 +13,6 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustM
 const ProductCardWithSideButton = (props) => {
   const [image, setImage] = useState(props.Image);
 
-  
-
   return (
       <View style={styles.container}>
         <View style={styles.imageContainer}>
@@ -24,7 +22,7 @@ const ProductCardWithSideButton = (props) => {
                 size={adjustHorizontalMeasure(24)} 
                 color={colors.cinza}    
             /> :
-            <Image source={props.Image} style={styles.image}/>
+            <Image source={{uri: image}} style={styles.image}/>
            }
         </View>
         <View style={styles.contentContainer}>
@@ -74,6 +72,7 @@ const styles = StyleSheet.create({
   image: {
     width: adjustHorizontalMeasure(88),
     height: adjustVerticalMeasure(88),
+    borderRadius: 8,
   },
   noImageText: {
     textAlign: 'center',

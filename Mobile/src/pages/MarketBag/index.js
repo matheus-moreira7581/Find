@@ -60,7 +60,8 @@ const MarketBag = () => {
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <View style={styles.cardContainer}>
-                  <ProductCardWithSideButton 
+                  <ProductCardWithSideButton
+                    Image={item.image}
                     Title={item.title}
                     Description={item.description}
                     Price={item.price}

@@ -42,7 +42,7 @@ const HomeCompany = () => {
               </View>
             : <Image 
                 style={styles.companyLogo}
-                source={companyLogoUrl}
+                source={{uri: companyLogoUrl}}
               />
           }
           
@@ -58,7 +58,6 @@ const HomeCompany = () => {
             width={256}
             height={40}
           />
-          <TouchableOpacity onPress={() => signOut()}><Text>Logout</Text></TouchableOpacity>
         </View>
       </View>
       <View style={styles.contentContainer}>
