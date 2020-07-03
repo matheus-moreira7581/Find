@@ -110,8 +110,9 @@ const ProductDetails = () => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <ImageBackground
-          source={productBackgroundImage}
+          source={{uri: productBackgroundImage}}
           style={styles.productImage}
+          resizeMode="cover"
         > 
           <ImageBackground 
             source={require('../../assets/images/ProductDetail/gradient.png')}

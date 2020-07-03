@@ -27,7 +27,7 @@ const ProductCard = (props) => {
                 size={adjustHorizontalMeasure(24)} 
                 color={colors.cinza}    
             /> :
-            <Image source={props.Image} style={styles.image}/>
+            <Image source={{uri: image}} style={styles.image}/>
            }
         </View>
         <View style={styles.detailsContainer}>
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
   image: {
     width: adjustHorizontalMeasure(88),
     height: adjustVerticalMeasure(88),
+    borderRadius: 8,
   },
   noImageText: {
     textAlign: 'center',

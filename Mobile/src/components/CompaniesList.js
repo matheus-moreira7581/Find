@@ -36,7 +36,7 @@ const CompaniesList = ({ datasource, onPress: navigateToCompanyProducts }) => {
                                 />
                               </View>
                             : <Image 
-                                source={item.img_url}
+                                source={{uri: item.img_url}}
                                 resizeMode='stretch'
                                 style={styles.companyLogo}
                               />
@@ -97,6 +97,8 @@ const styles = StyleSheet.create({
         marginLeft: adjustHorizontalMeasure(24),
         marginTop: adjustVerticalMeasure(11),
         marginBottom: adjustVerticalMeasure(14),
+        width: adjustHorizontalMeasure(56),
+        height: adjustVerticalMeasure(56),
     },
     companyLogoPlaceholder: {
         justifyContent: 'center',

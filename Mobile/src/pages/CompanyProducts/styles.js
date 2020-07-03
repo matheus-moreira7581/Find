@@ -30,10 +30,14 @@ export default StyleSheet.create({
     paddingLeft: 24 / 375 * SCREEN_WIDTH,
     justifyContent: 'center',
   },
-  ImageCompany: {
+  ImageCompanyContainer: {
     justifyContent: 'center',
     width: '60%',
     height: '100%',
+  },
+  ImageCompany: {
+    height: adjustVerticalMeasure(80),
+    width: adjustHorizontalMeasure(80),
   },
   textContainer: {
     height: 90 / 812 * SCREEN_HEIGHT,

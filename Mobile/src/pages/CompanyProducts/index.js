@@ -34,6 +34,7 @@ const CompanyProducts = () => {
 
     setCompany(res[0]);
     setProduct(res[0].products);
+    
   }
 
   const handleShowMarketBag = () => {
@@ -86,9 +87,10 @@ const CompanyProducts = () => {
                 <MaterialIcons name="arrow-back" color="black" size={24}/>
               </TouchableOpacity>
             </View>
-          <View style={styles.ImageCompany}>
+          <View style={styles.ImageCompanyContainer}>
             <Image 
-              source={require('../../assets/images/CompanyLogos/logo.png')}
+              source={{uri: company.img_url}}
+              style={styles.ImageCompany}
             />
           </View>
         </View>
@@ -112,7 +114,7 @@ const CompanyProducts = () => {
           renderItem={({ item }) => (
             <View style={styles.cardContainer}>
               <ProductCard 
-                Image={item.image}
+                Image={item.img_url}
                 Title={item.name}
                 Description={item.description}
                 Price={item.price}
