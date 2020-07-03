@@ -16,7 +16,6 @@ export const CartProvider = ({ children }) => {
 
     const addProductToCart = (cartItem, id_company) => {
         if(orderInfo.id_company === 0 || id_company === orderInfo.id_company){ //Condição para verificar se o carrinho não foi resetado e se já existem itens de outra empresa no carrinho
-            console.log(id_company);
             setCartItems(previous => [...previous, cartItem]);
             setTotal(total => total + (cartItem.amount * cartItem.price));
         }

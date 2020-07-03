@@ -37,7 +37,6 @@ const CustomerRegistration = () => {
                 cell,
                 password
             });
-            console.log(response);
             if(response.status >= 200 && response.status <=299) {
                 if(!!response.data.msg){
                     Alert.alert(
