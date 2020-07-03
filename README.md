@@ -19,7 +19,7 @@ Find é um aplicativo onde o comerciante poderá anunciar sua empresa ou marca, 
 - Acessar pasta "Mobile" :open_file_folder:
 
 ```node
-cd Backend
+cd Mobile
 ```
 
 - Instalar as dependencias;
