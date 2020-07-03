@@ -102,9 +102,6 @@ const Home = () => {
           <Text style={styles.welcomeText}>
             Olá, {signedIn ? loggedUser.data.name.split(' ')[0] : 'Usuário'}.
           </Text>
-          <TouchableOpacity onPress={signOut}>
-            <Text>Logout</Text>
-          </TouchableOpacity>
         </View>
         <View style={styles.typeContainer}>
           <TouchableOpacity onPress={() => navigateList('product')}> 

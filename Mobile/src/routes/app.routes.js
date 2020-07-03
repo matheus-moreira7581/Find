@@ -110,7 +110,7 @@ export const TabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="Profile" 
-            component={RequestsMadeScreen}
+            component={CompanyProfileScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="person" size={size} color={color} />
