@@ -20,7 +20,7 @@ const CompanyProducts = () => {
   const {companyId} = route.params;
   const {total, cartItems} = useCart();
 
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState([]);
   const [company, setCompany] = useState({});
   const [showMarketBag, setShowMarketBag] = useState(false);
   const [itemsCount, setItemsCount] = useState(0);
