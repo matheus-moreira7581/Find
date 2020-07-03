@@ -98,6 +98,10 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
       height: adjustVerticalMeasure(48),
       width: adjustHorizontalMeasure(48),
     },
+    companyLogo: {
+      height: adjustVerticalMeasure(48),
+      width: adjustHorizontalMeasure(48),
+    },
     companyTitleContainer: {
       marginLeft: adjustHorizontalMeasure(8),
       marginTop: adjustVerticalMeasure(2),

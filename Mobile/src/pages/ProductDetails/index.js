@@ -50,7 +50,7 @@ const ProductDetails = () => {
   const [addPrice, setAddPrice] = useState(1);
   const [productTitle, setProductTitle] = useState('Produto');
   const [productDescription, setProductDescription] = useState('Descrição do produto...');
-  const [productBackgroundImage, setProductBackgroundImage] = useState('');
+  const [productBackgroundImage, setProductBackgroundImage] = useState('https://static.thenounproject.com/png/340719-200.png');
   const [companyLogoUrl, setCompanyLogoUrl] = useState('my-photo');
   const [companyName, setCompanyName] = useState('Empresa');
   const [details, setDetails] = useState('');
@@ -147,7 +147,7 @@ const ProductDetails = () => {
           <View style={styles.companyImageContainer}>
             {
               companyLogoUrl !== '' && companyLogoUrl !== 'my-photo'
-              ? <Image source={companyLogoUrl}/> 
+              ? <Image source={{uri: companyLogoUrl}} style={styles.companyLogo}/> 
               : <View style={styles.companyLogoPlaceholder}>
                   <MaterialIcons 
                     name="broken-image" 
