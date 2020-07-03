@@ -1,6 +1,8 @@
 const knex = require('../database')
 const bcrypt = require('bcrypt')
 
+const cloudinary = require('../config/cloudinary')
+const fs = require('fs')
 
 module.exports = {
 
@@ -10,12 +12,36 @@ module.exports = {
 
          try {
     
+            const uploader = async (path) => await cloudinary.uploads(path,'images')
+
+            const urls = []
+
+            const files = request.files
+
+            for (const file of files) {
+            
+                const {path} = file
+
+                const newPath = await uploader(path)
+
+                urls.push(newPath)
+
+                fs.unlinkSync(path)
+            }
+
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
-            const { name, email, cpf, date_birth, address, id_categories, type, hours_schedule } = request.body;
+            const { name, email, cpf, date_birth, address, id_categories, type, status, hours_schedule } = request.body;
+            
+            const item = [{ name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, status, hours_schedule}];
 
-    
-            const company = { name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, hours_schedule};
+
+            const company = item.map(element => {
+                return {
+                    "img_url": urls[0].url,
+                    ...element
+                }
+            })
 
             const checkEmail = await knex('companies').where({ email });
 
@@ -26,7 +52,7 @@ module.exports = {
 
             await knex('companies').insert(company);
     
-            response.status(201).json(company);
+            return response.status(201).json(company);
             
         } catch (error) {
             next(error)
@@ -79,11 +105,38 @@ module.exports = {
 
         try {
           
+            const uploader = async (path) => await cloudinary.uploads(path,'images')
+
+            const urls = []
+
+            const files = request.files
+
+            for (const file of files) {
+            
+                const {path} = file
+
+                const newPath = await uploader(path)
+
+                urls.push(newPath)
+
+                fs.unlinkSync(path)
+            }
+
+
             const { id } = request.params;
 
-            const { name, cell, address, img_url} = request.body;
+            const { name, cell, address} = request.body;
 
-            await knex('companies').where({ id }).update({name, cell, address, img_url})
+            const item = [{ name, cell, address}];
+            
+            const company = item.map(element => {
+                return {
+                    "img_url": urls[0].url,
+                    ...element
+                }
+            })
+
+            await knex('companies').where({ id }).update({company})
 
             const newdata = await knex('companies').where({ id })
 

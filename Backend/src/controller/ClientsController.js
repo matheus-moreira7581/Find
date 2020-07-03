@@ -1,6 +1,9 @@
 const knex = require('../database');
 const bcrypt = require('bcrypt');
 
+const cloudinary = require('../config/cloudinary')
+const fs = require('fs')
+
 module.exports = {
 
     // Cadastrar um cliente (tela de cadastro - cliente)
@@ -8,11 +11,36 @@ module.exports = {
     async create(request, response, next) {
 
          try {
+
+            const uploader = async (path) => await cloudinary.uploads(path,'images')
+
+            const urls = []
+
+            const files = request.files
+
+            for (const file of files) {
+            
+                const {path} = file
+
+                const newPath = await uploader(path)
+
+                urls.push(newPath)
+
+                fs.unlinkSync(path)
+            }
+
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
             const { name, email, cell } = request.body;
     
-            const client = { name, email, cell, password: hashedPassword };
+            const item = [{ name, email, cell, password: hashedPassword }];
+
+            const client = item.map(element => {
+                return {
+                    "img_url": urls[0].url,
+                    ...element
+                }
+            })
 
             const checkEmail = await knex('clients').where({ email });
 
@@ -73,11 +101,37 @@ module.exports = {
 
         try {
           
+            const uploader = async (path) => await cloudinary.uploads(path,'images')
+
+            const urls = []
+
+            const files = request.files
+
+            for (const file of files) {
+            
+                const {path} = file
+
+                const newPath = await uploader(path)
+
+                urls.push(newPath)
+
+                fs.unlinkSync(path)
+            }
+
             const { id } = request.params;
 
-            const { name, cell, img_url} = request.body;
+            const { name, cell } = request.body;
 
-            await knex('clients').where({ id }).update({name, cell, img_url})
+            const item = [{ name, cell}];
+
+            const client = item.map(element => {
+                return {
+                    "img_url": urls[0].url,
+                    ...element
+                }
+            })
+
+            await knex('clients').where({ id }).update({client})
 
             const newdata = await knex('clients').where({ id })
 

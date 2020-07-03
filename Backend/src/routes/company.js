@@ -3,12 +3,14 @@ const CompanyController = require('../controller/CompanyController');
 
 const routes = express.Router();
 
+const uploadImages = require('../config/multer')
+
 //Company
 
-routes.post('/register-company', CompanyController.create)
+routes.post('/register-company', uploadImages.array('img_url'), CompanyController.create)
       .get('/companies', CompanyController.index)
       .get('/edit-company/:id', CompanyController.show)
-      .put('/edit-company/:id', CompanyController.update)
+      .put('/edit-company/:id', uploadImages.array('img_url'), CompanyController.update)
       .delete('/edit-company/:id', CompanyController.delete) 
 
 
