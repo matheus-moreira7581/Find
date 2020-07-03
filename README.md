@@ -51,6 +51,16 @@ ou
 - Logo após, abra o app do expo no seu celular, escaneie o QR Code que apareceu no navegador (O celular precisa estar conectado a mesma rede de seu computador);
 - Espere o aplicativo carregar e pronto! 
 
+- OBS: Se o expo apresentar algum erro de conexão, desative o firewall do seu computador, isso pode estar bloqueando o acesso.
+
+### Login para teste
+
+| tipo  |        login       |  senha |
+|-------|--------------------|--------|
+|cliente|lucas@gmail.com     | 123456 |
+|empresa|tastypizza@gmail.com| 123456 |
+
+
 
 ## Tecnologias :pushpin:
 
