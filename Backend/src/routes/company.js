@@ -7,7 +7,7 @@ const uploadImages = require('../config/multer')
 
 //Company
 
-routes.post('/register-company', uploadImages.array('img_url'), CompanyController.create)
+routes.post('/register-company', CompanyController.create)
       .get('/companies', CompanyController.index)
       .get('/edit-company/:id', CompanyController.show)
       .put('/edit-company/:id', uploadImages.array('img_url'), CompanyController.update)
