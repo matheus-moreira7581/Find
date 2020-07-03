@@ -1,7 +1,7 @@
 # Back-end da aplicação (API)
 
 
-## Guia para ativação do código (SETUP) :pushpin:
+### Guia para ativação do código (SETUP) :pushpin:
 
 
 - Antes de rodar a aplicação, crie um banco de dados no **postgreSQL**;
@@ -38,6 +38,6 @@ npm run migrations
 npm run seeds
 ```
 
-## Links úteis 
+## Links úteis :link:
 
 - Acompanhe o dia a dia do desenvolvimento: [Saiba mais](./Logbook)
