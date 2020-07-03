@@ -9,41 +9,44 @@ Find é um aplicativo onde o comerciante poderá anunciar sua empresa ou marca, 
 
 ## Guia para ativação do código (SETUP) :pushpin:
 
-#### Rodando o Backend da aplicação
+- **O Backend da aplicação** está sendo rodada no __Heroku__, porem caso queiram executá-la na sua maquina.
+  Sigam os passos disponibilizados no arquivo [`README.md`](./Backend/Readme.md) na pasta Backend :open_file_folder:.
+  
+**Executando a aplicação (front-end)**
 
-- Antes de rodar a aplicação, crie um banco de dados no **postgreSQL**;
+- Instalar aplicativo do expo no celular;
 
-- Depois atualize as informações de usuário e senha no arquivo `knexfile.js` :page_facing_up:
-
-- Acessar pasta "Backend" :open_file_folder:
+- Acessar pasta "Mobile" :open_file_folder:
 
 ```node
 cd Backend
 ```
 
-- Instalar pacotes do node modules(caso não tenha)
+- Instalar as dependencias;
 
 ```node
-npm i
+ npm i
 ```
-
-- Inicializar o servidor
+ou
 
 ```node
-npm run dev
+  yarn install
 ```
 
-- Criar tabelas
+- Inicializar a aplicação;
 
 ```node
-npm run migrations
+ npm run start
 ```
-
-- Popular tabelas 
+ou
 
 ```node
-npm run seeds
+ yarn start
 ```
+
+- Depois de inicializar, irá abrir uma pagina em seu navegador. Nesta pagina, selecione a opção de LAN em **connection**;
+- Logo após, abra o app do expo no seu celular, escaneie o QR Code que apareceu no navegador (O celular precisa estar conectado a mesma rede de seu computador);
+- Espere o aplicativo carregar e pronto! 
 
 
 ## Tecnologias :pushpin:
