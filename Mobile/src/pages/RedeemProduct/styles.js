@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         paddingTop: adjustVerticalMeasure(62.5),
-        paddingBottom: adjustVerticalMeasure(164),
         backgroundColor: colors.background,
     },
     inputContainer:{
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         paddingLeft: adjustHorizontalMeasure(24.5),
         paddingVertical: adjustVerticalMeasure(11.5),
-        marginBottom: 'auto',
+        marginBottom: adjustVerticalMeasure(184),
     },
     requestInfoContainer:{
         marginLeft: adjustHorizontalMeasure(8),
