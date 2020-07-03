@@ -132,14 +132,42 @@ module.exports = {
 
         try {
           
+            const uploader = async (path) => await cloudinary.uploads(path,'images')
+
+            const urls = []
+
+            const files = request.files
+
+            for (const file of files) {
+            
+                const {path} = file
+
+                const newPath = await uploader(path)
+
+                urls.push(newPath)
+
+                fs.unlinkSync(path)
+            }
+
+
             const { id } = request.params;
 
-            const { img_url, name, description, price, limit_time } = request.body;
+            const { name, description, price, limit_time } = request.body;
+
+            const item = [{ name, description, price, limit_time }];
+
+            const product = item.map(element => {
+                return {
+                    "img_url": urls[0].url,
+                    ...element
+                }
+            })
 
             await knex('products')
             .where({ id })
-            .update({img_url, name, description, price, limit_time});
+            .update({ product });
 
+            
             const newdata = await knex('products').where({ id })
 
             response.status(200).json(newdata)

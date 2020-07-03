@@ -3,13 +3,15 @@ const ServicesController = require('../controller/ServicesController')
 
 const routes = express.Router()
 
-// Products
+const uploadImages = require('../config/multer')
 
-routes.post('/my-services', ServicesController.create)
+// Services
+
+routes.post('/my-services', uploadImages.array('img_url'), ServicesController.create)
       .get('/my-services/:id_company', ServicesController.index)
       .get('/company-service', ServicesController.show)
       .get('/company/services/:id', ServicesController.getService)
-      .put('/my-services/:id', ServicesController.update)
+      .put('/my-services/:id', uploadImages.array('img_url'), ServicesController.update)
       .delete('/my-services/:id', ServicesController.delete)
 
 

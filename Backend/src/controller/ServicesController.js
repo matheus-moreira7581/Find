@@ -1,5 +1,8 @@
 const knex = require('../database');
 
+const cloudinary = require('../config/cloudinary')
+const fs = require('fs')
+
 module.exports = {
 
 
@@ -9,9 +12,33 @@ module.exports = {
 
         try {
 
-            const { name, description, price, img_url, id_company } = request.body;
+            const uploader = async (path) => await cloudinary.uploads(path,'images')
 
-            const service = { name, description, price, img_url,  id_company };
+            const urls = []
+
+            const files = request.files
+
+            for (const file of files) {
+            
+                const {path} = file
+
+                const newPath = await uploader(path)
+
+                urls.push(newPath)
+
+                fs.unlinkSync(path)
+            }
+
+            const { name, description, price, id_company } = request.body;
+
+            const item = [{ name, description, price,  id_company }];
+
+            const service = item.map(element => {
+                return {
+                    "img_url": urls[0].url,
+                    ...element
+                }
+            })
 
             await knex('services').insert(service);
 
@@ -104,13 +131,39 @@ module.exports = {
 
         try {
       
+            const uploader = async (path) => await cloudinary.uploads(path,'images')
+
+            const urls = []
+
+            const files = request.files
+
+            for (const file of files) {
+            
+                const {path} = file
+
+                const newPath = await uploader(path)
+
+                urls.push(newPath)
+
+                fs.unlinkSync(path)
+            }
+
             const { id } = request.params;
 
-            const { img_url, name, description, price } = request.body;
+            const { name, description, price } = request.body;
+
+            const item = [{ name, description, price }];
+            
+            const service = item.map(element => {
+                return {
+                    "img_url": urls[0].url,
+                    ...element
+                }
+            })
 
             await knex('services')
             .where({ id })
-            .update({img_url, name, description, price});
+            .update({ service});
 
             const newdata = await knex('services').where({ id })
 
