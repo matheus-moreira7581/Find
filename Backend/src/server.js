@@ -23,7 +23,7 @@ require('dotenv').config()
 
 //Upload de imagens Inicio
 const bodyParser = require('body-parser')
-const { restart } = require('nodemon')
+// const { restart } = require('nodemon')
 
 
 app.use(bodyParser.urlencoded({ extended: false}))
