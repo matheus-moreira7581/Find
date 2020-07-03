@@ -1,19 +1,84 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 
-import { SafeAreaView, View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import { SafeAreaView, View, Text, TouchableOpacity, Image, TextInput, Alert } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import { MaterialIcons } from '@expo/vector-icons'; 
+
+import { useCart } from '../../contexts/cart';
+import { useAuth } from '../../contexts/auth';
 
 import RoundedButton from '../../components/RoundedButton';
 
 import colors from '../../assets/var/colors'; 
 
 import styles from './styles';
-import { useNavigation } from '@react-navigation/native';
+
+import api from '../../services/api';
 
 const RedeemProduct = () => {
-    const navigation = useNavigation()
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [companyTitle, setCompanyTitle] = useState('Empresa');
+    const [duration, setDuration] = useState('X min - X min');
+    
+    const navigation = useNavigation();
+    const { orderInfo, cartItems, addressInfo } = useCart();
+    const { loggedUser } = useAuth();
+
+     useEffect(() => {
+        fetchRequestInfo();
+     }, [])
+
+    const fetchRequestInfo = async () => {
+        try{
+            const response = await api.get(`/edit-company/${orderInfo.id_company}`);
+            console.log(response.data.name);
+        }
+        catch(error){
+            throw error;
+        }
+    }
+
+
+    const cellPattern = /^\([1-9]{2}\)\s?[9]{1}[0-9]{4}\-[0-9]{4}$/g;
+    
+    const getName = (typed) => setName(typed);
+    const getPhone = (typed) => {
+        typed = cellMask(typed);
+        setPhone(typed);
+    };
+
+    const cellMask = (cell) => {
+        if(
+         !(String(cell).includes('(') && 
+         String(cell).includes(')') ||
+         String(cell).includes('-')) &&
+         String(cell).length === 11
+        ) {
+            cell = String(cell).replace(/\D/g,"");
+            cell = String(cell).replace(/^(\d{2})(\d)/g,"($1) $2");
+            cell = String(cell).replace(/(\d)(\d{4})$/,"$1-$2");
+            return cell;
+        } else return cell
+     }
+
+     const finishOrderRegistration = () => {
+         if(name === null || name === '' || phone === null || phone === ''){
+             Alert.alert('Error', 'Preencha todos os campos!')
+         }
+         else{
+             if(!cellPattern.test(phone)){
+                Alert.alert('Error', 'Formato inválido de celular, preencha com DDD e hífen!');
+             }
+             else{
+                 navigation.navigate('PaymentOptions');
+             }
+         }
+     }
+    
     return(
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
@@ -31,6 +96,8 @@ const RedeemProduct = () => {
                         style={styles.textInput} 
                         placeholder="Digite o nome completo"
                         placeholderTextColor={colors.cinza}
+                        onChange={getName}
+                        value={name}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -39,6 +106,8 @@ const RedeemProduct = () => {
                         style={styles.textInput} 
                         placeholder="(00) 00000-0000"
                         placeholderTextColor={colors.cinza}
+                        onChange={getPhone}
+                        value={phone}
                     />
                 </View>
                 <View style={styles.requestContainer}>
@@ -60,7 +129,7 @@ const RedeemProduct = () => {
                                     size={adjustHorizontalMeasure(12)}
                                     color={colors.cinza}
                                 />
-                                <Text style={styles.conclusionTimeText}>50min - 1hr</Text>
+                                <Text style={styles.conclusionTimeText}>{duration}</Text>
                             </View>
                                 </View>
                             </View>
