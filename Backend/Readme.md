@@ -1,37 +1,43 @@
 # Back-end da aplicação (API)
 
 
+## Guia para ativação do código (SETUP) :pushpin:
 
-## Links úteis 
 
-- Acompanhe o dia a dia do desenvolvimento: [Saiba mais](./Logbook)
+- Antes de rodar a aplicação, crie um banco de dados no **postgreSQL**;
 
-# Guia para ativação do código
+- Depois atualize as informações de usuário e senha no arquivo `knexfile.js` :page_facing_up:
 
-- Atualizar as informações de usuário e senha no arquivo "knexfile.js"
+- Acessar pasta "Backend" :open_file_folder:
 
-- Acessar pasta "Backend"
 ```node
 cd Backend
 ```
 
-- Instalar pacotes do node modules(caso não tenha) 
+- Instalar pacotes do node modules(caso não tenha)
+
 ```node
 npm i
 ```
 
 - Inicializar o servidor
+
 ```node
 npm run dev
 ```
 
 - Criar tabelas
+
 ```node
 npm run migrations
 ```
 
 - Popular tabelas 
+
 ```node
 npm run seeds
 ```
 
+## Links úteis 
+
+- Acompanhe o dia a dia do desenvolvimento: [Saiba mais](./Logbook)
