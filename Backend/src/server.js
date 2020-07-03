@@ -11,21 +11,16 @@ const authRoutes = require("./routes/auth");
 const ordersRoutes = require("./routes/order");
 const requestRoutes = require("./routes/request");
 
-//const cors = require("cors");
+/*const cors = require("cors");
 const uploadImages = require('./config/multer')
 const cloudinary = require('./config/cloudinary')
-const fs = require('fs')
+const fs = require('fs')*/
 
 const app = express();
 
 require('dotenv').config()
-
-
-//Upload de imagens Inicio
 const bodyParser = require('body-parser')
-const { restart } = require('nodemon')
-
-
+//const { restart } = require('nodemon')
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
