@@ -73,7 +73,7 @@ ou
 
 - Como chegamos nessa solução: [Clique aqui](https://docs.google.com/document/d/1Vsk6FfSIcFM8ikHsm82gj1hrL63U6hUuCF7S36d11aU/edit)
 
-- Acesse o nosso protótipo: [Clique aqui](https://xd.adobe.com/view/e4ae45b3-5f00-4560-7456-41f21a5df061-929f/screen/a09ca263-f883-4555-b400-85d6bf4d6e32/Tela-Inicial-17)
+- Acesse o nosso protótipo: [Clique aqui](https://xd.adobe.com/view/db18172e-c565-45f8-5975-420162bf4ce1-ad29/)
 
 - Acesse o nosso style guide: [Clique aqui](https://xd.adobe.com/view/489e7a75-0e3b-4e31-440a-8272bdc31f54-3eaf/)
 
