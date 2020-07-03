@@ -10,7 +10,7 @@ exports.up = knex => knex.schema.createTable('companies', table => {
     table.string('address').notNullable()
     table.string('img_url').nullable()
     table.boolean('status').defaultTo(false)
-    table.json('hours_schedule').nullable()
+    table.specificType('hours_schedule', 'text ARRAY').nullable(),
     table.enu('type', ['service', 'product']).notNullable()
 
 })

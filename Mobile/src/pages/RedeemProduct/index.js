@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { SafeAreaView, View, Text, TouchableOpacity, Image, TextInput, Alert } from 'react-native';
 
@@ -25,8 +25,8 @@ const RedeemProduct = () => {
     const [duration, setDuration] = useState('X min - X min');
     
     const navigation = useNavigation();
-    const { orderInfo, cartItems, addressInfo } = useCart();
-    const { loggedUser } = useAuth();
+
+    const { orderInfo } = useCart();
 
      useEffect(() => {
         fetchRequestInfo();

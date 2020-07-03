@@ -12,36 +12,13 @@ module.exports = {
 
          try {
     
-            // const uploader = async (path) => await cloudinary.uploads(path,'images')
-
-            // const urls = []
-
-            // const files = request.files
-
-            // for (const file of files) {
-            
-            //     const {path} = file
-
-            //     const newPath = await uploader(path)
-
-            //     urls.push(newPath)
-
-            //     fs.unlinkSync(path)
-            // }
 
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
-            const { name, email, cpf, date_birth, address, id_categories, type, status, hours_schedule } = request.body;
+            const { name, email, cpf, date_birth, address, id_categories, type, hours_schedule } = request.body;
             
-            const item = [{ name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, status, hours_schedule}];
+            const item = [{ name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, hours_schedule}];
 
-            const company = item;
-            // const company = item.map(element => {
-            //     return {
-            //         "img_url": urls[0].url,
-            //         ...element
-            //     }
-            // })
 
             const checkEmail = await knex('companies').where({ email });
 
@@ -50,9 +27,9 @@ module.exports = {
 
             }
 
-            await knex('companies').insert(company);
+            await knex('companies').insert(item);
     
-            return response.status(201).json(company);
+            return response.status(201).json(item);
             
         } catch (error) {
             next(error)

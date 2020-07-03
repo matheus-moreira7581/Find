@@ -1,5 +1,5 @@
 <p align="center">
-<img src="./Backend/uploads/find-logo.png" alt="find-logo" width="20%"/>
+<img src="./Backend/uploads/find.png" alt="find-logo" width="20%"/>
 </p>
 
 ## Sobre o aplicativo :iphone:
