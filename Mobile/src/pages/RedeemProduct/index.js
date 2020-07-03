@@ -10,12 +10,14 @@ import RoundedButton from '../../components/RoundedButton';
 import colors from '../../assets/var/colors'; 
 
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 const RedeemProduct = () => {
+    const navigation = useNavigation()
     return(
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backButton}>
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>

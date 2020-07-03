@@ -17,6 +17,7 @@ import PaymentOptionsScreen from '../pages/PaymentOptions';
 import DeliveryOptionsScreen from '../pages/DeliveryOptions';
 import ServiceOptionsScreen from '../pages/ServiceOptions';
 import DeliveryAddressScreen from '../pages/DeliveryAddress';
+import ReedemProductScreen from '../pages/RedeemProduct';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
 import MarketBagScreen from '../pages/MarketBag';
@@ -43,11 +44,13 @@ export const CustomerAppRoutes = () => (
                     <CustomerAppStack.Screen name="Home" component={HomeScreen}/>
                     <CustomerAppStack.Screen name="Companies" component={CompaniesScreen}/>
                     <CustomerAppStack.Screen name="CompanyProducts" component={CompanyProductsScreen}/>
+                    <CustomerAppStack.Screen name="MarketBag" component={MarketBagScreen}/>
                     <CustomerAppStack.Screen name="ProductDetails" component={ProductDeatilsScreen}/>
                     <CustomerAppStack.Screen name="PaymentOptions" component={PaymentOptionsScreen}/>
                     <CustomerAppStack.Screen name="DeliveryOptions" component={DeliveryOptionsScreen}/>
                     <CustomerAppStack.Screen name="ServiceOptions" component={ServiceOptionsScreen}/>
                     <CustomerAppStack.Screen name="DeliveryAddress" component={DeliveryAddressScreen}/>
+                    <CustomerAppStack.Screen name="ReedemProduct" component={ReedemProductScreen}/>
                     <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
                     <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
                     <CustomerAppStack.Screen name="ServiceScheduling" component={ServiceSchedulingScreen}/>

@@ -69,7 +69,9 @@ module.exports = {
            const { id_categories } = request.query;
 
            const companies = await knex('companies')
-           .where({ id_categories }).select('id','name', 'address', 'img_url', 'id_categories');
+           .where({ id_categories })
+           .orderBy('status', 'desc')
+           .select('id','name', 'address', 'img_url', 'id_categories', 'status');
 
            response.status(200).json(companies);
 

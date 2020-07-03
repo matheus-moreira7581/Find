@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
 import { Alert } from 'react-native';
 
 const CartContext = createContext({});
@@ -15,11 +15,14 @@ export const CartProvider = ({ children }) => {
     const [total, setTotal] = useState(0);
 
     const addProductToCart = (cartItem, id_company) => {
-        if(id_company === 0 || id_company === orderInfo.id_company){ //Condição para verificar se o carrinho não foi resetado e se já existem itens de outra empresa no carrinho
+        if(orderInfo.id_company === 0 || id_company === orderInfo.id_company){ //Condição para verificar se o carrinho não foi resetado e se já existem itens de outra empresa no carrinho
+            console.log(id_company);
             setCartItems(previous => [...previous, cartItem]);
             setTotal(total => total + (cartItem.amount * cartItem.price));
         }
         else{
+            console.log(id_company + "\n");
+            console.log(orderInfo.id_company);
             Alert.alert(
                 'Aviso', 
                 'Você pode apenas pedir da mesma empresa. Deseja esvaziar seu carrinho atual e começar uma nova compra?',
@@ -53,6 +56,7 @@ export const CartProvider = ({ children }) => {
         setCartItems([]);
         setTotal(0);
     }
+
 
     return (
         <CartContext.Provider value={{
