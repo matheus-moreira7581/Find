@@ -9,7 +9,6 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
-*.env*
 Mobile/web-build/
 Mobile/web-report/
 
