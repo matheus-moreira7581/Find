@@ -135,7 +135,7 @@ const ProductDetails = () => {
       }
     }
 
-    addProductToCart(cartItem, companyId);
+    addProductToCart(cartItem, companyId, selectedCategoryCardInfo.type);
 
     navigation.reset({
       routes: [

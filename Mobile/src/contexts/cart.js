@@ -12,7 +12,7 @@ export const CartProvider = ({ children }) => {
     });
     const [requestInfo, setRequestInfo] = useState({
         id_company: 0,
-        id_cliente: 0,
+        id_client: 0,
         payment: 'A definir',
         local: 'A definir',
         schedule: 'A definir'
@@ -21,10 +21,14 @@ export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
 
-    const addProductToCart = (cartItem, id_company) => {
-        if(orderInfo.id_company === 0 || id_company === orderInfo.id_company){ //Condição para verificar se o carrinho não foi resetado e se já existem itens de outra empresa no carrinho
+    const addProductToCart = (cartItem, id_company, type) => {
+        if(type === 'product' && (orderInfo.id_company === 0 || id_company === orderInfo.id_company)){ //Condição para verificar se o carrinho não foi resetado e se já existem itens de outra empresa no carrinho
             setCartItems(previous => [...previous, cartItem]);
             setTotal(total => total + (cartItem.amount * cartItem.price));
+        }
+        else if(type === 'service' && (orderInfo.id_company === 0 || id_company === orderInfo.id_company)){ //Condição para verificar se o carrinho não foi resetado e se já existem itens de outra empresa no carrinho
+            setCartItems(previous => [...previous, cartItem]);
+            setTotal(total => total + (parseFloat(cartItem.price)));
         }
         else{
             console.log(id_company + "\n");
@@ -62,7 +66,6 @@ export const CartProvider = ({ children }) => {
         setCartItems([]);
         setTotal(0);
     }
-
 
     return (
         <CartContext.Provider value={{

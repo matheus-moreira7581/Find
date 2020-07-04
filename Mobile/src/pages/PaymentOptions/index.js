@@ -14,6 +14,7 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
 
 import {useCart} from '../../contexts/cart'
 import {useAuth} from '../../contexts/auth'
+import {useCategory} from '../../contexts/categorySelection'
 import { useNavigation } from '@react-navigation/native';
 import api from '../../services/api';
 
@@ -23,16 +24,21 @@ const PaymentOptions = () => {
 
     const navigation = useNavigation();
 
-    const {setOrderInfo, orderInfo, cartItems, addressInfo, resetCart} = useCart();
-
+    const {setOrderInfo, orderInfo, cartItems, addressInfo, resetCart, requestInfo, setRequestInfo} = useCart();
     const {loggedUser} = useAuth();
+    const {selectedCategoryCardInfo} = useCategory();
 
     useEffect(() => {
         setPaymentOption(null);
         setHeaderTitle(orderInfo.receivement === 'Entregar' ? 'Entregar para mim' : 'Retirar no local');
     }, []);
 
-    const handleSelection = async () => {
+    const handleSelection = () => {
+        if(selectedCategoryCardInfo.type === 'product') handleSelectionProduct();
+        else if(selectedCategoryCardInfo.type === 'service') handleSelectionService();
+    }
+
+    const handleSelectionProduct = async () => {
         if(paymentOption === null){
             return Alert.alert("Error", "Escolha um tipo de pagamento");
         }
@@ -73,6 +79,65 @@ const PaymentOptions = () => {
                 itens_cart: cartItems
             }
             const response = await api.post('/order', object);
+            if(response.status === 201) {
+                resetCart();
+                navigation.navigate('SuccessOrder');
+            } else {
+                Alert.alert('Error', 'Falha ao criar o pedido');
+                resetCart();
+                navigation.navigate('Home');
+            }
+        }
+    }
+
+    const handleSelectionService = async () => {
+        if(paymentOption === null){
+            return Alert.alert("Error", "Escolha um tipo de pagamento");
+        }
+        else if(paymentOption === true) {
+            const id = loggedUser.data.id;
+            const requestInfoObject = {
+                id_company: requestInfo.id_company,
+                id_client: id,
+                payment: 'Cartão',
+                local: requestInfo.local,
+                schedule: requestInfo.schedule
+            }
+
+            const object = {
+                requests: requestInfoObject,
+                address: addressInfo,
+                items_request: cartItems
+            }
+            
+            const response = await api.post('/request', object);
+            if(response.status === 201) {
+                resetCart();
+                navigation.navigate('SuccessOrder');
+            } else {
+                Alert.alert('Error', 'Falha ao criar o pedido');
+                resetCart();
+                navigation.navigate('Home');
+            }
+        }
+        else if(paymentOption === false) {
+            const id = loggedUser.data.id;
+            const requestInfoObject = {
+                id_company: requestInfo.id_company,
+                id_client: id,
+                payment: 'Cartão',
+                local: requestInfo.local,
+                schedule: requestInfo.schedule
+            }
+
+            const object = {
+                requests: requestInfoObject,
+                address: addressInfo,
+                items_request: cartItems
+            }
+            console.log(object);
+            
+            const response = await api.post('/request', object);
             if(response.status === 201) {
                 resetCart();
                 navigation.navigate('SuccessOrder');

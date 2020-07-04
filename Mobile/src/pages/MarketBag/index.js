@@ -19,6 +19,7 @@ import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
 import {useCart} from '../../contexts/cart'
 
+
 const product = [
   {name: "Teste", description: 'Testandooooo', price: '44.00'},
   {name: "Teste", description: 'Testandooooo', price: '44.00'},
@@ -32,6 +33,7 @@ const MarketBag = () => {
   const navigation = useNavigation();
 
   const {cartItems} = useCart();
+  const {selectedCategoryCardInfo} = useCategory();
 
   const deleteButton = 
     <TouchableOpacity style={styles.deleteBottom}> 
@@ -40,6 +42,15 @@ const MarketBag = () => {
   const emptyView =  <View style={styles.deleteBottom}></View>
 
   const [showDeleteButton, setShowDeleteButton] = useState(false);
+
+  const navigate = () => {
+    if(selectedCategoryCardInfo.type === 'product') {
+      navigation.navigate('DeliveryOptions');
+    }
+    else if(selectedCategoryCardInfo.type === 'service') {
+      navigation.navigate('ServiceOptions');
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -79,7 +90,7 @@ const MarketBag = () => {
             width={256}
             height={51}
             fontSize={adjustFontSize(16)}
-            onPress={() => navigation.navigate('DeliveryOptions')}
+            onPress={() => navigate()}
           />
         </View>
       </View>
