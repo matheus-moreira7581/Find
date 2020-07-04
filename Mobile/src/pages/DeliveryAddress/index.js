@@ -49,7 +49,12 @@ const DeliveryAddress = () => {
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
-                    <Text style={styles.headerText}>Entregar pra mim</Text>
+                    <Text style={styles.headerText}>
+                    { 
+                        selectedCategoryCardInfo.type === 'product' ?  
+                        "Entregar pra mim" : "Meu Endereço"
+                    }
+                    </Text>
                 </View>
             </View>
             <View style={styles.bodyContainer}>

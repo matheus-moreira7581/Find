@@ -27,7 +27,9 @@ const product = [
 const OrderDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
-
+  const { loggedUser } = useAuth()
+  
+  const [type, setType] = useState('');
   const [items, setItems] = useState([]);
   const [order, setOrder] = useState({});
 
@@ -35,21 +37,48 @@ const OrderDetails = () => {
 
   const fetchOrder = async () => {
     const getOrder = async () => {
-      const response = api.get(`/details?id_order=${orderId}`);
+      const response = await api.get(`/details?id_order=${orderId}`);
       return response;
     }
     const response = await getOrder();
     const data = response.data;
+    console.log(data);
+
+    setItems(data.Items);
+    setOrder(data.Order);
+
+  }
+  const fetchService = async () => {
+    const getService = async () => {
+      const response = await api.get(`/details/service?id_request=${orderId}`);
+      return response;
+    }
+    const response = await getService();
+    const data = response.data;
+    console.log(data);
 
     setItems(data.Items);
     setOrder(data.Order);
 
   }
 
+  useEffect(() => {
+    if(loggedUser.data.type === 'product') fetchOrder();
+    else if(loggedUser.data.type === 'service') fetchService();
+  }, [])
+
   const confirmOrder = async () => {
-    const response = await api.put(`/details?id_order=${orderId}`, {
-      status: 'Aceito',
-    });
+    let response = {};
+    if(loggedUser.data.type === 'product') {
+      response = await api.put(`/details?id_order=${orderId}`, {
+        status: 'Aceito',
+      });
+    }
+    else if(loggedUser.data.type === 'service') {
+      response = await api.put(`/details/service?id_request=${orderId}`, {
+        status: 'Aceito',
+      });
+    }
     if(response.status === 200) return navigation.navigate('CompanyRunning');
     else {
       Alert.alert('Error', 'Falha ao tentar confirmar o pedido');
@@ -58,19 +87,23 @@ const OrderDetails = () => {
   }
 
   const cancelOrder = async () => {
-    const response = await api.put(`/details?id_order=${orderId}`, {
-      status: 'Cancelado',
-    });
+    let response = {};
+    if(loggedUser.data.type === 'product') {
+      response = await api.put(`/details?id_order=${orderId}`, {
+        status: 'Cancelado',
+      });
+    }
+    else if(loggedUser.data.type === 'service') {
+      response = await api.put(`/details/service?id_request=${orderId}`, {
+        status: 'Cancelado',
+      });
+    }
     if(response.status === 200) return navigation.navigate('CompanyRunning');
     else {
       Alert.alert('Error', 'Falha ao tentar cancelar o pedido');
       return navigation.navigate('CompanyRunning');
     }
   }
-
-  useEffect(() => {
-    fetchOrder();
-  }, [])
 
   return (
     <View style={styles.container}>
@@ -112,9 +145,9 @@ const OrderDetails = () => {
               />
           </View>
           <View style={styles.details}>
-            <Text style={styles.detailsText}>Agendado para 17:30</Text>
-            <Text style={styles.detailsText}>Dinheiro</Text>
-            <Text style={styles.detailsText}>Total: R$ 25,00</Text>
+            <Text style={styles.detailsText}>{`Agendado para ${order.schedule}`}</Text>
+            <Text style={styles.detailsText}>{order.payment}</Text>
+            <Text style={styles.detailsText}>{`Total: R$ ${order.total}`}</Text>
           </View>
         </View>
         <View style={styles.buttonsContainer}>
