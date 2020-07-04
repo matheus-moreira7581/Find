@@ -10,6 +10,13 @@ export const CartProvider = ({ children }) => {
         payment: 'A definir',
         receivement: 'A definir'
     });
+    const [requestInfo, setRequestInfo] = useState({
+        id_company: 0,
+        id_cliente: 0,
+        payment: 'A definir',
+        local: 'A definir',
+        schedule: 'A definir'
+    });
     const [addressInfo, setAddressInfo] = useState({});
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
@@ -61,6 +68,8 @@ export const CartProvider = ({ children }) => {
         <CartContext.Provider value={{
             orderInfo,
             setOrderInfo,
+            requestInfo,
+            setRequestInfo,
             cartItems,
             setCartItems,
             addressInfo,

@@ -11,7 +11,8 @@ import api from '../../services/api';
 import adjustFontSize from '../../utils/adjustFontSize';
 import RoundedButton from '../../components/RoundedButton';
 import colors from '../../assets/var/colors';
-import {useCart} from '../../contexts/cart'
+import {useCart} from '../../contexts/cart';
+import { useCategory } from '../../contexts/categorySelection';
 
 const CompanyProducts = () => {
   const navigation = useNavigation();
@@ -19,8 +20,9 @@ const CompanyProducts = () => {
 
   const {companyId} = route.params;
   const {total, cartItems} = useCart();
+  const { selectedCategoryCardInfo } = useCategory();
 
-  const [product, setProduct] = useState([]);
+  const [items, setItems] = useState([]);
   const [company, setCompany] = useState({});
   const [showMarketBag, setShowMarketBag] = useState(false);
   const [itemsCount, setItemsCount] = useState(0);
@@ -33,7 +35,19 @@ const CompanyProducts = () => {
     const res = await getProdutct();
 
     setCompany(res[0]);
-    setProduct(res[0].products);
+    setItems(res[0].products);
+    
+  }
+
+  const fetchCompanyServices = async () => {
+    const getService = async () => {
+      const res = await api.get(`/company-service?id_company=${companyId}`);
+      return res.data
+    }
+    const res = await getService();
+
+    setCompany(res[0]);
+    setItems(res[0].services);
     
   }
 
@@ -45,13 +59,18 @@ const CompanyProducts = () => {
   }
 
   useEffect(()=> {
-    fetchCompanyProducts();
+    if(selectedCategoryCardInfo.type === 'product') {
+      fetchCompanyProducts();
+    }
+    else if(selectedCategoryCardInfo.type === 'service') {
+      fetchCompanyServices();
+    }
     handleShowMarketBag();
   }, [])
 
-  const navigateToProductDetails = (productId, companyId) => {
-    navigation.navigate('ProductDetails', {
-      productId: productId,
+  const navigateToProductDetails = (id, companyId) => {
+    navigation.navigate('ProductDetails', { 
+      Id: id,
       companyId: companyId
     });
   }
@@ -109,7 +128,7 @@ const CompanyProducts = () => {
       </View>
       <View style={styles.productsContainer}>
         <FlatList 
-          data={product}
+          data={items}
           keyExtractor={(item, index) => item + index}
           renderItem={({ item }) => (
             <View style={styles.cardContainer}>
