@@ -12,37 +12,55 @@ import colors from '../../assets/var/colors';
 import api from '../../services/api';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import {useCart} from '../../contexts/cart'
+import {useCategory} from '../../contexts/categorySelection'
 
 const ProductDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { productId, companyId } = route.params;
-  const {setOrderInfo, addProductToCart, orderInfo} = useCart();
+  const { Id, companyId } = route.params;
+  const {setOrderInfo, addProductToCart, orderInfo, requestInfo, setRequestInfo} = useCart();
+  const { selectedCategoryCardInfo } = useCategory();
 
-  const loadScreenInfo = async () => {
+  const loadScreenInfoProduct = async () => {
     const response = await api.get(`/company?id_company=${companyId}`);
     
     const { products: companyProducts, title, img_url } = response.data[0];
 
-    const product = companyProducts.find(product => product.id === productId);
+    const product = companyProducts.find(product => product.id === Id);
 
     setScreenInfo(product, img_url, title);
   };
 
-  const setScreenInfo = (product, companyLogo, companyName) => {
+  const loadScreenInfoService = async () => {
+    
+    const response = await api.get(`/company-service?id_company=${companyId}`);
+    
+    const { services: companyServices, title, img_url } = response.data[0];
+
+    const service = companyServices.find(service => service.id === Id);
+
+    setScreenInfo(service, img_url, title);
+  };
+
+  const setScreenInfo = (item, companyLogo, companyName) => {
      setAmount(1);
-     setPrice(parseFloat(product.price).toFixed(2));
-     setAddPrice(parseFloat(product.price).toFixed(2));
-     setProductTitle(product.name);
-     setProductBackgroundImage(product.img_url);
-     setProductDescription(product.description);
+     setPrice(parseFloat(item.price).toFixed(2));
+     setAddPrice(parseFloat(item.price).toFixed(2));
+     setProductTitle(item.name);
+     setProductBackgroundImage(item.img_url);
+     setProductDescription(item.description);
      setCompanyLogoUrl(companyLogo);
      setCompanyName(companyName);
   }
 
   useEffect(() => {
-    loadScreenInfo();
+    if(selectedCategoryCardInfo.type === 'product') {
+      loadScreenInfoProduct();
+    }
+    else if(selectedCategoryCardInfo.type === 'service') {
+      loadScreenInfoService();
+    }
   }, []);
 
   const [amount, setAmount] = useState(1);
@@ -81,21 +99,42 @@ const ProductDetails = () => {
   }
 
   const handleAddProductToMarketBag = () => {
-    setOrderInfo({
-      id_company: companyId,
-      id_client: orderInfo.id_client,
-      payment: orderInfo.payment,
-      receivement: orderInfo.receivement
-    });
-    const cartItem = {
-      "id_products": productId,
-      "title": productTitle,
-      "image": productBackgroundImage,
-      "amount": amount,
-      "details": details,
-      "price": price,
-      "description": productDescription
+    let cartItem = {}
+    if(selectedCategoryCardInfo.type === 'product') {
+      setOrderInfo({
+        id_company: companyId,
+        id_client: orderInfo.id_client,
+        payment: orderInfo.payment,
+        receivement: orderInfo.receivement
+      });
+      cartItem = {
+        "id_products": Id,
+        "title": productTitle,
+        "image": productBackgroundImage,
+        "amount": amount,
+        "details": details,
+        "price": price,
+        "description": productDescription
+      }
     }
+    else if(selectedCategoryCardInfo.type === 'service') {
+      setRequestInfo({
+        id_company: companyId,
+        id_client: requestInfo.id_client,
+        payment: requestInfo.payment,
+        local: requestInfo.local,
+        schedule: requestInfo.schedule
+      });
+      cartItem = {
+        "id_service": Id,
+        "title": productTitle,
+        "image": productBackgroundImage,
+        "details": details,
+        "price": price,
+        "description": productDescription
+      }
+    }
+
     addProductToCart(cartItem, companyId);
 
     navigation.reset({

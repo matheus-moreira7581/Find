@@ -41,7 +41,7 @@ const HomeList = ({ datasource, onPress: navigateToCompanies }) => {
                     onPress={() => {
                       setSelectedCategoryCardInfo({
                         section: section.Section,
-                        type: section.type,
+                        type: section.Type,
                         categoryId: item.id,
                         category: item.title, 
                       });
