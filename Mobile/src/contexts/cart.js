@@ -21,14 +21,15 @@ export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
 
+
     const addProductToCart = (cartItem, id_company, type) => {
         if(type === 'product' && (orderInfo.id_company === 0 || id_company === orderInfo.id_company)){ //Condição para verificar se o carrinho não foi resetado e se já existem itens de outra empresa no carrinho
             setCartItems(previous => [...previous, cartItem]);
             setTotal(total => total + (cartItem.amount * cartItem.price));
         }
-        else if(type === 'service' && (orderInfo.id_company === 0 || id_company === orderInfo.id_company)){ //Condição para verificar se o carrinho não foi resetado e se já existem itens de outra empresa no carrinho
+        else if(type === 'service' && (requestInfo.id_company === 0 || id_company === requestInfo.id_company)){ //Condição para verificar se o carrinho não foi resetado e se já existem itens de outra empresa no carrinho
             setCartItems(previous => [...previous, cartItem]);
-            setTotal(total => total + (parseFloat(cartItem.price)));
+            setTotal(total + cartItem.price);
         }
         else{
             console.log(id_company + "\n");

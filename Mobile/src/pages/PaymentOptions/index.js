@@ -109,6 +109,7 @@ const PaymentOptions = () => {
                 address: addressInfo,
                 items_request: cartItems
             }
+            console.log(object);
             
             const response = await api.post('/request', object);
             if(response.status === 201) {
@@ -125,7 +126,7 @@ const PaymentOptions = () => {
             const requestInfoObject = {
                 id_company: requestInfo.id_company,
                 id_client: id,
-                payment: 'Cartão',
+                payment: 'Dinheiro',
                 local: requestInfo.local,
                 schedule: requestInfo.schedule
             }

@@ -19,8 +19,8 @@ async create(request, response, next) {
                    return e.price
                }
            })
-           
-           prices.push(price)
+
+           prices.push(parseFloat(price))
 
        }
     
@@ -65,7 +65,7 @@ async create(request, response, next) {
             const id_address = await trx('addresses')
             .returning('id')
             .insert(elements.address);
-     
+
             await trx('requests').where('id', id_request[0])
             .update({
                 'id_address': id_address[0], 
@@ -74,7 +74,6 @@ async create(request, response, next) {
      
             await trx.commit();
         }else{
-
             await trx('requests').where('id', id_request[0])
             .update({'total': total});
 

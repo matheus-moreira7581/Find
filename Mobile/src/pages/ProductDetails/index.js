@@ -45,7 +45,7 @@ const ProductDetails = () => {
 
   const setScreenInfo = (item, companyLogo, companyName) => {
      setAmount(1);
-     setPrice(parseFloat(item.price).toFixed(2));
+     setPrice(parseFloat(item.price));
      setAddPrice(parseFloat(item.price).toFixed(2));
      setProductTitle(item.name);
      setProductBackgroundImage(item.img_url);
@@ -107,13 +107,14 @@ const ProductDetails = () => {
         payment: orderInfo.payment,
         receivement: orderInfo.receivement
       });
+      let convertedPrice = parseFloat(price);
       cartItem = {
         "id_products": Id,
         "title": productTitle,
         "image": productBackgroundImage,
         "amount": amount,
         "details": details,
-        "price": price,
+        "price": convertedPrice,
         "description": productDescription
       }
     }
@@ -126,12 +127,12 @@ const ProductDetails = () => {
         schedule: requestInfo.schedule
       });
       cartItem = {
-        "id_service": Id,
-        "title": productTitle,
-        "image": productBackgroundImage,
-        "details": details,
-        "price": price,
-        "description": productDescription
+        id_service: Id,
+        title: productTitle,
+        image: productBackgroundImage,
+        details: details,
+        price: price,
+        description: productDescription
       }
     }
 

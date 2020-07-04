@@ -63,8 +63,7 @@ module.exports = {
 
             const total = prices.reduce((total, prices) => total + prices, 0)
 
-            if(elements.order.receivement !== "Retirar") {
-
+            if(elements.order.receivement !== "Retirar") {                
                 const id_address = await trx('addresses')
                 .returning('id')
                 .insert(elements.address);
@@ -77,8 +76,7 @@ module.exports = {
 
                 await trx.commit();
 
-            }else{
-
+            }else{                
                 await trx('orders').where('id', id_order[0])
                 .update({'total': total});
 

@@ -13,10 +13,12 @@ import styles from './styles';
 import colors from '../../assets/var/colors';
 import { useNavigation } from '@react-navigation/native';
 import {useCart} from '../../contexts/cart'
+import {useCategory} from '../../contexts/categorySelection';
 
 const DeliveryAddress = () => {
     const navigation = useNavigation();
     const {setAddressInfo} = useCart();
+    const {selectedCategoryCardInfo} = useCategory();
 
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -36,7 +38,8 @@ const DeliveryAddress = () => {
             additional: additional,
             landmark: "mercado" 
         });
-        navigation.navigate('PaymentOptions');
+        if(selectedCategoryCardInfo.type === 'product') return navigation.navigate('PaymentOptions');
+        else if(selectedCategoryCardInfo.type === 'service') return navigation.navigate('ServiceScheduling');
     }
 
     return (
