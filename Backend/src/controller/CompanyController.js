@@ -127,6 +127,23 @@ module.exports = {
 
     },
 
+    async updateStatus(request, response, next){
+        try{
+            const { status } = request.body;
+            const { id } = request.params;
+
+            await knex('companies').where({  id  }).update({ status });
+
+            const updatedCompany = await knex('companies').where({ id });
+
+            response.status(200).send(updatedCompany);
+
+        }
+        catch(error){
+            next(error)
+        }
+
+    },
 
     // Deletar uma empresa  (perfil)
 
