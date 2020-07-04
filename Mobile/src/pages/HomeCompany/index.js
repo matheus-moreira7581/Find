@@ -15,6 +15,7 @@ import adjustFontSize from '../../utils/adjustFontSize';
 import { useNavigation } from '@react-navigation/native';
 import CompanyRunning from '../CompanyRunning';
  
+import api from '../../services/api';
 
 const HomeCompany = () => {
   const navigation = useNavigation();
@@ -30,8 +31,16 @@ const HomeCompany = () => {
     setCompanyName(loggedUser.data.name);
   },[]);
   
+  const manageOfficeHour = async () => { //Função que seta o expediente da empresa (campo status da tabela), sendo true: dentro do expediente e false: fora do expediente
+    await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: !shift });
+  }
+
   return (
-    shift ? <CompanyRunning onPressButton={() => {setShift(!shift)}}/> : 
+    shift ? <CompanyRunning onPressButton={() => {
+      setShift(!shift);
+      manageOfficeHour();
+    
+    }}/> : 
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.companyLogoContainer}>
@@ -51,7 +60,10 @@ const HomeCompany = () => {
         <View style={styles.buttonContainer}>
           <RoundedButton 
             text="Iniciar Expediente" 
-            onPress={() => {setShift(!shift)}} 
+            onPress={() => {
+              setShift(!shift);
+              manageOfficeHour();
+            }} 
             style={styles.button}
             fontSize={adjustFontSize(15)} 
             selected={true} 

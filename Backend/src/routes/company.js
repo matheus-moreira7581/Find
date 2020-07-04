@@ -11,6 +11,7 @@ routes.post('/register-company', CompanyController.create)
       .get('/companies', CompanyController.index)
       .get('/edit-company/:id', CompanyController.show)
       .put('/edit-company/:id', uploadImages.array('img_url'), CompanyController.update)
+      .put('/edit-company/status/:id', CompanyController.updateStatus)
       .delete('/edit-company/:id', CompanyController.delete) 
 
 
