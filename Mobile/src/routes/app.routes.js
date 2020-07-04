@@ -28,7 +28,7 @@ import RequestConfirmedScreen from '../pages/RequestConfirmed';
 import HomeCompanyScreen from '../pages/HomeCompany';
 import HomeRunningScreen from '../pages/CompanyRunning';
 import CompanyIncomeScreen from '../pages/CompanyIncome';
-import CompanyProfileScreen from '../pages/CompanyProfile';
+import ProfileScreen from '../pages/Profile';
 import ServiceSchedulingScreen from '../pages/ServiceScheduling';
 import OrderDetailsScreen from '../pages/OrderDetails';
 
@@ -110,7 +110,7 @@ export const TabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="Profile" 
-            component={CompanyProfileScreen}
+            component={ProfileScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="person" size={size} color={color} />
@@ -151,7 +151,7 @@ export const ProductCompanyTabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="Profile" 
-            component={CompanyProfileScreen}
+            component={ProfileScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="person" size={size} color={color} />
@@ -192,7 +192,7 @@ export const ServiceCompanyTabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="Profile" 
-            component={CompanyProfileScreen}
+            component={ProfileScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="person" size={size} color={color} />

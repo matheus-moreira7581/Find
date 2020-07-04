@@ -42,7 +42,6 @@ export const AuthProvider = ({children}) => {
             await AsyncStorage.setItem('@Find:user', JSON.stringify(user));
         }
         catch(error){
-            console.log(error);
             Alert.alert(
                 'Erro',
                 'Falha no login',
