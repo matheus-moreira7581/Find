@@ -28,7 +28,9 @@ const CompanySellingItems = (props) => {
 
   const fetchCompanySellingItems = async () => {
     const user = loggedUser;
-    const response = await api.get(`/my-products/${user.data.id}`)
+    let response = {};
+    if(user.data.type === 'product') response = await api.get(`/my-products/${user.data.id}`)
+    else if(user.data.type === 'service') response = await api.get(`/my-services/${user.data.id}`)
     setSellingItemsData(response.data);
   }
 

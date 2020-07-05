@@ -41,9 +41,15 @@ const CompanyRunning = (props) => {
 
     setOrders(orders);
   }
+  const fetchRequest = async () => {
+    const { data: orders } = await api.get(`/request/${loggedUser.data.id}`);
+
+    setOrders(orders);
+  }
 
   useEffect(() => {
-    fetchOrders();
+    if(loggedUser.data.type === 'product') fetchOrders();
+    else if(loggedUser.data.type === 'service') fetchRequest();
   }, [screenMode]);
 
   const navigateToOrderDetails = (id) => {
