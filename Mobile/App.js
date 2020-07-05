@@ -11,6 +11,7 @@ import {
 } from '@expo-google-fonts/montserrat';
 
 import { AuthProvider } from './src/contexts/auth';
+import { CartProvider } from './src/contexts/cart';
 
 import Routes from './src/routes';
 
@@ -54,11 +55,13 @@ export default function App() {
   else {
     return (
       
-       <NavigationContainer>
-         <AuthProvider>
-           <Routes />
-         </AuthProvider>
-       </NavigationContainer>
+      <NavigationContainer>
+        <CartProvider>
+          <AuthProvider>
+            <Routes />
+          </AuthProvider>
+        </CartProvider>
+      </NavigationContainer>
        
       // <CompanyProducts/>
       // <Companies />

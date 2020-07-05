@@ -44,7 +44,7 @@ const ProductManagement = () => {
     const navigateToCompanyRunning = () => {
         navigation.reset({
             routes: [{name: 'CompanyRunning'}]
-          })  
+        });  
     }
 
     const handleSellingItemCreation = async () => {

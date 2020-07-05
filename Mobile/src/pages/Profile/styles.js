@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     top: Constants.statusBarHeight,
     backgroundColor: colors.background,
   },
@@ -34,12 +34,9 @@ const styles = StyleSheet.create({
   bodyContainer:{
     width: '100%',
     height: '100%',
-  },  
-  bodyContentContainer:{
-    width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'center',
-  },
+  },  
   profilePicture:{
     justifyContent: 'center',
     alignItems: 'center',
@@ -64,6 +61,9 @@ const styles = StyleSheet.create({
     color: colors.cinza,
     marginBottom: adjustVerticalMeasure(9),
   },
+  listHeader:{
+    alignItems: 'center'
+  },
   viewProfileButton:{
     flexDirection: 'row',
     justifyContent: 'center',
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   },
   sectionList:{
     width: '100%',
+    height: '100%',
   },
   sectionTitle:{
     fontFamily: fonts.montserrat,
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     marginTop: adjustVerticalMeasure(30),
-    marginBottom: adjustVerticalMeasure(42),
+    marginBottom: adjustVerticalMeasure(130),
   }
 });
 

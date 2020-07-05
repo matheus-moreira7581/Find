@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, ScrollView, Text, TouchableOpacity, Image, SectionList } from 'react-native';
+import { View, SafeAreaView, ScrollView, Text, TouchableOpacity, Image, SectionList, Alert } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { useCart } from '../../contexts/cart';
 import { useAuth } from '../../contexts/auth';
+
+import api from '../../services/api';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
@@ -17,7 +19,6 @@ import adjustFontSize from '../../utils/adjustFontSize';
 
 import colors from '../../assets/var/colors';
 
-import api from '../../services/api';
 
 const CompanyProfile = () => {
   const menuListData = [
@@ -94,64 +95,137 @@ const CompanyProfile = () => {
     }
   ]
 
-  const [customerName, setCustomerName] = useState('Lucas Batista de Menezes');
-  const [customerEmail, setCustomerEmail] = useState('lucasemailbrabo194@teste.com');
+  const [customerName, setCustomerName] = useState('User');
+  const [customerEmail, setCustomerEmail] = useState('e-mail');
   const [customerAvatarUrl, setCustomerAvatarUrl] = useState(null);
-  
+  const [companyName, setCompanyName] = useState('Empresa');
 
-  const navigation = useNavigation();
-  const { signOut } = useAuth();
+  const { signOut, loggedUser } = useAuth();
   const { resetCart, orderInfo, requestInfo } = useCart();
+  
+  const navigation = useNavigation();
 
-  const handleLogout = () => {
+  const loadScreenInfo = async () => {
+    setCustomerName(loggedUser.data.name);
+    setCustomerEmail(loggedUser.data.email);
+    setCustomerAvatarUrl(loggedUser.data.img_url);
+  };
+
+  const handleLogout = async () => {
+    if(orderInfo.id_company === 0 && requestInfo.id_company === 0){
+      Alert.alert(
+        'Confirmar',
+        'Deseja mesmo sair?',
+        [
+          { text: 'Sim', onPress: () => {
+            resetCart();
+            navigation.reset({
+              routes: [{name: 'Home'}]
+            });  
+            signOut();
+          }},
+          { text: 'Não' }
+        ]
+      );
+    }
+    else{
+      Alert.alert(
+        'Confirmar',
+        `Você possui um pedido pendente em ${companyName}. Deseja mesmo sair?`,
+        [
+          { text: 'Sim', onPress: () => {
+            resetCart();
+            navigation.reset({
+              routes: [{name: 'Home'}]
+            }); 
+            signOut();
+          }},
+          { text: 'Não' }
+        ]
+      );
+    }
+  };
+ 
+
+  const getCompanyName = async () => {
+    try{
+      if(orderInfo.id_company !== 0){
+        const response = await api.get(`/edit-company/${orderInfo.id_company}`);
+        setCompanyName(response.data[0].name); 
+      }
+      else{
+        if(requestInfo.id_company !== 0){
+          const response = await api.get(`/edit-company/${requestInfo.id_company}`);
+          setCompanyName(response.data[0].name); 
+        }
+        else{
+          setCompanyName('Empresa');
+        }
+      }
+    }
+    catch(error){
+      throw error;
+    }
     
-  } 
+  }
+  
+  useEffect(() => {
+    loadScreenInfo();
+    getCompanyName();
+  }, []);
 
   return (
     <SafeAreaView style={styles.screenContainer}>
       <View style={styles.headerContainer}>
           <Text style={styles.headerText}>Perfil</Text>
       </View>
-      <ScrollView style={styles.bodyContainer}>
-        <View style={styles.bodyContentContainer}>
-          <Image source={null} style={styles.profilePicture}/>
-          <Text style={styles.customerName}>{customerName}</Text>
-          <Text style={styles.customerEmail}>{customerEmail}</Text>
-          <TouchableOpacity style={styles.viewProfileButton}>
-            <Text style={styles.viewProfileText}>Visualizar Perfil</Text>
-            <MaterialIcons name="keyboard-arrow-right" size={adjustHorizontalMeasure(16)} color={colors.primary}/>
-          </TouchableOpacity>
-          <SectionList
-            style={styles.sectionList}
-            sections={menuListData}
-            keyExtractor={(item, index) => String(index)}
-            renderSectionHeader={({ section: { title } }) => 
-            title === null || title === ''
-              ? <></>
-              : <Text style={styles.sectionTitle}>{title}</Text>
-            }
-            renderItem={({ item, index }) => 
-              <ProfileMenuListItem 
-                mainIconName={item.mainIconName} 
-                endIconName={item.endIconName}
-                endIconColor={item.endIconColor}
-                text={item.text}
-                textColor={item.textColor} 
-                onPress={item.onPress}
-              />
-            }
-          />
-          <ProfileMenuListItem 
-            style={styles.logoutButton}
-            mainIconName={null} 
-            endIconName="exit-to-app"
-            endIconColor={colors.vermelho}
-            text="Sair"
-            textColor={colors.vermelho} 
-            onPress={handleLogout}
-          />
-        </View>     
-      </ScrollView>
+      <View style={styles.bodyContainer}>          
+        <SectionList
+          style={styles.sectionList}
+          ListHeaderComponent={() => 
+            <View style={styles.listHeader}>
+              <Image source={{uri: customerAvatarUrl}} style={styles.profilePicture}/>
+              <Text style={styles.customerName}>{customerName}</Text>
+              <Text style={styles.customerEmail}>{customerEmail}</Text>
+              <TouchableOpacity style={styles.viewProfileButton}>
+                <Text style={styles.viewProfileText}>Visualizar Perfil</Text>
+                <MaterialIcons name="keyboard-arrow-right" size={adjustHorizontalMeasure(16)} color={colors.primary}/>
+              </TouchableOpacity>
+            </View>
+          }
+          sections={menuListData}
+          keyExtractor={(item, index) => String(index)}
+          renderSectionHeader={({ section: { title } }) => 
+          title === null || title === ''
+            ? <></>
+            : <Text style={styles.sectionTitle}>{title}</Text>
+          }
+          renderItem={({ item, index }) => 
+            <ProfileMenuListItem 
+              mainIconName={item.mainIconName} 
+              endIconName={item.endIconName}
+              endIconColor={item.endIconColor}
+              text={item.text}
+              textColor={item.textColor} 
+              onPress={item.onPress}
+            />
+          }
+          ListFooterComponent={
+            <View>
+            <ProfileMenuListItem 
+              style={styles.logoutButton}
+              mainIconName={null} 
+              endIconName="exit-to-app"
+              endIconColor={colors.vermelho}
+              text="Sair"
+              textColor={colors.vermelho} 
+              onPress={handleLogout}
+            />  
+            </View>
+          }
+        />
+        
+      </View>
     </SafeAreaView>
   );
 }
