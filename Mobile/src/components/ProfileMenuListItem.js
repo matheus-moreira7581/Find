@@ -4,19 +4,20 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustMeasures';
-import adjustFontSize from '../utils/adjustMeasures';
+
+import adjustFontSize from '../utils/adjustFontSize';
 
 import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
 
-const ProfileMenuListItem = ({ iconName, text, onPress }) => {
+const ProfileMenuListItem = ({ style, mainIconName, endIconName, endIconColor, text, textColor, onPress }) => {
     return (
-        <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
+        <TouchableOpacity style={{...styles.itemContainer, ...style}} onPress={onPress}>
             <View style={styles.startInfo}>
-                <MaterialIcons name={iconName} size={adjustHorizontalMeasure(16)} style={styles.mainIcon}/>
-                <Text style={styles.text}>{text}</Text>
+                <MaterialIcons name={mainIconName} size={adjustHorizontalMeasure(16)} style={styles.mainIcon}/>
+                <Text style={{...styles.text, ...{ color: textColor }}}>{text}</Text>
             </View>
-            <MaterialIcons name="keyboard-arrow-right" size={adjustHorizontalMeasure(16)} color={colors.primary} />
+            <MaterialIcons name={endIconName} size={adjustHorizontalMeasure(16)} color={endIconColor} />
         </TouchableOpacity>
     );
 
@@ -29,23 +30,25 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         height: adjustVerticalMeasure(40),
-        paddingHorizontal: adjustHorizontalMeasure(29),
-        borderWidth: 1,
-        borderColor: colors.bordarCinza,
-    },
-    text:{
-        fontFamily: fonts.montserratBold,
-        fontSize: 12,
-    },
-    mainIcon:{
-        color: colors.cinzaEscuro,
-        marginRight: adjustHorizontalMeasure(8),
+        borderBottomWidth: 1,
+        borderTopWidth: 1,
+        borderBottomColor: colors.bordarCinza,
+        borderTopColor: colors.bordarCinza,
+        paddingHorizontal: adjustHorizontalMeasure(32)
     },
     startInfo:{
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+    text:{
+        fontFamily: fonts.montserratBold,
+        fontSize: adjustFontSize(12),
+    },
+    mainIcon:{
+        color: colors.cinzaEscuro,
+        marginRight: adjustHorizontalMeasure(8),
+    },
 });
 
 export default ProfileMenuListItem;
