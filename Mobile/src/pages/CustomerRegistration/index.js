@@ -24,6 +24,7 @@ const CustomerRegistration = () => {
     const [cell, setCell] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordCheck, setPasswordCheck] = useState('');
 
     const { signIn } = useAuth();
 
@@ -76,6 +77,8 @@ const CustomerRegistration = () => {
                 );
         } else if (!(String(email).includes('@') && String(email).includes('.'))) {
             return Alert.alert('Error', 'Digite um endereço de email válido!');
+        } else if(password !== passwordCheck) {
+            return Alert.alert('Error', 'Os campos "Cria uma senha" e "Confirme sua senha" não batem');
         }
         else {
             finishContumerRegistration()
@@ -107,6 +110,9 @@ const CustomerRegistration = () => {
     }
     const getPassword = (typed) => {
         setPassword(typed);
+    }
+    const getPasswordCheck = (typed) => {
+        setPasswordCheck(typed);
     }
 
     return (
@@ -166,6 +172,17 @@ const CustomerRegistration = () => {
                         <TextInput 
                             style={styles.input}
                             placeholder="Digite sua senha" 
+                            placeholderTextColor={colors.cinza}
+                            value={password}
+                            secureTextEntry={true}
+                            onChangeText={getPassword}
+                        />
+                    </View>
+                    <View style={styles.passwordCheckContainer}>
+                        <Text style={styles.text}>Confirme sua senha</Text>
+                        <TextInput 
+                            style={styles.input}
+                            placeholder="Digite sua senha novamente" 
                             placeholderTextColor={colors.cinza}
                             value={password}
                             secureTextEntry={true}

@@ -184,7 +184,7 @@ const CompanyPersonalData = () => {
           <View style={styles.passwordContainer}>
             <Text style={styles.passwordLabel}>Confirme sua senha</Text>
             <TextInput style={styles.passwordInput} 
-              placeholder="Digite sua senha" 
+              placeholder="Digite sua senha novamente" 
               placeholderTextColor={colors.cinza}
               secureTextEntry={true}
               onChangeText={getPasswordCheck}

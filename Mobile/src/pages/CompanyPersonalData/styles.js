@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     marginTop: adjustVerticalMeasure(45.5),
   },
   inputsContainer: {
+    marginTop: adjustVerticalMeasure(5),
     height: adjustVerticalMeasure(400),
     width: '95%',
   },

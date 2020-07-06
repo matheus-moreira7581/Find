@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingHorizontal: adjustHorizontalMeasure(24),
         marginTop: adjustVerticalMeasure(41),
+    },
+    passwordCheckContainer:{
+        width: '100%',
+        paddingHorizontal: adjustHorizontalMeasure(24),
+        marginTop: adjustVerticalMeasure(41),
         marginBottom: adjustVerticalMeasure(79),
     },
     headerText: {
