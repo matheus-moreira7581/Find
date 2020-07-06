@@ -22,9 +22,9 @@ module.exports = {
             for (const file of files) {
             
                 const {path} = file
-
+                
                 const newPath = await uploader(path)
-
+                
                 urls.push(newPath)
 
                 fs.unlinkSync(path)

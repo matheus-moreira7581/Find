@@ -92,16 +92,8 @@ const ProductManagement = () => {
                 if(checkSpecialCharacters.test(price) || checkLetters.test(price)) 
                     return Alert.alert('Error', 'Preço Fixo" só deve conter números e ponto!');
                 else {
-                    const productPrice = parseFloat(price)
-                    const newProduct = {
-                        name,
-                        description,
-                        price: productPrice,
-                        limit_time: timeRanges[selectedTimeRange].range,
-                        id_company: loggedUser.data.id,
-                    }                   
-
-                    const response = await api.post('/my-products', newProduct); 
+                    
+                    const response = await finishProductRegistration();
                     
                     if(response.status !== 201){
                         Alert.alert('Error', 'Falha na criação do produto!');
@@ -121,7 +113,54 @@ const ProductManagement = () => {
                 
         //----MÉTODO PARA UPAR A IMAGEM VEM AQUI, TODO----""
         
-    }
+    };
+
+    const finishProductRegistration = async () => {
+        const productPrice = parseFloat(price)
+        
+        const id = loggedUser.data.id;
+
+        const requestConfiguration = {
+            headers:{
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+        const newProduct = {
+            name,
+            description,
+            price: productPrice,
+            limit_time: timeRanges[selectedTimeRange].range,
+            id_company: loggedUser.data.id,
+        }                   
+
+        const productData = new FormData();
+        const picToUpload = {
+            uri: image.uri,
+            type: image.type,
+            path: image.path,
+            width: image.width,
+            height: image.height,
+        }   
+        productData.append('name', name);
+        productData.append('id_company', id);
+        productData.append('description', description);
+        productData.append('price', productPrice);
+        productData.append('limit_time', timeRanges[selectedTimeRange].range);
+        productData.append('img_url', picToUpload);
+
+        console.log(productData);
+        
+        try{
+            const response = await api.post('/my-products', productData, requestConfiguration); 
+
+            return response;
+        }
+        catch(error){
+            console.log(error);
+            return
+        }
+        
+    };
 
     return (
         <SafeAreaView style={styles.screenContainer}>
