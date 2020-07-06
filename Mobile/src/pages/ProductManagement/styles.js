@@ -91,6 +91,33 @@ const styles = StyleSheet.create({
     },
     imageToChoose:{
         marginTop: adjustVerticalMeasure(4),
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: adjustHorizontalMeasure(88),
+        height: adjustHorizontalMeasure(88),
+        backgroundColor: colors.textInput,
+    },
+    verticalView:{
+        position: 'absolute',
+        width: adjustHorizontalMeasure(5),
+        height: adjustVerticalMeasure(25),
+        backgroundColor: colors.cinza,
+        borderRadius: 3,
+    },
+    horizontalView:{
+        position: 'absolute',
+        width: adjustHorizontalMeasure(20),
+        height: adjustVerticalMeasure(5),
+        backgroundColor: colors.cinza,
+        borderRadius: 3,
+    },
+    image:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: adjustVerticalMeasure(4),
+        width: adjustHorizontalMeasure(88),
+        height: adjustHorizontalMeasure(88),
+        resizeMode: 'cover'
     }
 });
 

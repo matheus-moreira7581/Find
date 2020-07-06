@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, Text, TextInput, TouchableWithoutFeedback, Picker, Keyboard, Alert } from 'react-native';
+import { View, SafeAreaView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Picker, Keyboard, Alert, Image } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
-import { MaterialIcons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+
+import Constants from 'expo-constants';
 
 import { useAuth } from '../../contexts/auth';
+import { useNavigation } from '@react-navigation/native';
+
+import api from '../../services/api';
+
+import { MaterialIcons } from '@expo/vector-icons';
 
 import adjustFontSize from '../../utils/adjustFontSize';
 
@@ -13,16 +20,23 @@ import styles from './styles';
 
 import RoundedButton from '../../components/RoundedButton';
 import UnderlinedTextButton from '../../components/UnderlinedTextButton';
-import ImagePicker from '../../components/ImagePicker';
 
-import api from '../../services/api';
 
 const ProductManagement = () => { 
     const [selectedTimeRange, setSelectedTimeRange] = useState (0);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    
+    const [image, setImage] = useState({ uri: null, base64: null });
+
+    const imagePickerConditions = {
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        base64: true,
+        quality: 1,
+    }
+
     const navigation = useNavigation();
 
     const { loggedUser } = useAuth();
@@ -46,7 +60,27 @@ const ProductManagement = () => {
             routes: [{name: 'CompanyRunning'}]
         });  
     }
+    const getPermissionsAsync = async () => {
+        if(Constants.platform.ios){
+            const { status } = await Permissions.getAsync(Permissions.CAMERA_ROLL);
 
+            if(status !== 'granted'){
+                alert('Não podemos prosseguir, precisamos de permissões para utilizar Camera Roll.');
+            }
+        }
+    };
+    const getImage = async () => {
+        getPermissionsAsync();
+        try{
+           let result = await ImagePicker.launchImageLibraryAsync(imagePickerConditions);
+           if(!result.cancelled && result.uri){
+               setImage(result);
+           } 
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
     const handleSellingItemCreation = async () => {
         if(name === '' || description === '' || price === '0' || price === '') {
             return Alert.alert('Error', 'Preencha todos os campos marcados com "*"!');
@@ -63,10 +97,9 @@ const ProductManagement = () => {
                         name,
                         description,
                         price: productPrice,
-                        img_url: "",
                         limit_time: timeRanges[selectedTimeRange].range,
                         id_company: loggedUser.data.id,
-                    }
+                    }                   
 
                     const response = await api.post('/my-products', newProduct); 
                     
@@ -165,7 +198,19 @@ const ProductManagement = () => {
                     </View>
                     <View style={styles.topicContainer}>
                         <Text style={styles.topicTitleText}>Adicione uma imagem</Text>
-                        <ImagePicker style={styles.imageToChoose}/>
+                        {
+                            image.uri
+                            ?
+                                <TouchableOpacity style={styles.image} onPress={getImage}>
+                                    <Image source={{uri: image.uri}} style={styles.image}/>
+                                </TouchableOpacity>
+                                
+                            :
+                                <TouchableOpacity style={styles.imageToChoose} onPress={getImage}>
+                                    <View style={styles.verticalView}/>
+                                    <View style={styles.horizontalView}/>
+                                </TouchableOpacity>
+                        }    
                     </View>
                     <RoundedButton
                         text="Concluir"
