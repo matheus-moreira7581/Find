@@ -36,10 +36,12 @@ module.exports = {
             const item = [{ name, description, price, limit_time, id_company }];
 
             const product = item.map(element => {
-                return {
-                    "img_url": urls[0].url,
-                    ...element
+                if(urls.length > 0) {
+                    return {
+                        "img_url": urls[0].url,...element
+                    }
                 }
+                else return {...element}
             })
 
             await knex('products').insert(product);
