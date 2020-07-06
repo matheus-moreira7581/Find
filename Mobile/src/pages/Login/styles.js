@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: adjustVerticalMeasure(119),
   },
+  image: {
+    height: adjustVerticalMeasure(90),
+    width: adjustHorizontalMeasure(134)
+  },
   inputsContainer: {
     marginBottom: adjustVerticalMeasure(71),
   },

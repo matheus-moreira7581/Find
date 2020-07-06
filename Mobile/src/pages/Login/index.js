@@ -55,6 +55,7 @@ const Login = () => {
       <View style={styles.imageContainer}>
         <Image 
           source={require('../../assets/images/FindLogoBlack.png')}
+          style={styles.image}
         />
       </View>
       <View style={styles.inputsContainer}>
