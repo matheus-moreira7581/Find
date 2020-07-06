@@ -54,7 +54,7 @@ const Login = () => {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image 
-          source={require('../../assets/images/FindLogoBlack.png')}
+          source={require('../../assets/images/find-anim-logo.gif')}
           style={styles.image}
         />
       </View>
