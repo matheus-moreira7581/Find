@@ -227,42 +227,43 @@ const ProductDetails = () => {
         </View>
         <View style={styles.noteBottomBorder}></View>
         {
-        selectedCategoryCardInfo.type === 'product' ?
-        <View style={styles.addContainer}>
-          <View style={styles.amountContainer}>
-            <TouchableOpacity 
-              onPress={subtractAmount}
-              style={styles.removeAmount}
-            >
-              <MaterialIcons name="remove" style={styles.removeIcon}/>
-            </TouchableOpacity>
-            <Text style={styles.amountText}>{amount}</Text>
-            <TouchableOpacity
-              onPress={addAmount}
-              style={styles.addAmount}
-            >
-              <MaterialIcons name="add" style={styles.addIcon}/>
-            </TouchableOpacity>
-          </View>
-          <RoundedButton 
-            text={`Adicionar R$ ${addPrice}`} 
-            onPress={() => handleAddProductToMarketBag()} 
-            selected={true} 
-            width={168}
-            height={36}
-            fontSize={12}
-          />
-        </View> :
-        <View style={styles.serviceButtonContainer}>
-          <RoundedButton 
-            text={`Continuar R$ ${addPrice}`} 
-            onPress={() => handleAddProductToMarketBag()} 
-            selected={true} 
-            width={256}
-            height={48}
-            fontSize={16}
-          />
-        </View>
+          selectedCategoryCardInfo.type === 'product' ?
+            <View style={styles.addContainer}>
+              <View style={styles.amountContainer}>
+                <TouchableOpacity 
+                  onPress={subtractAmount}
+                  style={styles.removeAmount}
+                >
+                  <MaterialIcons name="remove" style={styles.removeIcon}/>
+                </TouchableOpacity>
+                <Text style={styles.amountText}>{amount}</Text>
+                <TouchableOpacity
+                  onPress={addAmount}
+                  style={styles.addAmount}
+                >
+                  <MaterialIcons name="add" style={styles.addIcon}/>
+                </TouchableOpacity>
+              </View>
+              <RoundedButton 
+                text={`Adicionar R$ ${addPrice}`} 
+                onPress={() => handleAddProductToMarketBag()} 
+                selected={true} 
+                width={168}
+                height={36}
+                fontSize={12}
+              />
+            </View> 
+          :
+            <View style={styles.serviceButtonContainer}>
+              <RoundedButton 
+                text={`Continuar R$ ${addPrice}`} 
+                onPress={() => handleAddProductToMarketBag()} 
+                selected={true} 
+                width={256}
+                height={48}
+                fontSize={16}
+              />
+            </View>
         }
       </View>
     </View>

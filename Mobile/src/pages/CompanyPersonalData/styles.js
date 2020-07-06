@@ -45,6 +45,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: adjustVerticalMeasure(45.5),
   },
+  inputsContainer: {
+    height: adjustVerticalMeasure(400),
+    width: '95%',
+  },
   nomeContainer: {
     marginTop: adjustVerticalMeasure(33),
     alignItems: 'center',

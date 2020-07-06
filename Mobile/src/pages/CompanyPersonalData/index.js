@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -26,6 +26,7 @@ const CompanyPersonalData = () => {
   const [birthday, setBirthday] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
 
   const cpfPatter = /[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}/g;
   const birthdayPatter = /[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g;
@@ -46,6 +47,9 @@ const CompanyPersonalData = () => {
   }
   const getPassword = (typed) => {
     setPassword(typed);
+  }
+  const getPasswordCheck = (typed) => {
+    setPasswordCheck(typed);
   }
   
   const navigateToCompanyRegistration = (type) => {
@@ -94,6 +98,8 @@ const CompanyPersonalData = () => {
       return Alert.alert('Error', 'Data de nascimento invalida! Digite a data com "/"');
     } else if (!(String(email).includes('@') && String(email).includes('.'))) {
         return Alert.alert('Error', 'Digite um endereço de email válido!');
+    } else if (password !== passwordCheck) {
+      return Alert.alert('Error', 'Os campos "Cria uma senha" e "Confirme sua senha" não batem');
     }
     else return navigateToCompanyRegistration(registrationType)
   }
@@ -123,54 +129,69 @@ const CompanyPersonalData = () => {
         <View style={styles.dotsContainer}>
           {phase}
         </View>
-        <View style={styles.nomeContainer}>
-          <Text style={styles.nomeLabel}>Nome</Text>
-          <TextInput style={styles.nomeInput} 
-            placeholder="Digite seu nome" 
-            placeholderTextColor={colors.cinza}
-            onChangeText={getName}
-            value={name}
-          />
-        </View>
-        <View style={styles.cpfContainer}>
-          <Text style={styles.cpfLabel}>CPF</Text>
-          <TextInput style={styles.cpfInput} 
-            placeholder="xxx.xxx.xxx-xx" 
-            placeholderTextColor={colors.cinza}
-            onChangeText={getCpf}
-            value={cpf}
-            maxLength={14}
-          />
-        </View>
-        <View style={styles.dataNascContainer}>
-          <Text style={styles.dataNascLabel}>Data de Nasc.</Text>
-          <TextInput style={styles.dataNascInput} 
-            placeholder="xx/xx/xxxx" 
-            placeholderTextColor={colors.cinza}
-            onChangeText={getBirthday}
-            value={birthday}
-            maxLength={10}
-          />
-        </View>
-        <View style={styles.emailContainer}>
-          <Text style={styles.emailLabel}>Email</Text>
-          <TextInput style={styles.emailInput} 
-            placeholder="Digite seu e-mail" 
-            placeholderTextColor={colors.cinza}
-            onChangeText={getEmail}
-            value={email}
-          />
-        </View>
-        <View style={styles.passwordContainer}>
-          <Text style={styles.passwordLabel}>Crie uma senha</Text>
-          <TextInput style={styles.passwordInput} 
-            placeholder="Digite sua senha" 
-            placeholderTextColor={colors.cinza}
-            secureTextEntry={true}
-            onChangeText={getPassword}
-            value={password}
-          />
-        </View>
+        <ScrollView 
+          style={styles.inputsContainer}
+          showsVerticalScrollIndicator={true}
+        >
+          <View style={styles.nomeContainer}>
+            <Text style={styles.nomeLabel}>Nome</Text>
+            <TextInput style={styles.nomeInput} 
+              placeholder="Digite seu nome" 
+              placeholderTextColor={colors.cinza}
+              onChangeText={getName}
+              value={name}
+            />
+          </View>
+          <View style={styles.cpfContainer}>
+            <Text style={styles.cpfLabel}>CPF</Text>
+            <TextInput style={styles.cpfInput} 
+              placeholder="xxx.xxx.xxx-xx" 
+              placeholderTextColor={colors.cinza}
+              onChangeText={getCpf}
+              value={cpf}
+              maxLength={14}
+            />
+          </View>
+          <View style={styles.dataNascContainer}>
+            <Text style={styles.dataNascLabel}>Data de Nasc.</Text>
+            <TextInput style={styles.dataNascInput} 
+              placeholder="xx/xx/xxxx" 
+              placeholderTextColor={colors.cinza}
+              onChangeText={getBirthday}
+              value={birthday}
+              maxLength={10}
+            />
+          </View>
+          <View style={styles.emailContainer}>
+            <Text style={styles.emailLabel}>Email</Text>
+            <TextInput style={styles.emailInput} 
+              placeholder="Digite seu e-mail" 
+              placeholderTextColor={colors.cinza}
+              onChangeText={getEmail}
+              value={email}
+            />
+          </View>
+          <View style={styles.passwordContainer}>
+            <Text style={styles.passwordLabel}>Crie uma senha</Text>
+            <TextInput style={styles.passwordInput} 
+              placeholder="Digite sua senha" 
+              placeholderTextColor={colors.cinza}
+              secureTextEntry={true}
+              onChangeText={getPassword}
+              value={password}
+            />
+          </View>
+          <View style={styles.passwordContainer}>
+            <Text style={styles.passwordLabel}>Confirme sua senha</Text>
+            <TextInput style={styles.passwordInput} 
+              placeholder="Digite sua senha" 
+              placeholderTextColor={colors.cinza}
+              secureTextEntry={true}
+              onChangeText={getPasswordCheck}
+              value={passwordCheck}
+            />
+          </View>
+        </ScrollView>
         <View style={styles.buttonContainer}>
           <RoundedButton
             selected={true}
