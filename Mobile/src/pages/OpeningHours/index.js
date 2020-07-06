@@ -40,8 +40,6 @@ const OpeningHours = () => {
     const finishCompanyRegistrarion = async () => {
         const selectedHours = getHours();
         const chosenHours = hours.filter((item, index) => selectedHours[index] === true );
-        const stringHours = JSON.stringify(Object.assign({}, chosenHours));
-        const jsonHours = JSON.parse(stringHours);
         let cpf = String(user.cpf).replace(/\D/g,"");
         const jsonObject = {
             name: companyData.companyName,
@@ -52,7 +50,7 @@ const OpeningHours = () => {
             address: companyData.companyAddress,
             id_categories: companyData.area,
             type: "service", 
-            hours_schedule:jsonHours
+            hours_schedule:chosenHours
         }
         const response = await api.post('/register-company', jsonObject).catch(err => console.log(err));
         if(response.status === 201) return navigation.navigate('Login');
