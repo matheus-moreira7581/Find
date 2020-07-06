@@ -127,7 +127,7 @@ const RedeemProduct = () => {
                                     color={colors.cinza}
                                 />
                             :
-                                <Image source={{uri: companyLogoUrl}} resizeMode="stretch"/>
+                                <Image source={{uri: companyLogoUrl}} resizeMode="stretch" style={styles.image}/>
                         }
                         
                     </View>

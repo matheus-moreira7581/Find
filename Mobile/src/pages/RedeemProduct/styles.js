@@ -52,9 +52,10 @@ const styles = StyleSheet.create({
         marginBottom: adjustVerticalMeasure(40),
     },
     textInput:{
+        height: adjustVerticalMeasure(40),
         backgroundColor: colors.textInput,
         fontFamily: fonts.montserratRegular,
-        fontSize: adjustFontSize(13),
+        fontSize: adjustFontSize(15),
         paddingLeft: adjustHorizontalMeasure(15),
         marginTop: adjustVerticalMeasure(6),
         borderRadius: 7,
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         paddingLeft: adjustHorizontalMeasure(24.5),
         paddingVertical: adjustVerticalMeasure(11.5),
-        marginBottom: adjustVerticalMeasure(184),
+        marginBottom: adjustVerticalMeasure(150),
     },
     companyLogoContainer:{
         justifyContent: 'center',
@@ -82,6 +83,11 @@ const styles = StyleSheet.create({
         width: adjustHorizontalMeasure(56),
         height: adjustHorizontalMeasure(56),
         backgroundColor: colors.bordarCinza,
+        borderRadius: 28,
+    },
+    image: {
+        width: adjustHorizontalMeasure(56),
+        height: adjustHorizontalMeasure(56),
         borderRadius: 28,
     },
     requestInfoContainer:{

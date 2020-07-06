@@ -172,6 +172,7 @@ const ProductManagement = () => {
                             selectedValue={selectedTimeRange}
                             onValueChange={(value) => setSelectedTimeRange(value)}
                             itemStyle={styles.pickerItem}
+                            mode="dropdown"
                         >
                             {
                                 timeRanges.map((timeRange, index) => {
