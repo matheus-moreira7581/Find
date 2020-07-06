@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Picker, Keyboard, Alert, Image } from 'react-native';
+import { View, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Picker, Keyboard, Alert, Image, ActivityIndicator } from 'react-native';
 
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
@@ -28,25 +28,26 @@ const ProductManagement = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [image, setImage] = useState({ uri: null, base64: null });
-
+    const [loading, setLoading] = useState(false);
+    
+    
     const imagePickerConditions = {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3],
-        base64: true,
+        base64: false,
         quality: 1,
     }
-
-    const navigation = useNavigation();
-
-    const { loggedUser } = useAuth();
-
     const timeRanges = [
         { id: 0, range: '5min - 10min' },
         { id: 1, range: '10min - 15min' },
         { id: 2, range: '15min - 20min' },
         { id: 3, range: '20min - 25min' },
     ];
+
+    const navigation = useNavigation();
+
+    const { loggedUser } = useAuth();
 
     const getName = (typed) => setName(typed);
     const getDescription = (typed) => setDescription(typed);
@@ -66,6 +67,7 @@ const ProductManagement = () => {
 
             if(status !== 'granted'){
                 alert('Não podemos prosseguir, precisamos de permissões para utilizar Camera Roll.');
+                return;
             }
         }
     };
@@ -93,8 +95,10 @@ const ProductManagement = () => {
                     return Alert.alert('Error', 'Preço Fixo" só deve conter números e ponto!');
                 else {
                     
-                    const response = await finishProductRegistration();
-                    
+                    setLoading(true);
+                    const response = await finishItemRegistration();
+                    setLoading(false);
+
                     if(response.status !== 201){
                         Alert.alert('Error', 'Falha na criação do produto!');
                     }
@@ -107,15 +111,10 @@ const ProductManagement = () => {
                     }
                 }
             }
-        }
-            
-                
-                
-        //----MÉTODO PARA UPAR A IMAGEM VEM AQUI, TODO----""
-        
+        }    
     };
 
-    const finishProductRegistration = async () => {
+    const finishItemRegistration = async () => {
         const productPrice = parseFloat(price)
         
         const id = loggedUser.data.id;
@@ -124,31 +123,35 @@ const ProductManagement = () => {
             headers:{
                 'Content-Type': 'multipart/form-data'
             }
-        }
-        const newProduct = {
-            name,
-            description,
-            price: productPrice,
-            limit_time: timeRanges[selectedTimeRange].range,
-            id_company: loggedUser.data.id,
-        }                   
+        } 
 
+        let picToUpload = null;
+
+        if(image.uri !== null){
+            const imageExtension = image.uri?.split('.').pop();
+            const imageName = image.uri.split('/').pop();
+            
+            if(imageExtension !== 'jpg' && imageExtension !== 'png'){
+                return;
+            } 
+            picToUpload = {
+                uri: image.uri,
+                name: imageName,
+                type: `${image.type}/${imageExtension === 'jpg' ? 'jpeg' : 'png'}`,
+                width: image.width,
+                height: image.height 
+            }
+        } 
+       
         const productData = new FormData();
-        const picToUpload = {
-            uri: image.uri,
-            type: image.type,
-            path: image.path,
-            width: image.width,
-            height: image.height,
-        }   
+        
         productData.append('name', name);
-        productData.append('id_company', id);
+        productData.append('id_company', id)
         productData.append('description', description);
         productData.append('price', productPrice);
         productData.append('limit_time', timeRanges[selectedTimeRange].range);
         productData.append('img_url', picToUpload);
 
-        console.log(productData);
         
         try{
             const response = await api.post('/my-products', productData, requestConfiguration); 
@@ -162,109 +165,119 @@ const ProductManagement = () => {
         
     };
 
-    return (
-        <SafeAreaView style={styles.screenContainer}>
-            <View style={styles.headerContainer}>
-                <UnderlinedTextButton 
-                    selected={false} 
-                    fontSize={adjustFontSize(15)} 
-                    style={styles.headerButton}
-                    onPress={() => navigation.navigate('CompanyRunning')}
-                >
-                    Pedidos
-                </UnderlinedTextButton>
-                <UnderlinedTextButton 
-                    selected={true} 
-                    fontSize={adjustFontSize(15)} 
-                    style={styles.headerButton}
-                    onPress={() => {}}
-                >
-                    Meus Produtos
-                </UnderlinedTextButton>
-            </View>
-            <TouchableWithoutFeedback style={styles.bodyContainer} onPress={() => Keyboard.dismiss()}>
-                <View style={styles.myProductsContainer}>
-                    <View style={styles.topicContainer}>
-                        <Text style={styles.topicTitleText}>Nome do Produto *</Text>
-                        <TextInput 
-                            style={styles.input}
-                            placeholder="Digite o nome do produto" 
-                            placeholderTextColor={colors.cinza}
-                            onChangeText={getName}
-                            value={name}
-                        />
-                    </View>
-                    <View style={styles.topicContainer}>
-                        <Text style={styles.topicTitleText}>Descrição do Produto *</Text>
-                        <TextInput style={styles.multilineInput} 
-                            placeholder="Digite uma descrição"
-                            placeholderTextColor={colors.cinza}
-                            multiline={true}
-                            onChangeText={getDescription}
-                            value={description}
-                        />
-                    </View>
-                    <View style={styles.topicContainer}>
-                        <Text style={styles.topicTitleText}>Tempo médio de conclusão</Text>
-                        <Picker 
-                            style={styles.picker}
-                            selectedValue={selectedTimeRange}
-                            onValueChange={(value) => setSelectedTimeRange(value)}
-                            itemStyle={styles.pickerItem}
-                            mode="dropdown"
-                        >
+    if(!loading){
+        return (
+            <SafeAreaView style={styles.screenContainer}>
+                <View style={styles.headerContainer}>
+                    <UnderlinedTextButton 
+                        selected={false} 
+                        fontSize={adjustFontSize(15)} 
+                        style={styles.headerButton}
+                        onPress={() => navigation.navigate('CompanyRunning')}
+                    >
+                        Pedidos
+                    </UnderlinedTextButton>
+                    <UnderlinedTextButton 
+                        selected={true} 
+                        fontSize={adjustFontSize(15)} 
+                        style={styles.headerButton}
+                        onPress={() => {}}
+                    >
+                        Meus Produtos
+                    </UnderlinedTextButton>
+                </View>
+                <TouchableWithoutFeedback style={styles.bodyContainer} onPress={() => Keyboard.dismiss()}>
+                    <ScrollView style={{width: '100%', height: '100%'}} contentContainerStyle={styles.myProductsContainer}>
+                        <View style={styles.topicContainer}>
+                            <Text style={styles.topicTitleText}>Nome do Produto *</Text>
+                            <TextInput 
+                                style={styles.input}
+                                placeholder="Digite o nome do produto" 
+                                placeholderTextColor={colors.cinza}
+                                onChangeText={getName}
+                                value={name}
+                            />
+                        </View>
+                        <View style={styles.topicContainer}>
+                            <Text style={styles.topicTitleText}>Descrição do Produto *</Text>
+                            <TextInput style={styles.multilineInput} 
+                                placeholder="Digite uma descrição"
+                                placeholderTextColor={colors.cinza}
+                                multiline={true}
+                                onChangeText={getDescription}
+                                value={description}
+                            />
+                        </View>
+                        <View style={styles.topicContainer}>
+                            <Text style={styles.topicTitleText}>Tempo médio de conclusão</Text>
+                            <Picker 
+                                style={styles.picker}
+                                selectedValue={selectedTimeRange}
+                                onValueChange={(value) => setSelectedTimeRange(value)}
+                                itemStyle={styles.pickerItem}
+                                mode="dropdown"
+                            >
+                                {
+                                    timeRanges.map((timeRange, index) => {
+                                        return <Picker.Item 
+                                                    label={timeRange.range} 
+                                                    value={timeRange.id} 
+                                                    key={index}
+                                                />
+                                        })
+                                }
+                            </Picker>
+                            
+                        </View>
+                        <View style={styles.topicContainer}>
+                            <Text style={styles.topicTitleText}>Preço Fixo *</Text>
+                            <TextInput 
+                                style={styles.input}
+                                placeholder="Digite um valor" 
+                                placeholderTextColor={colors.cinza}
+                                onChangeText={getPrice}
+                                value={price}
+                                keyboardType="decimal-pad"
+                            />
+                        </View>
+                        <View style={styles.topicContainer}>
+                            <Text style={styles.topicTitleText}>Adicione uma imagem</Text>
                             {
-                                timeRanges.map((timeRange, index) => {
-                                    return <Picker.Item 
-                                                label={timeRange.range} 
-                                                value={timeRange.id} 
-                                                key={index}
-                                            />
-                                    })
-                            }
-                        </Picker>
-                        
-                    </View>
-                    <View style={styles.topicContainer}>
-                        <Text style={styles.topicTitleText}>Preço Fixo *</Text>
-                        <TextInput 
-                            style={styles.input}
-                            placeholder="Digite um valor" 
-                            placeholderTextColor={colors.cinza}
-                            onChangeText={getPrice}
-                            value={price}
-                            keyboardType="decimal-pad"
+                                image.uri
+                                ?
+                                    <TouchableOpacity style={styles.image} onPress={getImage}>
+                                        <Image source={{uri: image.uri}} style={styles.image}/>
+                                    </TouchableOpacity>
+                                    
+                                :
+                                    <TouchableOpacity style={styles.imageToChoose} onPress={getImage}>
+                                        <View style={styles.verticalView}/>
+                                        <View style={styles.horizontalView}/>
+                                    </TouchableOpacity>
+                            }    
+                        </View>
+                        <RoundedButton
+                            text="Concluir"
+                            selected={true}
+                            width={256}
+                            height={50}
+                            fontSize={adjustFontSize(16)}
+                            style={styles.doneButton}
+                            onPress={() => handleSellingItemCreation()}
                         />
-                    </View>
-                    <View style={styles.topicContainer}>
-                        <Text style={styles.topicTitleText}>Adicione uma imagem</Text>
-                        {
-                            image.uri
-                            ?
-                                <TouchableOpacity style={styles.image} onPress={getImage}>
-                                    <Image source={{uri: image.uri}} style={styles.image}/>
-                                </TouchableOpacity>
-                                
-                            :
-                                <TouchableOpacity style={styles.imageToChoose} onPress={getImage}>
-                                    <View style={styles.verticalView}/>
-                                    <View style={styles.horizontalView}/>
-                                </TouchableOpacity>
-                        }    
-                    </View>
-                    <RoundedButton
-                        text="Concluir"
-                        selected={true}
-                        width={256}
-                        height={50}
-                        fontSize={adjustFontSize(16)}
-                        style={styles.doneButton}
-                        onPress={() => handleSellingItemCreation()}
-                    />
-                </View>    
-            </TouchableWithoutFeedback>
-        </SafeAreaView>
-    );
+                    </ScrollView>    
+                </TouchableWithoutFeedback>
+            </SafeAreaView>
+        );
+    }
+    else{
+        return(
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color={colors.primary}/>
+            </View>
+        );
+    }
+    
 }
 
 export default ProductManagement;
