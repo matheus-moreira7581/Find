@@ -60,7 +60,10 @@ const CompanySellingItems = (props) => {
             selected={true}
             style={styles.serviceListButton}
           >
-            Meus Produtos
+          {
+            loggedUser.data.type === 'product' ?
+            "Meus Produtos" : "Meus Serviços"
+          }
           </UnderlinedTextButton>
         </View>
       </View>

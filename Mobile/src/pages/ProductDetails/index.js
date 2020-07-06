@@ -226,6 +226,8 @@ const ProductDetails = () => {
           </View>
         </View>
         <View style={styles.noteBottomBorder}></View>
+        {
+        selectedCategoryCardInfo.type === 'product' ?
         <View style={styles.addContainer}>
           <View style={styles.amountContainer}>
             <TouchableOpacity 
@@ -250,7 +252,18 @@ const ProductDetails = () => {
             height={36}
             fontSize={12}
           />
+        </View> :
+        <View style={styles.serviceButtonContainer}>
+          <RoundedButton 
+            text={`Continuar R$ ${addPrice}`} 
+            onPress={() => handleAddProductToMarketBag()} 
+            selected={true} 
+            width={256}
+            height={48}
+            fontSize={16}
+          />
         </View>
+        }
       </View>
     </View>
   )

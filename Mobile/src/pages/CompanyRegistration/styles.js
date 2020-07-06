@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   container: {
     top: Constants.statusBarHeight,
     backgroundColor: colors.background,
+    height: '100%',
   },
   headerContainer:{
     backgroundColor: colors.background,
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     marginTop: adjustVerticalMeasure(28),
-    height: adjustVerticalMeasure(32),
+    height: adjustVerticalMeasure(40),
     width: adjustHorizontalMeasure(328),
     backgroundColor: colors.textInput,
   },
@@ -80,13 +81,13 @@ const styles = StyleSheet.create({
     marginBottom: adjustVerticalMeasure(4),
   },
   nameCompanyInput: {
-    height: adjustVerticalMeasure(32),
+    height: adjustVerticalMeasure(40),
     width: adjustHorizontalMeasure(328),
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
     fontFamily: fonts.montserratRegular,
-    fontSize: adjustFontSize(13),
+    fontSize: adjustFontSize(15),
   },
   addressContainer: {
     marginTop: adjustVerticalMeasure(41),
@@ -100,16 +101,16 @@ const styles = StyleSheet.create({
     marginBottom: adjustVerticalMeasure(4),
   },
   addressInput: {
-    height: adjustVerticalMeasure(32),
+    height: adjustVerticalMeasure(40),
     width: adjustHorizontalMeasure(328),
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
     fontFamily: fonts.montserratRegular,
-    fontSize: adjustFontSize(13),
+    fontSize: adjustFontSize(15),
   },
   buttonContainer: {
-    marginTop: adjustVerticalMeasure(128),
+    marginTop: adjustVerticalMeasure(120),
   }
 });
 

@@ -77,7 +77,12 @@ const CompanyRunning = (props) => {
                 style={styles.serviceListButton}
                 onPress={() => setScreenMode('list-products')}
               >
-                <Text style={styles.serviceListButtonText}>Meus Produtos</Text>
+                <Text style={styles.serviceListButtonText}>
+                  {
+                    loggedUser.data.type === 'product' ?
+                    "Meus Produtos" : "Meus Serviços"
+                  }
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

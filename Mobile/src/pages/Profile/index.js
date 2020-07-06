@@ -119,9 +119,9 @@ const CompanyProfile = () => {
         [
           { text: 'Sim', onPress: () => {
             resetCart();
-            navigation.reset({
-              routes: [{name: 'Home'}]
-            });  
+            // navigation.reset({
+            //   routes: [{name: 'Login'}]
+            // });  
             signOut();
           }},
           { text: 'Não' }

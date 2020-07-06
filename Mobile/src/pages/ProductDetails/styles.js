@@ -226,7 +226,13 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adju
       fontSize: adjustFontSize(22),
       color: colors.cinza,
       paddingRight: adjustHorizontalMeasure(2),
-    }
+    },
+    serviceButtonContainer: {
+      marginTop: adjustVerticalMeasure(12.5),
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     
  });
 

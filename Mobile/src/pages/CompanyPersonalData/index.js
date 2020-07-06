@@ -132,27 +132,25 @@ const CompanyPersonalData = () => {
             value={name}
           />
         </View>
-        <View style={styles.doubleInputContainer}>
-          <View style={styles.cpfContainer}>
-            <Text style={styles.cpfLabel}>CPF</Text>
-            <TextInput style={styles.cpfInput} 
-              placeholder="xxx.xxx.xxx-xx" 
-              placeholderTextColor={colors.cinza}
-              onChangeText={getCpf}
-              value={cpf}
-              maxLength={14}
-            />
-          </View>
-          <View style={styles.dataNascContainer}>
-            <Text style={styles.dataNascLabel}>Data de Nasc.</Text>
-            <TextInput style={styles.dataNascInput} 
-              placeholder="xx/xx/xxxx" 
-              placeholderTextColor={colors.cinza}
-              onChangeText={getBirthday}
-              value={birthday}
-              maxLength={10}
-            />
-          </View>
+        <View style={styles.cpfContainer}>
+          <Text style={styles.cpfLabel}>CPF</Text>
+          <TextInput style={styles.cpfInput} 
+            placeholder="xxx.xxx.xxx-xx" 
+            placeholderTextColor={colors.cinza}
+            onChangeText={getCpf}
+            value={cpf}
+            maxLength={14}
+          />
+        </View>
+        <View style={styles.dataNascContainer}>
+          <Text style={styles.dataNascLabel}>Data de Nasc.</Text>
+          <TextInput style={styles.dataNascInput} 
+            placeholder="xx/xx/xxxx" 
+            placeholderTextColor={colors.cinza}
+            onChangeText={getBirthday}
+            value={birthday}
+            maxLength={10}
+          />
         </View>
         <View style={styles.emailContainer}>
           <Text style={styles.emailLabel}>Email</Text>
