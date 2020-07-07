@@ -24,7 +24,7 @@ const ServiceScheduling = () => {
     const navigation = useNavigation();
     const {requestInfo, setRequestInfo} = useCart();
     const { scheduledHour } = useScheduledHour();
-    const [hours, setHours] = useState(["00:00"])
+    const [hours, setHours] = useState([])
 
     const handleScheduleSetting = async () => {
         if(!scheduledHour) return Alert.alert('Error', 'Seleciona um horario para agendar');
@@ -64,7 +64,13 @@ const ServiceScheduling = () => {
                     <TextInput style={styles.input} placeholder="Digite o nome completo" placeholderTextColor={colors.cinza}/>
                     <Text style={styles.text}>Agende um horário</Text>
                     <Text style={styles.text}>Hoje</Text>
-                    <ServiceHourGrade datasource={hours} style={styles.hourGrade}/>
+                    {
+                        hours.length === 0 ? 
+                            <View><Text style={styles.unavailable}>Não há nenhum horario disponivel</Text></View> 
+                        : 
+                            <ServiceHourGrade datasource={hours} style={styles.hourGrade}/>
+                    }
+                    
                     <View style={styles.buttonContainer}>
                         <RoundedButton
                             text="Continuar"
