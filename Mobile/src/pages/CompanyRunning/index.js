@@ -18,7 +18,7 @@ import OrderCard from '../../components/OrderCard';
 import RoundedButton from '../../components/RoundedButton';
 
 import CompanySellingItems from '../CompanySellingItems'
-import ProductManagement from '../ProductManagement';
+import ItemManagement from '../ItemManagement';
 
 const ordersDataModel = [
   {title: 'Corte Masculino', user: 'Lucas B.'},
@@ -65,7 +65,7 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
     return <CompanySellingItems onPress={() => setScreenMode('orders')}/>;
   
   if(screenMode === 'create-product')
-    return <ProductManagement onPress={() => setScreenMode('orders')}/>;
+    return <ItemManagement onPress={() => setScreenMode('orders')}/>;
 
   if(screenMode === 'orders'){
     return (
