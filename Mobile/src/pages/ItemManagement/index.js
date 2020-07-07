@@ -34,7 +34,7 @@ const ProductManagement = () => {
     const imagePickerConditions = {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
-        aspect: [4, 3],
+        aspect: [1, 1],
         base64: false,
         quality: 1,
     }
@@ -89,7 +89,9 @@ const ProductManagement = () => {
         }
         else {
             if(checkSpecialCharacters.test(name) || checkSpecialCharacters.test(description)) 
-                return Alert.alert('Error', '"Nome do produto" e "Descrição do produto" não podem conter caracters especiais!');
+                return loggedUser.data.type === 'product'  
+                    ? Alert.alert('Error', '"Nome do produto" e "Descrição do produto" não podem conter caracters especiais!')
+                    : Alert.alert('Error', '"Nome do serviço" e "Descrição do serviço" não podem conter caracters especiais!');
             else {
                 if(checkSpecialCharacters.test(price) || checkLetters.test(price)) 
                     return Alert.alert('Error', 'Preço Fixo" só deve conter números e ponto!');
@@ -100,12 +102,12 @@ const ProductManagement = () => {
                     setLoading(false);
 
                     if(response.status !== 201){
-                        Alert.alert('Error', 'Falha na criação do produto!');
+                        Alert.alert('Error', `Falha na criação do ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'}!`);
                     }
                     else{
                         Alert.alert(
                             'Concluído', 
-                            'Produto criado com sucesso!',
+                            `${loggedUser.data.type === 'product' ? 'Produto' : 'Serviço'} criado com sucesso!`,
                             [{ text: 'OK', onPress: () => navigateToCompanyRunning() }]
                         );
                     }
@@ -115,7 +117,7 @@ const ProductManagement = () => {
     };
 
     const finishItemRegistration = async () => {
-        const productPrice = parseFloat(price)
+        const itemPrice = parseFloat(price)
         
         const id = loggedUser.data.id;
 
@@ -143,18 +145,18 @@ const ProductManagement = () => {
             }
         } 
        
-        const productData = new FormData();
+        const itemData = new FormData();
         
-        productData.append('name', name);
-        productData.append('id_company', id)
-        productData.append('description', description);
-        productData.append('price', productPrice);
-        productData.append('limit_time', timeRanges[selectedTimeRange].range);
-        productData.append('img_url', picToUpload);
+        itemData.append('name', name);
+        itemData.append('id_company', id)
+        itemData.append('description', description);
+        itemData.append('price', itemPrice);
+        itemData.append('limit_time', timeRanges[selectedTimeRange].range);
+        itemData.append('img_url', picToUpload);
 
         
         try{
-            const response = await api.post('/my-products', productData, requestConfiguration); 
+            const response = await api.post(`${loggedUser.data.type === 'product' ? '/my-products' : '/my-services'}`, itemData, requestConfiguration); 
 
             return response;
         }
