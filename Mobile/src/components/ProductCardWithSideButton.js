@@ -4,6 +4,7 @@ import colors from '../assets/var/colors';
 import fonts from '../assets/var/fonts';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
+import {useCategory} from '../contexts/categorySelection'
 
 import adjustFontSize from '../utils/adjustFontSize';
 import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustMeasures';
@@ -12,6 +13,8 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustM
 
 const ProductCardWithSideButton = (props) => {
   const [image, setImage] = useState(props.Image);
+
+  const {selectedCategoryCardInfo} = useCategory();
 
   return (
       <View style={styles.container}>
@@ -31,17 +34,34 @@ const ProductCardWithSideButton = (props) => {
             <View style={styles.descriptionContainer}>
               <Text style={styles.description} numberOfLines={3}>{props.Description}</Text>
             </View>
-            <Text style={styles.price}>R$ {props.Price}</Text>
-          </View>
-          <TouchableOpacity
-            onPress={props.onPress}
-          >
-            <View style={styles.dotsButtonContainer}>
-              <Image 
-                source={require('../assets/images/dots.png')}
-              />
+            <View style={styles.priceAndUnitContainer}>
+              <Text style={styles.price}>R$ {props.Price}</Text>
+              {
+                props.Amount > 0 ?
+                  <Text style={styles.unit}>{props.Amount} unid.</Text> 
+                :
+                  <Text style={styles.unit}></Text>
+              }
             </View>
-          </TouchableOpacity>
+          </View>
+          {
+            selectedCategoryCardInfo.type === 'service' ?
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity>
+                  <MaterialIcons name="delete" size={adjustFontSize(20)} color="black" />
+                </TouchableOpacity>  
+              </View>
+            :
+              <TouchableOpacity
+                onPress={props.onPress}
+              >
+                <View style={styles.dotsButtonContainer}>
+                  <Image 
+                    source={require('../assets/images/dots.png')}
+                  />
+                </View>
+              </TouchableOpacity>
+          }
         </View>
       </View>
   );
@@ -84,7 +104,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   detailsContainer: {
-    width: adjustHorizontalMeasure(235),
+    width: adjustHorizontalMeasure(230),
     height: '100%',
   },
   title: {
@@ -99,6 +119,25 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserrat,
     fontSize: adjustFontSize(10),
     color: colors.cinza,
+  },
+  priceAndUnitContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    paddingRight: adjustHorizontalMeasure(30),
+  },
+  price: {
+    fontFamily: fonts.montserrat,
+    fontSize: adjustFontSize(15),
+    color: colors.cinzaEscuro,
+  },
+  unit: {
+    fontFamily: fonts.montserrat,
+    fontSize: adjustFontSize(15),
+    color: colors.primary,
+  },
+  buttonContainer: {
+    justifyContent: 'flex-end',
   },
   dotsButtonContainer:{
     height: '100%',

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity, Button, Image } from 'react-native';
+import { View, Text, SectionList, SafeAreaView, 
+        FlatList, TouchableOpacity, Button, Image, Alert } from 'react-native';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
@@ -32,16 +33,46 @@ const product = [
 const MarketBag = () => {
   const navigation = useNavigation();
 
-  const {cartItems} = useCart();
+  const [item, setItem] = useState(null);
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
+
+  const {cartItems, removeProductFromCart} = useCart();
   const {selectedCategoryCardInfo} = useCategory();
 
-  const deleteButton = 
-    <TouchableOpacity style={styles.deleteBottom}> 
-      <Text style={styles.deleteText}>Excluir Item</Text> 
-    </TouchableOpacity>
-  const emptyView =  <View style={styles.deleteBottom}></View>
+  const getItem = (item) => setItem(item);
 
-  const [showDeleteButton, setShowDeleteButton] = useState(false);
+  const removeItem = () => {
+    if(item) {
+      Alert.alert(
+        'Confirmar',
+        'Deseja mesmo remover item da sacola?',
+        [
+          { text: 'Sim', onPress: () => {
+            removeProductFromCart(item)
+            setItem(null)
+            setShowDeleteButton(!showDeleteButton)
+          }},
+          { text: 'Não' }
+        ]
+      );
+    }
+  }
+
+  const deleteButton = 
+    <View>
+      <TouchableOpacity style={styles.editBottom}> 
+        <Text style={styles.editText}>Editar Item</Text> 
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.deleteBottom}
+        onPress={removeItem}
+      > 
+        <Text style={styles.deleteText}>Excluir Item</Text> 
+      </TouchableOpacity>
+    </View>
+  
+  const emptyView =  <View style={styles.emptyView}></View>
+
 
   const navigate = () => {
     if(selectedCategoryCardInfo.type === 'product') {
@@ -76,7 +107,11 @@ const MarketBag = () => {
                     Title={item.title}
                     Description={item.description}
                     Price={item.price}
-                    onPress={() => {setShowDeleteButton(!showDeleteButton)}}
+                    Amount={item.amount ? item.amount : null}
+                    onPress={() => {
+                      getItem(item)
+                      setShowDeleteButton(!showDeleteButton)
+                    }}
                   />
                 </View>
               )}

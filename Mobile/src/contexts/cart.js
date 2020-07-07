@@ -52,8 +52,13 @@ export const CartProvider = ({ children }) => {
         }
     }
     const removeProductFromCart = (cartItem) => {
-        const items = cartItems;
-        items.filter(cartItem => cartItem.id_products !== cartItem.id_product);
+        const items = cartItems.filter(item => item.id_products !== cartItem.id_products);
+        setCartItems(items);
+        setTotal(total => total - (cartItem.price *  cartItem.amount));
+    }
+    const removeServiceFromCart = (cartItem) => {
+        const items = cartItems.filter(item => item.id_service !== cartItem.id_service);
+        setCartItems(items);
         setTotal(total => total - cartItem.price);
     }
     const resetCart = () => {
@@ -82,6 +87,7 @@ export const CartProvider = ({ children }) => {
             setTotal,
             addProductToCart,
             removeProductFromCart,
+            removeServiceFromCart,
             resetCart
         }}>
             { children }

@@ -38,14 +38,24 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   listContainer: {
-    height: adjustVerticalMeasure(528),
+    height: adjustVerticalMeasure(500),
     alignItems: 'center',
   },
   buttonsContainer: {
     alignItems: 'center',
   },
+  editBottom: {
+    width: '100%',
+    height: adjustVerticalMeasure(40),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  editText: {
+    fontFamily: fonts.montserratBold,
+    fontSize: adjustFontSize(12),
+    color: colors.cinzaEscuro,
+  },
   deleteBottom: {
-    marginTop: adjustVerticalMeasure(15),
     width: '100%',
     height: adjustVerticalMeasure(40),
     justifyContent: 'center',
@@ -56,6 +66,9 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserratBold,
     fontSize: adjustFontSize(12),
     color: colors.vermelho,
+  },
+  emptyView: {
+    height: adjustVerticalMeasure(88),
   }
 });
 
