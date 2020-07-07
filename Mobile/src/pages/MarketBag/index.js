@@ -36,7 +36,7 @@ const MarketBag = () => {
   const [item, setItem] = useState(null);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
 
-  const {cartItems, removeProductFromCart, orderInfo} = useCart();
+  const {cartItems, removeProductFromCart, removeServiceFromCart, orderInfo} = useCart();
   const {selectedCategoryCardInfo} = useCategory();
 
   const getItem = (item) => setItem(item);
@@ -45,7 +45,7 @@ const MarketBag = () => {
     if(item) {
       Alert.alert(
         'Confirmar',
-        'Deseja mesmo remover item da sacola?',
+        'Deseja mesmo remover o produto da sacola?',
         [
           { text: 'Sim', onPress: () => {
             removeProductFromCart(item)
@@ -56,6 +56,20 @@ const MarketBag = () => {
         ]
       );
     }
+  }
+
+  const removeService = (item) =>{
+    Alert.alert(
+      'Confirmar',
+      'Deseja mesmo remover o serviço da sacola?',
+      [
+        { text: 'Sim', onPress: () => {
+          removeServiceFromCart(item)
+          setItem(null)
+        }},
+        { text: 'Não' }
+      ]
+    );
   }
 
   const editItem = () => {
@@ -120,6 +134,9 @@ const MarketBag = () => {
                     Description={item.description}
                     Price={item.price}
                     Amount={item.amount ? item.amount : null}
+                    deleteServicePress={() => {
+                      removeService(item);
+                    }}
                     onPress={() => {
                       getItem(item)
                       setShowDeleteButton(!showDeleteButton)

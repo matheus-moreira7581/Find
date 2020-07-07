@@ -47,7 +47,9 @@ const ProductCardWithSideButton = (props) => {
           {
             selectedCategoryCardInfo.type === 'service' ?
               <View style={styles.buttonContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={props.deleteServicePress}
+                >
                   <MaterialIcons name="delete" size={adjustFontSize(20)} color="black" />
                 </TouchableOpacity>  
               </View>

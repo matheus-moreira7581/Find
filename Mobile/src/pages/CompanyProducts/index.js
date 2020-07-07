@@ -68,6 +68,10 @@ const CompanyProducts = () => {
     handleShowMarketBag();
   }, [])
 
+  useEffect(()=> {
+   setItemsCount(cartItems.length);
+  }, [cartItems])
+
   const navigateToProductDetails = (id, companyId) => {
     navigation.navigate('ProductDetails', { 
       Id: id,
