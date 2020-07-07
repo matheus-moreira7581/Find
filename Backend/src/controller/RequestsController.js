@@ -274,6 +274,10 @@ async getTime(request, response, next) {
 
             const FilterSchedule = arr.filter(e => e !== null)
 
+            if(FilterSchedule.length === 0) {
+                return response.json({'schedule': []})
+            }
+
             return response.json({'schedule': FilterSchedule})
         }
 
