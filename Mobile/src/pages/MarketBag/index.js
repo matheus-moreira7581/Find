@@ -36,7 +36,7 @@ const MarketBag = () => {
   const [item, setItem] = useState(null);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
 
-  const {cartItems, removeProductFromCart} = useCart();
+  const {cartItems, removeProductFromCart, orderInfo} = useCart();
   const {selectedCategoryCardInfo} = useCategory();
 
   const getItem = (item) => setItem(item);
@@ -58,9 +58,21 @@ const MarketBag = () => {
     }
   }
 
+  const editItem = () => {
+    navigation.navigate('ProductDetails', {
+      Id: item.id_products,
+      companyId: orderInfo.id_company,
+      edit: true,
+      editItem: item
+    })
+  }
+
   const deleteButton = 
     <View>
-      <TouchableOpacity style={styles.editBottom}> 
+      <TouchableOpacity 
+        style={styles.editBottom}
+        onPress={editItem}
+      > 
         <Text style={styles.editText}>Editar Item</Text> 
       </TouchableOpacity>
       <TouchableOpacity 

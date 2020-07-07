@@ -18,8 +18,8 @@ const ProductDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { Id, companyId } = route.params;
-  const {setOrderInfo, addProductToCart, orderInfo, requestInfo, setRequestInfo} = useCart();
+  const { Id, companyId, edit, editItem} = route.params;
+  const {setOrderInfo, addProductToCart, orderInfo, requestInfo, setRequestInfo, editItemFromCart} = useCart();
   const { selectedCategoryCardInfo } = useCategory();
 
   const loadScreenInfoProduct = async () => {
@@ -44,7 +44,6 @@ const ProductDetails = () => {
   };
 
   const setScreenInfo = (item, companyLogo, companyName) => {
-     setAmount(1);
      setPrice(parseFloat(item.price));
      setAddPrice(parseFloat(item.price).toFixed(2));
      setProductTitle(item.name);
@@ -55,7 +54,12 @@ const ProductDetails = () => {
   }
 
   useEffect(() => {
-    if(selectedCategoryCardInfo.type === 'product') {
+    if(edit === true) {
+      loadScreenInfoProduct();
+      setAmount(editItem.amount);
+      setDetails(editItem.details);
+    }
+    else if(selectedCategoryCardInfo.type === 'product') {
       loadScreenInfoProduct();
     }
     else if(selectedCategoryCardInfo.type === 'service') {
@@ -145,6 +149,28 @@ const ProductDetails = () => {
         {name: 'CompanyProducts', params: {companyId: companyId}}
       ]
     })  
+  }
+
+  const handleProductEdit = () => {
+    let cartItem = {
+      "id_products": editItem.id_products,
+      "title": editItem.title,
+      "image": editItem.image,
+      "amount": amount,
+      "details": details,
+      "price": editItem.price,
+      "description": editItem.description
+    }
+    editItemFromCart(cartItem);
+    navigation.reset({
+      routes: [
+        {name: 'Home'},
+        {name: 'Companies'},
+        {name: 'CompanyProducts', params: {companyId: companyId}},
+        {name: 'MarketBag'}
+      ]
+    })
+
   }
 
   return (
@@ -244,14 +270,26 @@ const ProductDetails = () => {
                   <MaterialIcons name="add" style={styles.addIcon}/>
                 </TouchableOpacity>
               </View>
-              <RoundedButton 
-                text={`Adicionar R$ ${addPrice}`} 
-                onPress={() => handleAddProductToMarketBag()} 
-                selected={true} 
-                width={168}
-                height={36}
-                fontSize={12}
-              />
+              {
+                edit === true ? 
+                  <RoundedButton 
+                    text={`Editar`} 
+                    onPress={() => handleProductEdit()} 
+                    selected={true} 
+                    width={168}
+                    height={36}
+                    fontSize={12}
+                  />
+                :
+                  <RoundedButton 
+                    text={`Adicionar R$ ${addPrice}`} 
+                    onPress={() => handleAddProductToMarketBag()} 
+                    selected={true} 
+                    width={168}
+                    height={36}
+                    fontSize={12}
+                  />
+              }
             </View> 
           :
             <View style={styles.serviceButtonContainer}>
