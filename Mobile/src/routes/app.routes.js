@@ -36,6 +36,8 @@ import OrderDetailsScreen from '../pages/OrderDetails';
 
 const CustomerAppStack = createStackNavigator();
 const CompanyAppStack = createStackNavigator();
+const CustomerProfileStack = createStackNavigator();
+const CompanyProfileStack = createStackNavigator();
 const AppTab = createBottomTabNavigator();
 
 export const CustomerAppRoutes = () => (
@@ -55,76 +57,32 @@ export const CustomerAppRoutes = () => (
                 <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
                 <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
                 <CustomerAppStack.Screen name="ServiceScheduling" component={ServiceSchedulingScreen}/>
-                <CustomerAppStack.Screen name="CustomerInfo" component={CustomerInfoScreen}/>
             </CustomerAppStack.Navigator>
         </CategoryProvider>      
     </ServiceSchedulingProvider>    
 );
 
-export const ProductCompanyAppRoutes = () => (
-    <CompanyAppStack.Navigator headerMode="none" initialRouteName="HomeCompany">
-        <CompanyAppStack.Screen name="HomeCompany" component={HomeCompanyScreen}/>
-        <CompanyAppStack.Screen name="CompanyRunning" component={HomeRunningScreen}/>
-        <CompanyAppStack.Screen name="OrderDetails" component={OrderDetailsScreen}/>
-        <CompanyAppStack.Screen name="NewProduct" component={ItemManagementScreen}/>
-        <CompanyAppStack.Screen name="RequestConfirmed" component={RequestConfirmedScreen}/>
-    </CompanyAppStack.Navigator>
-);
-export const ServiceCompanyAppRoutes = () => (
-    <CompanyAppStack.Navigator headerMode="none" initialRouteName="HomeCompany">
-        <CompanyAppStack.Screen name="HomeCompany" component={HomeCompanyScreen}/>
-        <CompanyAppStack.Screen name="CompanyRunning" component={HomeRunningScreen}/>
-        <CompanyAppStack.Screen name="OrderDetails" component={OrderDetailsScreen}/>
-        <CompanyAppStack.Screen name="NewProduct" component={ItemManagementScreen}/>
-        <CompanyAppStack.Screen name="RequestConfirmed" component={RequestConfirmedScreen}/>
-    </CompanyAppStack.Navigator>
-);
-export const TabAppRoutes = () => (
-        <AppTab.Navigator initialRouteName="Home" tabBarOptions={{showLabel: false}}>
-            <AppTab.Screen 
-                name="Home" 
-                component={CustomerAppRoutes}
-                options={{
-                    tabBarIcon: ({color, size}) => (
-                        <MaterialIcons name="home" size={size} color={color} />
-                    ),
-                }}
-            />
-            <AppTab.Screen 
-                name="History" 
-                component={RequestsMadeScreen}
-                options={{
-                    tabBarIcon: ({color, size}) => (
-                        <MaterialIcons name="receipt" size={size} color={color} />
-                    ),
-                }}
-            />
-            <AppTab.Screen 
-                name="Chat" 
-                component={RequestsMadeScreen}
-                options={{
-                    tabBarIcon: ({color, size}) => (
-                        <MaterialIcons name="speaker-notes" size={size} color={color} />
-                    ),
-                }}
-            />
-            <AppTab.Screen 
-                name="Profile" 
-                component={ProfileScreen}
-                options={{
-                    tabBarIcon: ({color, size}) => (
-                        <MaterialIcons name="person" size={size} color={color} />
-                    ),
-                }}
-            />
-        </AppTab.Navigator>
+const CustomerProfileRoutes = () => (
+    <CustomerProfileStack.Navigator headerMode="none" initialRouteName="Profile">
+        <CustomerProfileStack.Screen name="Profile" component={ProfileScreen}/>
+        <CustomerProfileStack.Screen name="CustomerInfo" component={CustomerInfoScreen}/>
+    </CustomerProfileStack.Navigator>
 );
 
-export const ProductCompanyTabAppRoutes = () => (
-    <AppTab.Navigator initialRouteName="HomeCompany" tabBarOptions={{showLabel: false}}>
+export const CompanyAppRoutes = () => (
+    <CompanyAppStack.Navigator headerMode="none" initialRouteName="HomeCompany">
+        <CompanyAppStack.Screen name="HomeCompany" component={HomeCompanyScreen}/>
+        <CompanyAppStack.Screen name="CompanyRunning" component={HomeRunningScreen}/>
+        <CompanyAppStack.Screen name="OrderDetails" component={OrderDetailsScreen}/>
+        <CompanyAppStack.Screen name="NewProduct" component={ItemManagementScreen}/>
+        <CompanyAppStack.Screen name="RequestConfirmed" component={RequestConfirmedScreen}/>
+    </CompanyAppStack.Navigator>
+);
+export const CustomerTabRoutes = () => (
+    <AppTab.Navigator initialRouteName="Home" tabBarOptions={{showLabel: false}}>
         <AppTab.Screen 
-            name="HomeCompany" 
-            component={ProductCompanyAppRoutes}
+            name="Home" 
+            component={CustomerAppRoutes}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="home" size={size} color={color} />
@@ -132,17 +90,17 @@ export const ProductCompanyTabAppRoutes = () => (
             }}
         />
         <AppTab.Screen 
-            name="Income" 
-            component={CompanyIncomeScreen}
+            name="History" 
+            component={RequestsMadeScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
-                    <MaterialIcons name="payment" size={size} color={color} />
+                    <MaterialIcons name="receipt" size={size} color={color} />
                 ),
             }}
         />
         <AppTab.Screen 
             name="Chat" 
-            component={HomeCompanyScreen}
+            component={RequestsMadeScreen}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="speaker-notes" size={size} color={color} />
@@ -151,7 +109,7 @@ export const ProductCompanyTabAppRoutes = () => (
         />
         <AppTab.Screen 
             name="Profile" 
-            component={ProfileScreen}
+            component={CustomerProfileRoutes}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="person" size={size} color={color} />
@@ -161,11 +119,11 @@ export const ProductCompanyTabAppRoutes = () => (
     </AppTab.Navigator>
 );
 
-export const ServiceCompanyTabAppRoutes = () => (
+export const CompanyTabRoutes = () => (
     <AppTab.Navigator initialRouteName="HomeCompany" tabBarOptions={{showLabel: false}}>
         <AppTab.Screen 
             name="HomeCompany" 
-            component={ServiceCompanyAppRoutes}
+            component={CompanyAppRoutes}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="home" size={size} color={color} />
