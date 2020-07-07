@@ -183,23 +183,23 @@ const ProductManagement = () => {
                         style={styles.headerButton}
                         onPress={() => {}}
                     >
-                        Meus Produtos
+                        {`Meus ${loggedUser.data.type === 'product' ? 'Produtos' : 'Serviços'}`}
                     </UnderlinedTextButton>
                 </View>
                 <TouchableWithoutFeedback style={styles.bodyContainer} onPress={() => Keyboard.dismiss()}>
                     <ScrollView style={{width: '100%', height: '100%'}} contentContainerStyle={styles.myProductsContainer}>
                         <View style={styles.topicContainer}>
-                            <Text style={styles.topicTitleText}>Nome do Produto *</Text>
+                            <Text style={styles.topicTitleText}>{`Nome do ${loggedUser.data.type === 'product' ? 'Produto' : 'Serviço'} *`}</Text>
                             <TextInput 
                                 style={styles.input}
-                                placeholder="Digite o nome do produto" 
+                                placeholder={`Digite o nome do ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'}`} 
                                 placeholderTextColor={colors.cinza}
                                 onChangeText={getName}
                                 value={name}
                             />
                         </View>
                         <View style={styles.topicContainer}>
-                            <Text style={styles.topicTitleText}>Descrição do Produto *</Text>
+                            <Text style={styles.topicTitleText}>{`Descrição do ${loggedUser.data.type === 'product' ? 'Produto' : 'Serviço'} *`}</Text>
                             <TextInput style={styles.multilineInput} 
                                 placeholder="Digite uma descrição"
                                 placeholderTextColor={colors.cinza}
