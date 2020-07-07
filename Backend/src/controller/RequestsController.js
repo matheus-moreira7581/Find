@@ -237,14 +237,51 @@ async update(request, response, next) {
 
 },
 
-/*async getTime(request, response, next) {
+async getTime(request, response, next) {
 
     try {
+
+        const date = new Date()
+        const dd = date.getDate();
+        const mm = date.getMonth() + 1;
+        const yyyy = date.getFullYear();
+    
+        const {id_company} = request.query;
+
+        const company = await knex('companies')
+        .where('id', id_company)
+        .select('hours_schedule')
+
+        const arr = company[0].hours_schedule;
+
+        const schedule = await knex('requests')
+        .where({
+            'id_company': id_company,
+            'status': 'Aceito',
+            'request_date': `${yyyy}-${mm}-${dd}`
+        })
+        .select('schedule')
+
+        if(schedule.length === 0){
+            return response.json(company[0].hours_schedule)
+        }
+        else {
+            schedule.forEach(element => {
+                let index = arr.indexOf(element.schedule)
+    
+                delete arr[index]
+            });
+
+            const FilterSchedule = arr.filter(e => e !== null)
+
+            return response.json({'schedule': FilterSchedule})
+        }
+
         
     } catch (error) {
         next(error)
     }
 
-}*/
+}
 
 }

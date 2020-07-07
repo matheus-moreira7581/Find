@@ -9,7 +9,7 @@ routes.post('/request', RequestsController.create)
       .get('/request/:id_company', RequestsController.index)
       //.get('/income/:id_company', RequestsController.indexForIncome)
       .get('/details/service', RequestsController.show)
-      //.get('/time', RequestsController.getTime)
+      .get('/time', RequestsController.getTime)
       .put('/details/service', RequestsController.update);
 
 
