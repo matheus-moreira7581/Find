@@ -21,6 +21,9 @@ import ReedemProductScreen from '../pages/RedeemProduct';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
 import MarketBagScreen from '../pages/MarketBag';
+import ProfileScreen from '../pages/Profile';
+import CustomerInfoScreen from '../pages/CustomerInfo'
+
 
 import ItemManagementScreen from '../pages/ItemManagement';
 import RequestConfirmedScreen from '../pages/RequestConfirmed';
@@ -28,7 +31,6 @@ import RequestConfirmedScreen from '../pages/RequestConfirmed';
 import HomeCompanyScreen from '../pages/HomeCompany';
 import HomeRunningScreen from '../pages/CompanyRunning';
 import CompanyIncomeScreen from '../pages/CompanyIncome';
-import ProfileScreen from '../pages/Profile';
 import ServiceSchedulingScreen from '../pages/ServiceScheduling';
 import OrderDetailsScreen from '../pages/OrderDetails';
 
@@ -53,6 +55,7 @@ export const CustomerAppRoutes = () => (
                 <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
                 <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
                 <CustomerAppStack.Screen name="ServiceScheduling" component={ServiceSchedulingScreen}/>
+                <CustomerAppStack.Screen name="CustomerInfo" component={CustomerInfoScreen}/>
             </CustomerAppStack.Navigator>
         </CategoryProvider>      
     </ServiceSchedulingProvider>    
