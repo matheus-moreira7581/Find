@@ -21,14 +21,16 @@ import ReedemProductScreen from '../pages/RedeemProduct';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
 import MarketBagScreen from '../pages/MarketBag';
+import ProfileScreen from '../pages/Profile';
+import CustomerInfoScreen from '../pages/CustomerInfo'
 
-import ProductManagementScreen from '../pages/ProductManagement';
+
+import ItemManagementScreen from '../pages/ItemManagement';
 import RequestConfirmedScreen from '../pages/RequestConfirmed';
 
 import HomeCompanyScreen from '../pages/HomeCompany';
 import HomeRunningScreen from '../pages/CompanyRunning';
 import CompanyIncomeScreen from '../pages/CompanyIncome';
-import ProfileScreen from '../pages/Profile';
 import ServiceSchedulingScreen from '../pages/ServiceScheduling';
 import OrderDetailsScreen from '../pages/OrderDetails';
 
@@ -53,6 +55,7 @@ export const CustomerAppRoutes = () => (
                 <CustomerAppStack.Screen name="SuccessOrder" component={SuccessOrderScreen}/>
                 <CustomerAppStack.Screen name="RequestsMade" component={RequestsMadeScreen}/>
                 <CustomerAppStack.Screen name="ServiceScheduling" component={ServiceSchedulingScreen}/>
+                <CustomerAppStack.Screen name="CustomerInfo" component={CustomerInfoScreen}/>
             </CustomerAppStack.Navigator>
         </CategoryProvider>      
     </ServiceSchedulingProvider>    
@@ -63,7 +66,7 @@ export const ProductCompanyAppRoutes = () => (
         <CompanyAppStack.Screen name="HomeCompany" component={HomeCompanyScreen}/>
         <CompanyAppStack.Screen name="CompanyRunning" component={HomeRunningScreen}/>
         <CompanyAppStack.Screen name="OrderDetails" component={OrderDetailsScreen}/>
-        <CompanyAppStack.Screen name="NewProduct" component={ProductManagementScreen}/>
+        <CompanyAppStack.Screen name="NewProduct" component={ItemManagementScreen}/>
         <CompanyAppStack.Screen name="RequestConfirmed" component={RequestConfirmedScreen}/>
     </CompanyAppStack.Navigator>
 );
@@ -72,7 +75,7 @@ export const ServiceCompanyAppRoutes = () => (
         <CompanyAppStack.Screen name="HomeCompany" component={HomeCompanyScreen}/>
         <CompanyAppStack.Screen name="CompanyRunning" component={HomeRunningScreen}/>
         <CompanyAppStack.Screen name="OrderDetails" component={OrderDetailsScreen}/>
-        <CompanyAppStack.Screen name="NewProduct" component={ProductManagementScreen}/>
+        <CompanyAppStack.Screen name="NewProduct" component={ItemManagementScreen}/>
         <CompanyAppStack.Screen name="RequestConfirmed" component={RequestConfirmedScreen}/>
     </CompanyAppStack.Navigator>
 );

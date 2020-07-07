@@ -27,21 +27,17 @@ const styles = StyleSheet.create({
         marginRight: adjustHorizontalMeasure(21.67),
     },
     bodyContainer:{
-        flex: 1,
+        width: '100%',
+        height: '100%',
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
     myProductsContainer:{
         backgroundColor: colors.background,
-        width: '100%',
-        height: '100%',
         justifyContent: 'flex-start',
         alignItems: 'center',
         paddingTop: adjustVerticalMeasure(5.5),
         paddingBottom: adjustVerticalMeasure(140),
-    },
-    requestsContainer:{
-        //TODO
     },
     topicContainer:{
         width: '100%',
@@ -122,7 +118,12 @@ const styles = StyleSheet.create({
         width: adjustHorizontalMeasure(88),
         height: adjustHorizontalMeasure(88),
         resizeMode: 'cover'
-    }
+    },
+    loadingContainer:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
 
 export default styles;

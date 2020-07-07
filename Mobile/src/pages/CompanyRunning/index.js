@@ -18,7 +18,7 @@ import OrderCard from '../../components/OrderCard';
 import RoundedButton from '../../components/RoundedButton';
 
 import CompanySellingItems from '../CompanySellingItems'
-import ProductManagement from '../ProductManagement';
+import ItemManagement from '../ItemManagement';
 
 const ordersDataModel = [
   {title: 'Corte Masculino', user: 'Lucas B.'},
@@ -26,7 +26,7 @@ const ordersDataModel = [
   {title: 'Sobrancelha Masculina, Corte Masculino', user: 'Tiago V.'},
 ];
 
-const CompanyRunning = (props) => {
+const CompanyRunning = ({ handleOfficeHourFunction }) => {
   //const [showSellingItems, setShowSellingItems] = useState(false);
   const [screenMode, setScreenMode] = useState('orders'); //3 states: 1 is default (Orders) 2 is My Products and 3 is register new product
 
@@ -47,6 +47,11 @@ const CompanyRunning = (props) => {
     setOrders(orders);
   }
 
+  const endOfficeHour = async () => {
+    await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
+    navigation.navigate('HomeCompany');
+  }
+
   useEffect(() => {
     if(loggedUser.data.type === 'product') fetchOrders();
     else if(loggedUser.data.type === 'service') fetchRequest();
@@ -60,7 +65,7 @@ const CompanyRunning = (props) => {
     return <CompanySellingItems onPress={() => setScreenMode('orders')}/>;
   
   if(screenMode === 'create-product')
-    return <ProductManagement onPress={() => setScreenMode('orders')}/>;
+    return <ItemManagement onPress={() => setScreenMode('orders')}/>;
 
   if(screenMode === 'orders'){
     return (
@@ -89,7 +94,7 @@ const CompanyRunning = (props) => {
           <View style={styles.roundedButtonContainer}>
               <RoundedButton 
                 text="Encerrar Expediente" 
-                onPress={props.onPressButton} 
+                onPress={handleOfficeHourFunction} 
                 style={styles.button}
                 fontSize={adjustFontSize(15)} 
                 selected={true} 

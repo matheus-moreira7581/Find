@@ -87,7 +87,7 @@ const CompanySellingItems = (props) => {
           <CircleButton 
             onPress={() => navigateToProductManagement()} 
             style={styles.button}
-            fontSize={52} 
+            fontSize={35} 
             selected={true} 
             width={52}
             height={52}

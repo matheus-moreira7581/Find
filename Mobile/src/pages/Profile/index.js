@@ -187,7 +187,7 @@ const CompanyProfile = () => {
               <Image source={{uri: customerAvatarUrl}} style={styles.profilePicture}/>
               <Text style={styles.customerName}>{customerName}</Text>
               <Text style={styles.customerEmail}>{customerEmail}</Text>
-              <TouchableOpacity style={styles.viewProfileButton}>
+              <TouchableOpacity style={styles.viewProfileButton} onPress={() => navigation.navigate('CustomerInfo')}>
                 <Text style={styles.viewProfileText}>Visualizar Perfil</Text>
                 <MaterialIcons name="keyboard-arrow-right" size={adjustHorizontalMeasure(16)} color={colors.primary}/>
               </TouchableOpacity>
