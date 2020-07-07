@@ -26,7 +26,7 @@ const ordersDataModel = [
   {title: 'Sobrancelha Masculina, Corte Masculino', user: 'Tiago V.'},
 ];
 
-const CompanyRunning = (props) => {
+const CompanyRunning = ({ handleOfficeHourFunction }) => {
   //const [showSellingItems, setShowSellingItems] = useState(false);
   const [screenMode, setScreenMode] = useState('orders'); //3 states: 1 is default (Orders) 2 is My Products and 3 is register new product
 
@@ -45,6 +45,11 @@ const CompanyRunning = (props) => {
     const { data: orders } = await api.get(`/request/${loggedUser.data.id}`);
 
     setOrders(orders);
+  }
+
+  const endOfficeHour = async () => {
+    await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
+    navigation.navigate('HomeCompany');
   }
 
   useEffect(() => {
@@ -89,7 +94,7 @@ const CompanyRunning = (props) => {
           <View style={styles.roundedButtonContainer}>
               <RoundedButton 
                 text="Encerrar Expediente" 
-                onPress={props.onPressButton} 
+                onPress={handleOfficeHourFunction} 
                 style={styles.button}
                 fontSize={adjustFontSize(15)} 
                 selected={true} 

@@ -31,21 +31,22 @@ const HomeCompany = () => {
     setCompanyName(loggedUser.data.name);
   },[]);
   
-  const manageOfficeHour = async () => { //Função que seta o expediente da empresa (campo status da tabela), sendo true: dentro do expediente e false: fora do expediente
-    await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: !shift });
+  const startOfficeHour = async () => { //Função que seta o expediente da empresa (campo status da tabela), sendo true: dentro do expediente e false: fora do expediente
+    await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: true });
+  }
+  const endOfficeHour = async () => {
+    setShift(!shift);
+    await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
+    navigation.navigate('HomeCompany');
   }
 
   return (
-    shift ? <CompanyRunning onPressButton={() => {
-      setShift(!shift);
-      manageOfficeHour();
-    
-    }}/> : 
+    shift ? <CompanyRunning handleOfficeHourFunction={endOfficeHour}/> : 
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.companyLogoContainer}>
           {
-            companyLogoUrl === 'my-photo' || companyLogoUrl === ''
+            companyLogoUrl === 'my-photo' || companyLogoUrl === '' || companyLogoUrl === null
             ? <View style={styles.companyLogoPlaceholder}>
                 <MaterialIcons name="insert-photo" size={adjustHorizontalMeasure(20)} color={colors.cinza} />
               </View>
@@ -62,7 +63,7 @@ const HomeCompany = () => {
             text="Iniciar Expediente" 
             onPress={() => {
               setShift(!shift);
-              manageOfficeHour();
+              startOfficeHour();
             }} 
             style={styles.button}
             fontSize={adjustFontSize(15)} 
