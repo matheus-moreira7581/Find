@@ -13,8 +13,6 @@ import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../utils/adjustM
 const ProductCard = (props) => {
   const [image, setImage] = useState(props.Image);
 
-  
-
   return (
     <TouchableOpacity
       onPress={props.onPress}
@@ -37,6 +35,9 @@ const ProductCard = (props) => {
           </View>
           <Text style={styles.price}>R$ {props.Price}</Text>
         </View>
+        <TouchableOpacity style={styles.deleteButton} onPress={() => {}}>
+          <MaterialIcons name="delete" size={adjustHorizontalMeasure(16)} color={colors.cinzaEscuro}/>
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -91,6 +92,11 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserrat,
     fontSize: adjustFontSize(10),
     color: colors.cinza,
+  },
+  deleteButton:{
+    position: 'absolute',
+    right: adjustHorizontalMeasure(16),
+    bottom: adjustVerticalMeasure(8),
   }
 });
 
