@@ -10,9 +10,7 @@ exports.up = knex => knex.schema.createTable('requests', table => {
     table.enu('status', ['Solicitando', 'Cancelado', 'Finalizado', 'Aceito']).defaultTo('Solicitando')
     table.string('schedule').notNullable();
     table.timestamp('request_date').defaultTo(knex.fn.now())
-    
 })
-
 
 
 exports.down = knex => knex.schema.dropTable('requests')
