@@ -20,8 +20,6 @@ import { useAuth } from '../../contexts/auth'
 import api from '../../services/api';
 
 const CompanySellingItems = ({ onOrderPress, onItemCreation, onItemRemoval }) => {
-  const navigation = useNavigation()
-
   const [sellingItemsData, setSellingItemsData] = useState([]);
 
   const {loggedUser} = useAuth();
@@ -32,10 +30,6 @@ const CompanySellingItems = ({ onOrderPress, onItemCreation, onItemRemoval }) =>
     if(user.data.type === 'product') response = await api.get(`/my-products/${user.data.id}`)
     else if(user.data.type === 'service') response = await api.get(`/my-services/${user.data.id}`)
     setSellingItemsData(response.data);
-  }
-
-  const navigateToProductManagement = () => {
-    navigation.navigate('NewProduct');
   }
 
   const handleItemRemoval = (id) => {

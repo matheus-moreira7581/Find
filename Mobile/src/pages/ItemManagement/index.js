@@ -161,7 +161,6 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
             return response;
         }
         catch(error){
-            console.log(error);
             return
         }
         
