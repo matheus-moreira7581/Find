@@ -165,9 +165,11 @@ module.exports = {
                 }
             })
 
+            const attributesToUpdate = product[0];
+
             await knex('products')
             .where({ id })
-            .update({ product });
+            .update(attributesToUpdate);
 
             
             const newdata = await knex('products').where({ id })

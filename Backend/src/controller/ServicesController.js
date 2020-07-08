@@ -164,9 +164,11 @@ module.exports = {
                 }
             })
 
+            const attributesToUpdate = service[0];
+
             await knex('services')
             .where({ id })
-            .update({ service});
+            .update(attributesToUpdate);
 
             const newdata = await knex('services').where({ id })
 
