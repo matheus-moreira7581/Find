@@ -35,7 +35,7 @@ const ProductCard = (props) => {
           </View>
           <Text style={styles.price}>R$ {props.Price}</Text>
         </View>
-        <TouchableOpacity style={styles.deleteButton} onPress={() => {}}>
+        <TouchableOpacity style={styles.deleteButton} onPress={props.onDelete}>
           <MaterialIcons name="delete" size={adjustHorizontalMeasure(16)} color={colors.cinzaEscuro}/>
         </TouchableOpacity>
       </View>

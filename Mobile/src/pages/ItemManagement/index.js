@@ -22,7 +22,7 @@ import RoundedButton from '../../components/RoundedButton';
 import UnderlinedTextButton from '../../components/UnderlinedTextButton';
 
 
-const ProductManagement = () => { 
+const ItemManagement = ({ onItemCreation, onOrderPress }) => { 
     const [selectedTimeRange, setSelectedTimeRange] = useState (0);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -108,7 +108,7 @@ const ProductManagement = () => {
                         Alert.alert(
                             'Concluído', 
                             `${loggedUser.data.type === 'product' ? 'Produto' : 'Serviço'} criado com sucesso!`,
-                            [{ text: 'OK', onPress: () => navigateToCompanyRunning() }]
+                            [{ text: 'OK', onPress: () => onItemCreation() }]
                         );
                     }
                 }
@@ -175,7 +175,7 @@ const ProductManagement = () => {
                         selected={false} 
                         fontSize={adjustFontSize(15)} 
                         style={styles.headerButton}
-                        onPress={() => navigation.navigate('CompanyRunning')}
+                        onPress={() => onOrderPress()}
                     >
                         Pedidos
                     </UnderlinedTextButton>
@@ -282,4 +282,4 @@ const ProductManagement = () => {
     
 }
 
-export default ProductManagement;
+export default ItemManagement;

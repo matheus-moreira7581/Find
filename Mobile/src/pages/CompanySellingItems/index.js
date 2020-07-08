@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Image, FlatList, Alert } from 'react-native';
 import RoundedButton from '../../components/RoundedButton';
 
 import styles from './styles';
@@ -19,7 +19,7 @@ import { useAuth } from '../../contexts/auth'
 
 import api from '../../services/api';
 
-const CompanySellingItems = (props) => {
+const CompanySellingItems = ({ onOrderPress, onItemCreation, onItemRemoval }) => {
   const navigation = useNavigation()
 
   const [sellingItemsData, setSellingItemsData] = useState([]);
@@ -38,6 +38,33 @@ const CompanySellingItems = (props) => {
     navigation.navigate('NewProduct');
   }
 
+  const handleItemRemoval = (id) => {
+    Alert.alert(
+      'Confirmar',
+      `Deseja mesmo remover o ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'} em questão?`,
+      [
+        { 
+          text: 'Sim', 
+          onPress: async () => {
+            try{
+              const response = await api.delete(`${loggedUser.data.type === 'product' ? `my-products/${id}` : `my-services/${id}`}`);
+            
+              if(response.status === 200)
+                Alert.alert('Concluído', response.data.msg);
+              else
+                Alert.alert('Erro', `Falha na remoção do ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'}!`);
+            }
+            catch(error){
+              Alert.alert('Erro', `O ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'} não pode ser removido pois está incluso em algum pedido!`);
+            }
+            onItemRemoval();
+          } 
+        },
+        {text: 'Não'}
+      ],
+      { cancelable: false }
+    );
+  }
   useEffect(() => {
     fetchCompanySellingItems();
   }, [])
@@ -50,7 +77,7 @@ const CompanySellingItems = (props) => {
             fontSize={adjustFontSize(15)}
             selected={false}
             style={styles.orderButton}
-            onPress={props.onPress}
+            onPress={() => onOrderPress()}
           >
             Pedidos
           </UnderlinedTextButton>
@@ -71,7 +98,7 @@ const CompanySellingItems = (props) => {
         <View style={styles.companySellingItemsContainer}>
           <FlatList 
             data={sellingItemsData}
-            keyExtractor={(item, index) => item + index}
+            keyExtractor={(item, index) => String(index)}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <ProductCard 
@@ -79,13 +106,14 @@ const CompanySellingItems = (props) => {
                 Price={item.price}
                 Image={item.img_url}
                 Description={item.description}
+                onDelete={() => handleItemRemoval(item.id)}
               />
             )}
           />
         </View>
         <View style={styles.addButtonContainer}>
           <CircleButton 
-            onPress={() => navigateToProductManagement()} 
+            onPress={() => onItemCreation()} 
             style={styles.button}
             fontSize={35} 
             selected={true} 

@@ -47,25 +47,47 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
     setOrders(orders);
   }
 
-  const endOfficeHour = async () => {
-    await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
-    navigation.navigate('HomeCompany');
-  }
-
   useEffect(() => {
     if(loggedUser.data.type === 'product') fetchOrders();
     else if(loggedUser.data.type === 'service') fetchRequest();
+
   }, [screenMode]);
 
   const navigateToOrderDetails = (id) => {
     navigation.navigate('OrderDetails', {orderId: id});
-  }
+  };
 
-  if(screenMode === 'list-products')
-    return <CompanySellingItems onPress={() => setScreenMode('orders')}/>;
+  if(screenMode === 'list-items')
+    return (
+      <CompanySellingItems 
+        onOrderPress={() => {
+          setScreenMode(null);
+          setScreenMode('orders');
+        }} 
+        onItemCreation={() => {
+          setScreenMode(null);
+          setScreenMode('create-product');
+        }} 
+        onItemRemoval={() => {
+          setScreenMode(null);
+          setScreenMode('list-items')
+        }}
+      />
+      );
   
   if(screenMode === 'create-product')
-    return <ItemManagement onPress={() => setScreenMode('orders')}/>;
+    return (
+      <ItemManagement 
+        onOrderPress={() => {
+          setScreenMode(null);
+          setScreenMode('orders')
+        }}
+        onItemCreation={() => {
+          setScreenMode(null);
+          setScreenMode('list-items');
+        }}
+      />
+    );
 
   if(screenMode === 'orders'){
     return (
@@ -80,7 +102,7 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
 
               <TouchableOpacity 
                 style={styles.serviceListButton}
-                onPress={() => setScreenMode('list-products')}
+                onPress={() => setScreenMode('list-items')}
               >
                 <Text style={styles.serviceListButtonText}>
                   {
