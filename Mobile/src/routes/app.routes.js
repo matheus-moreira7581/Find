@@ -22,7 +22,7 @@ import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
 import MarketBagScreen from '../pages/MarketBag';
 import ProfileScreen from '../pages/Profile';
-import CustomerInfoScreen from '../pages/CustomerInfo'
+import ProfileInfoScreen from '../pages/ProfileInfo';
 
 
 import ItemManagementScreen from '../pages/ItemManagement';
@@ -37,8 +37,7 @@ import OrderDetailsScreen from '../pages/OrderDetails';
 
 const CustomerAppStack = createStackNavigator();
 const CompanyAppStack = createStackNavigator();
-const CustomerProfileStack = createStackNavigator();
-const CompanyProfileStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 const AppTab = createBottomTabNavigator();
 
 export const CustomerAppRoutes = () => (
@@ -63,11 +62,11 @@ export const CustomerAppRoutes = () => (
     </ServiceSchedulingProvider>    
 );
 
-const CustomerProfileRoutes = () => (
-    <CustomerProfileStack.Navigator headerMode="none" initialRouteName="Profile">
-        <CustomerProfileStack.Screen name="Profile" component={ProfileScreen}/>
-        <CustomerProfileStack.Screen name="CustomerInfo" component={CustomerInfoScreen}/>
-    </CustomerProfileStack.Navigator>
+const ProfileRoutes = () => (
+    <ProfileStack.Navigator headerMode="none" initialRouteName="Profile">
+        <ProfileStack.Screen name="Profile" component={ProfileScreen}/>
+        <ProfileStack.Screen name="ProfileInfo" component={ProfileInfoScreen}/>
+    </ProfileStack.Navigator>
 );
 
 export const CompanyAppRoutes = () => (
@@ -80,6 +79,7 @@ export const CompanyAppRoutes = () => (
         <CompanyAppStack.Screen name="RequestConfirmed" component={RequestConfirmedScreen}/>
     </CompanyAppStack.Navigator>
 );
+
 export const CustomerTabRoutes = () => (
     <AppTab.Navigator initialRouteName="Home" tabBarOptions={{showLabel: false}}>
         <AppTab.Screen 
@@ -111,7 +111,7 @@ export const CustomerTabRoutes = () => (
         />
         <AppTab.Screen 
             name="Profile" 
-            component={CustomerProfileRoutes}
+            component={ProfileRoutes}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="person" size={size} color={color} />
@@ -152,7 +152,7 @@ export const CompanyTabRoutes = () => (
         />
         <AppTab.Screen 
             name="Profile" 
-            component={ProfileScreen}
+            component={ProfileRoutes}
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialIcons name="person" size={size} color={color} />

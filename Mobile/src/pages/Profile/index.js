@@ -20,7 +20,7 @@ import adjustFontSize from '../../utils/adjustFontSize';
 import colors from '../../assets/var/colors';
 
 
-const CompanyProfile = () => {
+const Profile = () => {
   const menuListData = [
     {
       title: null,
@@ -230,4 +230,4 @@ const CompanyProfile = () => {
   );
 }
 
-export default CompanyProfile;
+export default Profile;

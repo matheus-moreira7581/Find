@@ -12,7 +12,7 @@ import colors from '../../assets/var/colors';
 
 import styles from './styles';
 
-const CustomerInfo = () => {
+const ProfileInfo = () => {
     const navigation = useNavigation();
 
     const { loggedUser } = useAuth();
@@ -82,4 +82,4 @@ const CustomerInfo = () => {
     );
 }
 
-export default CustomerInfo;
+export default ProfileInfo;
