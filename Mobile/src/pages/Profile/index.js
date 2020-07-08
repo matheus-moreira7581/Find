@@ -120,9 +120,9 @@ const Profile = () => {
           [
             { text: 'Sim', onPress: () => {
               resetCart();
-              // navigation.reset({
-              //   routes: [{name: 'Login'}]
-              // });  
+              navigation.reset({
+                routes: [{name: 'Home'}]
+              });  
               signOut();
             }},
             { text: 'Não' }
@@ -153,6 +153,7 @@ const Profile = () => {
         [
           { text: 'Sim', onPress: async () => {
             await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
+            navigation.navigate('HomeCompany');
             signOut();
           }},
           { text: 'Não' }
