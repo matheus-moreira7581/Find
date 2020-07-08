@@ -177,7 +177,7 @@ async show(request, response, next) {
 
         const requests = await knex('requests')
         .join('clients', 'clients.id', 'requests.id_client')
-        .select('clients.name', 'requests.total', 'requests.payment', 'requests.local', 'requests.id_address', 'requests.schedule','requests.id');
+        .select('clients.name', 'clients.cell', 'requests.total', 'requests.payment', 'requests.local', 'requests.id_address', 'requests.schedule','requests.id');
 
 
         const req = requests.filter(e => e.id == id_request);
