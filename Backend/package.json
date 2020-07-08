@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/server",
     "migrations": "knex migrate:latest",
-    "seeds": "knex seed:run"
+    "seeds": "knex seed:run",
+    "rollback": "knex migrate:rollback --all"
   },
   "repository": {
     "type": "git",

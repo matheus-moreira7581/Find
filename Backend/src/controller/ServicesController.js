@@ -62,7 +62,11 @@ module.exports = {
 
             const { id_company } = request.params; 
 
-            const services = await knex('services').where({ id_company });
+            const services = await knex('services')
+            .where({ 
+                id_company,
+                'deleted_at': null 
+            })
 
             response.json(services);
 
@@ -86,7 +90,10 @@ module.exports = {
             const { id_company } = request.query;
 
             const services = await knex('services')
-            .where({ id_company })
+            .where({ 
+                id_company,
+                'deleted_at': null 
+            })
             .select('id', 'img_url', 'name', 'description', 'price');
 
             const company = await knex('companies')
@@ -187,9 +194,11 @@ module.exports = {
 
         try {
             const { id } = request.params;
-
-            await knex('services').where('id', id).del();
-  
+    
+            await knex('services')
+            .where({id})
+            .update('deleted_at', new Date());
+      
             response.status(200).json({msg: 'Serviço deletado com sucesso!'});
         
         } catch (error) {
