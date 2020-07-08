@@ -19,8 +19,10 @@ import adjustFontSize from '../../utils/adjustFontSize';
 
 import colors from '../../assets/var/colors';
 
-
 const Profile = () => {
+  const { signOut, loggedUser } = useAuth();
+  const { resetCart, orderInfo, requestInfo } = useCart();
+
   const menuListData = [
     {
       title: null,
@@ -42,10 +44,10 @@ const Profile = () => {
           onPress: () => {},
         },
         {
-          mainIconName: "star", 
+          mainIconName: `${loggedUser.type === 'client' ? 'star' : 'credit-card'}`, 
           endIconName: "keyboard-arrow-right",
           endIconColor: colors.primary,
-          text: "Locais favoritos",
+          text: `${loggedUser.type === 'client' ? 'Locais Favoritos' : 'Receitas'}`,
           textColor: colors.cinzaEscuro ,
           onPress: () => {},
         }
@@ -100,8 +102,6 @@ const Profile = () => {
   const [customerAvatarUrl, setCustomerAvatarUrl] = useState(null);
   const [companyName, setCompanyName] = useState('Empresa');
 
-  const { signOut, loggedUser } = useAuth();
-  const { resetCart, orderInfo, requestInfo } = useCart();
   
   const navigation = useNavigation();
 
@@ -112,32 +112,47 @@ const Profile = () => {
   };
 
   const handleLogout = async () => {
-    if(orderInfo.id_company === 0 && requestInfo.id_company === 0){
-      Alert.alert(
-        'Confirmar',
-        'Deseja mesmo sair?',
-        [
-          { text: 'Sim', onPress: () => {
-            resetCart();
-            // navigation.reset({
-            //   routes: [{name: 'Login'}]
-            // });  
-            signOut();
-          }},
-          { text: 'Não' }
-        ]
-      );
+    if(loggedUser.type === 'client'){ 
+      if(orderInfo.id_company === 0 && requestInfo.id_company === 0){
+        Alert.alert(
+          'Confirmar',
+          'Deseja mesmo sair?',
+          [
+            { text: 'Sim', onPress: () => {
+              resetCart();
+              // navigation.reset({
+              //   routes: [{name: 'Login'}]
+              // });  
+              signOut();
+            }},
+            { text: 'Não' }
+          ]
+        );
+      }
+      else{
+        Alert.alert(
+          'Confirmar',
+          `Você possui um pedido pendente em ${companyName}. Deseja mesmo sair?`,
+          [
+            { text: 'Sim', onPress: () => {
+              resetCart();
+              navigation.reset({
+                routes: [{name: 'Home'}]
+              }); 
+              signOut();
+            }},
+            { text: 'Não' }
+          ]
+        );
+      }
     }
     else{
       Alert.alert(
         'Confirmar',
-        `Você possui um pedido pendente em ${companyName}. Deseja mesmo sair?`,
+        'Deseja mesmo sair?',
         [
-          { text: 'Sim', onPress: () => {
-            resetCart();
-            navigation.reset({
-              routes: [{name: 'Home'}]
-            }); 
+          { text: 'Sim', onPress: async () => {
+            await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
             signOut();
           }},
           { text: 'Não' }
@@ -187,7 +202,7 @@ const Profile = () => {
               <Image source={{uri: customerAvatarUrl}} style={styles.profilePicture}/>
               <Text style={styles.customerName}>{customerName}</Text>
               <Text style={styles.customerEmail}>{customerEmail}</Text>
-              <TouchableOpacity style={styles.viewProfileButton} onPress={() => navigation.navigate('CustomerInfo')}>
+              <TouchableOpacity style={styles.viewProfileButton} onPress={() => navigation.navigate('ProfileInfo')}>
                 <Text style={styles.viewProfileText}>Visualizar Perfil</Text>
                 <MaterialIcons name="keyboard-arrow-right" size={adjustHorizontalMeasure(16)} color={colors.primary}/>
               </TouchableOpacity>

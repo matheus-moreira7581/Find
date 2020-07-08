@@ -17,22 +17,47 @@ const ProfileInfo = () => {
 
     const { loggedUser } = useAuth();
 
-    const listInfo = [
-        {
-            title: 'Dados Pessoais',
-            data: [
-                {
-                    titleText: 'Nome',
-                    value: loggedUser.data.name
-                },
-            ]
-        },
+    const maskCpf = (cpf) => {
+        const maskedBeginning = 'XXX.XXX';
+        const cpfFinalChars = cpf.slice(7, cpf.length - 1);
+
+        return maskedBeginning.concat(cpfFinalChars);
+    }
+
+    const listInfo = loggedUser.type === 'client'
+    ?
+        [
+            {
+                title: 'Dados Pessoais',
+                data: [
+                    {
+                        titleText: 'Nome',
+                        value: loggedUser.data.name
+                    },
+                ]
+            },
+            {
+                title: 'Minha Conta',
+                data: [
+                    {
+                        titleText: 'Meu Número',
+                        value: loggedUser.data.cell
+                    },
+                    {
+                        titleText: 'Meu E-mail',
+                        value: loggedUser.data.email
+                    },
+                ]
+            },
+        ]
+    :
+    [
         {
             title: 'Minha Conta',
             data: [
                 {
-                    titleText: 'Meu Número',
-                    value: loggedUser.data.cell
+                    titleText: 'Nome da Empresa',
+                    value: loggedUser.data.name
                 },
                 {
                     titleText: 'Meu E-mail',
@@ -40,7 +65,21 @@ const ProfileInfo = () => {
                 },
             ]
         },
-    ]
+        {
+            title: 'Dados Pessoais',
+            data: [
+                {
+                    titleText: 'Data de Nascimento',
+                    value: loggedUser.data.name
+                },
+                {
+                    titleText: 'CPF',
+                    value: maskCpf(loggedUser.data.cpf)
+                },
+            ]
+        },
+    ];
+    
     
     return (
         <SafeAreaView style={styles.screenContainer}>
