@@ -1,5 +1,5 @@
 <p align="center">
-<img src="./Backend/uploads/find.png" alt="find-logo" width="20%"/>
+<img src="./Backend/uploads/find.png" alt="find-logo" width="200px"/>
 </p>
 
 ## Sobre o aplicativo :iphone:
@@ -51,6 +51,16 @@ ou
 - Logo após, abra o app do expo no seu celular, escaneie o QR Code que apareceu no navegador (O celular precisa estar conectado a mesma rede de seu computador);
 - Espere o aplicativo carregar e pronto! 
 
+- OBS: Se o expo apresentar algum erro de conexão, desative o firewall do seu computador, isso pode estar bloqueando o acesso.
+
+### Login para teste
+
+| tipo  |        login       |  senha |
+|-------|--------------------|--------|
+|cliente|lucas@gmail.com     | 123456 |
+|empresa|tastypizza@gmail.com| 123456 |
+
+
 
 ## Tecnologias :pushpin:
 
@@ -73,13 +83,15 @@ ou
 
 - Como chegamos nessa solução: [Clique aqui](https://docs.google.com/document/d/1Vsk6FfSIcFM8ikHsm82gj1hrL63U6hUuCF7S36d11aU/edit)
 
-- Acesse o nosso protótipo: [Clique aqui](https://xd.adobe.com/view/db18172e-c565-45f8-5975-420162bf4ce1-ad29/)
+- Acesse o nosso protótipo: [Clique aqui](https://xd.adobe.com/view/847d68b5-7035-4152-4833-176ed3aa317a-f24c/)
 
 - Acesse o nosso style guide: [Clique aqui](https://xd.adobe.com/view/489e7a75-0e3b-4e31-440a-8272bdc31f54-3eaf/)
 
 - Modelagem do banco de dados: [Clique aqui](https://whimsical.com/Em9E37vFo2G1r3vHxHXCCM)
 
 - Acompanhe nosso cronograma: [Veja nossa sprint](./Sprints)
+
+- Leia nosso artigo no Behance: [Saiba mais](https://www.behance.net/gallery/100265571/FIND-UX-UI-Design)
 
 
 ## Equipe :pushpin:
