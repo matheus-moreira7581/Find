@@ -17,7 +17,17 @@ const OrderCard = (props) => {
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
-          <View style={styles.statusContainer}><Text style={styles.statusText}>{props.status}</Text></View>
+          <View style={{...styles.statusContainer, backgroundColor: props.color}}>
+            <Text style={styles.statusText}>{props.status}</Text>
+          </View>
+          {/* {
+            props.status === 'Finalizado' ?
+              <View style={{...styles.statusContainer, backgroundColor: props.color}}>
+                <Text style={styles.statusText}>{props.status}</Text>
+              </View>
+            :
+              null
+          } */}
         </View>
         <View style={styles.orderUserContainer}>
           <MaterialIcons name="person-outline" size={adjustHorizontalMeasure(14)}/>
@@ -43,8 +53,9 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     marginTop: adjustVerticalMeasure(9),
-    width: adjustHorizontalMeasure(229),
-    flexDirection: 'row'
+    width: '100%',
+    flexDirection: 'row',
+    // justifyContent: 'space-between'
   },
   title: {
     fontFamily: fonts.montserratBold,
@@ -52,11 +63,16 @@ const styles = StyleSheet.create({
     color: colors.cinzaEscuro,
   },
   statusContainer: {
-    width: adjustHorizontalMeasure(110),
-    backgroundColor: colors.cinzaClaro,
+    width: adjustHorizontalMeasure(120),
+    backgroundColor: colors.vermelho,
     borderRadius: 8,
     marginLeft: adjustHorizontalMeasure(20),
     alignItems: 'center',
+  },
+  statusText: {
+    fontFamily: fonts.montserrat,
+    fontSize: adjustFontSize(13),
+    color: colors.branco,
   },
   orderUserContainer: {
     flexDirection: 'row',

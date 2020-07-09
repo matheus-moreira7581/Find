@@ -19,7 +19,7 @@ const RequestConfirmed = () => {
     const route = useRoute();
 
     const { loggedUser } = useAuth();
-    const { orderId } = route.params;
+    const { orderId, accepted } = route.params;
 
     const [order, setOrder] = useState({});
     const [address, setAddress] = useState({});
@@ -33,7 +33,7 @@ const RequestConfirmed = () => {
         }
         const response = await getOrder();
         const data = response.data;
-
+        
         setOrder(data.Order);
         if(data.Address) setAddress(data.Address);
         else setAddress({street: 'O Cliente está indo até seu local.'});
@@ -64,7 +64,9 @@ const RequestConfirmed = () => {
             status: 'Finalizado',
           });
         }
-        if(response.status === 200) return navigation.navigate('CompanyRunning');
+        if(response.status === 200) return navigation.reset({
+            routes: [{name: 'CompanyRunning'}]
+          });
         else {
           Alert.alert('Error', 'Falha ao tentar confirmar o pedido');
           return navigation.navigate('CompanyRunning');
@@ -79,7 +81,11 @@ const RequestConfirmed = () => {
     return (
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>  
-                <TouchableOpacity style={styles.backButton} onPress={() => {navigation.navigate('CompanyRunning')}}>
+                <TouchableOpacity style={styles.backButton} onPress={() => {
+                    navigation.reset({
+                        routes: [{name: 'CompanyRunning'}]
+                      });
+                }}>
                     <MaterialIcons 
                         name="arrow-back" 
                         size={adjustHorizontalMeasure(20)} 
@@ -93,7 +99,7 @@ const RequestConfirmed = () => {
             <View style={styles.bodyContainer}>
                 <Text style={styles.streetText}>{street}</Text>
                 {
-                order.status === 'Aceito' ?
+                accepted === true ?
                     <Text style={styles.messageText}>
                         Este pedido já foi confirmado {"\n"}
                         anteriormente. Assim que {"\n"}
