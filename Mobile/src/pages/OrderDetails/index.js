@@ -70,7 +70,7 @@ const OrderDetails = () => {
     let response = {};
     if(loggedUser.data.type === 'product') {
       response = await api.put(`/details?id_order=${orderId}`, {
-        status: 'Aceito',
+        status: 'Fazendo',
       });
     }
     else if(loggedUser.data.type === 'service') {
