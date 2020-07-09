@@ -44,7 +44,7 @@ const CompaniesList = ({ datasource, onPress: navigateToCompanyProducts }) => {
                         
                         <View style={styles.companyInfoContainer}>
                             <View style={styles.companyTitleContainer}>
-                                <Text style={styles.companyName}>{item.name}</Text>
+                                <Text style={styles.companyName}>{item.company_name}</Text>
                                 <MaterialIcons name="star" size={adjustHorizontalMeasure(13)} color={colors.dourado} style={styles.ratingIcon}/>
                                 <Text style={styles.ratingText}>-</Text> 
                             </View>
