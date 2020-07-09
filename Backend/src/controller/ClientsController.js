@@ -12,35 +12,12 @@ module.exports = {
 
          try {
 
-            const uploader = async (path) => await cloudinary.uploads(path,'images')
-
-            const urls = []
-
-            const files = request.files
-
-            for (const file of files) {
-            
-                const {path} = file
-
-                const newPath = await uploader(path)
-
-                urls.push(newPath)
-
-                fs.unlinkSync(path)
-            }
-
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
             const { name, email, cell } = request.body;
     
-            const item = [{ name, email, cell, password: hashedPassword }];
+            const client = [{ name, email, cell, password: hashedPassword }];
 
-            const client = item.map(element => {
-                return {
-                    "img_url": urls[0].url,
-                    ...element
-                }
-            })
 
             const checkEmail = await knex('clients').where({ email });
 
@@ -150,7 +127,9 @@ module.exports = {
         try {
             const { id } = request.params;
     
-            await knex('clients').where('id', id).del();
+            await knex('clients')
+            .where({id})
+            .update('deleted_at', new Date());
     
             response.status(200).json({msg: 'cliente deletado com sucesso!'});
             

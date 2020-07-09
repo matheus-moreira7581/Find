@@ -25,6 +25,11 @@ module.exports = {
 
           } 
 
+          if(client[0].deleted_at !== null && company[0].deleted_at !== null) {
+
+            return response.status(400).send('Está conta foi desativado!')
+          }
+
           function validation() {
             if(company.length !== 0) {
 

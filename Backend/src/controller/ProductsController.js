@@ -100,13 +100,13 @@ module.exports = {
 
             const company = await knex('companies')
             .where('id', id_company)
-            .select('img_url', 'name', 'address');
+            .select('img_url', 'company_name', 'address');
 
             const data = company.map(items => {
 
                 return {
                     "img_url": items.img_url,
-                    "title": items.name,
+                    "title": items.company_name,
                     "address": items.address,
                     "products": product
                 }
