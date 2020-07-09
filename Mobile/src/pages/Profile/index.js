@@ -90,8 +90,8 @@ const Profile = () => {
           endIconName: "keyboard-arrow-right",
           endIconColor: colors.primary,
           text: "Desativar Conta",
-          textColor: colors.vermelho ,
-          onPress: () => {},
+          textColor: colors.vermelho,
+          onPress: () => navigation.navigate('DeleteAccount'),
         }
       ]
     }
