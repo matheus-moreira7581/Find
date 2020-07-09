@@ -179,7 +179,7 @@ module.exports = {
 
             const orders = await knex('orders')
             .join('clients', 'clients.id', 'orders.id_client')
-            .select('clients.name', 'clients.cell', 'orders.total', 'orders.payment', 'orders.receivement', 'orders.id_address', 'orders.id');
+            .select('clients.name', 'clients.cell', 'orders.total', 'orders.payment', 'orders.receivement', 'orders.id_address', 'orders.id', 'orders.status');
 
 
             const order = orders.filter(e => e.id == id_order);
