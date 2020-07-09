@@ -5,7 +5,7 @@ exports.up = knex => knex.schema.createTable('services', table => {
     table.string('name', 255).notNullable()
     table.text('description').notNullable()
     table.decimal('price', 5, 2).notNullable()
-    table.string('img_url').nullable()
+    table.string('img_url').nullable().defaultTo('https://res.cloudinary.com/dbehp0gsj/image/upload/v1594263837/uploads/Paisagem_bnxfsb.png')
     table.timestamp('deleted_at')
 
     

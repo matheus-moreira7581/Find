@@ -18,14 +18,16 @@ module.exports = {
 
             const file = request.file
 
-            const {path} = file
+            if(file){
+                const {path} = file
 
-            const newPath = await uploader(path)
+                const newPath = await uploader(path)
 
-            urls.push(newPath)
+                urls.push(newPath)
 
-            fs.unlinkSync(path)
-
+                fs.unlinkSync(path)
+            }
+            
             const { name, description, price, id_company } = request.body;
 
             const item = [{ name, description, price,  id_company }];

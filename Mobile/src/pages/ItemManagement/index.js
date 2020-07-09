@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Picker, Keyboard, Alert, Image, ActivityIndicator } from 'react-native';
+import { View, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Picker, Keyboard, Alert, Image, ActivityIndicator, Modal } from 'react-native';
 
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
@@ -101,7 +101,7 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
                     const response = await finishItemRegistration();
                     setLoading(false);
 
-                    if(response.status !== 201){
+                    if(response === undefined || response.status !== 201){
                         Alert.alert('Error', `Falha na criação do ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'}!`);
                     }
                     else{
@@ -154,131 +154,132 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
         itemData.append('limit_time', timeRanges[selectedTimeRange].range);
         itemData.append('img_url', picToUpload);
 
+        console.log(itemData)
+        console.log(id)
         
         try{
             const response = await api.post(`${loggedUser.data.type === 'product' ? '/my-products' : '/my-services'}`, itemData, requestConfiguration); 
 
+            console.log(response)
             return response;
         }
         catch(error){
-            return
+            console.log(error)
         }
         
     };
-
-    if(!loading){
-        return (
-            <SafeAreaView style={styles.screenContainer}>
-                <View style={styles.headerContainer}>
-                    <UnderlinedTextButton 
-                        selected={false} 
-                        fontSize={adjustFontSize(15)} 
-                        style={styles.headerButton}
-                        onPress={() => onOrderPress()}
-                    >
-                        Pedidos
-                    </UnderlinedTextButton>
-                    <UnderlinedTextButton 
-                        selected={true} 
-                        fontSize={adjustFontSize(15)} 
-                        style={styles.headerButton}
-                        onPress={() => {}}
-                    >
-                        {`Meus ${loggedUser.data.type === 'product' ? 'Produtos' : 'Serviços'}`}
-                    </UnderlinedTextButton>
+    return (
+        <SafeAreaView style={styles.screenContainer}>
+            <Modal 
+                transparent 
+                animationType="fade" 
+                visible={loading}
+            >
+                <View style={styles.loadingContainer}>
+                    <ActivityIndicator size="large" color={colors.primary}/>
                 </View>
-                <TouchableWithoutFeedback style={styles.bodyContainer} onPress={() => Keyboard.dismiss()}>
-                    <ScrollView style={{width: '100%', height: '100%'}} contentContainerStyle={styles.myProductsContainer}>
-                        <View style={styles.topicContainer}>
-                            <Text style={styles.topicTitleText}>{`Nome do ${loggedUser.data.type === 'product' ? 'Produto' : 'Serviço'} *`}</Text>
-                            <TextInput 
-                                style={styles.input}
-                                placeholder={`Digite o nome do ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'}`} 
-                                placeholderTextColor={colors.cinza}
-                                onChangeText={getName}
-                                value={name}
-                            />
-                        </View>
-                        <View style={styles.topicContainer}>
-                            <Text style={styles.topicTitleText}>{`Descrição do ${loggedUser.data.type === 'product' ? 'Produto' : 'Serviço'} *`}</Text>
-                            <TextInput style={styles.multilineInput} 
-                                placeholder="Digite uma descrição"
-                                placeholderTextColor={colors.cinza}
-                                multiline={true}
-                                onChangeText={getDescription}
-                                value={description}
-                            />
-                        </View>
-                        <View style={styles.topicContainer}>
-                            <Text style={styles.topicTitleText}>Tempo médio de conclusão</Text>
-                            <Picker 
-                                style={styles.picker}
-                                selectedValue={selectedTimeRange}
-                                onValueChange={(value) => setSelectedTimeRange(value)}
-                                itemStyle={styles.pickerItem}
-                                mode="dropdown"
-                            >
-                                {
-                                    timeRanges.map((timeRange, index) => {
-                                        return <Picker.Item 
-                                                    label={timeRange.range} 
-                                                    value={timeRange.id} 
-                                                    key={index}
-                                                />
-                                        })
-                                }
-                            </Picker>
-                            
-                        </View>
-                        <View style={styles.topicContainer}>
-                            <Text style={styles.topicTitleText}>Preço Fixo *</Text>
-                            <TextInput 
-                                style={styles.input}
-                                placeholder="Digite um valor" 
-                                placeholderTextColor={colors.cinza}
-                                onChangeText={getPrice}
-                                value={price}
-                                keyboardType="decimal-pad"
-                            />
-                        </View>
-                        <View style={styles.topicContainer}>
-                            <Text style={styles.topicTitleText}>Adicione uma imagem</Text>
-                            {
-                                image.uri
-                                ?
-                                    <TouchableOpacity style={styles.image} onPress={getImage}>
-                                        <Image source={{uri: image.uri}} style={styles.image}/>
-                                    </TouchableOpacity>
-                                    
-                                :
-                                    <TouchableOpacity style={styles.imageToChoose} onPress={getImage}>
-                                        <View style={styles.verticalView}/>
-                                        <View style={styles.horizontalView}/>
-                                    </TouchableOpacity>
-                            }    
-                        </View>
-                        <RoundedButton
-                            text="Concluir"
-                            selected={true}
-                            width={256}
-                            height={50}
-                            fontSize={adjustFontSize(16)}
-                            style={styles.doneButton}
-                            onPress={() => handleSellingItemCreation()}
-                        />
-                    </ScrollView>    
-                </TouchableWithoutFeedback>
-            </SafeAreaView>
-        );
-    }
-    else{
-        return(
-            <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large" color={colors.primary}/>
+            </Modal>
+            <View style={styles.headerContainer}>
+                <UnderlinedTextButton 
+                    selected={false} 
+                    fontSize={adjustFontSize(15)} 
+                    style={styles.headerButton}
+                    onPress={() => onOrderPress()}
+                >
+                    Pedidos
+                </UnderlinedTextButton>
+                <UnderlinedTextButton 
+                    selected={true} 
+                    fontSize={adjustFontSize(15)} 
+                    style={styles.headerButton}
+                    onPress={() => {}}
+                >
+                    {`Meus ${loggedUser.data.type === 'product' ? 'Produtos' : 'Serviços'}`}
+                </UnderlinedTextButton>
             </View>
-        );
-    }
-    
+            <TouchableWithoutFeedback style={styles.bodyContainer} onPress={() => Keyboard.dismiss()}>
+                <ScrollView style={{width: '100%', height: '100%'}} contentContainerStyle={styles.myProductsContainer}>
+                    <View style={styles.topicContainer}>
+                        <Text style={styles.topicTitleText}>{`Nome do ${loggedUser.data.type === 'product' ? 'Produto' : 'Serviço'} *`}</Text>
+                        <TextInput 
+                            style={styles.input}
+                            placeholder={`Digite o nome do ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'}`} 
+                            placeholderTextColor={colors.cinza}
+                            onChangeText={getName}
+                            value={name}
+                        />
+                    </View>
+                    <View style={styles.topicContainer}>
+                        <Text style={styles.topicTitleText}>{`Descrição do ${loggedUser.data.type === 'product' ? 'Produto' : 'Serviço'} *`}</Text>
+                        <TextInput style={styles.multilineInput} 
+                            placeholder="Digite uma descrição"
+                            placeholderTextColor={colors.cinza}
+                            multiline={true}
+                            onChangeText={getDescription}
+                            value={description}
+                        />
+                    </View>
+                    <View style={styles.topicContainer}>
+                        <Text style={styles.topicTitleText}>Tempo médio de conclusão</Text>
+                        <Picker 
+                            style={styles.picker}
+                            selectedValue={selectedTimeRange}
+                            onValueChange={(value) => setSelectedTimeRange(value)}
+                            itemStyle={styles.pickerItem}
+                            mode="dropdown"
+                        >
+                            {
+                                timeRanges.map((timeRange, index) => {
+                                    return <Picker.Item 
+                                                label={timeRange.range} 
+                                                value={timeRange.id} 
+                                                key={index}
+                                            />
+                                    })
+                            }
+                        </Picker>
+                        
+                    </View>
+                    <View style={styles.topicContainer}>
+                        <Text style={styles.topicTitleText}>Preço Fixo *</Text>
+                        <TextInput 
+                            style={styles.input}
+                            placeholder="Digite um valor" 
+                            placeholderTextColor={colors.cinza}
+                            onChangeText={getPrice}
+                            value={price}
+                            keyboardType="decimal-pad"
+                        />
+                    </View>
+                    <View style={styles.topicContainer}>
+                        <Text style={styles.topicTitleText}>Adicione uma imagem</Text>
+                        {
+                            image.uri
+                            ?
+                                <TouchableOpacity style={styles.image} onPress={getImage}>
+                                    <Image source={{uri: image.uri}} style={styles.image}/>
+                                </TouchableOpacity>
+                                
+                            :
+                                <TouchableOpacity style={styles.imageToChoose} onPress={getImage}>
+                                    <View style={styles.verticalView}/>
+                                    <View style={styles.horizontalView}/>
+                                </TouchableOpacity>
+                        }    
+                    </View>
+                    <RoundedButton
+                        text="Concluir"
+                        selected={true}
+                        width={256}
+                        height={50}
+                        fontSize={adjustFontSize(16)}
+                        style={styles.doneButton}
+                        onPress={() => handleSellingItemCreation()}
+                    />
+                </ScrollView>    
+            </TouchableWithoutFeedback>
+        </SafeAreaView>
+    );
 }
 
 export default ItemManagement;

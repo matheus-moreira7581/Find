@@ -28,7 +28,7 @@ const HomeCompany = () => {
 
   useEffect(() => {
     setCompanyLogoUrl(loggedUser.data.img_url);
-    setCompanyName(loggedUser.data.name);
+    setCompanyName(loggedUser.data.company_name);
   },[]);
   
   const startOfficeHour = async () => { //Função que seta o expediente da empresa (campo status da tabela), sendo true: dentro do expediente e false: fora do expediente
