@@ -13,10 +13,16 @@ module.exports = {
           const { email, password } = request.body;
             
           const client = await knex('clients')
-          .where({ email });
+          .where({ 
+            email,
+            "deleted_at": null 
+          });
           
           const company = await knex('companies')
-          .where({ email });
+          .where({ 
+            email,
+            "deleted_at": null 
+          });
           
           
           if (client.length == 0 && company.length == 0) {
@@ -24,6 +30,7 @@ module.exports = {
             return response.status(400).send('Usuário não encontrado')
 
           } 
+          
 
           function validation() {
             if(company.length !== 0) {
@@ -51,6 +58,7 @@ module.exports = {
             const res = user;
 
             delete res.data.password;
+            delete res.data.deleted_at;
 
             return response.json(res)
 

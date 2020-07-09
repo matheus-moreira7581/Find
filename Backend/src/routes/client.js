@@ -7,10 +7,10 @@ const uploadImages = require('../config/multer')
 
 //Cliente
 
-routes.post('/register-client', uploadImages.array('img_url'), ClientsController.create)
+routes.post('/register-client', ClientsController.create)
       .get('/clients', ClientsController.index)
       .get('/edit-client/:id', ClientsController.show)
-      .put('/edit-client/:id', uploadImages.array('img_url'), ClientsController.update)
+      .put('/edit-client/:id', uploadImages.single('img_url'), ClientsController.update)
       .delete('/edit-client/:id', ClientsController.delete) 
 
 

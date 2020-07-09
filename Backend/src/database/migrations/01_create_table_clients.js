@@ -6,6 +6,7 @@ exports.up = knex => knex.schema.createTable('clients', table => {
     table.string('password').notNullable()
     table.string('cell', 255).notNullable()
     table.string('img_url').nullable()
+    table.timestamp('deleted_at')
 
 })
 
