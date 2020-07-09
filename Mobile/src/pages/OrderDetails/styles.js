@@ -81,6 +81,18 @@ const styles = StyleSheet.create({
     fontSize: adjustFontSize(13),
     color: colors.cinza,
   },
+  finishedContainer: {
+    marginTop: adjustVerticalMeasure(58),
+    height: adjustVerticalMeasure(160),
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  finishedText: {
+    fontFamily: fonts.montserratBold,
+    fontSize: adjustFontSize(15),
+    color: colors.cinza,
+  },
   buttonsContainer: {
     marginTop: adjustVerticalMeasure(58),
     height: adjustVerticalMeasure(160),

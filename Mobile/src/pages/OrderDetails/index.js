@@ -78,7 +78,7 @@ const OrderDetails = () => {
         status: 'Aceito',
       });
     }
-    if(response.status === 200) return navigation.navigate('RequestConfirmed', {orderId: orderId});
+    if(response.status === 200) return navigation.navigate('RequestConfirmed', {orderId: orderId, accepted: false});
     else {
       Alert.alert('Error', 'Falha ao tentar confirmar o pedido');
       return navigation.navigate('CompanyRunning');
@@ -97,11 +97,44 @@ const OrderDetails = () => {
         status: 'Cancelado',
       });
     }
-    if(response.status === 200) return navigation.navigate('CompanyRunning');
+    if(response.status === 200) return navigation.reset({
+      routes: [{name: 'CompanyRunning'}]
+    });
     else {
       Alert.alert('Error', 'Falha ao tentar cancelar o pedido');
       return navigation.navigate('CompanyRunning');
     }
+  }
+ 
+  const getButton = () => {
+    let view = 
+      <View style={styles.finishedContainer}>
+        <Text style={styles.finishedText}>Este pedido já foi finalizado</Text>
+      </View>
+      
+    if(order.status !== 'Finalizado') {
+      view =
+        <View style={styles.buttonsContainer}>
+          <RoundedButton
+            selected={true}
+            text="Confirmar Pedido"
+            width={256}
+            height={51}
+            fontSize={adjustFontSize(16)}
+            onPress={() => confirmOrder()}
+          />
+          <Text style={styles.buttonCenterText}>OU</Text>
+          <RoundedButton
+            selected={false}
+            text="Cancelar Pedido"
+            width={256}
+            height={51}
+            fontSize={adjustFontSize(16)}
+            onPress={() => cancelOrder()}
+          />
+        </View>
+    }
+    return view
   }
 
   return (

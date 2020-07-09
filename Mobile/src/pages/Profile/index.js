@@ -120,9 +120,7 @@ const Profile = () => {
           [
             { text: 'Sim', onPress: () => {
               resetCart();
-              navigation.reset({
-                routes: [{name: 'Home'}]
-              });
+              navigation.navigate('Home');
               signOut();
             }},
             { text: 'Não' }
@@ -136,9 +134,7 @@ const Profile = () => {
           [
             { text: 'Sim', onPress: () => {
               resetCart();
-              navigation.reset({
-                routes: [{name: 'Home'}]
-              }); 
+              navigation.navigate('Home');
               signOut();
             }},
             { text: 'Não' }
