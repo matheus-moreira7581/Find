@@ -38,12 +38,13 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
 
   const fetchOrders = async () => {
     const { data: orders } = await api.get(`/orders/${loggedUser.data.id}`);
-
+    console.log(orders);
     setOrders(orders);
   }
   const fetchRequest = async () => {
     const { data: orders } = await api.get(`/request/${loggedUser.data.id}`);
-
+    console.log(orders);
+    
     setOrders(orders);
   }
 
@@ -55,6 +56,10 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
 
   const navigateToOrderDetails = (id) => {
     navigation.navigate('OrderDetails', {orderId: id});
+  };
+
+  const navigateToRequestConfirmed = (id) => {
+    return navigation.navigate('RequestConfirmed', {orderId: id});
   };
 
   if(screenMode === 'list-items')
@@ -135,7 +140,13 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
                     <OrderCard 
                       title={`Pedido #${item.id}`}
                       user={item.name}
-                      onPress={() => navigateToOrderDetails(item.id)}
+                      status={item.status}
+                      onPress={() => {
+                        item.status === 'Aceito' ?
+                          navigateToRequestConfirmed(item.id) 
+                        :
+                          navigateToOrderDetails(item.id)
+                      }}
                     />
                 
                 )}

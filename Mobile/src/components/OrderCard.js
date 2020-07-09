@@ -17,6 +17,7 @@ const OrderCard = (props) => {
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
+          <View style={styles.statusContainer}><Text style={styles.statusText}>{props.status}</Text></View>
         </View>
         <View style={styles.orderUserContainer}>
           <MaterialIcons name="person-outline" size={adjustHorizontalMeasure(14)}/>
@@ -43,11 +44,19 @@ const styles = StyleSheet.create({
   titleContainer: {
     marginTop: adjustVerticalMeasure(9),
     width: adjustHorizontalMeasure(229),
+    flexDirection: 'row'
   },
   title: {
     fontFamily: fonts.montserratBold,
     fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
+  },
+  statusContainer: {
+    width: adjustHorizontalMeasure(110),
+    backgroundColor: colors.cinzaClaro,
+    borderRadius: 8,
+    marginLeft: adjustHorizontalMeasure(20),
+    alignItems: 'center',
   },
   orderUserContainer: {
     flexDirection: 'row',

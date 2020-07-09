@@ -104,7 +104,7 @@ module.exports = {
             .where({ id_company })
             .join('clients', 'clients.id', 'orders.id_client')
             .orderBy('order_date', 'desc')
-            .select('clients.name', 'orders.id');
+            .select('clients.name', 'orders.id', 'orders.status');
 
             response.status(200).json(orders)
 

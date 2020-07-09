@@ -32,6 +32,7 @@ const OrderDetails = () => {
   const [type, setType] = useState('');
   const [items, setItems] = useState([]);
   const [order, setOrder] = useState({});
+  const [address, setAddress] = useState({});
 
   const {orderId} = route.params;
 
@@ -45,7 +46,7 @@ const OrderDetails = () => {
 
     setItems(data.Items);
     setOrder(data.Order);
-
+    if(data.Address) setAddress(data.Address)
   }
   const fetchService = async () => {
     const getService = async () => {
@@ -57,7 +58,7 @@ const OrderDetails = () => {
 
     setItems(data.Items);
     setOrder(data.Order);
-
+    if(data.Address) setAddress(data.Address)
   }
 
   useEffect(() => {
@@ -77,7 +78,7 @@ const OrderDetails = () => {
         status: 'Aceito',
       });
     }
-    if(response.status === 200) return navigation.navigate('CompanyRunning');
+    if(response.status === 200) return navigation.navigate('RequestConfirmed', {orderId: orderId});
     else {
       Alert.alert('Error', 'Falha ao tentar confirmar o pedido');
       return navigation.navigate('CompanyRunning');

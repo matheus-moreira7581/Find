@@ -101,7 +101,7 @@ async index(request, response, next) {
         .where({ id_company })
         .join('clients', 'clients.id', 'requests.id_client')
         .orderBy('request_date', 'desc')
-        .select('clients.name', 'requests.id');
+        .select('clients.name', 'requests.id', 'requests.status');
 
         response.status(200).json(requests)
 
