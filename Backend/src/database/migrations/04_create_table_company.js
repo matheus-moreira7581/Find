@@ -9,7 +9,7 @@ exports.up = knex => knex.schema.createTable('companies', table => {
     table.string('cpf').notNullable()
     table.string('date_birth').notNullable()
     table.string('address').notNullable()
-    table.string('img_url').nullable()
+    table.string('img_url').nullable().defaultTo('https://res.cloudinary.com/dbehp0gsj/image/upload/v1594263837/uploads/Caixa_jl19l7.png')
     table.boolean('status').defaultTo(false)
     table.specificType('hours_schedule', 'text ARRAY').nullable(),
     table.enu('type', ['service', 'product']).notNullable()
