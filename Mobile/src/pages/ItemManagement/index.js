@@ -10,9 +10,6 @@ import { useAuth } from '../../contexts/auth';
 import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
-
-import { MaterialIcons } from '@expo/vector-icons';
-
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import colors from '../../assets/var/colors';
@@ -20,6 +17,7 @@ import styles from './styles';
 
 import RoundedButton from '../../components/RoundedButton';
 import UnderlinedTextButton from '../../components/UnderlinedTextButton';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 
 const ItemManagement = ({ onItemCreation, onOrderPress }) => { 
@@ -170,15 +168,7 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
     };
     return (
         <SafeAreaView style={styles.screenContainer}>
-            <Modal 
-                transparent 
-                animationType="fade" 
-                visible={loading}
-            >
-                <View style={styles.loadingContainer}>
-                    <ActivityIndicator size="large" color={colors.primary}/>
-                </View>
-            </Modal>
+            <LoadingIndicator active={loading}/>
             <View style={styles.headerContainer}>
                 <UnderlinedTextButton 
                     selected={false} 
