@@ -106,7 +106,7 @@ const Profile = () => {
   const navigation = useNavigation();
 
   const loadScreenInfo = async () => {
-    setCustomerName(loggedUser.data.company_name);
+    setCustomerName(loggedUser.type === 'client' ? loggedUser.data.name : loggedUser.data.company_name);
     setCustomerEmail(loggedUser.data.email);
     setCustomerAvatarUrl(loggedUser.data.img_url);
   };
@@ -120,9 +120,7 @@ const Profile = () => {
           [
             { text: 'Sim', onPress: () => {
               resetCart();
-              navigation.reset({
-                routes: [{name: 'Home'}]
-              });  
+               
               signOut();
             }},
             { text: 'Não' }
