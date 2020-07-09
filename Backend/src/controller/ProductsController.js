@@ -7,7 +7,7 @@ const fs = require('fs')
 
 module.exports = {
 
-    // Add produtos
+    // Add produto (tela de empresa)
 
     async create(request, response, next) {
 
@@ -54,7 +54,7 @@ module.exports = {
     },
 
 
-    // Listar produtos 
+    // Listar produtos (tela de empresa)
 
     async index(request, response, next) {
 
@@ -82,7 +82,7 @@ module.exports = {
     
     // Listar produtos na tela do cliente, 
     // classificar por empresa (tela 28)
-    // Parte do cliente
+    // tela do cliente
 
     async show(request, response, next) {
 
@@ -120,7 +120,9 @@ module.exports = {
 
     },
 
-    //Listar um único produto
+
+    //Listar um único produto (tela do cliente)
+
     async getProduct(request, response, next){
         try{
             const { id } = request.params;
@@ -135,7 +137,7 @@ module.exports = {
         }
     },
     
-    // Atualizar dados de um produto
+    // Atualizar dados de um produto (tela de empresa)
 
     async update(request, response, next) { 
 
@@ -187,8 +189,7 @@ module.exports = {
 
     },
 
-
-    // Deletar um produto
+    // Deletar um produto (tela de empresa)
 
     async delete(request, response, next) {
 

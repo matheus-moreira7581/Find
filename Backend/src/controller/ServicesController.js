@@ -6,7 +6,7 @@ const fs = require('fs')
 module.exports = {
 
 
-    // Create service
+    // Add serviço
 
     async create(request, response, next) {
 
@@ -53,7 +53,7 @@ module.exports = {
     },
 
 
-    // Listar serviço 
+    // Listar serviço (Tela de empresa) 
 
     async index(request, response, next) {
 
@@ -80,7 +80,7 @@ module.exports = {
 
     // Listar serviço na tela do cliente, 
     // classificar por empresa (tela 72)
-    // Parte do cliente
+    // tela do cliente
 
     async show(request, response, next) {
 
@@ -119,7 +119,8 @@ module.exports = {
     },
 
 
-    //Listar um único serviço
+    //Listar um único serviço (Tela do cliente)
+
     async getService(request, response, next){
         try{
             const { id } = request.params;
@@ -134,7 +135,7 @@ module.exports = {
     },
 
 
-    // Atualizar dados de um serviço
+    // Atualizar dados de um serviço (Tela de empresa)
 
     async update(request, response, next) { 
 
@@ -185,7 +186,7 @@ module.exports = {
     },
 
 
-    // Deletar um serviço
+    // Deletar um serviço (Tela de empresa)
 
     async delete(request, response, next) {
 

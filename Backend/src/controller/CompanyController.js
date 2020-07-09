@@ -123,6 +123,7 @@ module.exports = {
     },
 
     
+    // Atualizar status da empresa (aberto/fechado)
 
     async updateStatus(request, response, next){
         try{
@@ -141,6 +142,7 @@ module.exports = {
         }
 
     },
+
 
     // Deletar uma empresa  (perfil)
 

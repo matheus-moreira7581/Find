@@ -2,7 +2,7 @@ const knex = require('../database');
 
 module.exports ={ 
 
-// Cadastrando solicitação de serviço
+// Solicitando serviço 
 
 async create(request, response, next) {
     try {
@@ -90,7 +90,7 @@ async create(request, response, next) {
 },
 
 
-// Listar solicitações de serviço de uma empresa
+// Listar solicitações de serviço de uma empresa 
 
 async index(request, response, next) {
     try {
@@ -167,7 +167,7 @@ async indexForIncome(request, response, next) {
 },
 
 
-// Detalhando serviço
+// Detalhando serviço (tela de empresa)
 
 async show(request, response, next) {
     try {
@@ -215,7 +215,7 @@ async show(request, response, next) {
 },
 
 
-// Atualizando status 
+// Atualizando status do serviço (Aceito / Cancelado / Finalizado)
 
 async update(request, response, next) {
     try {
