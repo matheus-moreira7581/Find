@@ -1,7 +1,9 @@
 import React from 'react';
-import { SafeAreaView, View, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Text, TouchableOpacity, Alert } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons';
+
+import { useNavigation } from '@react-navigation/native';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 
@@ -13,11 +15,40 @@ import styles from './styles';
 
 import RoundedButton from '../../components/RoundedButton';
 
+import api from '../../services/api';
+
 const DeleteAccount = () => {
+    const navigation = useNavigation();
+
+    const { loggedUser, signOut } = useAuth();
+
+    const handleAccountRemoval = async () => {
+        try{
+            const response = await api.delete(`${loggedUser.type === 'company' ? '/edit-company': 'edit-client'}/${loggedUser.data.id}`);
+            if(response !== undefined){
+                if(response.status === 200){
+                    Alert.alert('Concluído', response.data.msg);
+                    signOut();
+                }
+                else{
+                    Alert.alert('Erro', 'Ocorreu uma falha ao desativar a conta!')
+                }
+            }
+            else{
+                Alert.alert('Erro', 'Ocorreu uma falha ao desativar a conta!')
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+        
+        
+    }
+
     return (
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backButton}>
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.cinzaEscuro}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
@@ -39,11 +70,12 @@ const DeleteAccount = () => {
                     CPF.
                 </Text>
                 <RoundedButton
+                    selected
                     style={styles.button}
                     text="Desativar Conta"
                     width={256}
                     height={48}
-                    selected
+                    onPress={handleAccountRemoval}
                 />
             </View>
         </SafeAreaView>
