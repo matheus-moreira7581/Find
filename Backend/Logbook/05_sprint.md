@@ -19,7 +19,6 @@ O foco da quinta sprint está na organização do código para entrega final.
 
 ---
 
-
 ## Dia 1: back-end da aplicação (06/07/2020)
 
 ## Dia 2: back-end da aplicação (07/07/2020)
