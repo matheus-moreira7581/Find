@@ -265,7 +265,7 @@ async getTime(request, response, next) {
         .select('schedule')
 
         if(schedule.length === 0){
-            return response.json(company[0].hours_schedule)
+            return response.json({'schedule': company[0].hours_schedule})
         }
         else {
             schedule.forEach(element => {
