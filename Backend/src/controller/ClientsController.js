@@ -131,7 +131,7 @@ module.exports = {
             .where({id})
             .update('deleted_at', new Date());
     
-            response.status(200).json({msg: 'cliente deletado com sucesso!'});
+            response.status(200).json({msg: 'Cliente deletado com sucesso!'});
             
         } catch (error) {
             next(error)
