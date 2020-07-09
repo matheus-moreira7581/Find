@@ -16,18 +16,15 @@ module.exports = {
 
             const urls = []
 
-            const files = request.files
+            const file = request.file
 
-            for (const file of files) {
-            
-                const {path} = file
+            const {path} = file
 
-                const newPath = await uploader(path)
+            const newPath = await uploader(path)
 
-                urls.push(newPath)
+            urls.push(newPath)
 
-                fs.unlinkSync(path)
-            }
+            fs.unlinkSync(path)
 
             const { name, description, price, id_company } = request.body;
 
@@ -145,18 +142,16 @@ module.exports = {
 
             const urls = []
 
-            const files = request.files
+            const file = request.file
 
-            for (const file of files) {
+            const {path} = file
+
+            const newPath = await uploader(path)
+
+            urls.push(newPath)
+
+            fs.unlinkSync(path)
             
-                const {path} = file
-
-                const newPath = await uploader(path)
-
-                urls.push(newPath)
-
-                fs.unlinkSync(path)
-            }
 
             const { id } = request.params;
 
