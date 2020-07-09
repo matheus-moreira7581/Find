@@ -36,7 +36,7 @@ const RedeemProduct = () => {
     const fetchCompanyInfo = async () => {
         try{
             const response = await api.get(`/edit-company/${orderInfo.id_company}`);
-            setCompanyTitle(response.data[0].name);
+            setCompanyTitle(response.data[0].company_name);
             setCompanyLogoUrl(response.data[0].img_url);
         }
         catch(error){
