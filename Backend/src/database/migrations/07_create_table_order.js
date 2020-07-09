@@ -7,7 +7,7 @@ exports.up = knex => knex.schema.createTable('orders', table => {
     table.decimal('total', 5, 2).nullable()
     table.enu('payment', ['Cartão', 'Dinheiro']).notNullable()
     table.enu('receivement', ['Entregar', 'Retirar']).notNullable()
-    table.enu('status', ['Em andamento', 'Cancelado', 'Finalizado', 'Aceito']).defaultTo('Em andamento')
+    table.enu('status', ['Solicitado', 'Cancelado', 'Finalizado', 'Fazendo']).defaultTo('Solicitado')
     table.timestamp('order_date').defaultTo(knex.fn.now())
 
 })
