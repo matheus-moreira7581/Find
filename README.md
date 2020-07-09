@@ -59,6 +59,7 @@ ou
 |-------|--------------------|--------|
 |cliente|lucas@gmail.com     | 123456 |
 |empresa|tastypizza@gmail.com| 123456 |
+|       |uncleb@gmail.com    | 123456 |
 
 
 
