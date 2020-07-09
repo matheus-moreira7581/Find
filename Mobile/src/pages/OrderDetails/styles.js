@@ -100,6 +100,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  continueContainer: {
+    marginTop: adjustVerticalMeasure(58),
+    height: adjustVerticalMeasure(160),
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
   buttonCenterText: {
     fontFamily: fonts.montserratSemiBold,
     fontSize: adjustFontSize(15),

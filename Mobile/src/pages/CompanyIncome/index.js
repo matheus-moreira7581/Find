@@ -25,7 +25,7 @@ const CompanyIncome = () => {
   const [incomeData, setIncomeData] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const fetchCompanyIncome = async () => {
+  const fetchCompanyIncomeOrder = async () => {
     try {
       const user = loggedUser;
       const getIncome = async() => {
@@ -46,9 +46,31 @@ const CompanyIncome = () => {
     }
     
   }
+  const fetchCompanyIncomeRequest = async () => {
+    try {
+      const user = loggedUser;
+      const getIncome = async() => {
+        const response = await api.get(`/income/request/${user.data.id}`);
+        return response.data
+      }
+      const data = await getIncome();
+      setIncomeData(data);
+      let arr = Object.values(data);
+      let total = 0;
+      for(let i = 0; i < arr.length; i++) {
+        total += arr[i].income;
+      }
+      setTotal(total);
+      
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
 
   useEffect(() => {
-    fetchCompanyIncome();
+    if(loggedUser.data.type === 'product') fetchCompanyIncomeOrder();
+    else fetchCompanyIncomeRequest();
   }, [])
 
   const navigateToClientRegistration = () => {
@@ -86,7 +108,12 @@ const CompanyIncome = () => {
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <IncomeCard 
-                date={item.order_date}
+                date={
+                loggedUser.data.type === 'product' ? 
+                  item.order_date 
+                : 
+                  item.request_date
+                }
                 price={item.income}
               />
             )}

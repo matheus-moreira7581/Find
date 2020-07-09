@@ -56,7 +56,8 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
   };
 
   const navigateToRequestConfirmed = (id) => {
-    return navigation.navigate('RequestConfirmed', {orderId: id, accepted: true});
+    // return navigation.navigate('RequestConfirmed', {orderId: id, accepted: true});
+    navigation.navigate('OrderDetails', {orderId: id, accepted: true});
   };
 
   if(screenMode === 'list-items')

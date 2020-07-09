@@ -34,7 +34,7 @@ const OrderDetails = () => {
   const [order, setOrder] = useState({});
   const [address, setAddress] = useState({});
 
-  const {orderId} = route.params;
+  const {orderId, accepted} = route.params;
 
   const fetchOrder = async () => {
     const getOrder = async () => {
@@ -108,34 +108,45 @@ const OrderDetails = () => {
  
   const getButton = () => {
     let view = 
-      <View style={styles.finishedContainer}>
-        <Text style={styles.finishedText}>Este pedido já foi finalizado</Text>
+      <View style={styles.buttonsContainer}>
+        <RoundedButton
+          selected={true}
+          text="Confirmar Pedido"
+          width={256}
+          height={51}
+          fontSize={adjustFontSize(16)}
+          onPress={() => confirmOrder()}
+        />
+        <Text style={styles.buttonCenterText}>OU</Text>
+        <RoundedButton
+          selected={false}
+          text="Cancelar Pedido"
+          width={256}
+          height={51}
+          fontSize={adjustFontSize(16)}
+          onPress={() => cancelOrder()}
+        />
       </View>
-      
-    if(order.status !== 'Finalizado') {
+
+    if(accepted === true) {
       view =
-        <View style={styles.buttonsContainer}>
+        <View style={styles.continueContainer}>
           <RoundedButton
             selected={true}
-            text="Confirmar Pedido"
+            text="Continuar"
             width={256}
             height={51}
             fontSize={adjustFontSize(16)}
-            onPress={() => confirmOrder()}
-          />
-          <Text style={styles.buttonCenterText}>OU</Text>
-          <RoundedButton
-            selected={false}
-            text="Cancelar Pedido"
-            width={256}
-            height={51}
-            fontSize={adjustFontSize(16)}
-            onPress={() => cancelOrder()}
+            onPress={() => navigateToRequestConfirmed(orderId)}
           />
         </View>
     }
     return view
   }
+
+  const navigateToRequestConfirmed = (id) => {
+    return navigation.navigate('RequestConfirmed', {orderId: id, accepted: true});
+  };
 
   return (
     <View style={styles.container}>
@@ -182,25 +193,7 @@ const OrderDetails = () => {
             <Text style={styles.detailsText}>{`Total: R$ ${order.total}`}</Text>
           </View>
         </View>
-        <View style={styles.buttonsContainer}>
-          <RoundedButton
-            selected={true}
-            text="Confirmar Pedido"
-            width={256}
-            height={51}
-            fontSize={adjustFontSize(16)}
-            onPress={() => confirmOrder()}
-          />
-          <Text style={styles.buttonCenterText}>OU</Text>
-          <RoundedButton
-            selected={false}
-            text="Cancelar Pedido"
-            width={256}
-            height={51}
-            fontSize={adjustFontSize(16)}
-            onPress={() => cancelOrder()}
-          />
-        </View>
+        {getButton()}
       </View>
     </View>
   );
