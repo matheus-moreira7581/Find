@@ -120,7 +120,9 @@ const Profile = () => {
           [
             { text: 'Sim', onPress: () => {
               resetCart();
-               
+              navigation.reset({
+                routes: [{name: 'Home'}]
+              });
               signOut();
             }},
             { text: 'Não' }
@@ -165,12 +167,12 @@ const Profile = () => {
     try{
       if(orderInfo.id_company !== 0){
         const response = await api.get(`/edit-company/${orderInfo.id_company}`);
-        setCompanyName(response.data[0].name); 
+        setCompanyName(response.data[0].company_name); 
       }
       else{
         if(requestInfo.id_company !== 0){
           const response = await api.get(`/edit-company/${requestInfo.id_company}`);
-          setCompanyName(response.data[0].name); 
+          setCompanyName(response.data[0].company_name);
         }
         else{
           setCompanyName('Empresa');

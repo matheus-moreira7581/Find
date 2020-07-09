@@ -41,7 +41,7 @@ const ServiceScheduling = () => {
     const fetchTime = async () => {
         const response = await api.get(`/time?id_company=${requestInfo.id_company}`);
         console.log(response);
-        setHours(response.data);
+        setHours(response.data.schedule);
     }
 
     useEffect(() => {
