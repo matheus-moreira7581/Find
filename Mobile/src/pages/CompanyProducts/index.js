@@ -18,7 +18,7 @@ const CompanyProducts = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const {companyId} = route.params;
+  const {companyId, companyStatus} = route.params;
   const {total, cartItems} = useCart();
   const { selectedCategoryCardInfo } = useCategory();
 
@@ -48,7 +48,7 @@ const CompanyProducts = () => {
 
     setCompany(res[0]);
     setItems(res[0].services);
-    
+
   }
 
   const handleShowMarketBag = () => {
@@ -126,7 +126,7 @@ const CompanyProducts = () => {
             <MaterialIcons name="star" style={styles.rate}/>
             <MaterialIcons name="star-half" style={styles.rate}/>
           </View>
-          <Text style={styles.companyStatus}>Aberto</Text>
+          <Text style={companyStatus? styles.companyStatusOpen : styles.companyStatusClosed}>{companyStatus ? 'Aberto' : 'Fechado'}</Text>
           <Text style={styles.companyAddress}>{company.address}</Text>
         </View>
       </View>
