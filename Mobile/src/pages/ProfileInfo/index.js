@@ -70,7 +70,7 @@ const ProfileInfo = () => {
             data: [
                 {
                     titleText: 'Data de Nascimento',
-                    value: loggedUser.data.name
+                    value: loggedUser.data.date_birth
                 },
                 {
                     titleText: 'CPF',
@@ -103,7 +103,7 @@ const ProfileInfo = () => {
                     ListHeaderComponent={
                         <View style={styles.listHeader}>
                             <Image source={{uri: loggedUser.data.img_url}} style={styles.profilePicture}/>
-                            <Text style={styles.customerName}>{loggedUser.data.name}</Text>
+                            <Text style={styles.customerName}>{loggedUser.data.company_name}</Text>
                         </View>
                     }
                     renderSectionHeader={({ section: { title } }) => 
