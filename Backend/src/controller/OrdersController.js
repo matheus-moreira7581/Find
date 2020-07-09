@@ -114,6 +114,9 @@ module.exports = {
         }
     },
 
+
+    // Calculando o fatoramento do dia
+
     async indexForIncome(request, response, next) {
         try {
 
@@ -218,7 +221,7 @@ module.exports = {
     },
 
 
-    // Atualizar status 
+    // Atualizar status do pedido (Aceito / Cancelado / Finalizado)
 
     async update(request, response, next) {
         try {
