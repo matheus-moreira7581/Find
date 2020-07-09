@@ -105,9 +105,10 @@ const Companies = () => {
     }, []);
 
 
-    const navigateToCompanyProducts = (companyId) => {
+    const navigateToCompanyProducts = (companyId, companyStatus) => {
         navigation.navigate('CompanyProducts', {
             companyId,
+            companyStatus
         });
     }
 
