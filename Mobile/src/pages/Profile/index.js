@@ -106,7 +106,7 @@ const Profile = () => {
   const navigation = useNavigation();
 
   const loadScreenInfo = async () => {
-    setCustomerName(loggedUser.data.name);
+    setCustomerName(loggedUser.data.company_name);
     setCustomerEmail(loggedUser.data.email);
     setCustomerAvatarUrl(loggedUser.data.img_url);
   };
