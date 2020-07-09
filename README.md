@@ -58,8 +58,8 @@ ou
 | tipo  |        login       |  senha |
 |-------|--------------------|--------|
 |cliente|lucas@gmail.com     | 123456 |
-|empresa|tastypizza@gmail.com| 123456 |
-|empresa|uncleb@gmail.com    | 123456 |
+|empresa|tastypizza@gmail.com<br>uncleb@gmail.com| 123456<br>123456 |
+
 
 
 
