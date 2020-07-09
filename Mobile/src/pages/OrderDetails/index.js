@@ -42,7 +42,6 @@ const OrderDetails = () => {
     }
     const response = await getOrder();
     const data = response.data;
-    console.log(data);
 
     setItems(data.Items);
     setOrder(data.Order);
@@ -55,7 +54,6 @@ const OrderDetails = () => {
     }
     const response = await getService();
     const data = response.data;
-    console.log(data);
 
     setItems(data.Items);
     setOrder(data.Order);

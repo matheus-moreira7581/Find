@@ -101,6 +101,7 @@ const CompanySellingItems = ({ onOrderPress, onItemCreation, onItemRemoval }) =>
                 Image={item.img_url}
                 Description={item.description}
                 onDelete={() => handleItemRemoval(item.id)}
+                removable
               />
             )}
           />
