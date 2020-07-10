@@ -84,7 +84,7 @@ module.exports = {
 
             }
         
-           return response.send().status(201)
+           return response.status(201).send()
 
             
         } catch (error) {
@@ -233,7 +233,7 @@ module.exports = {
             await knex('orders').where('id', id_order)
             .update({ status });
     
-            response.send().status(200);
+            response.status(200).send();
 
         } catch (error) {
 

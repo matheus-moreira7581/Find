@@ -28,7 +28,7 @@ module.exports = {
 
             await knex('companies').insert(company);
     
-            return response.send().status(201);
+            return response.status(201).send();
             
         } catch (error) {
             next(error)
@@ -112,7 +112,7 @@ module.exports = {
 
             await knex('companies').where({ id }).update({company})
 
-            response.send().status(200)
+            response.status(200).send()
 
         } catch (error) {
             next(error)
@@ -153,7 +153,7 @@ module.exports = {
             .where({id})
             .update('deleted_at', new Date());
       
-            response.send().status(200);
+            response.status(200).send();
             
         } catch (error) {
             next(error)

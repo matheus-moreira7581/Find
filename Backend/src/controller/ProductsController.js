@@ -45,7 +45,7 @@ module.exports = {
 
             await knex('products').insert(product);
             
-            return response.send().status(201);
+            return response.status(201).send();
 
 
         } catch (error) {
@@ -122,7 +122,6 @@ module.exports = {
 
 
     //Listar um único produto (tela do cliente)
-
     async getProduct(request, response, next){
         try{
             const { id } = request.params;
@@ -181,7 +180,7 @@ module.exports = {
             .update(attributesToUpdate);
 
 
-            response.send().status(200);
+            response.status(200).send();
 
         }catch (error) {
             next(error)
@@ -200,7 +199,7 @@ module.exports = {
             .where({id})
             .update('deleted_at', new Date());
       
-            response.send().status(200);
+            response.status(200).send();
             
         } catch (error) {
             next(error)

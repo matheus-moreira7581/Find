@@ -81,7 +81,7 @@ async create(request, response, next) {
         }
 
 
-       return response.send().status(201)
+       return response.status(201).send();
 
         
     } catch (error) {
@@ -228,7 +228,7 @@ async update(request, response, next) {
         await knex('requests').where('id', id_request)
         .update({ status });
 
-        response.send().status(200);
+        response.status(200).send();
 
     } catch (error) {
 
