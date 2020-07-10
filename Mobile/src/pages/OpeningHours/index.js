@@ -4,6 +4,7 @@ import { View, SafeAreaView, Text, TouchableOpacity, Alert } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { useAuth } from '../../contexts/auth';
+import { useHours } from '../../contexts/SelectedHours';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
