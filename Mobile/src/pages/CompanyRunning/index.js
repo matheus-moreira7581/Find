@@ -35,7 +35,7 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
 
   const [orders, setOrders] = useState([]);
 
-  const { loggedUser } = useAuth();
+  const { loggedUser, endOfficeHour } = useAuth();
 
   const fetchOrders = async () => {
     const { data: orders } = await api.get(`/orders/${loggedUser.data.id}`);

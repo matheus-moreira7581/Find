@@ -65,7 +65,7 @@ const RequestConfirmed = () => {
           });
         }
         if(response.status === 200) return navigation.reset({
-            routes: [{name: 'CompanyRunning'}]
+            routes: [{name: 'HomeCompany'}]
           });
         else {
           Alert.alert('Error', 'Falha ao tentar confirmar o pedido');
@@ -83,7 +83,7 @@ const RequestConfirmed = () => {
             <View style={styles.headerContainer}>  
                 <TouchableOpacity style={styles.backButton} onPress={() => {
                     navigation.reset({
-                        routes: [{name: 'CompanyRunning'}]
+                        routes: [{name: 'HomeCompany'}]
                       });
                 }}>
                     <MaterialIcons 
