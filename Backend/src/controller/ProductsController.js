@@ -156,7 +156,7 @@ module.exports = {
                 urls.push(newPath)
     
                 fs.unlinkSync(path)
-            }    
+            }
 
             const { id } = request.params;
 

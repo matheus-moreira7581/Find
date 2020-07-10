@@ -59,14 +59,9 @@ const ProfileInfo = () => {
                         titleText: 'Nome da Empresa',
                         value: loggedUser.data.company_name
                     },
-                ]
-            },
-            {
-                title: 'Minha Conta',
-                data: [
                     {
-                        titleText: 'Nome da Empresa',
-                        value: loggedUser.data.company_name
+                        titleText: 'Meu E-mail',
+                        value: loggedUser.data.email
                     },
                 ]
             },
