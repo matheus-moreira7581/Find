@@ -3,7 +3,7 @@ const OrdersController = require('../controller/OrdersController')
 
 const routes = express.Router()
 
-// Requests
+// Pedidos
 
 /**
  * @swagger

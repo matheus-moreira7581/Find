@@ -19,10 +19,10 @@ routes.get('/home-client', CategoriesController.index)
  * @swagger
  * /register-company:
  *  get:
- *    description: Registro de compania
+ *    description: Listagem de categorias
  *    responses:
  *      '200':
- *        description: Registro realizada com sucesso
+ *        description: Listagem realizada com sucesso
  */
       .get('/register-company', CategoriesController.listCategories)
 
