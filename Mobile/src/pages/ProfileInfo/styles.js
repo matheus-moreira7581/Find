@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
         height: adjustVerticalMeasure(95.5),
         borderBottomWidth: 1,
         borderBottomColor: colors.bordarCinza,
-
     },
     centeredContainer:{
         position: 'absolute',
@@ -41,10 +40,11 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        paddingBottom: adjustVerticalMeasure(42)
     },
     sectionList:{
         width: '100%',
-        height: '100%',
+        height: '100%'
     },
     listHeader:{
         alignItems: 'center',
@@ -95,6 +95,10 @@ const styles = StyleSheet.create({
         marginLeft: adjustHorizontalMeasure(24),
         marginBottom: adjustVerticalMeasure(16),
     },
+    bottomSeparator:{
+        height: adjustVerticalMeasure(100),
+        
+    }
 });
 
 export default styles;
