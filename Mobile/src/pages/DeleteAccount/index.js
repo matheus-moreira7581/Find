@@ -24,10 +24,10 @@ const DeleteAccount = () => {
 
     const handleAccountRemoval = async () => {
         try{
-            const response = await api.delete(`${loggedUser.type === 'company' ? '/edit-company': 'edit-client'}/${loggedUser.data.id}`);
+            const response = await api.delete(`${loggedUser.type === 'company' ? '/edit-company': '/edit-client'}/${loggedUser.data.id}`);
             if(response !== undefined){
                 if(response.status === 200){
-                    Alert.alert('Concluído', response.data.msg);
+                    Alert.alert('Concluído', 'Conta desativada com sucesso!');
                     signOut();
                 }
                 else{
