@@ -61,7 +61,8 @@ const CompanyRegistration = () => {
     let cpf = String(user.cpf).replace(/\D/g,"");
     console.log(cpf + '\n\n\n\n');
     const response = await api.post('/register-company', {
-      name: companyName,
+      name: user.name,
+      company_name: companyName,
       email: user.email,
       cpf: cpf,
       date_birth: user.birthday,
