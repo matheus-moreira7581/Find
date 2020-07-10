@@ -12,8 +12,8 @@ const routes = express.Router();
  * /auth:
  *  post:
  *    description: Autenticação de usuários
- *    responses:
- *      '200':
+ *    responses: 
+ *      '200': 
  *        description: Autenticação realizada com sucesso
  */
 routes.post('/auth', AuthController.login)
