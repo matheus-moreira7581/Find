@@ -32,8 +32,9 @@ const OrderDetails = () => {
   const [type, setType] = useState('');
   const [items, setItems] = useState([]);
   const [order, setOrder] = useState({});
+  const [address, setAddress] = useState({});
 
-  const {orderId} = route.params;
+  const {orderId, accepted} = route.params;
 
   const fetchOrder = async () => {
     const getOrder = async () => {
@@ -45,7 +46,7 @@ const OrderDetails = () => {
 
     setItems(data.Items);
     setOrder(data.Order);
-
+    if(data.Address) setAddress(data.Address)
   }
   const fetchService = async () => {
     const getService = async () => {
@@ -57,7 +58,7 @@ const OrderDetails = () => {
 
     setItems(data.Items);
     setOrder(data.Order);
-
+    if(data.Address) setAddress(data.Address)
   }
 
   useEffect(() => {
@@ -69,7 +70,7 @@ const OrderDetails = () => {
     let response = {};
     if(loggedUser.data.type === 'product') {
       response = await api.put(`/details?id_order=${orderId}`, {
-        status: 'Aceito',
+        status: 'Fazendo',
       });
     }
     else if(loggedUser.data.type === 'service') {
@@ -77,7 +78,7 @@ const OrderDetails = () => {
         status: 'Aceito',
       });
     }
-    if(response.status === 200) return navigation.navigate('CompanyRunning');
+    if(response.status === 200) return navigation.navigate('RequestConfirmed', {orderId: orderId, accepted: false});
     else {
       Alert.alert('Error', 'Falha ao tentar confirmar o pedido');
       return navigation.navigate('CompanyRunning');
@@ -96,12 +97,56 @@ const OrderDetails = () => {
         status: 'Cancelado',
       });
     }
-    if(response.status === 200) return navigation.navigate('CompanyRunning');
+    if(response.status === 200) return navigation.reset({
+      routes: [{name: 'CompanyRunning'}]
+    });
     else {
       Alert.alert('Error', 'Falha ao tentar cancelar o pedido');
       return navigation.navigate('CompanyRunning');
     }
   }
+ 
+  const getButton = () => {
+    let view = 
+      <View style={styles.buttonsContainer}>
+        <RoundedButton
+          selected={true}
+          text="Confirmar Pedido"
+          width={256}
+          height={51}
+          fontSize={adjustFontSize(16)}
+          onPress={() => confirmOrder()}
+        />
+        <Text style={styles.buttonCenterText}>OU</Text>
+        <RoundedButton
+          selected={false}
+          text="Cancelar Pedido"
+          width={256}
+          height={51}
+          fontSize={adjustFontSize(16)}
+          onPress={() => cancelOrder()}
+        />
+      </View>
+
+    if(accepted === true) {
+      view =
+        <View style={styles.continueContainer}>
+          <RoundedButton
+            selected={true}
+            text="Continuar"
+            width={256}
+            height={51}
+            fontSize={adjustFontSize(16)}
+            onPress={() => navigateToRequestConfirmed(orderId)}
+          />
+        </View>
+    }
+    return view
+  }
+
+  const navigateToRequestConfirmed = (id) => {
+    return navigation.navigate('RequestConfirmed', {orderId: id, accepted: true});
+  };
 
   return (
     <View style={styles.container}>
@@ -148,25 +193,7 @@ const OrderDetails = () => {
             <Text style={styles.detailsText}>{`Total: R$ ${order.total}`}</Text>
           </View>
         </View>
-        <View style={styles.buttonsContainer}>
-          <RoundedButton
-            selected={true}
-            text="Confirmar Pedido"
-            width={256}
-            height={51}
-            fontSize={adjustFontSize(16)}
-            onPress={() => confirmOrder()}
-          />
-          <Text style={styles.buttonCenterText}>OU</Text>
-          <RoundedButton
-            selected={false}
-            text="Cancelar Pedido"
-            width={256}
-            height={51}
-            fontSize={adjustFontSize(16)}
-            onPress={() => cancelOrder()}
-          />
-        </View>
+        {getButton()}
       </View>
     </View>
   );

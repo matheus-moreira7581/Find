@@ -104,7 +104,7 @@ module.exports = {
             .where({ id_company })
             .join('clients', 'clients.id', 'orders.id_client')
             .orderBy('order_date', 'desc')
-            .select('clients.name', 'orders.id');
+            .select('clients.name', 'orders.id', 'orders.status');
 
             response.status(200).json(orders)
 
@@ -113,6 +113,9 @@ module.exports = {
             next(error)
         }
     },
+
+
+    // Calculando o fatoramento do dia
 
     async indexForIncome(request, response, next) {
         try {
@@ -157,7 +160,6 @@ module.exports = {
                 groupArrays[i].income = total
 
             }
-            console.log(groupArrays);
 
             
             response.status(200).json(groupArrays);
@@ -179,7 +181,7 @@ module.exports = {
 
             const orders = await knex('orders')
             .join('clients', 'clients.id', 'orders.id_client')
-            .select('clients.name', 'clients.cell', 'orders.total', 'orders.payment', 'orders.receivement', 'orders.id_address', 'orders.id');
+            .select('clients.name', 'clients.cell', 'orders.total', 'orders.payment', 'orders.receivement', 'orders.id_address', 'orders.id', 'orders.status');
 
 
             const order = orders.filter(e => e.id == id_order);
@@ -218,7 +220,7 @@ module.exports = {
     },
 
 
-    // Atualizar status 
+    // Atualizar status do pedido (Aceito / Cancelado / Finalizado)
 
     async update(request, response, next) {
         try {

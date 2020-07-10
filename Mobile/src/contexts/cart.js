@@ -85,6 +85,13 @@ export const CartProvider = ({ children }) => {
             payment: 'A definir',
             receivement: 'A definir'
         });
+        setRequestInfo({
+            id_company: 0,
+            id_client: 0,
+            payment: 'A definir',
+            local: 'A definir',
+            schedule: 'A definir'
+        });
         setAddressInfo({});
         setCartItems([]);
         setTotal(0);

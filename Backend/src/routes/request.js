@@ -26,16 +26,7 @@ routes.post('/request', RequestsController.create)
  *        description: Seleção realizada com sucesso
  */
       .get('/request/:id_company', RequestsController.index)
-    //.get('/income/:id_company', RequestsController.indexForIncome)
-/**
- * @swagger
- * /details/service:
- *  get:
- *    description: Seleção de serviço
- *    responses:
- *      '200':
- *        description: Seleção realizada com sucesso
- */
+      .get('/income/request/:id_company', RequestsController.indexForIncome)
       .get('/details/service', RequestsController.show)
 /**
  * @swagger

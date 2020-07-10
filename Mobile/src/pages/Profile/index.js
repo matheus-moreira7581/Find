@@ -20,7 +20,7 @@ import adjustFontSize from '../../utils/adjustFontSize';
 import colors from '../../assets/var/colors';
 
 const Profile = () => {
-  const { signOut, loggedUser } = useAuth();
+  const { signOut, loggedUser, endOfficeHour } = useAuth();
   const { resetCart, orderInfo, requestInfo } = useCart();
 
   const menuListData = [
@@ -90,8 +90,8 @@ const Profile = () => {
           endIconName: "keyboard-arrow-right",
           endIconColor: colors.primary,
           text: "Desativar Conta",
-          textColor: colors.vermelho ,
-          onPress: () => {},
+          textColor: colors.vermelho,
+          onPress: () => navigation.navigate('DeleteAccount'),
         }
       ]
     }
@@ -106,7 +106,7 @@ const Profile = () => {
   const navigation = useNavigation();
 
   const loadScreenInfo = async () => {
-    setCustomerName(loggedUser.data.company_name);
+    setCustomerName(loggedUser.type === 'client' ? loggedUser.data.name : loggedUser.data.company_name);
     setCustomerEmail(loggedUser.data.email);
     setCustomerAvatarUrl(loggedUser.data.img_url);
   };
@@ -120,9 +120,7 @@ const Profile = () => {
           [
             { text: 'Sim', onPress: () => {
               resetCart();
-              navigation.reset({
-                routes: [{name: 'Home'}]
-              });  
+              navigation.navigate('Home');
               signOut();
             }},
             { text: 'Não' }
@@ -136,9 +134,7 @@ const Profile = () => {
           [
             { text: 'Sim', onPress: () => {
               resetCart();
-              navigation.reset({
-                routes: [{name: 'Home'}]
-              }); 
+              navigation.navigate('Home');
               signOut();
             }},
             { text: 'Não' }
@@ -152,7 +148,7 @@ const Profile = () => {
         'Deseja mesmo sair?',
         [
           { text: 'Sim', onPress: async () => {
-            await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
+            await endOfficeHour();
             navigation.navigate('HomeCompany');
             signOut();
           }},
@@ -167,12 +163,12 @@ const Profile = () => {
     try{
       if(orderInfo.id_company !== 0){
         const response = await api.get(`/edit-company/${orderInfo.id_company}`);
-        setCompanyName(response.data[0].name); 
+        setCompanyName(response.data[0].company_name); 
       }
       else{
         if(requestInfo.id_company !== 0){
           const response = await api.get(`/edit-company/${requestInfo.id_company}`);
-          setCompanyName(response.data[0].name); 
+          setCompanyName(response.data[0].company_name);
         }
         else{
           setCompanyName('Empresa');

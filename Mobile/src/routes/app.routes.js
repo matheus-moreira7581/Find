@@ -21,9 +21,10 @@ import ReedemProductScreen from '../pages/RedeemProduct';
 import SuccessOrderScreen from '../pages/SuccessOrder';
 import RequestsMadeScreen from '../pages/RequestsMade';
 import MarketBagScreen from '../pages/MarketBag';
+
 import ProfileScreen from '../pages/Profile';
 import ProfileInfoScreen from '../pages/ProfileInfo';
-
+import DeleteAccountScreen from '../pages/DeleteAccount';
 
 import ItemManagementScreen from '../pages/ItemManagement';
 import RequestConfirmedScreen from '../pages/RequestConfirmed';
@@ -66,6 +67,7 @@ const ProfileRoutes = () => (
     <ProfileStack.Navigator headerMode="none" initialRouteName="Profile">
         <ProfileStack.Screen name="Profile" component={ProfileScreen}/>
         <ProfileStack.Screen name="ProfileInfo" component={ProfileInfoScreen}/>
+        <ProfileStack.Screen name="DeleteAccount" component={DeleteAccountScreen}/>
     </ProfileStack.Navigator>
 );
 

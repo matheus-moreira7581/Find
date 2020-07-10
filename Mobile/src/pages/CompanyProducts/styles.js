@@ -60,12 +60,20 @@ export default StyleSheet.create({
     color: colors.dourado,
     fontSize: adjustFontSize(13),
   },
-  companyStatus: {
+  companyStatusOpen: {
     fontFamily: fonts.montserratSemiBold,
     fontSize: adjustFontSize(10),
     color: colors.cinzaEscuro,
     borderBottomWidth: 2,
     borderBottomColor: colors.verde,
+    marginBottom: 11 / 812 * SCREEN_HEIGHT,
+  },
+  companyStatusClosed: {
+    fontFamily: fonts.montserratSemiBold,
+    fontSize: adjustFontSize(10),
+    color: colors.cinzaEscuro,
+    borderBottomWidth: 2,
+    borderBottomColor: colors.vermelho,
     marginBottom: 11 / 812 * SCREEN_HEIGHT,
   },
   companyAddress: {

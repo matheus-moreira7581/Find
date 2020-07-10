@@ -20,25 +20,29 @@ import api from '../../services/api';
 const HomeCompany = () => {
   const navigation = useNavigation();
 
-  const [shift, setShift] = useState(false);
   const [companyLogoUrl, setCompanyLogoUrl] = useState('');
   const [companyName, setCompanyName] = useState('');
-
-  const { signOut, loggedUser, signedIn } = useAuth();
+  
+  const { signOut, loggedUser, signedIn, officeHour, startOfficeHour, endOfficeHour } = useAuth();
+  const [shift, setShift] = useState(false);
 
   useEffect(() => {
     setCompanyLogoUrl(loggedUser.data.img_url);
     setCompanyName(loggedUser.data.company_name);
   },[]);
+
+  useEffect(() => {
+    setShift(officeHour);
+  }, [officeHour])
   
-  const startOfficeHour = async () => { //Função que seta o expediente da empresa (campo status da tabela), sendo true: dentro do expediente e false: fora do expediente
-    await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: true });
-  }
-  const endOfficeHour = async () => {
-    setShift(!shift);
-    await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
-    navigation.navigate('HomeCompany');
-  }
+  // const startOfficeHour = async () => { //Função que seta o expediente da empresa (campo status da tabela), sendo true: dentro do expediente e false: fora do expediente
+  //   await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: true });
+  // }
+  // const endOfficeHour = async () => {
+  //   setShift(!shift);
+  //   await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
+  //   navigation.navigate('HomeCompany');
+  // }
 
   return (
     shift ? <CompanyRunning handleOfficeHourFunction={endOfficeHour}/> : 

@@ -38,12 +38,10 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
 
   const fetchOrders = async () => {
     const { data: orders } = await api.get(`/orders/${loggedUser.data.id}`);
-
     setOrders(orders);
   }
   const fetchRequest = async () => {
     const { data: orders } = await api.get(`/request/${loggedUser.data.id}`);
-
     setOrders(orders);
   }
 
@@ -55,6 +53,11 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
 
   const navigateToOrderDetails = (id) => {
     navigation.navigate('OrderDetails', {orderId: id});
+  };
+
+  const navigateToRequestConfirmed = (id) => {
+    // return navigation.navigate('RequestConfirmed', {orderId: id, accepted: true});
+    navigation.navigate('OrderDetails', {orderId: id, accepted: true});
   };
 
   if(screenMode === 'list-items')
@@ -88,6 +91,17 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
         }}
       />
     );
+
+    const getColor = (status) => {
+      switch (status) {
+        case 'Aceito':
+          return colors.verde
+        case 'Finalizado':
+          return colors.vermelho
+        default:
+          return colors.primary
+      }
+    }
 
   if(screenMode === 'orders'){
     return (
@@ -135,7 +149,14 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
                     <OrderCard 
                       title={`Pedido #${item.id}`}
                       user={item.name}
-                      onPress={() => navigateToOrderDetails(item.id)}
+                      status={item.status}
+                      color={getColor(item.status)}
+                      onPress={() => {
+                        item.status === 'Aceito' ?
+                          navigateToRequestConfirmed(item.id) 
+                        :
+                          navigateToOrderDetails(item.id)
+                      }}
                     />
                 
                 )}
