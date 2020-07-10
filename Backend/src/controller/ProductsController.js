@@ -159,7 +159,12 @@ module.exports = {
         
                 const { id } = request.params;
 
-                const { name, description, price, limit_time } = request.body;
+                fs.unlinkSync(path)
+            }    
+
+            const { id } = request.params;
+
+            const { name, description, price, limit_time } = request.body;
 
                 const item = [{ name, description, price, limit_time }];
 
@@ -181,7 +186,7 @@ module.exports = {
 
             response.send().status(200);
 
-        } catch (error) {
+        }catch (error) {
             next(error)
         }
 
