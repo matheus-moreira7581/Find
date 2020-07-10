@@ -53,8 +53,8 @@ const ItemManagement = ({ onItemCreation, onOrderPress, itemId = null, onItemEdi
 
                 if(item.limit_time){
                     const availableTimeRanges = timeRanges;
-                    const selectedTimeRange = availableTimeRanges.filter((timeRange) => timeRange.range === item.limit_time);
-                    console.log(selectedTimeRange);
+                    const [selectedTimeRange] = availableTimeRanges.filter((timeRange) => timeRange.range === item.limit_time);
+                    setSelectedTimeRange(selectedTimeRange.id);
                 }
             }
         }
