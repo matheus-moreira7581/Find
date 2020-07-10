@@ -184,9 +184,9 @@ const CustomerRegistration = () => {
                             style={styles.input}
                             placeholder="Digite sua senha novamente" 
                             placeholderTextColor={colors.cinza}
-                            value={password}
+                            value={passwordCheck}
                             secureTextEntry={true}
-                            onChangeText={getPassword}
+                            onChangeText={getPasswordCheck}
                         />
                     </View>
                     <RoundedButton 

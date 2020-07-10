@@ -94,6 +94,8 @@ ou
 
 - Leia nosso artigo no Behance: [Saiba mais](https://www.behance.net/gallery/100265571/FIND-UX-UI-Design)
 
+- Teste com Swagger: [Clique aqui](http://localhost:3333/api-docs/#/)
+
 
 ## Equipe :pushpin:
 

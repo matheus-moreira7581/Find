@@ -161,7 +161,6 @@ module.exports = {
                 groupArrays[i].income = total
 
             }
-            console.log(groupArrays);
 
             
             response.status(200).json(groupArrays);

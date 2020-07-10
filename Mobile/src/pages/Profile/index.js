@@ -20,7 +20,7 @@ import adjustFontSize from '../../utils/adjustFontSize';
 import colors from '../../assets/var/colors';
 
 const Profile = () => {
-  const { signOut, loggedUser } = useAuth();
+  const { signOut, loggedUser, endOfficeHour } = useAuth();
   const { resetCart, orderInfo, requestInfo } = useCart();
 
   const menuListData = [
@@ -148,7 +148,7 @@ const Profile = () => {
         'Deseja mesmo sair?',
         [
           { text: 'Sim', onPress: async () => {
-            await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
+            await endOfficeHour();
             navigation.navigate('HomeCompany');
             signOut();
           }},
@@ -224,19 +224,18 @@ const Profile = () => {
           }
           ListFooterComponent={
             <View>
-            <ProfileMenuListItem 
-              style={styles.logoutButton}
-              mainIconName={null} 
-              endIconName="exit-to-app"
-              endIconColor={colors.vermelho}
-              text="Sair"
-              textColor={colors.vermelho} 
-              onPress={handleLogout}
-            />  
+              <ProfileMenuListItem 
+                style={styles.logoutButton}
+                mainIconName={null} 
+                endIconName="exit-to-app"
+                endIconColor={colors.vermelho}
+                text="Sair"
+                textColor={colors.vermelho} 
+                onPress={handleLogout}
+              />  
             </View>
           }
-        />
-        
+        /> 
       </View>
     </SafeAreaView>
   );

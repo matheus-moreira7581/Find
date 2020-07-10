@@ -16,7 +16,7 @@ module.exports = {
 
             const { name, company_name, email, cpf, date_birth, address, id_categories, type, hours_schedule } = request.body;
             
-            const company = [{ name, company_name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, hours_schedule}];
+            const company = { name, company_name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, hours_schedule};
 
 
             const checkEmail = await knex('companies').where({ email });

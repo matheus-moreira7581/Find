@@ -42,7 +42,8 @@ const OpeningHours = () => {
         const chosenHours = hours.filter((item, index) => selectedHours[index] === true );
         let cpf = String(user.cpf).replace(/\D/g,"");
         const jsonObject = {
-            name: companyData.companyName,
+            name: user.name,
+            company_name: companyData.companyName,
             email: user.email,
             cpf: cpf,
             date_birth: user.birthday,

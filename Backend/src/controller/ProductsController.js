@@ -148,15 +148,13 @@ module.exports = {
             const urls = []
 
             const file = request.file
- 
-            const {path} = file
-
-            const newPath = await uploader(path)
-
-            urls.push(newPath)
-
-            fs.unlinkSync(path)
             
+            if(file){
+                const {path} = file
+
+                const newPath = await uploader(path)
+
+                urls.push(newPath)
 
             const { id } = request.params;
 
@@ -165,10 +163,12 @@ module.exports = {
             const item = [{ name, description, price, limit_time }];
 
             const product = item.map(element => {
-                return {
-                    "img_url": urls[0].url,
-                    ...element
+                if(urls.length > 0) {
+                    return {
+                        "img_url": urls[0].url,...element
+                    }
                 }
+                else return {...element}
             })
 
             const attributesToUpdate = product[0];

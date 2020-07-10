@@ -5,7 +5,7 @@ exports.up = knex => knex.schema.createTable('clients', table => {
     table.string('email').unique().notNullable()
     table.string('password').notNullable()
     table.string('cell', 255).notNullable()
-    table.string('img_url').nullable().defaultTo('https://discordapp.com/channels/694679776694108161/694680070215696465/730620632848531486')
+    table.string('img_url').nullable().defaultTo('https://res.cloudinary.com/dbehp0gsj/image/upload/v1594263837/uploads/Perfil_wlbvbl.png')
     table.timestamp('deleted_at')
 
 })

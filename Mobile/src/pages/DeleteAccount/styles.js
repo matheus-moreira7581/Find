@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
+        backgroundColor: colors.background,
     },
     warningTitle:{
         fontFamily: fonts.montserratSemiBold,

@@ -29,12 +29,13 @@ const ordersDataModel = [
 const CompanyRunning = ({ handleOfficeHourFunction }) => {
   //const [showSellingItems, setShowSellingItems] = useState(false);
   const [screenMode, setScreenMode] = useState('orders'); //3 states: 1 is default (Orders) 2 is My Products and 3 is register new product
+  const [itemId, setItemId] = useState(null);
 
   const navigation = useNavigation();
 
   const [orders, setOrders] = useState([]);
 
-  const { loggedUser } = useAuth();
+  const { loggedUser, endOfficeHour } = useAuth();
 
   const fetchOrders = async () => {
     const { data: orders } = await api.get(`/orders/${loggedUser.data.id}`);
@@ -52,11 +53,10 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
   }, [screenMode]);
 
   const navigateToOrderDetails = (id) => {
-    navigation.navigate('OrderDetails', {orderId: id});
+    navigation.navigate('OrderDetails', {orderId: id, accepted: false});
   };
 
   const navigateToRequestConfirmed = (id) => {
-    // return navigation.navigate('RequestConfirmed', {orderId: id, accepted: true});
     navigation.navigate('OrderDetails', {orderId: id, accepted: true});
   };
 
@@ -65,6 +65,7 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
       <CompanySellingItems 
         onOrderPress={() => {
           setScreenMode(null);
+          setItemId(null);
           setScreenMode('orders');
         }} 
         onItemCreation={() => {
@@ -75,6 +76,12 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
           setScreenMode(null);
           setScreenMode('list-items')
         }}
+        editItem={(id) => {
+          //TODO DIA 10 ESSA FUNÇÃO POSSIVELMENTE DEVE RECEBER O ID DO PRODUTO E INVOCAR A SCREEN DE CRIAÇÃO, MAS PASSANDO O ID DO PRODUTO E COM A FLAG DE EDITAR ATIVADA
+          setItemId(id);
+          setScreenMode(null);
+          setScreenMode('create-product');
+        }}
       />
       );
   
@@ -83,21 +90,28 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
       <ItemManagement 
         onOrderPress={() => {
           setScreenMode(null);
+          setItemId(null);
           setScreenMode('orders')
         }}
         onItemCreation={() => {
           setScreenMode(null);
           setScreenMode('list-items');
         }}
+        onItemEdited={() => {
+          setScreenMode(null);
+          setItemId(null);
+          setScreenMode('list-items');
+        }}
+        itemId={itemId}
       />
     );
 
     const getColor = (status) => {
       switch (status) {
         case 'Aceito':
-          return colors.verde
-        case 'Finalizado':
-          return colors.vermelho
+          return colors.outroVerde
+        case 'Fazendo':
+          return colors.outroVerde
         default:
           return colors.primary
       }
@@ -152,7 +166,7 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
                       status={item.status}
                       color={getColor(item.status)}
                       onPress={() => {
-                        item.status === 'Aceito' ?
+                        item.status === 'Aceito' || item.status === 'Fazendo'  ?
                           navigateToRequestConfirmed(item.id) 
                         :
                           navigateToOrderDetails(item.id)

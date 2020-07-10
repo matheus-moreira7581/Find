@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-//const swaggerDoc = require("./swaggerDoc");
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
 //Rotas
 
@@ -33,7 +34,28 @@ app.use(servicesRoutes)
 app.use(authRoutes)
 app.use(ordersRoutes)
 app.use(requestRoutes)
-//app.use(swaggerDoc)
+
+
+// Extended: https://swagger.io/specification/#infoObject
+const swaggerOptions = {
+    swaggerDefinition: {
+      info: {
+        version: "1.0.0",
+        title: "Customer API",
+        description: "Customer API Information",
+        contact: {
+          name: "Amazing Developer"
+        },
+        servers: ["http://localhost:3333"]
+      }
+    },
+    apis: ['src/routes/*.js']
+  };
+  
+  
+  
+const swaggerDocs = swaggerJsDoc(swaggerOptions)
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 // Initial route
