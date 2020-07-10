@@ -19,7 +19,7 @@ import { useAuth } from '../../contexts/auth'
 
 import api from '../../services/api';
 
-const CompanySellingItems = ({ onOrderPress, onItemCreation, onItemRemoval }) => {
+const CompanySellingItems = ({ onOrderPress, onItemCreation, onItemRemoval, editItem }) => {
   const [sellingItemsData, setSellingItemsData] = useState([]);
 
   const {loggedUser} = useAuth();
@@ -101,6 +101,7 @@ const CompanySellingItems = ({ onOrderPress, onItemCreation, onItemRemoval }) =>
                 Image={item.img_url}
                 Description={item.description}
                 onDelete={() => handleItemRemoval(item.id)}
+                onPress={() => editItem(item.id)}//TODO DIA 10, ESSA FUNÇÃO POSSIVELMENTE DEVE RECEBER O ID DO PRODUTO
                 removable
               />
             )}

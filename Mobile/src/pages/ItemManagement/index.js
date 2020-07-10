@@ -20,7 +20,7 @@ import UnderlinedTextButton from '../../components/UnderlinedTextButton';
 import LoadingIndicator from '../../components/LoadingIndicator';
 
 
-const ItemManagement = ({ onItemCreation, onOrderPress }) => { 
+const ItemManagement = ({ onItemCreation, onOrderPress, itemId = null, onItemEdited }) => { 
     const [selectedTimeRange, setSelectedTimeRange] = useState (0);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -29,6 +29,40 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
     const [loading, setLoading] = useState(false);
     
     
+    const { loggedUser } = useAuth();
+    
+    useEffect(() => {
+        if(!!itemId){
+            loadItemDataToEdit();
+        }
+    }, [itemId]);
+
+    const loadItemDataToEdit = async () => {
+        try{
+            const response = await api.get(`${loggedUser.data.type === 'service' ? '/company/services' : '/company/products'}/${itemId}`);
+            if(response.status !== 200 || response === undefined){
+                Alert.alert('Erro', `${loggedUser.data.type === 'service' ? 'Serviço' : 'Produto'} inválido!`);
+            }
+            else{
+                const item = response.data[0];
+                
+                setImage({uri: item.img_url});
+                setPrice(item.price);
+                setName(item.name);
+                setDescription(item.description);
+
+                if(item.limit_time){
+                    const availableTimeRanges = timeRanges;
+                    const [selectedTimeRange] = availableTimeRanges.filter((timeRange) => timeRange.range === item.limit_time);
+                    setSelectedTimeRange(selectedTimeRange.id);
+                }
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
     const imagePickerConditions = {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
@@ -43,9 +77,6 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
         { id: 3, range: '20min - 25min' },
     ];
 
-    const navigation = useNavigation();
-
-    const { loggedUser } = useAuth();
 
     const getName = (typed) => setName(typed);
     const getDescription = (typed) => setDescription(typed);
@@ -54,11 +85,6 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
     const checkSpecialCharacters = /[-'`~!@#$%^&*()_|+=?;:'"<>\{\}\[\]\\\/]/gi;
     const checkLetters = /[a-zA-Z]/g;
 
-    const navigateToCompanyRunning = () => {
-        navigation.reset({
-            routes: [{name: 'CompanyRunning'}]
-        });  
-    }
     const getPermissionsAsync = async () => {
         if(Constants.platform.ios){
             const { status } = await Permissions.getAsync(Permissions.CAMERA_ROLL);
@@ -98,7 +124,7 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
                     setLoading(true);
                     const response = await finishItemRegistration();
                     setLoading(false);
-
+                    
                     if(response === undefined || response.status !== 201){
                         Alert.alert('Error', `Falha na criação do ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'}!`);
                     }
@@ -137,9 +163,7 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
             picToUpload = {
                 uri: image.uri,
                 name: imageName,
-                type: `${image.type}/${imageExtension === 'jpg' ? 'jpeg' : 'png'}`,
-                width: image.width,
-                height: image.height 
+                type: `image/${imageExtension === 'jpg' ? 'jpeg' : 'png'}`,
             }
         } 
        
@@ -152,13 +176,12 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
         itemData.append('limit_time', timeRanges[selectedTimeRange].range);
         itemData.append('img_url', picToUpload);
 
-        console.log(itemData)
-        console.log(id)
         
         try{
-            const response = await api.post(`${loggedUser.data.type === 'product' ? '/my-products' : '/my-services'}`, itemData, requestConfiguration); 
-
-            console.log(response)
+            const response = !!itemId
+                ? await api.put(`${loggedUser.data.type === 'product' ? '/my-products' : '/my-services'}/${itemId}`, itemData, requestConfiguration)
+                : await api.post(`${loggedUser.data.type === 'product' ? '/my-products' : '/my-services'}`, itemData, requestConfiguration); 
+            
             return response;
         }
         catch(error){
@@ -166,6 +189,41 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
         }
         
     };
+
+    const handleItemEdition = async () => {
+        if(name === '' || description === '' || price === '0' || price === '') {
+            return Alert.alert('Error', 'Preencha todos os campos marcados com "*"!');
+        }
+        else {
+            if(checkSpecialCharacters.test(name) || checkSpecialCharacters.test(description)) 
+                return loggedUser.data.type === 'product'  
+                    ? Alert.alert('Error', '"Nome do produto" e "Descrição do produto" não podem conter caracters especiais!')
+                    : Alert.alert('Error', '"Nome do serviço" e "Descrição do serviço" não podem conter caracters especiais!');
+            else {
+                if(checkSpecialCharacters.test(price) || checkLetters.test(price)) 
+                    return Alert.alert('Error', 'Preço Fixo" só deve conter números e ponto!');
+                else {
+                    
+                    setLoading(true);
+                    const response = await finishItemRegistration();
+                    setLoading(false);
+
+                    if(response === undefined || response.status !== 200){
+                        Alert.alert('Error', `Falha ao modificar o ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'}!`);
+                    }
+                    else{
+                        Alert.alert(
+                            'Concluído', 
+                            `${loggedUser.data.type === 'product' ? 'Produto' : 'Serviço'} editado com sucesso!`,
+                            [{ text: 'OK', onPress: () => onItemEdited() }]
+                        );
+                    }
+                }
+            }
+        }    
+    };
+
+
     return (
         <SafeAreaView style={styles.screenContainer}>
             <LoadingIndicator active={loading}/>
@@ -258,13 +316,13 @@ const ItemManagement = ({ onItemCreation, onOrderPress }) => {
                         }    
                     </View>
                     <RoundedButton
-                        text="Concluir"
+                        text={!!itemId ? "Editar" : "Concluir"}
                         selected={true}
                         width={256}
                         height={50}
                         fontSize={adjustFontSize(16)}
                         style={styles.doneButton}
-                        onPress={() => handleSellingItemCreation()}
+                        onPress={!!itemId ? () => handleItemEdition() : () => handleSellingItemCreation()}
                     />
                 </ScrollView>    
             </TouchableWithoutFeedback>
