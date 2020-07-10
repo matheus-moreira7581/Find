@@ -38,7 +38,10 @@ const CustomerRegistration = () => {
                 cell,
                 password
             });
-            if(response.status >= 200 && response.status <=299) {
+            if(response.status === 201) {
+                signIn(email, password);
+            }
+            else{
                 if(!!response.data.msg){
                     Alert.alert(
                         'Erro', 
@@ -47,24 +50,23 @@ const CustomerRegistration = () => {
                         {  cancelable: false }
                     )
                 }
-                else{
-                    signIn(email, password);
-                }
+                else
+                    Alert.alert(
+                        'Erro', 
+                        'Falha no cadastro!', 
+                        [ { text: 'OK' } ], 
+                        { cancelable: true }
+                    );
             }
-            else{
-                Alert.alert(
-                    'Erro', 
-                    'Falha no cadastro!', 
-                    [ { text: 'OK' } ], 
-                    { cancelable: true }
-                )
-            }
-                
-
         }
         catch(error){
-            console.log(error)
-        }   
+            Alert.alert(
+                'Erro', 
+                'Este e-mail já está em uso!', 
+                [ { text: 'OK' } ], 
+                { cancelable: true }
+            );
+        }       
     }
 
     const handleRegister = () => {

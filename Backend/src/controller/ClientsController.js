@@ -29,7 +29,7 @@ module.exports = {
 
             await knex('clients').insert(client);
             
-            response.status(201).json(client);
+            response.status(201).send();
             
         } catch (error) {
             next(error)
@@ -37,21 +37,6 @@ module.exports = {
 
     },
 
-
-    // Listar clientes (apenas para desenvolvimento)
-
-    async index(request, response, next) {
-
-        try {
-            const clients = await knex('clients');
-    
-            response.json(clients);
-            
-        } catch (error) {  
-            next(error)
-        }
-
-    },
 
     // Mostrar dados de um cliente especifico (perfil)
 
@@ -107,9 +92,7 @@ module.exports = {
 
             await knex('clients').where({ id }).update({client})
 
-            const newdata = await knex('clients').where({ id })
-
-            response.status(200).json(newdata)
+            response.status(200).send()
 
         } catch (error) {
             next(error)
@@ -128,7 +111,7 @@ module.exports = {
             .where({id})
             .update('deleted_at', new Date());
     
-            response.status(200).json({msg: 'Cliente deletado com sucesso!'});
+            response.status(200).send();
             
         } catch (error) {
             next(error)

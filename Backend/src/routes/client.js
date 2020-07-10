@@ -17,25 +17,6 @@ const uploadImages = require('../config/multer')
  *        description: Registro realizado com sucesso
  */
 routes.post('/register-client', ClientsController.create)
-/**
- * @swagger
- * /clients:
- *  get:
- *    description: Seleção de clientes
- *    responses:
- *      '200':
- *        description: Seleção realizada com sucesso
- */
-      .get('/clients', ClientsController.index)
-/**
- * @swagger
- * /edit-client/:id:
- *  get:
- *    description: Seleção de cliente expecifico
- *    responses:
- *      '200':
- *        description: Seleção realizada com sucesso
- */      
       .get('/edit-client/:id', ClientsController.show)
 /**
  * @swagger

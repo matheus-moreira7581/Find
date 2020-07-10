@@ -72,6 +72,7 @@ export const AuthProvider = ({children}) => {
         if(response.status === 200) {
             await AsyncStorage.removeItem('@Find:officeHour');
             setOfficeHour(false);
+            
         }
         else return Alert.alert('Error', 'Não foi possivel encerrar expediente')
     }

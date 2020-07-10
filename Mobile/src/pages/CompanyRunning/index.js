@@ -35,7 +35,7 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
 
   const [orders, setOrders] = useState([]);
 
-  const { loggedUser } = useAuth();
+  const { loggedUser, endOfficeHour } = useAuth();
 
   const fetchOrders = async () => {
     const { data: orders } = await api.get(`/orders/${loggedUser.data.id}`);
@@ -53,11 +53,10 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
   }, [screenMode]);
 
   const navigateToOrderDetails = (id) => {
-    navigation.navigate('OrderDetails', {orderId: id});
+    navigation.navigate('OrderDetails', {orderId: id, accepted: false});
   };
 
   const navigateToRequestConfirmed = (id) => {
-    // return navigation.navigate('RequestConfirmed', {orderId: id, accepted: true});
     navigation.navigate('OrderDetails', {orderId: id, accepted: true});
   };
 
@@ -110,9 +109,9 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
     const getColor = (status) => {
       switch (status) {
         case 'Aceito':
-          return colors.verde
-        case 'Finalizado':
-          return colors.vermelho
+          return colors.outroVerde
+        case 'Fazendo':
+          return colors.outroVerde
         default:
           return colors.primary
       }
@@ -167,7 +166,7 @@ const CompanyRunning = ({ handleOfficeHourFunction }) => {
                       status={item.status}
                       color={getColor(item.status)}
                       onPress={() => {
-                        item.status === 'Aceito' ?
+                        item.status === 'Aceito' || item.status === 'Fazendo'  ?
                           navigateToRequestConfirmed(item.id) 
                         :
                           navigateToOrderDetails(item.id)

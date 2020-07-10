@@ -81,7 +81,7 @@ async create(request, response, next) {
         }
 
 
-       return response.status(201).json({ status: "Serviço solicitado com sucesso."})
+       return response.status(201).send();
 
         
     } catch (error) {
@@ -98,9 +98,10 @@ async index(request, response, next) {
         const { id_company } = request.params;
 
         const requests = await knex('requests')
-        .where({ id_company })
+        .where({ id_company,})
+        .whereIn('status', ['Aceito','Solicitando'])
         .join('clients', 'clients.id', 'requests.id_client')
-        .orderBy('request_date', 'desc')
+        .orderBy([{column : 'status', order: 'desc'}, {column : 'request_time', order: 'asc'}])
         .select('clients.name', 'requests.id', 'requests.status');
 
         response.status(200).json(requests)
@@ -227,7 +228,7 @@ async update(request, response, next) {
         await knex('requests').where('id', id_request)
         .update({ status });
 
-        response.status(200).json({status});
+        response.status(200).send();
 
     } catch (error) {
 

@@ -10,6 +10,7 @@ exports.up = knex => knex.schema.createTable('requests', table => {
     table.enu('status', ['Solicitando', 'Cancelado', 'Finalizado', 'Aceito']).defaultTo('Solicitando')
     table.string('schedule').notNullable();
     table.date('request_date').defaultTo(knex.fn.now())
+    table.timestamp('request_time').defaultTo(knex.fn.now())
     
 })
 

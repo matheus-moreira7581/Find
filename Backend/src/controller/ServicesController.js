@@ -44,7 +44,7 @@ module.exports = {
 
             await knex('services').insert(service);
 
-            response.status(201).json(service);
+            response.status(201).send();
         
 
         } catch (error) {
@@ -178,9 +178,7 @@ module.exports = {
             .where({ id })
             .update(attributesToUpdate);
 
-            const newdata = await knex('services').where({ id })
-
-            response.status(200).json(newdata)
+            response.status(200).send();
 
         } catch (error) {
             next(error)
@@ -200,7 +198,7 @@ module.exports = {
             .where({id})
             .update('deleted_at', new Date());
       
-            response.status(200).json({msg: 'Serviço deletado com sucesso!'});
+            response.status(200).send();
         
         } catch (error) {
             next(error)

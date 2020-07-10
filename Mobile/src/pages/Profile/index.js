@@ -224,19 +224,18 @@ const Profile = () => {
           }
           ListFooterComponent={
             <View>
-            <ProfileMenuListItem 
-              style={styles.logoutButton}
-              mainIconName={null} 
-              endIconName="exit-to-app"
-              endIconColor={colors.vermelho}
-              text="Sair"
-              textColor={colors.vermelho} 
-              onPress={handleLogout}
-            />  
+              <ProfileMenuListItem 
+                style={styles.logoutButton}
+                mainIconName={null} 
+                endIconName="exit-to-app"
+                endIconColor={colors.vermelho}
+                text="Sair"
+                textColor={colors.vermelho} 
+                onPress={handleLogout}
+              />  
             </View>
           }
-        />
-        
+        /> 
       </View>
     </SafeAreaView>
   );

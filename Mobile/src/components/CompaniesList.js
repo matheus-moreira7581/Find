@@ -94,11 +94,14 @@ const styles = StyleSheet.create({
         fontFamily: fonts.montserratBold       
     },
     companyLogo:{
+        justifyContent: 'center',
+        alignItems: 'center',
         marginLeft: adjustHorizontalMeasure(24),
         marginTop: adjustVerticalMeasure(11),
         marginBottom: adjustVerticalMeasure(14),
         width: adjustHorizontalMeasure(56),
-        height: adjustVerticalMeasure(56),
+        height: adjustHorizontalMeasure(56),
+        borderRadius: adjustHorizontalMeasure(200),
     },
     companyLogoPlaceholder: {
         justifyContent: 'center',

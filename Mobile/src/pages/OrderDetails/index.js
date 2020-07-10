@@ -27,7 +27,7 @@ const product = [
 const OrderDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const { loggedUser } = useAuth()
+  const { loggedUser, endOfficeHour } = useAuth()
   
   const [type, setType] = useState('');
   const [items, setItems] = useState([]);
@@ -98,7 +98,7 @@ const OrderDetails = () => {
       });
     }
     if(response.status === 200) return navigation.reset({
-      routes: [{name: 'CompanyRunning'}]
+      routes: [{name: 'HomeCompany'}]
     });
     else {
       Alert.alert('Error', 'Falha ao tentar cancelar o pedido');

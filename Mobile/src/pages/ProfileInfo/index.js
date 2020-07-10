@@ -51,34 +51,38 @@ const ProfileInfo = () => {
             },
         ]
     :
-    [
-        {
-            title: 'Minha Conta',
-            data: [
-                {
-                    titleText: 'Nome da Empresa',
-                    value: loggedUser.data.company_name
-                },
-                {
-                    titleText: 'Meu E-mail',
-                    value: loggedUser.data.email
-                },
-            ]
-        },
-        {
-            title: 'Dados Pessoais',
-            data: [
-                {
-                    titleText: 'Data de Nascimento',
-                    value: loggedUser.data.date_birth
-                },
-                {
-                    titleText: 'CPF',
-                    value: maskCpf(loggedUser.data.cpf)
-                },
-            ]
-        },
-    ];
+        [
+            {
+                title: 'Minha Conta',
+                data: [
+                    {
+                        titleText: 'Nome da Empresa',
+                        value: loggedUser.data.company_name
+                    },
+                    {
+                        titleText: 'Meu E-mail',
+                        value: loggedUser.data.email
+                    },
+                ]
+            },
+            {
+                title: 'Dados Pessoais',
+                data: [
+                    {
+                        titleText: 'Nome',
+                        value: loggedUser.data.name
+                    },
+                    {
+                        titleText: 'Data de Nascimento',
+                        value: loggedUser.data.date_birth
+                    },
+                    {
+                        titleText: 'CPF',
+                        value: maskCpf(loggedUser.data.cpf)
+                    },
+                ]
+            },
+        ];
     
     
     return (
@@ -114,6 +118,9 @@ const ProfileInfo = () => {
                             <Text style={styles.listItemTitle}>{item.titleText}</Text>
                             <Text style={styles.listItemValue}>{item.value}</Text>
                         </View>
+                    }
+                    ListFooterComponent={
+                        <View style={styles.bottomSeparator}/>
                     }
                 />
             </View>

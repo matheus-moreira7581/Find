@@ -45,7 +45,7 @@ module.exports = {
 
             await knex('products').insert(product);
             
-            return response.status(201).json(product);
+            return response.status(201).send();
 
 
         } catch (error) {
@@ -122,7 +122,6 @@ module.exports = {
 
 
     //Listar um único produto (tela do cliente)
-
     async getProduct(request, response, next){
         try{
             const { id } = request.params;
@@ -155,7 +154,7 @@ module.exports = {
                 const newPath = await uploader(path)
 
                 urls.push(newPath)
-
+    
                 fs.unlinkSync(path)
             }
 
@@ -163,13 +162,13 @@ module.exports = {
 
             const { name, description, price, limit_time } = request.body;
 
-            const item = [{ name, description, price, limit_time }];
+                const item = [{ name, description, price, limit_time }];
 
-            const product = item.map(element => {
-                if(urls.length > 0) {
-                    return {
-                        "img_url": urls[0].url,...element
-                    }
+                const product = item.map(element => {
+                    if(urls.length > 0) {
+                        return {
+                            "img_url": urls[0].url,...element
+                        }
                 }
                 else return {...element}
             })
@@ -180,12 +179,10 @@ module.exports = {
             .where({ id })
             .update(attributesToUpdate);
 
-            
-            const newdata = await knex('products').where({ id })
 
-            response.status(200).json(newdata)
+            response.status(200).send();
 
-        } catch (error) {
+        }catch (error) {
             next(error)
         }
 
@@ -202,7 +199,7 @@ module.exports = {
             .where({id})
             .update('deleted_at', new Date());
       
-            response.status(200).json({msg: 'Produto deletado com sucesso!'});
+            response.status(200).send();
             
         } catch (error) {
             next(error)
