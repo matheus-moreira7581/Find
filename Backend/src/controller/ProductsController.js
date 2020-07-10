@@ -155,18 +155,19 @@ module.exports = {
                 const newPath = await uploader(path)
 
                 urls.push(newPath)
+            
+        
+                const { id } = request.params;
 
-            const { id } = request.params;
+                const { name, description, price, limit_time } = request.body;
 
-            const { name, description, price, limit_time } = request.body;
+                const item = [{ name, description, price, limit_time }];
 
-            const item = [{ name, description, price, limit_time }];
-
-            const product = item.map(element => {
-                if(urls.length > 0) {
-                    return {
-                        "img_url": urls[0].url,...element
-                    }
+                const product = item.map(element => {
+                    if(urls.length > 0) {
+                        return {
+                            "img_url": urls[0].url,...element
+                        }
                 }
                 else return {...element}
             })
