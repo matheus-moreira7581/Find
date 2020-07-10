@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity, Button } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
 
 import styles from './styles';
 import HomeList from '../../components/HomeList';
 
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
-import { useCategory } from '../../contexts/categorySelection';
+
+import { MaterialIcons } from '@expo/vector-icons';
+import colors from '../../assets/var/colors';
 
 import api from '../../services/api';
+import adjustFontSize from '../../utils/adjustFontSize';
 
-
-// import { Container } from './styles';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -86,8 +87,8 @@ const Home = () => {
   }
 
 
-  let showList = <HomeList datasource={productData} onPress={navigateToCompanies}/>;
-  if(showProduct === false) showList = <HomeList datasource={serviceData} onPress={navigateToCompanies}/>
+  let showList = <HomeList datasource={productData} onPress={navigateToCompanies} height={580}/>;
+  if(showProduct === false) showList = <HomeList datasource={serviceData} onPress={navigateToCompanies} height={580}/>
 
   const navigateList = (type) => {
     if(type === 'service') setShowProduct(false);
@@ -103,12 +104,22 @@ const Home = () => {
             Olá, {signedIn ? loggedUser.data.name.split(' ')[0] : 'Usuário'}.
           </Text>
         </View>
+        <View style={styles.searchContainer}>
+          <View style={styles.searchBox}>
+          <MaterialIcons name="search" size={adjustFontSize(21)} color={colors.primary} />
+          <TextInput 
+            style={styles.input}
+            placeholder="O que você deseja?" 
+            placeholderTextColor={colors.cinza}
+          />
+          </View>
+        </View>
         <View style={styles.typeContainer}>
           <TouchableOpacity onPress={() => navigateList('product')}> 
-            <Text style={styles.typeText}>Produto</Text>
+            <Text style={showProduct === true ? styles.activeText : styles.typeText}>Produto</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigateList('service')}> 
-            <Text style={styles.typeText}>Serviço</Text>
+            <Text style={showProduct === false ? styles.activeText : styles.typeText}>Serviço</Text>
           </TouchableOpacity>
         </View>
       </View>

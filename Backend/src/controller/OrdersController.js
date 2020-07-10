@@ -42,7 +42,7 @@ module.exports = {
            .insert(elements.order);
 
 
-           const data = elements.itens_cart.map(itens => { 
+           const data = elements.items_order.map(itens => { 
 
                 calc(itens.amount, itens.id_products)
 
@@ -63,8 +63,7 @@ module.exports = {
 
             const total = prices.reduce((total, prices) => total + prices, 0)
 
-            if(elements.order.receivement !== "Retirar") {
-
+            if(elements.order.receivement !== "Retirar") {                
                 const id_address = await trx('addresses')
                 .returning('id')
                 .insert(elements.address);
@@ -77,8 +76,7 @@ module.exports = {
 
                 await trx.commit();
 
-            }else{
-
+            }else{                
                 await trx('orders').where('id', id_order[0])
                 .update({'total': total});
 
@@ -86,7 +84,7 @@ module.exports = {
 
             }
         
-           return response.status(201).json({ status: "Pedido realizado com sucesso."})
+           return response.status(201).send();
 
             
         } catch (error) {
@@ -103,10 +101,11 @@ module.exports = {
             const { id_company } = request.params;
 
             const orders = await knex('orders')
-            .where({ id_company })
+            .where({ id_company,})
+            .whereIn('status', ['Fazendo','Solicitado'])
             .join('clients', 'clients.id', 'orders.id_client')
-            .orderBy('order_date', 'desc')
-            .select('clients.name', 'orders.id');
+            .orderBy([{column : 'status', order: 'desc'}, {column : 'order_date', order: 'asc'}])
+            .select('clients.name', 'orders.id', 'orders.status');
 
             response.status(200).json(orders)
 
@@ -115,6 +114,9 @@ module.exports = {
             next(error)
         }
     },
+
+
+    // Calculando o fatoramento do dia
 
     async indexForIncome(request, response, next) {
         try {
@@ -159,7 +161,6 @@ module.exports = {
                 groupArrays[i].income = total
 
             }
-            console.log(groupArrays);
 
             
             response.status(200).json(groupArrays);
@@ -181,7 +182,7 @@ module.exports = {
 
             const orders = await knex('orders')
             .join('clients', 'clients.id', 'orders.id_client')
-            .select('clients.name', 'orders.total', 'orders.payment', 'orders.receivement', 'orders.id_address', 'orders.id');
+            .select('clients.name', 'clients.cell', 'orders.total', 'orders.payment', 'orders.receivement', 'orders.id_address', 'orders.id', 'orders.status');
 
 
             const order = orders.filter(e => e.id == id_order);
@@ -220,7 +221,7 @@ module.exports = {
     },
 
 
-    // Atualizar status 
+    // Atualizar status do pedido (Aceito / Cancelado / Finalizado)
 
     async update(request, response, next) {
         try {
@@ -232,7 +233,7 @@ module.exports = {
             await knex('orders').where('id', id_order)
             .update({ status });
     
-            response.status(200).json({status});
+            response.status(200).send();
 
         } catch (error) {
 

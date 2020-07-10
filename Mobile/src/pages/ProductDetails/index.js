@@ -11,38 +11,60 @@ import colors from '../../assets/var/colors';
 
 import api from '../../services/api';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import {useCart} from '../../contexts/cart'
+import { useCart } from '../../contexts/cart'
+import { useCategory } from '../../contexts/categorySelection'
 
 const ProductDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { productId, companyId } = route.params;
-  const {setOrderInfo, addProductToCart, orderInfo} = useCart();
+  const { Id, companyId, edit, editItem} = route.params;
+  const {setOrderInfo, addProductToCart, orderInfo, requestInfo, setRequestInfo, editItemFromCart} = useCart();
+  const { selectedCategoryCardInfo } = useCategory();
 
-  const loadScreenInfo = async () => {
+  const loadScreenInfoProduct = async () => {
     const response = await api.get(`/company?id_company=${companyId}`);
     
     const { products: companyProducts, title, img_url } = response.data[0];
 
-    const product = companyProducts.find(product => product.id === productId);
+    const product = companyProducts.find(product => product.id === Id);
 
     setScreenInfo(product, img_url, title);
   };
 
-  const setScreenInfo = (product, companyLogo, companyName) => {
-     setAmount(1);
-     setPrice(parseFloat(product.price).toFixed(2));
-     setAddPrice(parseFloat(product.price).toFixed(2));
-     setProductTitle(product.name);
-     setProductBackgroundImage(product.img_url);
-     setProductDescription(product.description);
+  const loadScreenInfoService = async () => {
+    
+    const response = await api.get(`/company-service?id_company=${companyId}`);
+    
+    const { services: companyServices, title, img_url } = response.data[0];
+
+    const service = companyServices.find(service => service.id === Id);
+
+    setScreenInfo(service, img_url, title);
+  };
+
+  const setScreenInfo = (item, companyLogo, companyName) => {
+     setPrice(parseFloat(item.price));
+     setAddPrice(parseFloat(item.price).toFixed(2));
+     setProductTitle(item.name);
+     setProductBackgroundImage(item.img_url);
+     setProductDescription(item.description);
      setCompanyLogoUrl(companyLogo);
      setCompanyName(companyName);
   }
 
   useEffect(() => {
-    loadScreenInfo();
+    if(edit === true) {
+      loadScreenInfoProduct();
+      setAmount(editItem.amount);
+      setDetails(editItem.details);
+    }
+    else if(selectedCategoryCardInfo.type === 'product') {
+      loadScreenInfoProduct();
+    }
+    else if(selectedCategoryCardInfo.type === 'service') {
+      loadScreenInfoService();
+    }
   }, []);
 
   const [amount, setAmount] = useState(1);
@@ -81,22 +103,44 @@ const ProductDetails = () => {
   }
 
   const handleAddProductToMarketBag = () => {
-    setOrderInfo({
-      id_company: companyId,
-      id_client: orderInfo.id_client,
-      payment: orderInfo.payment,
-      receivement: orderInfo.receivement
-    });
-    const cartItem = {
-      "id_products": productId,
-      "title": productTitle,
-      "image": productBackgroundImage,
-      "amount": amount,
-      "details": details,
-      "price": price,
-      "description": productDescription
+    let cartItem = {}
+    if(selectedCategoryCardInfo.type === 'product') {
+      setOrderInfo({
+        id_company: companyId,
+        id_client: orderInfo.id_client,
+        payment: orderInfo.payment,
+        receivement: orderInfo.receivement
+      });
+      let convertedPrice = parseFloat(price);
+      cartItem = {
+        "id_products": Id,
+        "title": productTitle,
+        "image": productBackgroundImage,
+        "amount": amount,
+        "details": details,
+        "price": convertedPrice,
+        "description": productDescription
+      }
     }
-    addProductToCart(cartItem, companyId);
+    else if(selectedCategoryCardInfo.type === 'service') {
+      setRequestInfo({
+        id_company: companyId,
+        id_client: requestInfo.id_client,
+        payment: requestInfo.payment,
+        local: requestInfo.local,
+        schedule: requestInfo.schedule
+      });
+      cartItem = {
+        id_service: Id,
+        title: productTitle,
+        image: productBackgroundImage,
+        details: details,
+        price: price,
+        description: productDescription
+      }
+    }
+
+    addProductToCart(cartItem, companyId, selectedCategoryCardInfo.type);
 
     navigation.reset({
       routes: [
@@ -105,6 +149,28 @@ const ProductDetails = () => {
         {name: 'CompanyProducts', params: {companyId: companyId}}
       ]
     })  
+  }
+
+  const handleProductEdit = () => {
+    let cartItem = {
+      "id_products": editItem.id_products,
+      "title": editItem.title,
+      "image": editItem.image,
+      "amount": amount,
+      "details": details,
+      "price": editItem.price,
+      "description": editItem.description
+    }
+    editItemFromCart(cartItem);
+    navigation.reset({
+      routes: [
+        {name: 'Home'},
+        {name: 'Companies'},
+        {name: 'CompanyProducts', params: {companyId: companyId}},
+        {name: 'MarketBag'}
+      ]
+    })
+
   }
 
   return (
@@ -186,31 +252,57 @@ const ProductDetails = () => {
           </View>
         </View>
         <View style={styles.noteBottomBorder}></View>
-        <View style={styles.addContainer}>
-          <View style={styles.amountContainer}>
-            <TouchableOpacity 
-              onPress={subtractAmount}
-              style={styles.removeAmount}
-            >
-              <MaterialIcons name="remove" style={styles.removeIcon}/>
-            </TouchableOpacity>
-            <Text style={styles.amountText}>{amount}</Text>
-            <TouchableOpacity
-              onPress={addAmount}
-              style={styles.addAmount}
-            >
-              <MaterialIcons name="add" style={styles.addIcon}/>
-            </TouchableOpacity>
-          </View>
-          <RoundedButton 
-            text={`Adicionar R$ ${addPrice}`} 
-            onPress={() => handleAddProductToMarketBag()} 
-            selected={true} 
-            width={168}
-            height={36}
-            fontSize={12}
-          />
-        </View>
+        {
+          selectedCategoryCardInfo.type === 'product' ?
+            <View style={styles.addContainer}>
+              <View style={styles.amountContainer}>
+                <TouchableOpacity 
+                  onPress={subtractAmount}
+                  style={styles.removeAmount}
+                >
+                  <MaterialIcons name="remove" style={styles.removeIcon}/>
+                </TouchableOpacity>
+                <Text style={styles.amountText}>{amount}</Text>
+                <TouchableOpacity
+                  onPress={addAmount}
+                  style={styles.addAmount}
+                >
+                  <MaterialIcons name="add" style={styles.addIcon}/>
+                </TouchableOpacity>
+              </View>
+              {
+                edit === true ? 
+                  <RoundedButton 
+                    text={`Editar`} 
+                    onPress={() => handleProductEdit()} 
+                    selected={true} 
+                    width={168}
+                    height={36}
+                    fontSize={12}
+                  />
+                :
+                  <RoundedButton 
+                    text={`Adicionar R$ ${addPrice}`} 
+                    onPress={() => handleAddProductToMarketBag()} 
+                    selected={true} 
+                    width={168}
+                    height={36}
+                    fontSize={12}
+                  />
+              }
+            </View> 
+          :
+            <View style={styles.serviceButtonContainer}>
+              <RoundedButton 
+                text={`Continuar R$ ${addPrice}`} 
+                onPress={() => handleAddProductToMarketBag()} 
+                selected={true} 
+                width={256}
+                height={48}
+                fontSize={16}
+              />
+            </View>
+        }
       </View>
     </View>
   )

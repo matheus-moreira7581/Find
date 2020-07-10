@@ -1,42 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, Button } from 'react-native';
-import RoundedButton from '../../components/RoundedButton';
+import { View, Text, Image } from 'react-native';
 
 import { useAuth } from '../../contexts/auth';
-
-import styles from './styles';
-import colors from '../../assets/var/colors';
+import { useNavigation } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
-import { useNavigation } from '@react-navigation/native';
 import CompanyRunning from '../CompanyRunning';
- 
+
+import RoundedButton from '../../components/RoundedButton';
+
+import styles from './styles';
+
+import colors from '../../assets/var/colors';
 
 const HomeCompany = () => {
   const navigation = useNavigation();
 
-  const [shift, setShift] = useState(false);
   const [companyLogoUrl, setCompanyLogoUrl] = useState('');
   const [companyName, setCompanyName] = useState('');
-
-  const { signOut, loggedUser, signedIn } = useAuth();
+  
+  const { signOut, loggedUser, signedIn, officeHour, startOfficeHour, endOfficeHour } = useAuth();
+  const [shift, setShift] = useState(false);
 
   useEffect(() => {
     setCompanyLogoUrl(loggedUser.data.img_url);
-    setCompanyName(loggedUser.data.name);
+    setCompanyName(loggedUser.data.company_name);
   },[]);
-  
+
+  useEffect(() => {
+    setShift(officeHour);
+  }, [officeHour])
+
   return (
-    shift ? <CompanyRunning onPressButton={() => {setShift(!shift)}}/> : 
+    shift ? <CompanyRunning handleOfficeHourFunction={endOfficeHour}/> : 
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.companyLogoContainer}>
           {
-            companyLogoUrl === 'my-photo' || companyLogoUrl === ''
+            companyLogoUrl === 'my-photo' || companyLogoUrl === '' || companyLogoUrl === null
             ? <View style={styles.companyLogoPlaceholder}>
                 <MaterialIcons name="insert-photo" size={adjustHorizontalMeasure(20)} color={colors.cinza} />
               </View>
@@ -51,7 +56,10 @@ const HomeCompany = () => {
         <View style={styles.buttonContainer}>
           <RoundedButton 
             text="Iniciar Expediente" 
-            onPress={() => {setShift(!shift)}} 
+            onPress={() => {
+              setShift(!shift);
+              startOfficeHour();
+            }} 
             style={styles.button}
             fontSize={adjustFontSize(15)} 
             selected={true} 

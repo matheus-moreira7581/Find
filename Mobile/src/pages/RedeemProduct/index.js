@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { SafeAreaView, View, Text, TouchableOpacity, Image, TextInput, Alert } from 'react-native';
 
@@ -8,7 +8,6 @@ import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import { useCart } from '../../contexts/cart';
-import { useAuth } from '../../contexts/auth';
 
 import RoundedButton from '../../components/RoundedButton';
 
@@ -36,7 +35,7 @@ const RedeemProduct = () => {
     const fetchCompanyInfo = async () => {
         try{
             const response = await api.get(`/edit-company/${orderInfo.id_company}`);
-            setCompanyTitle(response.data[0].name);
+            setCompanyTitle(response.data[0].company_name);
             setCompanyLogoUrl(response.data[0].img_url);
         }
         catch(error){
@@ -127,7 +126,7 @@ const RedeemProduct = () => {
                                     color={colors.cinza}
                                 />
                             :
-                                <Image source={{uri: companyLogoUrl}} resizeMode="stretch"/>
+                                <Image source={{uri: companyLogoUrl}} resizeMode="stretch" style={styles.image}/>
                         }
                         
                     </View>

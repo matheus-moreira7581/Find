@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-
 import { SafeAreaView, View, Text, TouchableOpacity, TextInput } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
-import RoundedButton from '../../components/RoundedButton';
+import { useNavigation } from '@react-navigation/native';
+
+import { useCart } from '../../contexts/cart'
+import { useCategory } from '../../contexts/categorySelection';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import adjustFontSize from '../../utils/adjustFontSize';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
-import { useNavigation } from '@react-navigation/native';
-import {useCart} from '../../contexts/cart'
+
+import RoundedButton from '../../components/RoundedButton';
 
 const DeliveryAddress = () => {
     const navigation = useNavigation();
     const {setAddressInfo} = useCart();
+    const {selectedCategoryCardInfo} = useCategory();
 
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -36,7 +38,8 @@ const DeliveryAddress = () => {
             additional: additional,
             landmark: "mercado" 
         });
-        navigation.navigate('PaymentOptions');
+        if(selectedCategoryCardInfo.type === 'product') return navigation.navigate('PaymentOptions');
+        else if(selectedCategoryCardInfo.type === 'service') return navigation.navigate('ServiceScheduling');
     }
 
     return (
@@ -46,7 +49,12 @@ const DeliveryAddress = () => {
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
-                    <Text style={styles.headerText}>Entregar pra mim</Text>
+                    <Text style={styles.headerText}>
+                    { 
+                        selectedCategoryCardInfo.type === 'product' ?  
+                        "Entregar pra mim" : "Meu Endereço"
+                    }
+                    </Text>
                 </View>
             </View>
             <View style={styles.bodyContainer}>

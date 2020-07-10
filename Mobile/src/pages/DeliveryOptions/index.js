@@ -11,7 +11,7 @@ import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import { useNavigation } from '@react-navigation/native';
-import {useCart} from '../../contexts/cart'
+import { useCart } from '../../contexts/cart'
 
 const DeliveryOptions = () => {
     const [deliveryOption, setDeliveryOption] = useState(false);
@@ -50,7 +50,7 @@ const DeliveryOptions = () => {
     return ( 
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backButton}>
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.secondary} style={styles.backIcon}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>

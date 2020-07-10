@@ -10,17 +10,49 @@ import colors from '../../assets/var/colors';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
+import { useCart } from '../../contexts/cart'
+import { useNavigation } from '@react-navigation/native';
+
 const ServiceOptions = () => {
     const [deliveryOption, setDeliveryOption] = useState(false);
+
+    const {requestInfo, setRequestInfo} = useCart();
+    const navigation = useNavigation();
 
     useEffect(() => {
         setDeliveryOption(null);
     }, []);
 
+    const navigate = () => {
+        if(deliveryOption === null) {
+            Alert.alert('Error', 'Selecione uma opção onde seu serviço será realizado');
+        }
+        else if(deliveryOption === false) {
+            setRequestInfo({
+                id_company: requestInfo.id_company,
+                id_client: requestInfo.id_client,
+                payment: requestInfo.payment,
+                local: 'Endereço do profissional',
+                schedule: requestInfo.schedule,
+            });
+            navigation.navigate('ServiceScheduling');
+        }
+        else if(deliveryOption === true) {
+            setRequestInfo({
+                id_company: requestInfo.id_company,
+                id_client: requestInfo.id_client,
+                payment: requestInfo.payment,
+                local: 'Endereço do cliente',
+                schedule: requestInfo.schedule,
+            })
+            navigation.navigate('DeliveryAddress');
+        }
+    }
+
     return ( 
         <SafeAreaView style={styles.screenContainer}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backButton}>
+                <TouchableOpacity style={styles.backButton} onPress={() => {navigation.goBack()}}>
                     <MaterialIcons name="arrow-back" size={adjustHorizontalMeasure(20)} color={colors.secondary} style={styles.backIcon}/>
                 </TouchableOpacity>
                 <View style={styles.centeredContainer}>
@@ -55,7 +87,7 @@ const ServiceOptions = () => {
                 />
                 <RoundedButton 
                     text="Continuar" 
-                    onPress={() => {}}
+                    onPress={() => navigate()}
                     fontSize={adjustFontSize(16)} 
                     selected={true} 
                     width={256}

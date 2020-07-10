@@ -2,7 +2,7 @@ const knex = require('../database');
 
 module.exports ={ 
 
-// Cadastrando solicitação de serviço
+// Solicitando serviço 
 
 async create(request, response, next) {
     try {
@@ -19,8 +19,8 @@ async create(request, response, next) {
                    return e.price
                }
            })
-           
-           prices.push(price)
+
+           prices.push(parseFloat(price))
 
        }
     
@@ -65,7 +65,7 @@ async create(request, response, next) {
             const id_address = await trx('addresses')
             .returning('id')
             .insert(elements.address);
-     
+
             await trx('requests').where('id', id_request[0])
             .update({
                 'id_address': id_address[0], 
@@ -74,7 +74,6 @@ async create(request, response, next) {
      
             await trx.commit();
         }else{
-
             await trx('requests').where('id', id_request[0])
             .update({'total': total});
 
@@ -82,7 +81,7 @@ async create(request, response, next) {
         }
 
 
-       return response.status(201).json({ status: "Serviço solicitado com sucesso."})
+       return response.status(201).send();
 
         
     } catch (error) {
@@ -91,7 +90,7 @@ async create(request, response, next) {
 },
 
 
-// Listar solicitações de serviço de uma empresa
+// Listar solicitações de serviço de uma empresa 
 
 async index(request, response, next) {
     try {
@@ -99,10 +98,11 @@ async index(request, response, next) {
         const { id_company } = request.params;
 
         const requests = await knex('requests')
-        .where({ id_company })
+        .where({ id_company,})
+        .whereIn('status', ['Aceito','Solicitando'])
         .join('clients', 'clients.id', 'requests.id_client')
-        .orderBy('request_date', 'desc')
-        .select('clients.name', 'requests.id');
+        .orderBy([{column : 'status', order: 'desc'}, {column : 'request_time', order: 'asc'}])
+        .select('clients.name', 'requests.id', 'requests.status');
 
         response.status(200).json(requests)
 
@@ -168,7 +168,7 @@ async indexForIncome(request, response, next) {
 },
 
 
-// Detalhando serviço
+// Detalhando serviço (tela de empresa)
 
 async show(request, response, next) {
     try {
@@ -178,7 +178,7 @@ async show(request, response, next) {
 
         const requests = await knex('requests')
         .join('clients', 'clients.id', 'requests.id_client')
-        .select('clients.name', 'requests.total', 'requests.payment', 'requests.local', 'requests.id_address', 'requests.schedule','requests.id');
+        .select('clients.name', 'clients.cell', 'requests.total', 'requests.payment', 'requests.local', 'requests.id_address', 'requests.schedule','requests.id', 'requests.status');
 
 
         const req = requests.filter(e => e.id == id_request);
@@ -216,7 +216,7 @@ async show(request, response, next) {
 },
 
 
-// Atualizando status 
+// Atualizando status do serviço (Aceito / Cancelado / Finalizado)
 
 async update(request, response, next) {
     try {
@@ -228,7 +228,7 @@ async update(request, response, next) {
         await knex('requests').where('id', id_request)
         .update({ status });
 
-        response.status(200).json({status});
+        response.status(200).send();
 
     } catch (error) {
 
@@ -239,14 +239,56 @@ async update(request, response, next) {
 },
 
 
-/*async getTime(request, response, next) {
+
+async getTime(request, response, next) {
 
     try {
 
+        const date = new Date()
+        const dd = date.getDate();
+        const mm = date.getMonth() + 1;
+        const yyyy = date.getFullYear();
+    
+        const {id_company} = request.query;
+
+        const company = await knex('companies')
+        .where('id', id_company)
+        .select('hours_schedule')
+
+        const arr = company[0].hours_schedule;
+
+        const schedule = await knex('requests')
+        .where({
+            'id_company': id_company,
+            'status': 'Aceito',
+            'request_date': `${yyyy}-${mm}-${dd}`
+        })
+        .select('schedule')
+
+        if(schedule.length === 0){
+            return response.json({'schedule': company[0].hours_schedule})
+        }
+        else {
+            schedule.forEach(element => {
+                let index = arr.indexOf(element.schedule)
+    
+                delete arr[index]
+            });
+
+            const FilterSchedule = arr.filter(e => e !== null)
+
+            if(FilterSchedule.length === 0) {
+                return response.json({'schedule': []})
+            }
+
+            return response.json({'schedule': FilterSchedule})
+        }
+
+        
     } catch (error) {
         next(error)
     }
 
-}*/
+}
 
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity, Button, Image, Alert } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image, Alert } from 'react-native';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
@@ -14,7 +14,6 @@ import adjustFontSize  from '../../utils/adjustFontSize';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
-import { useCategory } from '../../contexts/categorySelection';
 
 import api from '../../services/api';
 
@@ -27,15 +26,18 @@ const product = [
 const OrderDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
-
+  const { loggedUser, endOfficeHour } = useAuth()
+  
+  const [type, setType] = useState('');
   const [items, setItems] = useState([]);
   const [order, setOrder] = useState({});
+  const [address, setAddress] = useState({});
 
-  const {orderId} = route.params;
+  const {orderId, accepted} = route.params;
 
   const fetchOrder = async () => {
     const getOrder = async () => {
-      const response = api.get(`/details?id_order=${orderId}`);
+      const response = await api.get(`/details?id_order=${orderId}`);
       return response;
     }
     const response = await getOrder();
@@ -43,14 +45,39 @@ const OrderDetails = () => {
 
     setItems(data.Items);
     setOrder(data.Order);
+    if(data.Address) setAddress(data.Address)
+  }
+  const fetchService = async () => {
+    const getService = async () => {
+      const response = await api.get(`/details/service?id_request=${orderId}`);
+      return response;
+    }
+    const response = await getService();
+    const data = response.data;
 
+    setItems(data.Items);
+    setOrder(data.Order);
+    if(data.Address) setAddress(data.Address)
   }
 
+  useEffect(() => {
+    if(loggedUser.data.type === 'product') fetchOrder();
+    else if(loggedUser.data.type === 'service') fetchService();
+  }, [])
+
   const confirmOrder = async () => {
-    const response = await api.put(`/details?id_order=${orderId}`, {
-      status: 'Aceito',
-    });
-    if(response.status === 200) return navigation.navigate('CompanyRunning');
+    let response = {};
+    if(loggedUser.data.type === 'product') {
+      response = await api.put(`/details?id_order=${orderId}`, {
+        status: 'Fazendo',
+      });
+    }
+    else if(loggedUser.data.type === 'service') {
+      response = await api.put(`/details/service?id_request=${orderId}`, {
+        status: 'Aceito',
+      });
+    }
+    if(response.status === 200) return navigation.navigate('RequestConfirmed', {orderId: orderId, accepted: false});
     else {
       Alert.alert('Error', 'Falha ao tentar confirmar o pedido');
       return navigation.navigate('CompanyRunning');
@@ -58,19 +85,67 @@ const OrderDetails = () => {
   }
 
   const cancelOrder = async () => {
-    const response = await api.put(`/details?id_order=${orderId}`, {
-      status: 'Cancelado',
+    let response = {};
+    if(loggedUser.data.type === 'product') {
+      response = await api.put(`/details?id_order=${orderId}`, {
+        status: 'Cancelado',
+      });
+    }
+    else if(loggedUser.data.type === 'service') {
+      response = await api.put(`/details/service?id_request=${orderId}`, {
+        status: 'Cancelado',
+      });
+    }
+    if(response.status === 200) return navigation.reset({
+      routes: [{name: 'HomeCompany'}]
     });
-    if(response.status === 200) return navigation.navigate('CompanyRunning');
     else {
       Alert.alert('Error', 'Falha ao tentar cancelar o pedido');
       return navigation.navigate('CompanyRunning');
     }
   }
+ 
+  const getButton = () => {
+    let view = 
+      <View style={styles.buttonsContainer}>
+        <RoundedButton
+          selected={true}
+          text="Confirmar Pedido"
+          width={256}
+          height={51}
+          fontSize={adjustFontSize(16)}
+          onPress={() => confirmOrder()}
+        />
+        <Text style={styles.buttonCenterText}>OU</Text>
+        <RoundedButton
+          selected={false}
+          text="Cancelar Pedido"
+          width={256}
+          height={51}
+          fontSize={adjustFontSize(16)}
+          onPress={() => cancelOrder()}
+        />
+      </View>
 
-  useEffect(() => {
-    fetchOrder();
-  }, [])
+    if(accepted === true) {
+      view =
+        <View style={styles.continueContainer}>
+          <RoundedButton
+            selected={true}
+            text="Continuar"
+            width={256}
+            height={51}
+            fontSize={adjustFontSize(16)}
+            onPress={() => navigateToRequestConfirmed(orderId)}
+          />
+        </View>
+    }
+    return view
+  }
+
+  const navigateToRequestConfirmed = (id) => {
+    return navigation.navigate('RequestConfirmed', {orderId: id, accepted: true});
+  };
 
   return (
     <View style={styles.container}>
@@ -112,30 +187,12 @@ const OrderDetails = () => {
               />
           </View>
           <View style={styles.details}>
-            <Text style={styles.detailsText}>Agendado para 17:30</Text>
-            <Text style={styles.detailsText}>Dinheiro</Text>
-            <Text style={styles.detailsText}>Total: R$ 25,00</Text>
+            <Text style={styles.detailsText}>{`Agendado para ${order.schedule}`}</Text>
+            <Text style={styles.detailsText}>{order.payment}</Text>
+            <Text style={styles.detailsText}>{`Total: R$ ${order.total}`}</Text>
           </View>
         </View>
-        <View style={styles.buttonsContainer}>
-          <RoundedButton
-            selected={true}
-            text="Confirmar Pedido"
-            width={256}
-            height={51}
-            fontSize={adjustFontSize(16)}
-            onPress={() => confirmOrder()}
-          />
-          <Text style={styles.buttonCenterText}>OU</Text>
-          <RoundedButton
-            selected={false}
-            text="Cancelar Pedido"
-            width={256}
-            height={51}
-            fontSize={adjustFontSize(16)}
-            onPress={() => cancelOrder()}
-          />
-        </View>
+        {getButton()}
       </View>
     </View>
   );

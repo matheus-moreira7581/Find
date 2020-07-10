@@ -58,7 +58,8 @@ ou
 | tipo  |        login       |  senha |
 |-------|--------------------|--------|
 |cliente|lucas@gmail.com     | 123456 |
-|empresa|tastypizza@gmail.com| 123456 |
+|empresa|tastypizza@gmail.com<br>uncleb@gmail.com| 123456<br>123456 |
+
 
 
 
@@ -92,6 +93,8 @@ ou
 - Acompanhe nosso cronograma: [Veja nossa sprint](./Sprints)
 
 - Leia nosso artigo no Behance: [Saiba mais](https://www.behance.net/gallery/100265571/FIND-UX-UI-Design)
+
+- Teste com Swagger: [Clique aqui](http://localhost:3333/api-docs/#/)
 
 
 ## Equipe :pushpin:

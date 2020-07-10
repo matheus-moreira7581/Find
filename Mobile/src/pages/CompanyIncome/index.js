@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../contexts/auth'
+
+import { MaterialIcons } from '@expo/vector-icons'; 
+
+import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
+
 import styles from './styles';
 import colors from '../../assets/var/colors';
 
-import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import adjustFontSize from '../../utils/adjustFontSize';
-
-import { useNavigation } from '@react-navigation/native';
-import {useAuth} from '../../contexts/auth'
-
-import api from '../../services/api';
-
-import { MaterialIcons } from '@expo/vector-icons'; 
-import RoundedButton from '../../components/RoundedButton';
 import IncomeCard from '../../components/IncomeCard';
 
-// This is a temporary data set for test.
+import api from '../../services/api';
 
 const CompanyIncome = () => {
   const navigation = useNavigation();
@@ -25,7 +22,7 @@ const CompanyIncome = () => {
   const [incomeData, setIncomeData] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const fetchCompanyIncome = async () => {
+  const fetchCompanyIncomeOrder = async () => {
     try {
       const user = loggedUser;
       const getIncome = async() => {
@@ -46,9 +43,31 @@ const CompanyIncome = () => {
     }
     
   }
+  const fetchCompanyIncomeRequest = async () => {
+    try {
+      const user = loggedUser;
+      const getIncome = async() => {
+        const response = await api.get(`/income/request/${user.data.id}`);
+        return response.data
+      }
+      const data = await getIncome();
+      setIncomeData(data);
+      let arr = Object.values(data);
+      let total = 0;
+      for(let i = 0; i < arr.length; i++) {
+        total += arr[i].income;
+      }
+      setTotal(total);
+      
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
 
   useEffect(() => {
-    fetchCompanyIncome();
+    if(loggedUser.data.type === 'product') fetchCompanyIncomeOrder();
+    else fetchCompanyIncomeRequest();
   }, [])
 
   const navigateToClientRegistration = () => {
@@ -86,7 +105,12 @@ const CompanyIncome = () => {
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <IncomeCard 
-                date={item.order_date}
+                date={
+                loggedUser.data.type === 'product' ? 
+                  item.order_date 
+                : 
+                  item.request_date
+                }
                 price={item.income}
               />
             )}

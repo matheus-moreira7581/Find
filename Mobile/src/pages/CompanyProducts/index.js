@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, Alert, TouchableOpacity } from 'react-native';
 
-import styles from '../CompanyProducts/styles';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+import { useCart } from '../../contexts/cart';
+import { useCategory } from '../../contexts/categorySelection';
 
 import { MaterialIcons } from '@expo/vector-icons';
-import ProductCard from '../../components/ProductCard';
 
-import { useNavigation, useRoute } from '@react-navigation/native';
-import api from '../../services/api';
 import adjustFontSize from '../../utils/adjustFontSize';
+
+import ProductCard from '../../components/ProductCard';
 import RoundedButton from '../../components/RoundedButton';
+
+import styles from '../CompanyProducts/styles';
 import colors from '../../assets/var/colors';
-import {useCart} from '../../contexts/cart'
+
+import api from '../../services/api';
 
 const CompanyProducts = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const {companyId} = route.params;
+  const {companyId, companyStatus} = route.params;
   const {total, cartItems} = useCart();
+  const { selectedCategoryCardInfo } = useCategory();
 
-  const [product, setProduct] = useState([]);
+  const [items, setItems] = useState([]);
   const [company, setCompany] = useState({});
   const [showMarketBag, setShowMarketBag] = useState(false);
   const [itemsCount, setItemsCount] = useState(0);
@@ -33,8 +39,20 @@ const CompanyProducts = () => {
     const res = await getProdutct();
 
     setCompany(res[0]);
-    setProduct(res[0].products);
+    setItems(res[0].products);
     
+  }
+
+  const fetchCompanyServices = async () => {
+    const getService = async () => {
+      const res = await api.get(`/company-service?id_company=${companyId}`);
+      return res.data
+    }
+    const res = await getService();
+
+    setCompany(res[0]);
+    setItems(res[0].services);
+
   }
 
   const handleShowMarketBag = () => {
@@ -45,13 +63,22 @@ const CompanyProducts = () => {
   }
 
   useEffect(()=> {
-    fetchCompanyProducts();
+    if(selectedCategoryCardInfo.type === 'product') {
+      fetchCompanyProducts();
+    }
+    else if(selectedCategoryCardInfo.type === 'service') {
+      fetchCompanyServices();
+    }
     handleShowMarketBag();
   }, [])
 
-  const navigateToProductDetails = (productId, companyId) => {
-    navigation.navigate('ProductDetails', {
-      productId: productId,
+  useEffect(()=> {
+   setItemsCount(cartItems.length);
+  }, [cartItems])
+
+  const navigateToProductDetails = (id, companyId) => {
+    navigation.navigate('ProductDetails', { 
+      Id: id,
       companyId: companyId
     });
   }
@@ -103,13 +130,13 @@ const CompanyProducts = () => {
             <MaterialIcons name="star" style={styles.rate}/>
             <MaterialIcons name="star-half" style={styles.rate}/>
           </View>
-          <Text style={styles.companyStatus}>Aberto</Text>
+          <Text style={companyStatus? styles.companyStatusOpen : styles.companyStatusClosed}>{companyStatus ? 'Aberto' : 'Fechado'}</Text>
           <Text style={styles.companyAddress}>{company.address}</Text>
         </View>
       </View>
       <View style={styles.productsContainer}>
         <FlatList 
-          data={product}
+          data={items}
           keyExtractor={(item, index) => item + index}
           renderItem={({ item }) => (
             <View style={styles.cardContainer}>

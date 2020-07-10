@@ -16,12 +16,12 @@ import { useCategory } from '../contexts/categorySelection';
 
 // import { Container } from './styles';
 
-const HomeList = ({ datasource, onPress: navigateToCompanies }) => {
+const HomeList = ({ datasource, onPress: navigateToCompanies, height }) => {
 
   const { setSelectedCategoryCardInfo } = useCategory();
   
   return (
-    <View style={styles.listContainer}>
+    <View style={{...styles.listContainer, height: adjustVerticalMeasure(height)}}>
        <SectionList 
           sections={datasource}
           keyExtractor={(item, index) => String(index)}
@@ -41,7 +41,7 @@ const HomeList = ({ datasource, onPress: navigateToCompanies }) => {
                     onPress={() => {
                       setSelectedCategoryCardInfo({
                         section: section.Section,
-                        type: section.type,
+                        type: section.Type,
                         categoryId: item.id,
                         category: item.title, 
                       });

@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import RoundedButton from '../../components/RoundedButton';
-import styles from './styles';
 
-import { MaterialIcons } from '@expo/vector-icons'; 
-import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import colors from '../../assets/var/colors';
-import adjustFontSize from '../../utils/adjustFontSize';
 import { useNavigation } from '@react-navigation/native';
 
-// import { Container } from './styles';
+import { MaterialIcons } from '@expo/vector-icons'; 
+
+import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
+import adjustFontSize from '../../utils/adjustFontSize';
+
+import styles from './styles';
+import colors from '../../assets/var/colors';
+
+import RoundedButton from '../../components/RoundedButton';
 
 const CompanyRegistrationType = () => {
   const navigation = useNavigation();

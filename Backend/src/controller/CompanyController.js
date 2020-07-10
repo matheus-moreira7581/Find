@@ -12,12 +12,11 @@ module.exports = {
 
          try {
     
-
             const hashedPassword = await bcrypt.hash(request.body.password, 10)
 
-            const { name, email, cpf, date_birth, address, id_categories, type, hours_schedule } = request.body;
+            const { name, company_name, email, cpf, date_birth, address, id_categories, type, hours_schedule } = request.body;
             
-            const item = [{ name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, hours_schedule}];
+            const company = { name, company_name, email, cpf, date_birth, address, password: hashedPassword, id_categories, type, hours_schedule};
 
 
             const checkEmail = await knex('companies').where({ email });
@@ -27,9 +26,9 @@ module.exports = {
 
             }
 
-            await knex('companies').insert(item);
+            await knex('companies').insert(company);
     
-            return response.status(201).json(item);
+            return response.status(201).send();
             
         } catch (error) {
             next(error)
@@ -48,7 +47,7 @@ module.exports = {
            const companies = await knex('companies')
            .where({ id_categories })
            .orderBy('status', 'desc')
-           .select('id','name', 'address', 'img_url', 'id_categories', 'status');
+           .select('id','company_name', 'address', 'img_url', 'id_categories', 'status');
 
            response.status(200).json(companies);
 
@@ -88,25 +87,21 @@ module.exports = {
 
             const urls = []
 
-            const files = request.files
+            const file = request.file
 
-            for (const file of files) {
-            
-                const {path} = file
+            const {path} = file
 
-                const newPath = await uploader(path)
+            const newPath = await uploader(path)
 
-                urls.push(newPath)
+            urls.push(newPath)
 
-                fs.unlinkSync(path)
-            }
-
+            fs.unlinkSync(path)
 
             const { id } = request.params;
 
-            const { name, cell, address} = request.body;
+            const { company_name, cell, address} = request.body;
 
-            const item = [{ name, cell, address}];
+            const item = [{ company_name, cell, address}];
             
             const company = item.map(element => {
                 return {
@@ -117,11 +112,30 @@ module.exports = {
 
             await knex('companies').where({ id }).update({company})
 
-            const newdata = await knex('companies').where({ id })
-
-            response.status(200).json(newdata)
+            response.status(200).send()
 
         } catch (error) {
+            next(error)
+        }
+
+    },
+
+    
+    // Atualizar status da empresa (aberto/fechado)
+
+    async updateStatus(request, response, next){
+        try{
+            const { status } = request.body;
+            const { id } = request.params;
+
+            await knex('companies').where({  id  }).update({ status });
+
+            const updatedCompany = await knex('companies').where({ id });
+
+            response.status(200).send(updatedCompany);
+
+        }
+        catch(error){
             next(error)
         }
 
@@ -135,9 +149,11 @@ module.exports = {
         try {
             const { id } = request.params;
     
-            await knex('companies').where('id', id).del();
+            await knex('companies')
+            .where({id})
+            .update('deleted_at', new Date());
       
-            response.status(200).json({msg: 'empresa deletado com sucesso!'});
+            response.status(200).send();
             
         } catch (error) {
             next(error)

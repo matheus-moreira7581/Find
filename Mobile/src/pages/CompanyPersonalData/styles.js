@@ -8,6 +8,7 @@ import adjustFontSize from '../../utils/adjustFontSize';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.branco,
+    height: '100%',
   },
   headerContainer:{
     backgroundColor: colors.branco,
@@ -44,6 +45,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: adjustVerticalMeasure(45.5),
   },
+  inputsContainer: {
+    marginTop: adjustVerticalMeasure(5),
+    height: adjustVerticalMeasure(400),
+    width: '95%',
+  },
   nomeContainer: {
     marginTop: adjustVerticalMeasure(33),
     alignItems: 'center',
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
     marginBottom: adjustVerticalMeasure(4),
   },
   nomeInput: {
-    height: adjustVerticalMeasure(32),
+    height: adjustVerticalMeasure(40),
     width: adjustHorizontalMeasure(328),
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
@@ -64,53 +70,48 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserratRegular,
     fontSize: adjustFontSize(13),
   },
-  doubleInputContainer: {
-    marginTop: adjustVerticalMeasure(41),
-    width: adjustHorizontalMeasure(328),
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
   cpfContainer: {
-    flexDirection: 'column',
+    marginTop: adjustVerticalMeasure(33),
+    alignItems: 'center'
   },
   cpfLabel: {
-    width: adjustHorizontalMeasure(120),
+    width: adjustHorizontalMeasure(328),
     fontFamily: fonts.montserratBold,
     fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
     marginBottom: adjustVerticalMeasure(4),
   },
   cpfInput: {
-    height: adjustVerticalMeasure(32),
-    width: adjustHorizontalMeasure(120),
+    height: adjustVerticalMeasure(40),
+    width: adjustHorizontalMeasure(328),
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
     fontFamily: fonts.montserratRegular,
-    fontSize: adjustFontSize(13),
+    fontSize: adjustFontSize(15),
   },
   dataNascContainer: {
-    flexDirection: 'column',
+    marginTop: adjustVerticalMeasure(33),
+    alignItems: 'center'
   },
   dataNascLabel: {
-    width: adjustHorizontalMeasure(112),
+    width: adjustHorizontalMeasure(328),
     fontFamily: fonts.montserratBold,
     fontSize: adjustFontSize(15),
     color: colors.cinzaEscuro,
     marginBottom: adjustVerticalMeasure(4),
   },
   dataNascInput: {
-    height: adjustVerticalMeasure(32),
-    width: adjustHorizontalMeasure(96),
+    height: adjustVerticalMeasure(40),
+    width: adjustHorizontalMeasure(328),
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
     fontFamily: fonts.montserratRegular,
-    fontSize: adjustFontSize(13),
+    fontSize: adjustFontSize(15),
   },
   emailContainer: {
-    marginTop: adjustVerticalMeasure(41),
+    marginTop: adjustVerticalMeasure(33),
     alignItems: 'center',
   },
   emailLabel: {
@@ -121,16 +122,16 @@ const styles = StyleSheet.create({
     marginBottom: adjustVerticalMeasure(4),
   },
   emailInput: {
-    height: adjustVerticalMeasure(32),
+    height: adjustVerticalMeasure(40),
     width: adjustHorizontalMeasure(328),
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
     fontFamily: fonts.montserratRegular,
-    fontSize: adjustFontSize(13),
+    fontSize: adjustFontSize(15),
   },
   passwordContainer: {
-    marginTop: adjustVerticalMeasure(41),
+    marginTop: adjustVerticalMeasure(33),
     alignItems: 'center',
   },
   passwordLabel: {
@@ -141,16 +142,16 @@ const styles = StyleSheet.create({
     marginBottom: adjustVerticalMeasure(4),
   },
   passwordInput: {
-    height: adjustVerticalMeasure(32),
+    height: adjustVerticalMeasure(40),
     width: adjustHorizontalMeasure(328),
     paddingLeft: adjustHorizontalMeasure(15),
     backgroundColor: colors.textInput,
     borderRadius: 8,
     fontFamily: fonts.montserratRegular,
-    fontSize: adjustFontSize(13),
+    fontSize: adjustFontSize(15),
   },
   buttonContainer: {
-    marginTop: adjustVerticalMeasure(80),
+    marginTop: adjustVerticalMeasure(55),
   }
 });
 

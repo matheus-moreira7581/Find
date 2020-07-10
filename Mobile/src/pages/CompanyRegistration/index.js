@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Picker, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
+import { useAuth } from '../../contexts/auth';
+
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
@@ -20,6 +22,8 @@ import api from '../../services/api';
 const CompanyRegistration = () => {
   const navigation = useNavigation();
   const route = useRoute();
+
+  const { signIn } = useAuth();
 
   const [pickerValue, setPickerValue] = useState(0);
   const [companyName, setCompanyName] = useState('');
@@ -60,8 +64,10 @@ const CompanyRegistration = () => {
   const finishCompanyRegistration = async () => {
     let cpf = String(user.cpf).replace(/\D/g,"");
     console.log(cpf + '\n\n\n\n');
+
     const response = await api.post('/register-company', {
-      name: companyName,
+      name: user.name,
+      company_name: companyName,
       email: user.email,
       cpf: cpf,
       date_birth: user.birthday,
@@ -70,7 +76,14 @@ const CompanyRegistration = () => {
       id_categories: pickerValue,
       type: registrationType
     }).catch(err => console.log(err))
-    navigation.navigate('Login');
+
+    if(response.status === 201){
+      signIn(user.email, user.password);
+    }
+    else{
+      Alert.alert('Erro', 'Falha no cadastro!');
+      navigation.navigate('Login');
+    }
   }
 
   let phase = <ThreeWayPhase phase={2}/>

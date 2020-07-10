@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
+import { useCategory } from '../../contexts/categorySelection';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-
-import { useCategory } from '../../contexts/categorySelection';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
@@ -81,7 +81,7 @@ const companiesModel = [
         rating: 4.5,
         imgUrl: require('../../assets/images/CompanyLogos/pizzaria_8.png')
     }
-] //just a base model to help us construct the screen and check attributes [NOT IN USE]
+] 
 
 const Companies = () => {
     const [companies, setCompanies] = useState([]);
@@ -105,9 +105,10 @@ const Companies = () => {
     }, []);
 
 
-    const navigateToCompanyProducts = (companyId) => {
+    const navigateToCompanyProducts = (companyId, companyStatus) => {
         navigation.navigate('CompanyProducts', {
             companyId,
+            companyStatus
         });
     }
 

@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingHorizontal: adjustHorizontalMeasure(24),
         marginTop: adjustVerticalMeasure(41),
+    },
+    passwordCheckContainer:{
+        width: '100%',
+        paddingHorizontal: adjustHorizontalMeasure(24),
+        marginTop: adjustVerticalMeasure(41),
         marginBottom: adjustVerticalMeasure(79),
     },
     headerText: {
@@ -63,10 +68,12 @@ const styles = StyleSheet.create({
         fontSize: adjustFontSize(15),
     },
     input:{
+        height: adjustVerticalMeasure(40),
+        width: adjustHorizontalMeasure(328),
         fontFamily: fonts.montserratRegular,
-        fontSize: adjustFontSize(13),
+        fontSize: adjustFontSize(15),
         color: colors.cinza,
-        borderRadius: 7,
+        borderRadius: 8,
         backgroundColor: colors.textInput,
         paddingLeft: adjustHorizontalMeasure(15),
         marginTop: adjustVerticalMeasure(4),

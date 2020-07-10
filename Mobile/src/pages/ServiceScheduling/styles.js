@@ -63,6 +63,11 @@ const styles = StyleSheet.create({
         fontSize: adjustFontSize(15),
         marginBottom: adjustVerticalMeasure(37),
     },
+    unavailable: {
+        fontFamily: fonts.montserratSemiBold,
+        fontSize: adjustFontSize(15),
+        color: colors.cinza,
+    },
     buttonContainer:{
         flex: 1,
         justifyContent: 'center',

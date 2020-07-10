@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../contexts/auth';
 
-import { MaterialIcons } from '@expo/vector-icons'; 
-import api from '../../services/api';
-
 import styles from './styles';
 import colors from '../../assets/var/colors';
 
-import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import OrderCard from '../../components/OrderCard';
 import RoundedButton from '../../components/RoundedButton';
 
 import CompanySellingItems from '../CompanySellingItems'
-import ProductManagement from '../ProductManagement';
+import ItemManagement from '../ItemManagement';
+
+import api from '../../services/api';
 
 const ordersDataModel = [
   {title: 'Corte Masculino', user: 'Lucas B.'},
@@ -26,35 +24,96 @@ const ordersDataModel = [
   {title: 'Sobrancelha Masculina, Corte Masculino', user: 'Tiago V.'},
 ];
 
-const CompanyRunning = (props) => {
+const CompanyRunning = ({ handleOfficeHourFunction }) => {
   //const [showSellingItems, setShowSellingItems] = useState(false);
   const [screenMode, setScreenMode] = useState('orders'); //3 states: 1 is default (Orders) 2 is My Products and 3 is register new product
+  const [itemId, setItemId] = useState(null);
 
   const navigation = useNavigation();
 
   const [orders, setOrders] = useState([]);
 
-  const { loggedUser } = useAuth();
+  const { loggedUser, endOfficeHour } = useAuth();
 
   const fetchOrders = async () => {
     const { data: orders } = await api.get(`/orders/${loggedUser.data.id}`);
-
+    setOrders(orders);
+  }
+  const fetchRequest = async () => {
+    const { data: orders } = await api.get(`/request/${loggedUser.data.id}`);
     setOrders(orders);
   }
 
   useEffect(() => {
-    fetchOrders();
+    if(loggedUser.data.type === 'product') fetchOrders();
+    else if(loggedUser.data.type === 'service') fetchRequest();
+
   }, [screenMode]);
 
   const navigateToOrderDetails = (id) => {
-    navigation.navigate('OrderDetails', {orderId: id});
-  }
+    navigation.navigate('OrderDetails', {orderId: id, accepted: false});
+  };
 
-  if(screenMode === 'list-products')
-    return <CompanySellingItems onPress={() => setScreenMode('orders')}/>;
+  const navigateToRequestConfirmed = (id) => {
+    navigation.navigate('OrderDetails', {orderId: id, accepted: true});
+  };
+
+  if(screenMode === 'list-items')
+    return (
+      <CompanySellingItems 
+        onOrderPress={() => {
+          setScreenMode(null);
+          setItemId(null);
+          setScreenMode('orders');
+        }} 
+        onItemCreation={() => {
+          setScreenMode(null);
+          setScreenMode('create-product');
+        }} 
+        onItemRemoval={() => {
+          setScreenMode(null);
+          setScreenMode('list-items')
+        }}
+        editItem={(id) => {
+          //TODO DIA 10 ESSA FUNÇÃO POSSIVELMENTE DEVE RECEBER O ID DO PRODUTO E INVOCAR A SCREEN DE CRIAÇÃO, MAS PASSANDO O ID DO PRODUTO E COM A FLAG DE EDITAR ATIVADA
+          setItemId(id);
+          setScreenMode(null);
+          setScreenMode('create-product');
+        }}
+      />
+      );
   
   if(screenMode === 'create-product')
-    return <ProductManagement onPress={() => setScreenMode('orders')}/>;
+    return (
+      <ItemManagement 
+        onOrderPress={() => {
+          setScreenMode(null);
+          setItemId(null);
+          setScreenMode('orders')
+        }}
+        onItemCreation={() => {
+          setScreenMode(null);
+          setScreenMode('list-items');
+        }}
+        onItemEdited={() => {
+          setScreenMode(null);
+          setItemId(null);
+          setScreenMode('list-items');
+        }}
+        itemId={itemId}
+      />
+    );
+
+    const getColor = (status) => {
+      switch (status) {
+        case 'Aceito':
+          return colors.outroVerde
+        case 'Fazendo':
+          return colors.outroVerde
+        default:
+          return colors.primary
+      }
+    }
 
   if(screenMode === 'orders'){
     return (
@@ -69,16 +128,21 @@ const CompanyRunning = (props) => {
 
               <TouchableOpacity 
                 style={styles.serviceListButton}
-                onPress={() => setScreenMode('list-products')}
+                onPress={() => setScreenMode('list-items')}
               >
-                <Text style={styles.serviceListButtonText}>Meus Produtos</Text>
+                <Text style={styles.serviceListButtonText}>
+                  {
+                    loggedUser.data.type === 'product' ?
+                    "Meus Produtos" : "Meus Serviços"
+                  }
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.roundedButtonContainer}>
               <RoundedButton 
                 text="Encerrar Expediente" 
-                onPress={props.onPressButton} 
+                onPress={handleOfficeHourFunction} 
                 style={styles.button}
                 fontSize={adjustFontSize(15)} 
                 selected={true} 
@@ -97,7 +161,14 @@ const CompanyRunning = (props) => {
                     <OrderCard 
                       title={`Pedido #${item.id}`}
                       user={item.name}
-                      onPress={() => navigateToOrderDetails(item.id)}
+                      status={item.status}
+                      color={getColor(item.status)}
+                      onPress={() => {
+                        item.status === 'Aceito' || item.status === 'Fazendo'  ?
+                          navigateToRequestConfirmed(item.id) 
+                        :
+                          navigateToOrderDetails(item.id)
+                      }}
                     />
                 
                 )}

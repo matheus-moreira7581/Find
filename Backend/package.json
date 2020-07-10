@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/server",
     "migrations": "knex migrate:latest",
-    "seeds": "knex seed:run"
+    "seeds": "knex seed:run",
+    "rollback": "knex migrate:rollback --all"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,9 @@
     "express": "^4.17.1",
     "knex": "^0.21.1",
     "multer": "^1.4.2",
-    "pg": "^8.2.1"
+    "pg": "^8.2.1",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

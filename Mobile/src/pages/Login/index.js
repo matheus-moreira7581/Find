@@ -1,12 +1,13 @@
-import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, Image, Alert, CheckBox } from 'react-native';
-import styles from './styles';
-import RoundedButton from '../../components/RoundedButton';
-import { useAuth } from '../../contexts/auth';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Image, Alert } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-// import { Container } from './styles';
+import { useAuth } from '../../contexts/auth';
+import { useNavigation } from '@react-navigation/native';
+
+import styles from './styles';
+
+import RoundedButton from '../../components/RoundedButton';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -54,7 +55,8 @@ const Login = () => {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image 
-          source={require('../../assets/images/FindLogoBlack.png')}
+          source={require('../../assets/images/find-anim-logo.gif')}
+          style={styles.image}
         />
       </View>
       <View style={styles.inputsContainer}>

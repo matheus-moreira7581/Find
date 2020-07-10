@@ -23,7 +23,7 @@ const CompaniesList = ({ datasource, onPress: navigateToCompanyProducts }) => {
             showsVerticalScrollIndicator={false}
             renderItem={({item})=> (
                 <TouchableOpacity
-                    onPress={() => {navigateToCompanyProducts(item.id)}}
+                    onPress={() => {navigateToCompanyProducts(item.id, item.status)}}
                 >
                     <View style={styles.companyContainer}>
                         {
@@ -44,7 +44,7 @@ const CompaniesList = ({ datasource, onPress: navigateToCompanyProducts }) => {
                         
                         <View style={styles.companyInfoContainer}>
                             <View style={styles.companyTitleContainer}>
-                                <Text style={styles.companyName}>{item.name}</Text>
+                                <Text style={styles.companyName}>{item.company_name}</Text>
                                 <MaterialIcons name="star" size={adjustHorizontalMeasure(13)} color={colors.dourado} style={styles.ratingIcon}/>
                                 <Text style={styles.ratingText}>-</Text> 
                             </View>
@@ -54,8 +54,8 @@ const CompaniesList = ({ datasource, onPress: navigateToCompanyProducts }) => {
                                 <Text style={styles.minDistanceText}>--km</Text>
                             </View>
                             <View style={styles.companyStatusContainer}>
-                                <StatusCircle color={colors.vermelho} radius={adjustHorizontalMeasure(2)} />
-                                <Text style={styles.minDistanceText}>Fechado</Text>
+                                <StatusCircle color={item.status ? colors.verde : colors.vermelho} radius={adjustHorizontalMeasure(2)} />
+                                <Text style={styles.minDistanceText}>{item.status ? 'Aberto' : 'Fechado'} </Text>
                             </View>
                         </View>
                     </View> 
@@ -94,11 +94,14 @@ const styles = StyleSheet.create({
         fontFamily: fonts.montserratBold       
     },
     companyLogo:{
+        justifyContent: 'center',
+        alignItems: 'center',
         marginLeft: adjustHorizontalMeasure(24),
         marginTop: adjustVerticalMeasure(11),
         marginBottom: adjustVerticalMeasure(14),
         width: adjustHorizontalMeasure(56),
-        height: adjustVerticalMeasure(56),
+        height: adjustHorizontalMeasure(56),
+        borderRadius: adjustHorizontalMeasure(200),
     },
     companyLogoPlaceholder: {
         justifyContent: 'center',

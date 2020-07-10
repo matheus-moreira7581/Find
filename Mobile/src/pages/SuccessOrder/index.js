@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'; 
-import styles from './styles';
-import RoundedButton from '../../components/RoundedButton';
-import colors from '../../assets/var/colors';
+
 import { useNavigation } from '@react-navigation/native';
 
-// import { Container } from './styles';
+import styles from './styles';
+
+import RoundedButton from '../../components/RoundedButton';
+
 
 const SuccessOrder = () => {
   const navigation = useNavigation();

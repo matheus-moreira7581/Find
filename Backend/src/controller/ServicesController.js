@@ -6,7 +6,7 @@ const fs = require('fs')
 module.exports = {
 
 
-    // Create service
+    // Add serviço
 
     async create(request, response, next) {
 
@@ -16,10 +16,9 @@ module.exports = {
 
             const urls = []
 
-            const files = request.files
+            const file = request.file
 
-            for (const file of files) {
-            
+            if(file){
                 const {path} = file
 
                 const newPath = await uploader(path)
@@ -28,21 +27,24 @@ module.exports = {
 
                 fs.unlinkSync(path)
             }
-
+            
             const { name, description, price, id_company } = request.body;
 
             const item = [{ name, description, price,  id_company }];
 
             const service = item.map(element => {
-                return {
-                    "img_url": urls[0].url,
-                    ...element
+                if(urls.length > 0){
+                    return {
+                        "img_url": urls[0].url,
+                        ...element
+                    }
                 }
+                else return { ...element }
             })
 
             await knex('services').insert(service);
 
-            response.status(201).json(service);
+            response.status(201).send();
         
 
         } catch (error) {
@@ -51,7 +53,7 @@ module.exports = {
     },
 
 
-    // Listar serviço 
+    // Listar serviço (Tela de empresa) 
 
     async index(request, response, next) {
 
@@ -59,7 +61,11 @@ module.exports = {
 
             const { id_company } = request.params; 
 
-            const services = await knex('services').where({ id_company });
+            const services = await knex('services')
+            .where({ 
+                id_company,
+                'deleted_at': null 
+            })
 
             response.json(services);
 
@@ -74,7 +80,7 @@ module.exports = {
 
     // Listar serviço na tela do cliente, 
     // classificar por empresa (tela 72)
-    // Parte do cliente
+    // tela do cliente
 
     async show(request, response, next) {
 
@@ -83,18 +89,21 @@ module.exports = {
             const { id_company } = request.query;
 
             const services = await knex('services')
-            .where({ id_company })
+            .where({ 
+                id_company,
+                'deleted_at': null 
+            })
             .select('id', 'img_url', 'name', 'description', 'price');
 
             const company = await knex('companies')
             .where('id', id_company)
-            .select('img_url', 'name', 'address');
+            .select('img_url', 'company_name', 'address');
 
             const data = company.map(items => {
 
             return {
                 "img_url": items.img_url,
-                "title": items.name,
+                "title": items.company_name,
                 "address": items.address,
                 "services": services
             }
@@ -110,7 +119,8 @@ module.exports = {
     },
 
 
-    //Listar um único serviço
+    //Listar um único serviço (Tela do cliente)
+
     async getService(request, response, next){
         try{
             const { id } = request.params;
@@ -125,7 +135,7 @@ module.exports = {
     },
 
 
-    // Atualizar dados de um serviço
+    // Atualizar dados de um serviço (Tela de empresa)
 
     async update(request, response, next) { 
 
@@ -135,10 +145,9 @@ module.exports = {
 
             const urls = []
 
-            const files = request.files
-
-            for (const file of files) {
+            const file = request.file
             
+            if(file){
                 const {path} = file
 
                 const newPath = await uploader(path)
@@ -155,19 +164,21 @@ module.exports = {
             const item = [{ name, description, price }];
             
             const service = item.map(element => {
-                return {
-                    "img_url": urls[0].url,
-                    ...element
+                if(urls.length > 0) {
+                    return {
+                        "img_url": urls[0].url,...element
+                    }
                 }
+                else return {...element}
             })
+
+            const attributesToUpdate = service[0];
 
             await knex('services')
             .where({ id })
-            .update({ service});
+            .update(attributesToUpdate);
 
-            const newdata = await knex('services').where({ id })
-
-            response.status(200).json(newdata)
+            response.status(200).send();
 
         } catch (error) {
             next(error)
@@ -176,16 +187,18 @@ module.exports = {
     },
 
 
-    // Deletar um serviço
+    // Deletar um serviço (Tela de empresa)
 
     async delete(request, response, next) {
 
         try {
             const { id } = request.params;
-
-            await knex('services').where('id', id).del();
-  
-            response.status(200).json({msg: 'Serviço deletado com sucesso!'});
+    
+            await knex('services')
+            .where({id})
+            .update('deleted_at', new Date());
+      
+            response.status(200).send();
         
         } catch (error) {
             next(error)
