@@ -42,7 +42,7 @@ module.exports = {
            .insert(elements.order);
 
 
-           const data = elements.itens_cart.map(itens => { 
+           const data = elements.items_order.map(itens => { 
 
                 calc(itens.amount, itens.id_products)
 
@@ -84,7 +84,7 @@ module.exports = {
 
             }
         
-           return response.status(201).json({ status: "Pedido realizado com sucesso."})
+           return response.send().status(201)
 
             
         } catch (error) {
@@ -101,9 +101,10 @@ module.exports = {
             const { id_company } = request.params;
 
             const orders = await knex('orders')
-            .where({ id_company })
+            .where({ id_company,})
+            .whereIn('status', ['Fazendo','Solicitado'])
             .join('clients', 'clients.id', 'orders.id_client')
-            .orderBy('order_date', 'desc')
+            .orderBy([{column : 'status', order: 'desc'}, {column : 'order_date', order: 'asc'}])
             .select('clients.name', 'orders.id', 'orders.status');
 
             response.status(200).json(orders)
@@ -233,7 +234,7 @@ module.exports = {
             await knex('orders').where('id', id_order)
             .update({ status });
     
-            response.status(200).json({status});
+            response.send().status(200);
 
         } catch (error) {
 

@@ -45,7 +45,7 @@ module.exports = {
 
             await knex('products').insert(product);
             
-            return response.status(201).json(product);
+            return response.send().status(201);
 
 
         } catch (error) {
@@ -158,7 +158,6 @@ module.exports = {
             fs.unlinkSync(path)
             
 
-
             const { id } = request.params;
 
             const { name, description, price, limit_time } = request.body;
@@ -178,10 +177,8 @@ module.exports = {
             .where({ id })
             .update(attributesToUpdate);
 
-            
-            const newdata = await knex('products').where({ id })
 
-            response.status(200).json(newdata)
+            response.send().status(200);
 
         } catch (error) {
             next(error)
@@ -200,7 +197,7 @@ module.exports = {
             .where({id})
             .update('deleted_at', new Date());
       
-            response.status(200).json({msg: 'Produto deletado com sucesso!'});
+            response.send().status(200);
             
         } catch (error) {
             next(error)
