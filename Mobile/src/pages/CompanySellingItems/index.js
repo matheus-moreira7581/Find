@@ -38,7 +38,7 @@ const CompanySellingItems = ({ onOrderPress, onItemCreation, onItemRemoval, edit
               const response = await api.delete(`${loggedUser.data.type === 'product' ? `my-products/${id}` : `my-services/${id}`}`);
             
               if(response.status === 200)
-                Alert.alert('Concluído', response.data.msg);
+                Alert.alert('Concluído', 'Produto deletado com sucesso!');
               else
                 Alert.alert('Erro', `Falha na remoção do ${loggedUser.data.type === 'product' ? 'produto' : 'serviço'}!`);
             }
