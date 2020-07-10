@@ -4,6 +4,7 @@ import { View, SafeAreaView, Text, TouchableOpacity, Alert } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { useAuth } from '../../contexts/auth';
+import { useHours } from '../../contexts/SelectedHours';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
@@ -56,7 +57,7 @@ const OpeningHours = () => {
             hours_schedule:chosenHours
         }
         const response = await api.post('/register-company', jsonObject).catch(err => console.log(err));
-        
+
         if(response.status === 201){
             signIn(user.email, user.password);
         }
