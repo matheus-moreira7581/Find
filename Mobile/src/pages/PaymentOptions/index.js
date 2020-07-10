@@ -53,8 +53,9 @@ const PaymentOptions = () => {
             const object = {
                 order: order,
                 address: addressInfo,
-                itens_cart: cartItems
+                items_order: cartItems
             }
+            
             const response = await api.post('/order', object);
             if(response.status === 201) {
                 resetCart();
@@ -76,8 +77,9 @@ const PaymentOptions = () => {
             const object = {
                 order: order,
                 address: addressInfo,
-                itens_cart: cartItems
+                items_order: cartItems
             }
+            
             const response = await api.post('/order', object);
             if(response.status === 201) {
                 resetCart();
