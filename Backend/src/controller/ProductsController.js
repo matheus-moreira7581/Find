@@ -156,6 +156,9 @@ module.exports = {
 
                 urls.push(newPath)
 
+                fs.unlinkSync(path)
+            }    
+
             const { id } = request.params;
 
             const { name, description, price, limit_time } = request.body;
@@ -180,7 +183,7 @@ module.exports = {
 
             response.send().status(200);
 
-        } catch (error) {
+        }catch (error) {
             next(error)
         }
 
