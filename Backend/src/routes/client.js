@@ -14,7 +14,7 @@ const uploadImages = require('../config/multer')
  *    description: Registro de clientes
  *    responses:
  *      '200':
- *        description: Registro realizada com sucesso
+ *        description: Registro realizado com sucesso
  */
 routes.post('/register-client', ClientsController.create)
 /**
@@ -54,7 +54,7 @@ routes.post('/register-client', ClientsController.create)
  *    description: Deletar cliente
  *    responses:
  *      '200':
- *        description: Deletado com sucesso
+ *        description: Cliente deletado com sucesso
  */
       .delete('/edit-client/:id', ClientsController.delete) 
 

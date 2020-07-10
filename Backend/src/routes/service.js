@@ -5,7 +5,7 @@ const routes = express.Router()
 
 const uploadImages = require('../config/multer')
 
-// Services
+// Serviços
 
 /**
  * @swagger
@@ -31,7 +31,7 @@ routes.post('/my-services', uploadImages.single('img_url'), ServicesController.c
  * @swagger
  * /company-service:
  *  get:
- *    description: Seleção de serviço
+ *    description: Seleção de serviço específico
  *    responses:
  *      '200':
  *        description: Seleção realizada com sucesso
@@ -64,7 +64,7 @@ routes.post('/my-services', uploadImages.single('img_url'), ServicesController.c
  *    description: Deletar serviço
  *    responses:
  *      '200':
- *        description: Deletado com sucesso
+ *        description: Serviço deletado com sucesso
  */      
       .delete('/my-services/:id', ServicesController.delete)
 

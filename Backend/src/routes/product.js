@@ -5,7 +5,7 @@ const routes = express.Router()
 
 const uploadImages = require('../config/multer')
 
-// Products
+// Produtos
 
 
 /**
@@ -22,7 +22,7 @@ routes.post('/my-products', uploadImages.single('img_url'), ProductsController.c
  * @swagger
  * /my-products/:id_company:
  *  get:
- *    description: Seleção de produtos
+ *    description: Seleção de produtos de uma determinada empresa
  *    responses:
  *      '200':
  *        description: Seleção realizada com sucesso
@@ -32,7 +32,7 @@ routes.post('/my-products', uploadImages.single('img_url'), ProductsController.c
  * @swagger
  * /company:
  *  get:
- *    description: Seleção de produto
+ *    description: Seleção de produto específico
  *    responses:
  *      '200':
  *        description: Seleção realizada com sucesso
@@ -65,7 +65,7 @@ routes.post('/my-products', uploadImages.single('img_url'), ProductsController.c
  *    description: Deletar produto
  *    responses:
  *      '200':
- *        description: Deletado com sucesso
+ *        description: Produto deletado com sucesso
  */      
       .delete('/my-products/:id', ProductsController.delete)
 

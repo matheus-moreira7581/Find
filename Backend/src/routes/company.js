@@ -5,7 +5,7 @@ const routes = express.Router();
 
 const uploadImages = require('../config/multer')
 
-//Company
+//Empresa
 
 /**
  * @swagger
@@ -31,7 +31,7 @@ routes.post('/register-company', CompanyController.create)
  * @swagger
  * /edit-company/:id:
  *  get:
- *    description: Seleção de empresa
+ *    description: Seleção de empresa específica
  *    responses:
  *      '200':
  *        description: Seleção realizada com sucesso
@@ -64,7 +64,7 @@ routes.post('/register-company', CompanyController.create)
  *    description: Deletar empresa
  *    responses:
  *      '200':
- *        description: Deletada com sucesso
+ *        description: Empresa deletada com sucesso
  */
       .delete('/edit-company/:id', CompanyController.delete) 
 
