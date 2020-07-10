@@ -96,8 +96,7 @@ const styles = StyleSheet.create({
         marginBottom: adjustVerticalMeasure(16),
     },
     bottomSeparator:{
-        height: adjustVerticalMeasure(100),
-        
+        height: adjustVerticalMeasure(100),  
     }
 });
 

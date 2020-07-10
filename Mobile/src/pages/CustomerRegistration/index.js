@@ -38,7 +38,7 @@ const CustomerRegistration = () => {
                 cell,
                 password
             });
-            if(response.status >= 200 && response.status <=299) {
+            if(response.status === 201) {
                 if(!!response.data.msg){
                     Alert.alert(
                         'Erro', 
@@ -63,7 +63,7 @@ const CustomerRegistration = () => {
 
         }
         catch(error){
-            console.log(error)
+            
         }   
     }
 
