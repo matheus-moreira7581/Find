@@ -5,6 +5,7 @@ export default {
   cinzaClaro: '#F8F8F8',
   bordarCinza: '#E5E5E5',
   verde: '#17E73A',
+  outroVerde: '#1EDE3F',
   textInput: '#EFEFEF',
   dourado: '#F8CC1B',
   branco: '#FFFFFF',
