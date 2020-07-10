@@ -1,6 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-//const swaggerDoc = require("./swaggerDoc");
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDoc = require("./swaggerDoc");
 
 //Rotas
 const clientRoutes = require("./routes/client");
@@ -36,7 +38,8 @@ app.use(servicesRoutes)
 app.use(authRoutes)
 app.use(ordersRoutes)
 app.use(requestRoutes)
-//app.use(swaggerDoc)
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 // Initial route
 app.get('/', function (req, res) {

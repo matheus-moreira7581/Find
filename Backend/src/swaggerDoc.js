@@ -1,20 +1,21 @@
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
-const options = {
+
+const swaggerOptions = {
     swaggerDefinition: {
-        info: {
-            title: 'Find API',
-            version: '1.0.0',
-            description: 'API Express com auto-gerador de documento swagger',
+      info: {
+        version: "1.0.0",
+        title: "Find",
+        description: "Aplicativo de prestação de serviços e venda de produtos",
+        contact: {
+          name: "Squad 1"
         },
-        basePath: './routes/',
+        servers: ["http://localhost:3333"]
+      }
     },
-    apis: ['auth.js'],
-};
-
-const specs = swaggerJsdoc(options);
-
-module.exports = (app) =>{
-    app.use('/api-docs', swaggerUi.server, swaggerUi.setup(options));
-}
+    apis: ["swaggerDoc.js"]
+  };
+  
+const swaggerDoc = swaggerJsDoc(swaggerOptions);
+ 
