@@ -3,14 +3,14 @@ const RequestsController = require('../controller/RequestsController')
 
 const routes = express.Router()
 
-// Requests
+// Requisições
 
 
 /**
  * @swagger
  * /request:
  *  post:
- *    description: Criação de serviços
+ *    description: Criação do carrinho
  *    responses:
  *      '200':
  *        description: Criação realizada com sucesso
@@ -20,13 +20,31 @@ routes.post('/request', RequestsController.create)
  * @swagger
  * /request/:id_company:
  *  get:
- *    description: Seleção de serviços
+ *    description: Seleção do carrinho
  *    responses:
  *      '200':
  *        description: Seleção realizada com sucesso
  */
       .get('/request/:id_company', RequestsController.index)
+/**
+ * @swagger
+ * /request/:id_company:
+ *  get:
+ *    description: Finalizar pedido
+ *    responses:
+ *      '200':
+ *        description: Finalização realizada com sucesso
+ */
       .get('/income/request/:id_company', RequestsController.indexForIncome)
+/**
+ * @swagger
+ * /request/:id_company:
+ *  get:
+ *    description: Detalhes do serviço
+ *    responses:
+ *      '200':
+ *        description: Seleção realizada com sucesso
+ */
       .get('/details/service', RequestsController.show)
 /**
  * @swagger
