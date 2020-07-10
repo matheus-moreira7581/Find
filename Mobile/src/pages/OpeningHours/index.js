@@ -1,20 +1,22 @@
 import React from 'react';
 import { View, SafeAreaView, Text, TouchableOpacity, Alert } from 'react-native'; 
 
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+import { useAuth } from '../../contexts/auth';
+
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import adjustFontSize from '../../utils/adjustFontSize';
 
-import RoundedButton from '../../components/RoundedButton';
-import HourGrade from '../../components/HourGrade';
-import ThreeWayPhase from '../../components/ThreeWayPhase';
+import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
-import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import { useNavigation, useRoute } from '@react-navigation/native';
 
-import { useHours } from '../../contexts/SelectedHours';
+import RoundedButton from '../../components/RoundedButton';
+import HourGrade from '../../components/HourGrade';
+import ThreeWayPhase from '../../components/ThreeWayPhase';
 
 import api from '../../services/api';
 
@@ -31,9 +33,11 @@ const OpeningHours = () => {
     const navigation = useNavigation();
     const route = useRoute();
 
+    const { signIn } = useAuth();
+
     const { getHours } = useHours();
 
-    const {user, companyData, registrationType} = route.params;
+    const { user, companyData } = route.params;
 
     const finishCompanyRegistrarion = async () => {
         const selectedHours = getHours();
@@ -52,10 +56,13 @@ const OpeningHours = () => {
             hours_schedule:chosenHours
         }
         const response = await api.post('/register-company', jsonObject).catch(err => console.log(err));
-        if(response.status === 201) return navigation.navigate('Login');
-        else {
-            Alert.alert('Error', 'Falha ao cadastrar uma nova empresa');
-            return navigation.navigate('Home');
+        
+        if(response.status === 201){
+            signIn(user.email, user.password);
+        }
+        else{
+            Alert.alert('Erro', 'Falha no cadastro!');
+            navigation.navigate('Login');
         }
     }
 
