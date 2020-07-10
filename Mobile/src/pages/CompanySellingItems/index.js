@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, FlatList, Alert } from 'react-native';
-import RoundedButton from '../../components/RoundedButton';
+import { View, FlatList, Alert } from 'react-native';
+
+import { useAuth } from '../../contexts/auth'
 
 import styles from './styles';
-import colors from '../../assets/var/colors';
 
-import { MaterialIcons } from '@expo/vector-icons'; 
-
-import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import ProductCard from '../../components/ProductCard';
 import CircleButton from '../../components/CircleButton';
 import UnderlinedTextButton from '../../components/UnderlinedTextButton';
-
-import { useNavigation } from '@react-navigation/native';
-import { useAuth } from '../../contexts/auth'
 
 import api from '../../services/api';
 

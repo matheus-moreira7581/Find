@@ -9,7 +9,8 @@ import colors from '../../assets/var/colors';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
-import {useCart} from '../../contexts/cart'
+
+import { useCart } from '../../contexts/cart'
 import { useNavigation } from '@react-navigation/native';
 
 const ServiceOptions = () => {

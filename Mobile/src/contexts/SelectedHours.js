@@ -1,9 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import { Alert } from 'react-native';
-
-import AsyncStorage from '@react-native-community/async-storage';
-
-import api from '../services/api';
+import React, { createContext, useState, useContext } from 'react';
 
 const HoursContext = createContext({selectedHours: []});
 

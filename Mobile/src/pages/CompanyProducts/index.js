@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, Alert, TouchableOpacity } from 'react-native';
 
-import styles from '../CompanyProducts/styles';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+import { useCart } from '../../contexts/cart';
+import { useCategory } from '../../contexts/categorySelection';
 
 import { MaterialIcons } from '@expo/vector-icons';
-import ProductCard from '../../components/ProductCard';
 
-import { useNavigation, useRoute } from '@react-navigation/native';
-import api from '../../services/api';
 import adjustFontSize from '../../utils/adjustFontSize';
+
+import ProductCard from '../../components/ProductCard';
 import RoundedButton from '../../components/RoundedButton';
+
+import styles from '../CompanyProducts/styles';
 import colors from '../../assets/var/colors';
-import {useCart} from '../../contexts/cart';
-import { useCategory } from '../../contexts/categorySelection';
+
+import api from '../../services/api';
 
 const CompanyProducts = () => {
   const navigation = useNavigation();

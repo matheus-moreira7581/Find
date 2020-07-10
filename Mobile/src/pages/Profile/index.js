@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, ScrollView, Text, TouchableOpacity, Image, SectionList, Alert } from 'react-native';
+import { View, SafeAreaView, Text, TouchableOpacity, Image, SectionList, Alert } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -15,7 +15,6 @@ import styles from './styles';
 import ProfileMenuListItem from '../../components/ProfileMenuListItem';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import adjustFontSize from '../../utils/adjustFontSize';
 
 import colors from '../../assets/var/colors';
 

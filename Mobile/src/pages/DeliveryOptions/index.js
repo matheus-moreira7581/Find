@@ -11,7 +11,7 @@ import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import { useNavigation } from '@react-navigation/native';
-import {useCart} from '../../contexts/cart'
+import { useCart } from '../../contexts/cart'
 
 const DeliveryOptions = () => {
     const [deliveryOption, setDeliveryOption] = useState(false);

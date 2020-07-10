@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View, ScrollView, Text, TouchableOpacity, Image } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -27,29 +27,24 @@ const RequestsMade = () => {
                 </View>
             </View>
             <View style={styles.bodyContainer}>
-                {
-                    !!requestList 
-                    ? 
-                        <View/> //List component in the future
-                    : 
-                        <>
-                            <Text style={styles.messageText}>
-                                Você ainda não {"\n"}
-                                possui nenhum {"\n"}
-                                pedido.
-                            </Text>
-                            <Text style={styles.sadFaceText}>:(</Text>
-                            <Image source={null} resizeMode="stretch"/>
-                            <RoundedButton
-                                selected={true}
-                                text="Voltar para o início"
-                                width={256}
-                                height={55}
-                                fontSize={adjustFontSize(16)}
-                                onPress={() => navigation.navigate('Home')}
-                            />
-                        </>
-                }
+                <>
+                    <Text style={styles.messageText}>
+                        Você ainda não {"\n"}
+                        possui nenhum {"\n"}
+                        pedido.
+                    </Text>
+                    <Text style={styles.sadFaceText}>:(</Text>
+                    <Image source={null} resizeMode="stretch"/>
+                    <RoundedButton
+                        selected={true}
+                        text="Voltar para o início"
+                        width={256}
+                        height={55}
+                        fontSize={adjustFontSize(16)}
+                        onPress={() => navigation.navigate('Home')}
+                    />
+                </>
+                
             </View>
         </SafeAreaView>
     );

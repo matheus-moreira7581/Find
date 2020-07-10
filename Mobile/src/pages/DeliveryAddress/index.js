@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-
 import { SafeAreaView, View, Text, TouchableOpacity, TextInput } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
-import RoundedButton from '../../components/RoundedButton';
+import { useNavigation } from '@react-navigation/native';
+
+import { useCart } from '../../contexts/cart'
+import { useCategory } from '../../contexts/categorySelection';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import adjustFontSize from '../../utils/adjustFontSize';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
-import { useNavigation } from '@react-navigation/native';
-import {useCart} from '../../contexts/cart'
-import {useCategory} from '../../contexts/categorySelection';
+
+import RoundedButton from '../../components/RoundedButton';
 
 const DeliveryAddress = () => {
     const navigation = useNavigation();

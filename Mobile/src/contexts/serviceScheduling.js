@@ -1,11 +1,9 @@
-import React, { useContext, useState, createContext, useEffect } from 'react';
+import React, { useContext, useState, createContext } from 'react';
 
 const ServiceSchedulingContext = createContext(null);
 
 export const ServiceSchedulingProvider = ({ children }) => {
     const [scheduledHour, setScheduledHour] = useState(null);
-
-    //useEffect(() => console.log(scheduledHour), [scheduledHour]); for testing
 
     const saveScheduledHour = (hour) => setScheduledHour(hour);
 

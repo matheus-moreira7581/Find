@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
+
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -7,12 +8,12 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
+import styles from './styles';
+import colors from '../../assets/var/colors';
+
+import ThreeWayPhase from '../../components/ThreeWayPhase';
 import TwoWayPhase from '../../components/TwoWayPhase';
 import RoundedButton from '../../components/RoundedButton';
-
-import colors from '../../assets/var/colors';
-import styles from './styles';
-import ThreeWayPhase from '../../components/ThreeWayPhase';
 
 
 const CompanyPersonalData = () => {

@@ -3,15 +3,14 @@ import { SafeAreaView, View, Text, TouchableOpacity, Alert } from 'react-native'
 
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { useAuth } from '../../contexts/auth';
 import { useNavigation } from '@react-navigation/native';
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 
-import { useAuth } from '../../contexts/auth';
+import styles from './styles';
 
 import colors from '../../assets/var/colors';
-
-import styles from './styles';
 
 import RoundedButton from '../../components/RoundedButton';
 

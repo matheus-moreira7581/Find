@@ -7,7 +7,6 @@ import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 
 import { useAuth } from '../../contexts/auth';
-import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
 import adjustFontSize from '../../utils/adjustFontSize';

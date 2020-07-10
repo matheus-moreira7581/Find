@@ -11,8 +11,8 @@ import colors from '../../assets/var/colors';
 
 import api from '../../services/api';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import {useCart} from '../../contexts/cart'
-import {useCategory} from '../../contexts/categorySelection'
+import { useCart } from '../../contexts/cart'
+import { useCategory } from '../../contexts/categorySelection'
 
 const ProductDetails = () => {
   const navigation = useNavigation();

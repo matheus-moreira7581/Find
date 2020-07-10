@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { SafeAreaView, View, Text, TouchableOpacity, Image, TextInput, Alert } from 'react-native';
 
@@ -8,7 +8,6 @@ import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import { useCart } from '../../contexts/cart';
-import { useAuth } from '../../contexts/auth';
 
 import RoundedButton from '../../components/RoundedButton';
 

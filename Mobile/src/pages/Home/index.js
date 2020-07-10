@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity, Button, TextInput } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
 
 import styles from './styles';
 import HomeList from '../../components/HomeList';
 
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
-import { useCategory } from '../../contexts/categorySelection';
+
 import { MaterialIcons } from '@expo/vector-icons';
 import colors from '../../assets/var/colors';
 
 import api from '../../services/api';
 import adjustFontSize from '../../utils/adjustFontSize';
 
-
-// import { Container } from './styles';
 
 const Home = () => {
   const navigation = useNavigation();

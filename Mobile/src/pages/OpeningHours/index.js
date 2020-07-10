@@ -3,8 +3,6 @@ import { View, SafeAreaView, Text, TouchableOpacity, Alert } from 'react-native'
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-import { SCREEN_WIDTH } from '../../utils/constants';
-
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import RoundedButton from '../../components/RoundedButton';

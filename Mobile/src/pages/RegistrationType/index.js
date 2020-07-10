@@ -9,8 +9,6 @@ import colors from '../../assets/var/colors';
 import adjustFontSize from '../../utils/adjustFontSize';
 import { useNavigation } from '@react-navigation/native';
 
-// import { Container } from './styles';
-
 const RegistrationType = () => {
   const navigation = useNavigation();
 

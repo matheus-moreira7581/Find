@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SectionList, SafeAreaView, FlatList, TouchableOpacity, Button, Image, Alert } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image, Alert } from 'react-native';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
@@ -14,7 +14,6 @@ import adjustFontSize  from '../../utils/adjustFontSize';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
-import { useCategory } from '../../contexts/categorySelection';
 
 import api from '../../services/api';
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SectionList, SafeAreaView, 
-        FlatList, TouchableOpacity, Button, Image, Alert } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
 
 import styles from './styles';
 import colors from '../../assets/var/colors';
@@ -13,10 +12,8 @@ import RoundedButton from '../../components/RoundedButton';
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize  from '../../utils/adjustFontSize';
 
-import { useAuth } from '../../contexts/auth';
 import { useCategory } from '../../contexts/categorySelection';
 
-import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
 import {useCart} from '../../contexts/cart'
 

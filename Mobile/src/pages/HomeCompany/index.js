@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, Button } from 'react-native';
-import RoundedButton from '../../components/RoundedButton';
+import { View, Text, Image } from 'react-native';
 
 import { useAuth } from '../../contexts/auth';
-
-import styles from './styles';
-import colors from '../../assets/var/colors';
+import { useNavigation } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
-import { useNavigation } from '@react-navigation/native';
 import CompanyRunning from '../CompanyRunning';
- 
-import api from '../../services/api';
+
+import RoundedButton from '../../components/RoundedButton';
+
+import styles from './styles';
+
+import colors from '../../assets/var/colors';
 
 const HomeCompany = () => {
   const navigation = useNavigation();
@@ -34,15 +34,6 @@ const HomeCompany = () => {
   useEffect(() => {
     setShift(officeHour);
   }, [officeHour])
-  
-  // const startOfficeHour = async () => { //Função que seta o expediente da empresa (campo status da tabela), sendo true: dentro do expediente e false: fora do expediente
-  //   await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: true });
-  // }
-  // const endOfficeHour = async () => {
-  //   setShift(!shift);
-  //   await api.put(`/edit-company/status/${loggedUser.data.id}`, { status: false });
-  //   navigation.navigate('HomeCompany');
-  // }
 
   return (
     shift ? <CompanyRunning handleOfficeHourFunction={endOfficeHour}/> : 

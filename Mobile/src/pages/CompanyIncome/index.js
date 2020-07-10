@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../contexts/auth'
+
+import { MaterialIcons } from '@expo/vector-icons'; 
+
+import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
+
 import styles from './styles';
 import colors from '../../assets/var/colors';
 
-import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
-import adjustFontSize from '../../utils/adjustFontSize';
-
-import { useNavigation } from '@react-navigation/native';
-import {useAuth} from '../../contexts/auth'
-
-import api from '../../services/api';
-
-import { MaterialIcons } from '@expo/vector-icons'; 
-import RoundedButton from '../../components/RoundedButton';
 import IncomeCard from '../../components/IncomeCard';
 
-// This is a temporary data set for test.
+import api from '../../services/api';
 
 const CompanyIncome = () => {
   const navigation = useNavigation();

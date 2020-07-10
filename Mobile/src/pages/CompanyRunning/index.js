@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../contexts/auth';
 
-import { MaterialIcons } from '@expo/vector-icons'; 
-import api from '../../services/api';
-
 import styles from './styles';
 import colors from '../../assets/var/colors';
 
-import { adjustHorizontalMeasure } from '../../utils/adjustMeasures';
 import adjustFontSize from '../../utils/adjustFontSize';
 
 import OrderCard from '../../components/OrderCard';
@@ -19,6 +15,8 @@ import RoundedButton from '../../components/RoundedButton';
 
 import CompanySellingItems from '../CompanySellingItems'
 import ItemManagement from '../ItemManagement';
+
+import api from '../../services/api';
 
 const ordersDataModel = [
   {title: 'Corte Masculino', user: 'Lucas B.'},

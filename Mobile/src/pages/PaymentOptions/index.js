@@ -12,9 +12,10 @@ import colors from '../../assets/var/colors';
 
 import { adjustHorizontalMeasure, adjustVerticalMeasure } from '../../utils/adjustMeasures';
 
-import {useCart} from '../../contexts/cart'
-import {useAuth} from '../../contexts/auth'
-import {useCategory} from '../../contexts/categorySelection'
+import { useCart } from '../../contexts/cart'
+
+import { useAuth } from '../../contexts/auth'
+import { useCategory } from '../../contexts/categorySelection'
 import { useNavigation } from '@react-navigation/native';
 import api from '../../services/api';
 
