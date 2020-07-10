@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   companyLogo: {
     width: adjustHorizontalMeasure(79),
-    height: adjustVerticalMeasure(79),
+    height: adjustHorizontalMeasure(79),
     borderRadius: 100,
   },
   companyLogoPlaceholder:{
