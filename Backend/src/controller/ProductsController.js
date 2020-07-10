@@ -155,10 +155,7 @@ module.exports = {
                 const newPath = await uploader(path)
 
                 urls.push(newPath)
-            
-        
-                const { id } = request.params;
-
+    
                 fs.unlinkSync(path)
             }    
 
